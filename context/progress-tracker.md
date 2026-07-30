@@ -8,7 +8,7 @@ Update this file after every meaningful implementation change.
 
 ## Current Goal
 
-- Implement Public Marketing Layout, Navigation & Route Shells
+- Enhancing the Home page.
 
 ## Completed
 
@@ -18,13 +18,15 @@ Update this file after every meaningful implementation change.
 - Created `lib/utils.ts` (`cn` helper).
 - Created `drizzle.config.ts`, `db/schema.ts`, and `db/index.ts`.
 - Initialized and started fresh local Supabase container stack via Docker Desktop (`pnpm exec supabase start`).
-- Generated [.env.local](file:///c:/black-swan-v1/.env.local) with local API endpoints and keys.
 - Executed `pnpm db:push` to verify Drizzle ORM schema syncing with local Postgres (`postgresql://postgres:postgres@127.0.0.1:54322/postgres`).
-- Configured [app/globals.css](file:///c:/black-swan-v1/app/globals.css) with official Black Swan metallic gray color palette (Onyx `#1c1e24`, Charcoal `#30333a`, Marble `#434952`, Granite `#575e67`, Pewter `#767f88`, Slate `#9da3a9`) and shadcn/ui CSS variable tokens.
-- Implemented Dual Header architecture: [top-utility-bar.tsx](file:///c:/black-swan-v1/components/layout/top-utility-bar.tsx) (contact info & staff portal link) and [main-header.tsx](file:///c:/black-swan-v1/components/layout/main-header.tsx) (sticky opaque header with logo, nav links, Quote Cart badge, and CTA button).
-- Implemented touch-friendly [mobile-nav.tsx](file:///c:/black-swan-v1/components/layout/mobile-nav.tsx) slide-out drawer using `shadcn/ui Sheet`.
-- Implemented 4-column responsive [public-footer.tsx](file:///c:/black-swan-v1/components/layout/public-footer.tsx).
-- Created public layout wrapper [app/(public)/layout.tsx](file:///c:/black-swan-v1/app/%28public%29/layout.tsx) and page shells: [Homepage](file:///c:/black-swan-v1/app/%28public%29/page.tsx), [About](file:///c:/black-swan-v1/app/%28public%29/about/page.tsx), [Products](file:///c:/black-swan-v1/app/%28public%29/products/page.tsx), [Services](file:///c:/black-swan-v1/app/%28public%29/services/page.tsx), [Contact](file:///c:/black-swan-v1/app/%28public%29/contact/page.tsx), and [Quote](file:///c:/black-swan-v1/app/%28public%29/quote/page.tsx).
+- Configured `app/globals.css` with official Black Swan metallic gray color palette (Onyx `#1c1e24`, Charcoal `#30333a`, Marble `#434952`, Granite `#575e67`, Pewter `#767f88`, Slate `#9da3a9`) and shadcn/ui CSS variable tokens.
+- Implemented `components/layout/main-header.tsx` (sticky opaque header with logo, nav links, Quote Cart badge, and CTA button).
+- Implemented touch-friendly `components/layout/mobile-nav.tsx` slide-out drawer using `shadcn/ui Sheet`.
+- Implemented 4-column responsive `components/layout/public-footer.tsx`.
+- Created public layout wrapper `app/(public)/layout.tsx` and page shells: Homepage (`app/(public)/page.tsx`), About (`app/(public)/about/page.tsx`), Products (`app/(public)/products/page.tsx`), Services (`app/(public)/services/page.tsx`), Contact (`app/(public)/contact/page.tsx`), and Quote (`app/(public)/quote/page.tsx`).
+- Authored detailed implementation specification: `context/implementation-specs/01-fix-coderabbit-pr-review-findings.md`.
+- Resolved all 11 CodeRabbit PR #1 review findings across layout components, accessibility, quote cart state, contact form, legal routes, ESLint globs, and progress documentation.
+- Converted `logo` and `hero` images to true `.webp` format (`public/logo.webp` and `public/hero.webp`), aligned domain copy to **Medical Technology & Broadcast Computer Hardware**, refined hero heading to a two-line title, and removed upper top utility bar from public layout. Verified build clean (`pnpm run lint` & `pnpm run build`).
 
 ## In Progress
 
@@ -41,8 +43,11 @@ Update this file after every meaningful implementation change.
 ## Architecture Decisions
 
 - Configured Drizzle ORM to interface with local Supabase PostgreSQL instance on port `54322`.
+- Centralized public contact data inside `constants/contact.ts`.
+- Client-side Quote Cart state management via React Context (`context/quote-cart-context.tsx`) with `localStorage` persistence.
+- Single business domain focus: Medical Technology & Broadcast Computer Hardware Systems.
+- Admin portal accessible strictly via `/admin` (no admin links rendered on public-facing site).
 
 ## Session Notes
 
 - Run `pnpm run supabase:start` with Docker Desktop running to launch local Supabase instance.
-

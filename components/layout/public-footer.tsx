@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, ArrowUpRight } from "lucide-react";
+import { CONTACT_INFO } from "@/constants/contact";
 
 export function PublicFooter() {
   return (
@@ -11,7 +12,7 @@ export function PublicFooter() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/logo (2).webp"
+                src="/logo.webp"
                 alt="Black Swan International Logo"
                 width={40}
                 height={40}
@@ -28,7 +29,7 @@ export function PublicFooter() {
             </Link>
 
             <p className="text-sm text-slate-400 leading-relaxed">
-              Premium industrial equipment, heavy machinery, mechanical seals, and custom engineering solutions built for mission-critical operations worldwide.
+              Enterprise medical technology, diagnostic imaging processors, broadcast computing hardware, and media infrastructure systems built for mission-critical operations worldwide.
             </p>
           </div>
 
@@ -75,32 +76,32 @@ export function PublicFooter() {
           {/* Column 3: Featured Product Categories */}
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-white tracking-wider uppercase border-b border-brand-marble/50 pb-2">
-              Product Solutions
+              Hardware Solutions
             </h3>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li>
-                <Link href="/products?category=pumps" className="hover:text-white transition-colors">
-                  Industrial Heavy Pumps
+                <Link href="/products?category=medical" className="hover:text-white transition-colors">
+                  Medical Tech Hardware
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=seals" className="hover:text-white transition-colors">
-                  Mechanical Seals & Gaskets
+                <Link href="/products?category=broadcast" className="hover:text-white transition-colors">
+                  Broadcast Computer Systems
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=valves" className="hover:text-white transition-colors">
-                  Control Valves & Actuators
+                <Link href="/products?category=medical" className="hover:text-white transition-colors">
+                  Telehealth Gateways
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=bearings" className="hover:text-white transition-colors">
-                  Precision Bearings & Assemblies
+                <Link href="/products?category=broadcast" className="hover:text-white transition-colors">
+                  Media Encoding Servers
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=custom" className="hover:text-white transition-colors">
-                  Custom Metal Fabrication
+                <Link href="/services" className="hover:text-white transition-colors">
+                  Custom Infrastructure Integration
                 </Link>
               </li>
             </ul>
@@ -114,23 +115,23 @@ export function PublicFooter() {
             <ul className="space-y-3 text-sm text-slate-400">
               <li className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
-                <span>100 Industrial Parkway, Suite 400, Industrial District</span>
+                <span>{CONTACT_INFO.address.full}</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-slate-400 shrink-0" />
-                <a href="tel:+18005550199" className="hover:text-white transition-colors">
-                  +1 (800) 555-0199
+                <a href={CONTACT_INFO.phone.href} className="hover:text-white transition-colors">
+                  {CONTACT_INFO.phone.display}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-slate-400 shrink-0" />
-                <a href="mailto:sales@blackswan-intl.com" className="hover:text-white transition-colors">
-                  sales@blackswan-intl.com
+                <a href={CONTACT_INFO.email.href} className="hover:text-white transition-colors">
+                  {CONTACT_INFO.email.display}
                 </a>
               </li>
               <li className="flex items-start gap-2.5 pt-1">
                 <Clock className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
-                <span>Mon - Fri: 8:00 AM - 5:00 PM EST</span>
+                <span>{CONTACT_INFO.hours.display}</span>
               </li>
             </ul>
           </div>

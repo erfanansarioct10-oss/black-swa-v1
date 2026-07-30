@@ -3,8 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FileText } from "lucide-react";
+import { FileText, ShoppingCart } from "lucide-react";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { useQuoteCart } from "@/context/quote-cart-context";
 
 interface NavItem {
   label: string;
@@ -21,6 +22,7 @@ const navItems: NavItem[] = [
 
 export function MainHeader() {
   const pathname = usePathname();
+  const { itemCount, mounted } = useQuoteCart();
 
   return (
     <header className="sticky top-0 z-40 w-full bg-background opacity-100 border-b border-border shadow-xs">
@@ -28,7 +30,7 @@ export function MainHeader() {
         {/* Brand Logo & Name */}
         <Link href="/" className="flex items-center gap-3 group">
           <Image
-            src="/logo (2).webp"
+            src="/logo.webp"
             alt="Black Swan International Logo"
             width={44}
             height={44}
@@ -46,13 +48,14 @@ export function MainHeader() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+        <nav className="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActive ? "page" : undefined}
                 className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                   isActive
                     ? "text-primary font-semibold bg-accent"
@@ -65,8 +68,22 @@ export function MainHeader() {
           })}
         </nav>
 
-        {/* Action Group: Quote CTA */}
+        {/* Action Group: Quote Cart Badge & CTA */}
         <div className="flex items-center gap-3">
+          {/* Quote Cart Badge */}
+          <Link
+            href="/quote"
+            className="relative p-2 text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+            aria-label={`View Quote Cart, ${mounted ? itemCount : 0} items selected`}
+          >
+            <ShoppingCart className="h-5 w-5" />
+            {mounted && itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground shadow-xs animate-in zoom-in-50">
+                {itemCount}
+              </span>
+            )}
+          </Link>
+
           {/* Request a Quote Primary CTA (Desktop) */}
           <Link
             href="/quote"

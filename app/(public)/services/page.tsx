@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Wrench, Cpu, RefreshCw, Layers, ArrowRight } from "lucide-react";
+import { Cpu, Server, Activity, Wrench, ArrowRight } from "lucide-react";
 
 export default function ServicesPage() {
   return (
@@ -9,34 +9,34 @@ export default function ServicesPage() {
           Expert Services
         </span>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-foreground tracking-tight">
-          Industrial Engineering & Maintenance Services
+          System Integration & Technical Services
         </h1>
         <p className="text-muted-foreground text-sm sm:text-base max-w-3xl">
-          From custom alloy machining to emergency field repairs, our specialized engineering services ensure operational continuity and safety compliance.
+          From custom broadcast hardware assembly to medical device system integration, our specialized engineering teams ensure operational continuity and compliance.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {[
           {
-            icon: Wrench,
-            title: "Pump & Mechanical Seal Overhaul",
-            desc: "Complete teardown, inspection, dynamic balancing, and re-sealing of industrial pumps and rotating equipment.",
+            icon: Activity,
+            title: "Medical Hardware System Integration",
+            desc: "Custom assembly, DICOM compliance calibration, and HIPAA security hardening for hospital diagnostic processing hardware.",
+          },
+          {
+            icon: Server,
+            title: "Broadcast Media Server Assembly",
+            desc: "High-density rack-mount server configuration, GPU array optimization, and low-latency 12G-SDI video card integration.",
           },
           {
             icon: Cpu,
-            title: "Reverse Engineering & Custom Machining",
-            desc: "3D laser scanning and CAD modeling of obsolete components to fabricate drop-in alloy replacements.",
+            title: "Custom Embedded Computing Solutions",
+            desc: "Tailored micro-architecture configuration and firmware customization for specialized broadcast and medical hardware.",
           },
           {
-            icon: RefreshCw,
-            title: "Emergency On-Site Field Service",
-            desc: "24/7 rapid response engineering teams for critical plant shutdowns and unexpected equipment failures.",
-          },
-          {
-            icon: Layers,
-            title: "Surface Coating & Corrosion Protection",
-            desc: "Advanced ceramic, tungsten carbide, and polymer coatings engineered for severe abrasive and acidic exposure.",
+            icon: Wrench,
+            title: "24/7 Enterprise Hardware Maintenance",
+            desc: "Mission-critical hardware diagnostics, rapid component replacement, and 24/7 technical infrastructure support.",
           },
         ].map((item, idx) => {
           const Icon = item.icon;

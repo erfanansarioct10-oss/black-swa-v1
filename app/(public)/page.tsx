@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, Wrench, Factory, Cpu, FileText } from "lucide-react";
+import { ArrowRight, ShieldCheck, Cpu, Tv, Activity, FileText } from "lucide-react";
 import { AnimatedCount } from "@/components/ui/animated-count";
 
 export default function HomePage() {
   return (
     <div className="flex flex-col w-full">
-      {/* Industrial Hero Section */}
+      {/* Hero Section */}
       <section className="relative bg-brand-onyx text-white min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)] py-6 sm:py-10 lg:py-12 px-4 sm:px-6 lg:px-8 border-b border-brand-marble/40 overflow-hidden flex items-center">
         {/* Subtle background ambient lighting */}
         <div className="absolute inset-0 bg-radial from-brand-charcoal/60 via-brand-onyx to-brand-onyx pointer-events-none" />
@@ -16,16 +16,17 @@ export default function HomePage() {
           <div className="lg:col-span-7 space-y-7 sm:space-y-8 text-center sm:text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-charcoal text-slate-300 border border-brand-marble text-xs font-semibold uppercase tracking-wider">
               <ShieldCheck className="h-4 w-4 text-slate-200" />
-              <span>Next-Gen Media Tech & Broadcast Solutions</span>
+              <span>Medical Tech & Broadcast Hardware Solutions</span>
             </div>
 
+            {/* Exactly two lines short and minimum heading */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white">
-              Next-Gen Media Tech. <br />
-              <span className="text-slate-300">Professional Broadcast Systems.</span>
+              Medical Technology. <br />
+              <span className="text-slate-300">Broadcast Computer Hardware.</span>
             </h1>
 
             <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              Black Swan International supplies high-performance broadcasting instruments, studio production switchers, PTZ camera controls, audio consoles, and mission-critical media technology for global networks and live media infrastructure.
+              Black Swan International delivers enterprise medical imaging processors, telehealth hardware gateways, broadcast media servers, and studio IT computing infrastructure engineered for mission-critical operations.
             </p>
 
             {/* CTAs */}
@@ -34,7 +35,7 @@ export default function HomePage() {
                 href="/products"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-brand-onyx font-bold text-sm sm:text-base rounded-lg shadow-md hover:bg-slate-100 transition-all"
               >
-                <span>Browse Products</span>
+                <span>Browse Hardware Catalog</span>
                 <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
 
@@ -55,7 +56,7 @@ export default function HomePage() {
                   suffix="+"
                   className="block text-xl sm:text-2xl lg:text-3xl font-extrabold text-white"
                 />
-                <span className="text-xs text-slate-400">Years Experience</span>
+                <span className="text-xs text-slate-400">Years Industry Experience</span>
               </div>
               <div>
                 <AnimatedCount
@@ -63,16 +64,16 @@ export default function HomePage() {
                   suffix="K+"
                   className="block text-xl sm:text-2xl lg:text-3xl font-extrabold text-white"
                 />
-                <span className="text-xs text-slate-400">Components Deployed</span>
+                <span className="text-xs text-slate-400">Systems Deployed</span>
               </div>
               <div>
                 <AnimatedCount
-                  target={99.8}
+                  target={99.9}
                   decimals={1}
                   suffix="%"
                   className="block text-xl sm:text-2xl lg:text-3xl font-extrabold text-white"
                 />
-                <span className="text-xs text-slate-400">Uptime Rate</span>
+                <span className="text-xs text-slate-400">Uptime Reliability</span>
               </div>
             </div>
           </div>
@@ -85,8 +86,8 @@ export default function HomePage() {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
 
               <Image
-                src="/hero.png"
-                alt="Industrial Machinery Showcase"
+                src="/hero.webp"
+                alt="Medical Technology & Broadcast Computer Hardware Showcase"
                 width={900}
                 height={750}
                 priority
@@ -101,31 +102,31 @@ export default function HomePage() {
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="text-center space-y-3 mb-12">
           <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-            Our Core Specializations
+            Our Hardware Specializations
           </h2>
           <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto">
-            High-grade machinery, component fabrication, and engineering services tailored for heavy industry operations.
+            High-performance computing infrastructure, medical technology devices, and broadcast hardware solutions.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
-              icon: Factory,
-              title: "Industrial Heavy Pumps",
-              desc: "Centrifugal, positive displacement, and slurry pumps designed for extreme pressures and corrosive environments.",
-              href: "/products?category=pumps",
+              icon: Activity,
+              title: "Medical Technology Hardware",
+              desc: "Diagnostic imaging workstations, clinical processing hardware, and secure medical IoT hardware gateways.",
+              href: "/products?category=medical",
             },
             {
-              icon: Wrench,
-              title: "Mechanical Seals",
-              desc: "API-compliant single, dual, and gas-lubricated mechanical seals engineered to prevent fluid leakage.",
-              href: "/products?category=seals",
+              icon: Tv,
+              title: "Broadcast Computer Systems",
+              desc: "4K/8K real-time media encoding servers, video wall controllers, and studio production computing rigs.",
+              href: "/products?category=broadcast",
             },
             {
               icon: Cpu,
-              title: "Custom Fabrication",
-              desc: "Bespoke metal alloy machining, reverse engineering, and custom part replacement for legacy equipment.",
+              title: "Custom Infrastructure Integration",
+              desc: "Bespoke hardware assembly, rack-mount server optimization, and enterprise system support services.",
               href: "/services",
             },
           ].map((cat, idx) => {
@@ -152,7 +153,7 @@ export default function HomePage() {
                     href={cat.href}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-primary transition-colors"
                   >
-                    <span>Explore Solutions</span>
+                    <span>Explore Hardware</span>
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>

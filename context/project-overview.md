@@ -10,22 +10,22 @@
 
 **Black Swan International**
 
-A modern B2B industrial solutions platform built with **Next.js 16+ App Router**.
+A modern B2B solutions platform built with **Next.js 16+ App Router**.
 
 This project consists of two major systems:
 
 1. Public Marketing Website
 2. Secure Administrative Portal
 
-The website is designed primarily for **lead generation**, **product discovery**, and **quotation management**, not e-commerce.
+The website is designed primarily for **lead generation**, **product discovery**, and **quotation management** for **Medical Technology** and **Broadcasting Computer Hardware** infrastructure.
 
-Customers browse products and services, build a quote cart, and submit quotation requests. Internal staff manage those requests through a secure CRM-like dashboard.
+Customers browse medical imaging systems, telehealth hardware gateways, broadcast processing workstations, media encoding servers, and studio IT hardware, build a quote cart, and submit quotation requests. Internal staff manage those requests through a secure CRM-like dashboard.
 
 ---
 
 # Primary Business Goals
 
-- Build a professional industrial company website
+- Build a professional medical & broadcast technology B2B platform
 - Improve SEO and discoverability
 - Replace manual quotation workflow
 - Centralize products and services
@@ -229,8 +229,6 @@ AI functionality
 
 Never invent APIs or patterns that differ from the installed skills.
 
-This ensures the codebase always follows the official implementation guidance for the installed versions. The Vercel AI SDK itself recommends adding its repository skill for coding agents so implementations stay aligned with the installed SDK rather than relying on model memory. :contentReference[oaicite:0]{index=0}
-
 ---
 
 # Forbidden Technologies
@@ -258,7 +256,7 @@ Customers do NOT purchase products online.
 
 Workflow:
 
-Browse Products
+Browse Medical & Broadcast Hardware
 
 ↓
 

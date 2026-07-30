@@ -18,19 +18,19 @@ const eslintConfig = [
   ...nextVitals.map((config) => ({
     ...config,
     files: [
-      "app/**/*.{js,mjs,cjs,ts,tsx}",
-      "components/**/*.{js,mjs,cjs,ts,tsx}",
-      "lib/**/*.{js,mjs,cjs,ts,tsx}",
-      "db/**/*.{js,mjs,cjs,ts,tsx}",
+      "app/**/*.{js,mjs,cjs,jsx,ts,tsx}",
+      "components/**/*.{js,mjs,cjs,jsx,ts,tsx}",
+      "lib/**/*.{js,mjs,cjs,jsx,ts,tsx}",
+      "db/**/*.{js,mjs,cjs,jsx,ts,tsx}",
     ],
   })),
   ...nextTs.map((config) => ({
     ...config,
     files: [
-      "app/**/*.{js,mjs,cjs,ts,tsx}",
-      "components/**/*.{js,mjs,cjs,ts,tsx}",
-      "lib/**/*.{js,mjs,cjs,ts,tsx}",
-      "db/**/*.{js,mjs,cjs,ts,tsx}",
+      "app/**/*.{ts,tsx}",
+      "components/**/*.{ts,tsx}",
+      "lib/**/*.{ts,tsx}",
+      "db/**/*.{ts,tsx}",
     ],
   })),
 ];

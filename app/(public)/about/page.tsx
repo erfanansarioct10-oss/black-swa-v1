@@ -10,10 +10,10 @@ export default function AboutPage() {
           About Black Swan International
         </span>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-foreground tracking-tight">
-          Pioneering Heavy Industrial Excellence
+          Pioneering Medical & Broadcast Hardware
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-          For over two decades, Black Swan International has provided robust engineering components, custom fabrication, and specialized equipment servicing to heavy processing industries worldwide.
+          For over 15 years, Black Swan International has supplied medical imaging technology, telehealth hardware gateways, broadcast computing servers, and high-performance media infrastructure worldwide.
         </p>
       </div>
 
@@ -22,18 +22,18 @@ export default function AboutPage() {
         {[
           {
             icon: ShieldCheck,
-            title: "Uncompromising Quality",
-            desc: "Every component undergoes rigorous pressure testing and non-destructive examination (NDE) prior to field delivery.",
+            title: "Certified Reliability",
+            desc: "Every medical device terminal and broadcast processing server undergoes rigorous stress testing and compliance verification.",
           },
           {
             icon: Target,
-            title: "Precision Engineering",
-            desc: "Custom mechanical seal profiles and alloy machining engineered to exact tolerances down to the micron.",
+            title: "Precision System Architecture",
+            desc: "Low-latency video encoding hardware and HIPAA-compliant telemedicine gateways engineered to exact technical standards.",
           },
           {
             icon: Award,
             title: "Global Supply Chain",
-            desc: "Rapid delivery network ensuring zero downtime for critical manufacturing, power generation, and chemical facilities.",
+            desc: "Mission-critical hardware deployment network ensuring zero operational downtime for healthcare networks and live broadcasters.",
           },
         ].map((item, idx) => {
           const Icon = item.icon;
@@ -57,16 +57,16 @@ export default function AboutPage() {
       {/* CTA Banner */}
       <div className="p-8 sm:p-12 bg-brand-onyx text-white rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="space-y-2 text-center sm:text-left">
-          <h2 className="text-2xl font-bold">Need Custom Engineering Guidance?</h2>
+          <h2 className="text-2xl font-bold">Need Custom Hardware Infrastructure Guidance?</h2>
           <p className="text-sm text-slate-300">
-            Consult directly with our technical team for custom part specifications.
+            Consult directly with our system integration team for technical specifications and volume quotes.
           </p>
         </div>
         <Link
           href="/contact"
           className="px-6 py-3 bg-white text-brand-onyx font-bold rounded-lg hover:bg-slate-100 transition-colors shrink-0 flex items-center gap-2"
         >
-          <span>Contact Engineers</span>
+          <span>Contact System Engineers</span>
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>

@@ -1,5 +1,6 @@
 import { MainHeader } from "@/components/layout/main-header";
 import { PublicFooter } from "@/components/layout/public-footer";
+import { QuoteCartProvider } from "@/context/quote-cart-context";
 
 export default function PublicLayout({
   children,
@@ -7,15 +8,17 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
-      {/* Main Opaque Sticky Header with Logo, Navigation Links, Quote Cart & CTA */}
-      <MainHeader />
+    <QuoteCartProvider>
+      <div className="min-h-screen flex flex-col bg-background text-foreground">
+        {/* Main Opaque Sticky Header with Logo, Navigation Links, Quote Cart & CTA */}
+        <MainHeader />
 
-      {/* Dynamic Content Page Body */}
-      <main className="flex-1 w-full">{children}</main>
+        {/* Dynamic Content Page Body */}
+        <main className="flex-1 w-full">{children}</main>
 
-      {/* Multi-column Industrial Footer */}
-      <PublicFooter />
-    </div>
+        {/* Multi-column Industrial Footer */}
+        <PublicFooter />
+      </div>
+    </QuoteCartProvider>
   );
 }
