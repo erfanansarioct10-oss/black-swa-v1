@@ -26,9 +26,7 @@ Update this file after every meaningful implementation change.
 - Created public layout wrapper `app/(public)/layout.tsx` and page shells: Homepage (`app/(public)/page.tsx`), About (`app/(public)/about/page.tsx`), Products (`app/(public)/products/page.tsx`), Services (`app/(public)/services/page.tsx`), Contact (`app/(public)/contact/page.tsx`), and Quote (`app/(public)/quote/page.tsx`).
 - Authored detailed implementation specification: `context/implementation-specs/01-fix-coderabbit-pr-review-findings.md`.
 - Resolved all 11 CodeRabbit PR #1 review findings across layout components, accessibility, quote cart state, contact form, legal routes, ESLint globs, and progress documentation.
-- Converted `logo` and `hero` images to true `.webp` format (`public/logo.webp` and `public/hero.webp`), aligned domain copy to **Medical Technology & Broadcast Computer Hardware**, refined hero heading to a two-line title, and removed upper top utility bar from public layout. Verified build clean (`pnpm run lint` & `pnpm run build`).
-- Addressed CodeRabbit post-push findings: expanded ESLint scope to include `constants/` and `context/`, refactored product category filtering to URL-driven `useRouter` single source of truth, added `aria-label` accessibility attributes to catalog controls, updated operating hours to DST-safe "Eastern Time", implemented runtime `isQuoteCartItem` localStorage validation in `QuoteCartProvider`, and updated spec documentation.
-
+- Implemented homepage dual-row brand marquee section (`context/implementation-specs/02-homepage-brand-marquee-section.md`) featuring 18 compressed WebP brand logos (`public/brands/`), priority preloading, 70s slow-motion pure CSS keyframe tracks (`animate-marquee`, `animate-marquee-reverse`), navbar accent cards (`bg-accent`), trust badge header, and subtle blue ambient radial glow. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
 
 ## In Progress
 

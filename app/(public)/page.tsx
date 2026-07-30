@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ShieldCheck, Cpu, Tv, Activity, FileText } from "lucide-react";
 import { AnimatedCount } from "@/components/ui/animated-count";
+import { BrandMarquee } from "@/components/sections/brand-marquee";
 
 export default function HomePage() {
   return (
@@ -97,6 +98,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Brand Logos Trust Marquee Section */}
+      <BrandMarquee />
+
 
       {/* Product Categories Overview */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">

@@ -155,10 +155,14 @@ State explicit conditions required for completion:
 
 ## 8. Agent Workflow Integration
 
+> [!IMPORTANT]
+> **Mandatory User Permission Rule:** After drafting an implementation spec in `context/implementation-specs/` and updating `context/progress-tracker.md`, AI agents MUST **NOT** immediately start coding. Agents MUST present the plan to the user and obtain explicit permission before making any code changes.
+
 When working on a feature or review fix:
 1. **Load Context:** Read `AGENTS.md` and all files in `context/`.
 2. **Draft Spec:** Create `context/implementation-specs/XX-[spec-name].md` using the template above.
 3. **Update Progress Tracker:** Add the spec reference to `In Progress` in `context/progress-tracker.md`.
-4. **Obtain Approval:** Present the spec to the user for review before making code modifications.
-5. **Execute & Validate:** Implement step-by-step, running `pnpm run lint` and `pnpm run build` upon completion.
+4. **Obtain Approval (Mandatory Pause):** Present the implementation spec to the user and request explicit permission to proceed. Do **NOT** immediately start coding.
+5. **Execute & Validate:** Implement step-by-step only after receiving explicit user approval, running `pnpm run lint` and `pnpm run build` upon completion.
+
 ```
