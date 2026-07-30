@@ -12,7 +12,6 @@ import { EnterpriseAdvantageSection } from "@/components/sections/enterprise-adv
 import { ProcurementWorkflowSection } from "@/components/sections/procurement-workflow-section";
 import { CustomerReviewsSection } from "@/components/sections/customer-reviews-section";
 import { GetInTouchSection } from "@/components/sections/get-in-touch-section";
-import { BRAND_LOGOS_ROW_1 } from "@/constants/brands";
 import { generatePageMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_CONFIG } from "@/constants/site";
@@ -28,9 +27,6 @@ export const metadata = generatePageMetadata({
 export default function HomePage() {
   preload("/hero/hero.webp", { as: "image", type: "image/webp", fetchPriority: "high" });
   preload("/logo/logo.webp", { as: "image", type: "image/webp", fetchPriority: "high" });
-  BRAND_LOGOS_ROW_1.slice(0, 6).forEach((brand) => {
-    preload(brand.imageSrc, { as: "image", type: "image/webp", fetchPriority: "high" });
-  });
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",

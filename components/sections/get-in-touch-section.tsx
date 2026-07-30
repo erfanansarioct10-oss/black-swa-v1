@@ -65,6 +65,7 @@ export function GetInTouchSection() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin allow-popups"
                 title="Black Swan International Google Map Location"
                 className="absolute inset-0 w-full h-full"
               />

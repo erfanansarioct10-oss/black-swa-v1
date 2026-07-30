@@ -43,8 +43,8 @@ export function BrandMarquee() {
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-600/10 rounded-full blur-3xl" />
 
       {/* Edge gradient fade masks for smooth floating entry/exit */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-12 sm:w-24 lg:w-36 bg-gradient-to-r from-brand-onyx via-brand-onyx/90 to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-12 sm:w-24 lg:w-36 bg-gradient-to-l from-brand-onyx via-brand-onyx/90 to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-20 w-12 sm:w-24 lg:w-36 bg-gradient-to-r from-brand-onyx via-brand-onyx/90 to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-20 w-12 sm:w-24 lg:w-36 bg-gradient-to-l from-brand-onyx via-brand-onyx/90 to-transparent" />
 
       {/* Header Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 mb-12 sm:mb-16 text-center space-y-3">

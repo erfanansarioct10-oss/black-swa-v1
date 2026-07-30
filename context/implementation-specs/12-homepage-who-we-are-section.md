@@ -11,7 +11,7 @@
 
 This specification outlines the technical design and step-by-step implementation for adding a dedicated **"Who We Are" (About Us)** section on the public homepage (`app/(public)/page.tsx`), positioned directly below the main Hero section and directly above the Brand Marquee section (`components/sections/brand-marquee.tsx`).
 
-The section highlights Black Swan International's 15+ year legacy as an industrial leader in mission-critical Medical Technology and Broadcast Computer Hardware. On the left, it displays an optimized executive portrait card using `/ceo.webp` (compressed from the original 2.1 MB PNG down to ~71 KB, ~96.6% size reduction, with the legacy `ceo.png` deleted). On the right, it presents a compelling brand narrative, key enterprise checkmark highlights, and a primary call-to-action button (`Read Our Full Story`) redirecting visitors to the main About page (`/about`).
+The section highlights Black Swan International's 15+ year legacy as an industrial leader in mission-critical Medical Technology and Broadcast Computer Hardware. On the left, it displays an optimized executive portrait card using `/about/ceo.webp` (compressed from the original 2.1 MB PNG down to ~71 KB, ~96.6% size reduction, with the legacy `ceo.png` deleted). On the right, it presents a compelling brand narrative, key enterprise checkmark highlights, and a primary call-to-action button (`Read Our Full Story`) redirecting visitors to the main About page (`/about`).
 
 ---
 
@@ -21,7 +21,7 @@ List of files to be created, modified, or deleted:
 
 | #   | Target File | Action Required |
 | --- | ----------- | --------------- |
-| 1   | `public/ceo.webp` | **[NEW/COMPRESSED]** High-efficiency WebP executive image (~71 KB). |
+| 1   | `public/about/ceo.webp` | **[NEW/COMPRESSED]** High-efficiency WebP executive image (~71 KB). |
 | 2   | `public/ceo.png` | **[DELETE]** Unoptimized raw PNG asset (~2.1 MB) deleted. |
 | 3   | `components/sections/who-we-are-section.tsx` | **[NEW]** Modern responsive section component with CEO portrait card, legacy copy, key highlights, and CTA. |
 | 4   | `app/(public)/page.tsx` | **[MODIFY]** Import and embed `<WhoWeAreSection />` between Hero section and `<BrandMarquee />`. |

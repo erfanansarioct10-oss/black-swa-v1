@@ -124,10 +124,10 @@ export function PopularServicesSection({
 
                     <Link
                       href={`/contact?service=${service.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-slate-300 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 cursor-pointer py-2 px-3.5 rounded-lg bg-brand-onyx border border-brand-marble/60 group"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-slate-300 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 cursor-pointer py-2 px-3.5 rounded-lg bg-brand-onyx border border-brand-marble/60 group/link"
                     >
                       <span>Inquire About Service</span>
-                      <ArrowRight className="h-3.5 w-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                      <ArrowRight className="h-3.5 w-3.5 text-slate-400 group-hover/link:translate-x-0.5 transition-transform" />
                     </Link>
                   </div>
                 </div>
