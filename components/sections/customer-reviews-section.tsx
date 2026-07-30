@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import {
   Star,
@@ -12,6 +12,8 @@ import {
   Award,
   Clock,
   ShieldCheck,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { CUSTOMER_REVIEWS, CustomerReviewItem } from "@/constants/reviews";
 
@@ -20,6 +22,7 @@ type FilterTab = "all" | "medical" | "broadcast";
 export function CustomerReviewsSection() {
   const [activeTab, setActiveTab] = useState<FilterTab>("all");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const filteredReviews =
     activeTab === "all"
@@ -30,6 +33,32 @@ export function CustomerReviewsSection() {
   const handleTabChange = (tab: FilterTab) => {
     setActiveTab(tab);
     setCurrentIndex(0);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    }
+  };
+
+  const scrollToCard = (index: number) => {
+    const targetIndex = Math.max(0, Math.min(index, filteredReviews.length - 1));
+    setCurrentIndex(targetIndex);
+    if (scrollContainerRef.current) {
+      const cardElement = scrollContainerRef.current.children[targetIndex] as HTMLElement;
+      if (cardElement) {
+        cardElement.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    }
+  };
+
+  const handlePrev = () => {
+    scrollToCard(currentIndex - 1);
+  };
+
+  const handleNext = () => {
+    scrollToCard(currentIndex + 1);
   };
 
   return (
@@ -90,10 +119,13 @@ export function CustomerReviewsSection() {
           </div>
         </div>
 
-        {/* Animated Carousel Container with vertical padding to prevent hover clipping */}
+        {/* Carousel Container */}
         <div className="relative pt-3 pb-3 px-1 overflow-visible">
-          {/* Reviews Card Grid Display */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 transition-all duration-500 ease-in-out">
+          {/* Reviews Card Display: Horizontal Carousel on mobile (< md), Grid on desktop (>= md) */}
+          <div
+            ref={scrollContainerRef}
+            className="flex md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-5 sm:gap-6 lg:gap-8 pb-4 md:pb-0 scrollbar-none scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+          >
             {filteredReviews.map((review: CustomerReviewItem, index: number) => {
               // Highlight cards based on active index position
               const isActiveCard = index === currentIndex;
@@ -101,8 +133,8 @@ export function CustomerReviewsSection() {
               return (
                 <div
                   key={review.id}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-brand-charcoal text-white border transition-all duration-300 group relative overflow-hidden cursor-pointer ${
+                  onClick={() => scrollToCard(index)}
+                  className={`flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-brand-charcoal text-white border transition-all duration-300 group relative overflow-hidden cursor-pointer w-[85vw] max-w-sm sm:w-[380px] md:w-auto shrink-0 snap-center md:snap-align-none ${
                     isActiveCard
                       ? "border-blue-500/80 shadow-xl shadow-blue-500/10 ring-2 ring-blue-500/30 scale-[1.01]"
                       : "border-brand-marble/80 shadow-md hover:border-slate-400/60 hover:shadow-xl hover:-translate-y-1"
@@ -198,21 +230,43 @@ export function CustomerReviewsSection() {
             })}
           </div>
 
-          {/* Carousel Slide Indicators / Dots */}
-          <div className="mt-8 flex items-center justify-center gap-2">
-            {filteredReviews.map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setCurrentIndex(idx)}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  idx === currentIndex
-                    ? "w-8 bg-blue-600"
-                    : "w-2 bg-slate-300 hover:bg-slate-400"
-                }`}
-                aria-label={`Go to review ${idx + 1}`}
-              />
-            ))}
+          {/* Carousel Controls: Arrows (mobile-friendly) & Indicators */}
+          <div className="mt-8 flex items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={handlePrev}
+              disabled={currentIndex === 0}
+              aria-label="Previous testimonial"
+              className="p-2 rounded-full border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {filteredReviews.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => scrollToCard(idx)}
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                    idx === currentIndex
+                      ? "w-8 bg-blue-600"
+                      : "w-2 bg-slate-300 hover:bg-slate-400"
+                  }`}
+                  aria-label={`Go to review ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={currentIndex === filteredReviews.length - 1}
+              aria-label="Next testimonial"
+              className="p-2 rounded-full border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
 

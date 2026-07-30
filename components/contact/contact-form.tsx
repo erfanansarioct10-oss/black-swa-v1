@@ -1,51 +1,27 @@
 "use client";
 
-import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { CONTACT_INFO } from "@/constants/contact";
+import { useSimulatedFormSubmit } from "@/hooks/use-simulated-form-submit";
 
 export function ContactForm() {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    companyName: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage(null);
-    setSubmitting(true);
-
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 800);
-  };
-
-  const handleReset = () => {
-    setFormData({
+  const {
+    formData,
+    submitting,
+    submitted,
+    errorMessage,
+    handleChange,
+    handleSubmit,
+    handleReset,
+  } = useSimulatedFormSubmit({
+    initialValues: {
       fullName: "",
       companyName: "",
       email: "",
       phone: "",
       message: "",
-    });
-    setSubmitted(false);
-    setErrorMessage(null);
-  };
+    },
+  });
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-4">

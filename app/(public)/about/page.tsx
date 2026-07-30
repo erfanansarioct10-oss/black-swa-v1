@@ -4,11 +4,12 @@ import { generatePageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_CONFIG } from "@/constants/site";
+import { FeatureCard } from "@/components/ui/feature-card";
 
 export const metadata = generatePageMetadata({
-  title: "About Us | Pioneering Medical & Broadcast Hardware",
+  title: "About Black Swan International",
   description:
-    "Learn about Black Swan International's 15-year history supplying mission-critical medical imaging systems, broadcast video encoding nodes, and telehealth compute gateways.",
+    "Learn about Black Swan International's mission, engineering excellence, and 15+ years of supplying certified medical & broadcast computing hardware globally.",
   path: "/about",
 });
 
@@ -30,13 +31,13 @@ export default function AboutPage() {
       <JsonLd data={aboutSchema} />
       <Breadcrumbs items={[{ label: "About Us", href: "/about" }]} />
 
-      {/* Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
+      {/* Hero Intro Section */}
+      <div className="space-y-4 max-w-3xl">
         <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
           About Black Swan International
         </span>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-foreground tracking-tight">
-          Pioneering Medical & Broadcast Hardware
+          Enterprise Infrastructure & Hardware Innovation
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
           For over 15 years, Black Swan International has supplied medical imaging technology, telehealth hardware gateways, broadcast computing servers, and high-performance media infrastructure worldwide.
@@ -61,23 +62,14 @@ export default function AboutPage() {
             title: "Global Supply Chain",
             desc: "Mission-critical hardware deployment network ensuring zero operational downtime for healthcare networks and live broadcasters.",
           },
-        ].map((item, idx) => {
-          const Icon = item.icon;
-          return (
-            <div
-              key={idx}
-              className="p-6 bg-card border border-border rounded-xl space-y-3"
-            >
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-foreground">
-                <Icon className="h-5 w-5" />
-              </div>
-              <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-          );
-        })}
+        ].map((item, idx) => (
+          <FeatureCard
+            key={idx}
+            icon={item.icon}
+            title={item.title}
+            desc={item.desc}
+          />
+        ))}
       </div>
 
       {/* CTA Banner */}

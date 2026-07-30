@@ -30,12 +30,6 @@ export default function ProductsPage() {
           "@type": "Brand",
           name: SITE_CONFIG.name,
         },
-        offers: {
-          "@type": "AggregateOffer",
-          priceCurrency: "USD",
-          price: "Request Quote",
-          availability: "https://schema.org/InStock",
-        },
       },
     })),
   };

@@ -139,7 +139,7 @@ We will resolve all CodeRabbit findings across the target files (including separ
 
 ### Step 9: Configuration & Progress Tracker Fixes
 - In `eslint.config.mjs`:
-  - Update `nextTs.map` files target to `["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}", "lib/**/*.{ts,tsx}", "db/**/*.{ts,tsx}"]`.
+  - Update `nextTs.map` files target to `["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}", "lib/**/*.{ts,tsx}", "db/**/*.{ts,tsx}", "constants/**/*.{ts,tsx}", "context/**/*.{ts,tsx}"]`.
   - Include `.jsx` in `nextVitals.map` target.
 - In `context/progress-tracker.md`:
   - Replace all `file:///c:/black-swan-v1/...` links with `app/(public)/layout.tsx`, etc.

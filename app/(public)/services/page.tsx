@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { Cpu, Server, Activity, Wrench, ArrowRight } from "lucide-react";
+import { Cpu, Server, Activity, Wrench } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_CONFIG } from "@/constants/site";
+import { FeatureCard } from "@/components/ui/feature-card";
 
 export const metadata = generatePageMetadata({
   title: "System Integration & Technical Services",
@@ -86,37 +86,16 @@ export default function ServicesPage() {
             title: "24/7 Enterprise Hardware Maintenance",
             desc: "Mission-critical hardware diagnostics, rapid component replacement, and 24/7 technical infrastructure support.",
           },
-        ].map((item, idx) => {
-          const Icon = item.icon;
-          return (
-            <div
-              key={idx}
-              className="p-6 bg-card border border-border rounded-xl space-y-4 flex flex-col justify-between"
-            >
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center text-foreground">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-border">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
-                >
-                  <span>Inquire About Service</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          );
-        })}
+        ].map((item, idx) => (
+          <FeatureCard
+            key={idx}
+            icon={item.icon}
+            title={item.title}
+            desc={item.desc}
+            href="/contact"
+            linkText="Inquire About Service"
+          />
+        ))}
       </div>
     </div>
   );

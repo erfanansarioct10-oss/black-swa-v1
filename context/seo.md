@@ -128,7 +128,7 @@ Every public page must have its own meta description.
 
 URLs must remain clean, descriptive, and predictable.
 
-```
+```text
 /
 
 about
@@ -305,7 +305,7 @@ Exclude:
 
 Every page should naturally link to related pages.
 
-```
+```text
 Homepage
     ↓
 Categories
@@ -327,7 +327,7 @@ Every hierarchical page should include breadcrumbs.
 
 Example:
 
-```
+```text
 Home
 ↓
 Catalog
@@ -357,13 +357,13 @@ Every image must include:
 
 ### Good
 
-```
+```text
 hikvision-industrial-ip-camera.jpg
 ```
 
 ### Bad
 
-```
+```text
 IMG000123.jpg
 ```
 

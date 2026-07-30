@@ -119,7 +119,7 @@ import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
 import { BRAND_LOGOS_ROW_1, BRAND_LOGOS_ROW_2, type BrandLogo } from "@/constants/brands";
 
-function BrandItem({ brand, priority = false }: { brand: BrandLogo; priority?: boolean }) {
+function BrandItem({ brand }: { brand: BrandLogo }) {
   return (
     <div className="group flex items-center justify-center shrink-0 px-6 py-3.5 sm:px-8 sm:py-4.5 bg-accent hover:bg-slate-200/90 rounded-xl border border-border/80 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 select-none">
       <Image
@@ -127,7 +127,6 @@ function BrandItem({ brand, priority = false }: { brand: BrandLogo; priority?: b
         alt={brand.name}
         width={360}
         height={140}
-        priority={priority}
         className="h-14 sm:h-18 lg:h-20 w-auto max-w-[180px] sm:max-w-[220px] lg:max-w-[250px] object-contain opacity-95 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
       />
     </div>

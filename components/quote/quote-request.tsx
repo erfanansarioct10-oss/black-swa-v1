@@ -1,40 +1,36 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { FileText, ShoppingCart, ArrowLeft, Send, Trash2, Plus, Minus, CheckCircle2 } from "lucide-react";
 import { useQuoteCart } from "@/components/providers/quote-cart-provider";
+import { useSimulatedFormSubmit } from "@/hooks/use-simulated-form-submit";
 
 export function QuoteRequest() {
   const { items, itemCount, updateQuantity, removeItem, clearCart, mounted } = useQuoteCart();
 
-  const [rfqForm, setRfqForm] = useState({
-    contactName: "",
-    companyName: "",
-    email: "",
-    timelineRequirements: "",
+  const {
+    formData: rfqForm,
+    submitting,
+    submitted,
+    handleChange,
+    handleSubmit: handleFormSubmit,
+  } = useSimulatedFormSubmit({
+    initialValues: {
+      contactName: "",
+      companyName: "",
+      email: "",
+      timelineRequirements: "",
+    },
+    onSubmitSuccess: () => {
+      clearCart();
+    },
+    delayMs: 1000,
   });
 
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setRfqForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (items.length === 0) return;
-
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
+  const handleClearCartWithConfirm = () => {
+    if (window.confirm("Are you sure you want to clear all items from your quote cart?")) {
       clearCart();
-    }, 1000);
+    }
   };
 
   if (!mounted) {
@@ -48,21 +44,28 @@ export function QuoteRequest() {
   if (submitted) {
     return (
       <div className="p-8 bg-card border border-border rounded-2xl space-y-6 max-w-2xl mx-auto text-center shadow-sm">
-        <div className="flex justify-center text-emerald-600 dark:text-emerald-400">
-          <CheckCircle2 className="h-14 w-14" />
+        <div className="w-16 h-16 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto border border-emerald-500/20">
+          <CheckCircle2 className="h-8 w-8 text-emerald-500" />
         </div>
-        <h2 className="text-2xl font-bold text-foreground">
-          Quotation Request Submitted Successfully!
-        </h2>
-        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-          Your RFQ reference has been generated and dispatched to our engineering accounts team. A formal quote document with custom pricing and delivery timelines will be emailed within 1 business day.
-        </p>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-extrabold text-foreground">
+            Quotation Request Received
+          </h2>
+          <p className="text-sm text-muted-foreground max-w-md mx-auto">
+            Thank you, <span className="font-semibold text-foreground">{rfqForm.contactName}</span>. Your RFQ for <span className="font-semibold text-foreground">{rfqForm.companyName}</span> has been dispatched to our sales engineering team.
+          </p>
+        </div>
+        <div className="p-4 bg-muted/50 rounded-lg text-xs text-muted-foreground text-left max-w-md mx-auto space-y-1">
+          <p>• Confirmation email sent to: <span className="font-mono text-foreground font-semibold">{rfqForm.email}</span></p>
+          <p>• Account Manager Response Time: <span className="font-semibold text-foreground">Under 2 Business Hours</span></p>
+        </div>
         <div className="pt-2">
           <Link
             href="/products"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-foreground text-background text-sm font-semibold hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
           >
-            Return to Hardware Catalog
+            <ArrowLeft className="h-4 w-4" />
+            Return to Equipment Catalog
           </Link>
         </div>
       </div>
@@ -71,23 +74,26 @@ export function QuoteRequest() {
 
   if (items.length === 0) {
     return (
-      <div className="text-center py-16 bg-card rounded-xl border border-border p-8 space-y-6 max-w-2xl mx-auto shadow-sm">
-        <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-muted text-muted-foreground">
-          <ShoppingCart className="h-8 w-8" />
+      <div className="p-12 bg-card border border-border rounded-2xl text-center max-w-xl mx-auto space-y-5 shadow-sm">
+        <div className="w-14 h-14 bg-muted text-muted-foreground rounded-full flex items-center justify-center mx-auto">
+          <ShoppingCart className="h-7 w-7" />
         </div>
-        <div className="space-y-2">
-          <h2 className="text-xl font-bold text-foreground">Your Quote Cart is Empty</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Select medical technology or broadcast compute hardware from our equipment catalog to generate a custom commercial RFQ.
+        <div className="space-y-1">
+          <h2 className="text-xl font-bold text-foreground">
+            Your Quote Cart is Empty
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Browse our medical and broadcast hardware catalog to request customized enterprise pricing.
           </p>
         </div>
-        <Link
-          href="/products"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-foreground text-background text-sm font-semibold hover:opacity-90 transition-opacity shadow-sm"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span>Browse Hardware Catalog</span>
-        </Link>
+        <div>
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
+          >
+            Browse Products Catalog
+          </Link>
+        </div>
       </div>
     );
   }
@@ -103,7 +109,7 @@ export function QuoteRequest() {
           </h2>
 
           <button
-            onClick={clearCart}
+            onClick={handleClearCartWithConfirm}
             className="text-xs text-muted-foreground hover:text-destructive transition-colors font-medium"
           >
             Clear Cart
@@ -134,6 +140,7 @@ export function QuoteRequest() {
                   <button
                     type="button"
                     onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                    aria-label={`Decrease quantity of ${item.name}`}
                     className="p-2 hover:bg-muted text-muted-foreground hover:text-foreground rounded-l-lg transition-colors"
                   >
                     <Minus className="h-3.5 w-3.5" />
@@ -144,6 +151,7 @@ export function QuoteRequest() {
                   <button
                     type="button"
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    aria-label={`Increase quantity of ${item.name}`}
                     className="p-2 hover:bg-muted text-muted-foreground hover:text-foreground rounded-r-lg transition-colors"
                   >
                     <Plus className="h-3.5 w-3.5" />
@@ -154,6 +162,7 @@ export function QuoteRequest() {
                 <button
                   type="button"
                   onClick={() => removeItem(item.id)}
+                  aria-label={`Remove ${item.name} from quote cart`}
                   className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
                   title="Remove Item"
                 >
@@ -171,7 +180,7 @@ export function QuoteRequest() {
           Submit Quote Request
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleFormSubmit} className="space-y-4">
           <div className="space-y-1.5">
             <label htmlFor="contactName" className="text-xs font-semibold text-foreground uppercase tracking-wider">
               Contact Name <span className="text-destructive">*</span>
@@ -238,7 +247,7 @@ export function QuoteRequest() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-foreground text-background text-sm font-bold shadow hover:opacity-90 transition-opacity disabled:opacity-50 pt-3"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-foreground text-background text-sm font-bold shadow hover:opacity-90 transition-opacity disabled:opacity-50"
           >
             {submitting ? (
               <span>Generating Quotation...</span>

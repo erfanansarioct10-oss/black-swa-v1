@@ -88,8 +88,8 @@ export function CertificationsSection({
                       {cert.code}
                     </span>
 
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-xs">
-                      <Check className="h-3.5 w-3.5 text-emerald-400 stroke-[3]" />
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-xs ${cert.badgeColor}`}>
+                      <Check className="h-3.5 w-3.5 stroke-[3]" />
                       <span>{cert.status}</span>
                     </span>
                   </div>

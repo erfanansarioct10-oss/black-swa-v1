@@ -135,6 +135,8 @@ export default function HomePage() {
                 alt="Medical Technology & Broadcast Computer Hardware Showcase"
                 width={900}
                 height={750}
+                priority
+                sizes="(min-width: 1024px) 45vw, 90vw"
                 className="relative z-10 w-full h-auto object-contain filter drop-shadow-[0_10px_20px_rgba(37,99,235,0.12)] drop-shadow-xl scale-105 lg:scale-110 origin-center"
               />
             </div>

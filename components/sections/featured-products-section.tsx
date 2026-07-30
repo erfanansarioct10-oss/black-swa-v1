@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -17,6 +17,7 @@ import { SAMPLE_PRODUCTS, type SampleProduct } from "@/constants/products";
 
 export function FeaturedProductsSection() {
   const [addedIds, setAddedIds] = useState<Record<string, boolean>>({});
+  const timeoutsRef = useRef<Record<string, NodeJS.Timeout>>({});
   const { addItem } = useQuoteCart();
 
   const handleAddToQuote = (prod: SampleProduct) => {
@@ -28,8 +29,14 @@ export function FeaturedProductsSection() {
     });
 
     setAddedIds((prev) => ({ ...prev, [prod.id]: true }));
-    setTimeout(() => {
+
+    if (timeoutsRef.current[prod.id]) {
+      clearTimeout(timeoutsRef.current[prod.id]);
+    }
+
+    timeoutsRef.current[prod.id] = setTimeout(() => {
       setAddedIds((prev) => ({ ...prev, [prod.id]: false }));
+      delete timeoutsRef.current[prod.id];
     }, 1500);
   };
 

@@ -21,7 +21,7 @@ export function generatePageMetadata({
   const fullTitle = `${title} | ${SITE_CONFIG.name}`;
 
   return {
-    title: fullTitle,
+    title,
     description,
     keywords: [...SITE_CONFIG.keywords, ...keywords],
     alternates: {
