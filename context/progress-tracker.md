@@ -27,6 +27,8 @@ Update this file after every meaningful implementation change.
 - Authored detailed implementation specification: `context/implementation-specs/01-fix-coderabbit-pr-review-findings.md`.
 - Resolved all 11 CodeRabbit PR #1 review findings across layout components, accessibility, quote cart state, contact form, legal routes, ESLint globs, and progress documentation.
 - Converted `logo` and `hero` images to true `.webp` format (`public/logo.webp` and `public/hero.webp`), aligned domain copy to **Medical Technology & Broadcast Computer Hardware**, refined hero heading to a two-line title, and removed upper top utility bar from public layout. Verified build clean (`pnpm run lint` & `pnpm run build`).
+- Addressed CodeRabbit post-push findings: expanded ESLint scope to include `constants/` and `context/`, refactored product category filtering to URL-driven `useRouter` single source of truth, added `aria-label` accessibility attributes to catalog controls, updated operating hours to DST-safe "Eastern Time", implemented runtime `isQuoteCartItem` localStorage validation in `QuoteCartProvider`, and updated spec documentation.
+
 
 ## In Progress
 

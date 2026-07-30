@@ -22,11 +22,26 @@ interface QuoteCartContextType {
 
 const STORAGE_KEY = "blackswan_quote_cart";
 
+function isQuoteCartItem(value: unknown): value is QuoteCartItem {
+  if (!value || typeof value !== "object") return false;
+  const item = value as Record<string, unknown>;
+  return (
+    typeof item.id === "string" &&
+    typeof item.name === "string" &&
+    typeof item.sku === "string" &&
+    typeof item.category === "string" &&
+    typeof item.quantity === "number" &&
+    Number.isSafeInteger(item.quantity) &&
+    item.quantity > 0
+  );
+}
+
 const getInitialItems = (): QuoteCartItem[] => {
   if (typeof window === "undefined") return [];
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
+    const parsed: unknown = stored ? JSON.parse(stored) : [];
+    return Array.isArray(parsed) ? parsed.filter(isQuoteCartItem) : [];
   } catch (e) {
     console.error("Failed to parse quote cart items from localStorage:", e);
     return [];

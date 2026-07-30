@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Following the initial PR commit and automated CodeRabbit code review, 11 inline findings were identified across layout components, accessibility, quote cart state management, brand messaging consistency, public forms, legal route handling, ESLint configurations, and progress documentation.
+Following the initial PR commit and automated CodeRabbit code review, findings were identified across layout components, accessibility, quote cart state management, brand messaging consistency, public forms, legal route handling, ESLint configurations, and progress documentation.
 
 This document details the exact technical plan to systematically verify, fix, and validate every unresolved finding while maintaining strict adherence to the project standards (`AGENTS.md`, `context/architecture.md`, `context/code-standards.md`, and `context/ui-context.md`).
 
@@ -17,13 +17,13 @@ This document details the exact technical plan to systematically verify, fix, an
 
 ## 1. What We Are Going to Do
 
-We will resolve all 11 CodeRabbit findings across 12 specific files:
+We will resolve all CodeRabbit findings across the target files (including separate legal routes `privacy/page.tsx` and `terms/page.tsx` grouped under item 8):
 
 | # | Target File | Action Required |
 |---|---|---|
 | 1 | `public/logo.webp` & `public/hero.webp` | Convert PNG assets to optimized WebP image format; update references in headers, footers & hero. |
-| 2 | `constants/contact.ts` | **[NEW]** Create central source of truth for company contact details (phone, email, address, operating hours). |
-| 3 | `components/providers/quote-cart-provider.tsx` | **[NEW]** Implement React Context & `useQuoteCart` hook with `localStorage` persistence for client-side Quote Cart state. |
+| 2 | `constants/contact.ts` | **[NEW]** Create central source of truth for company contact details (phone, email, address, operating hours in Eastern Time). |
+| 3 | `components/providers/quote-cart-provider.tsx` | **[NEW]** Implement React Context & `useQuoteCart` hook with `localStorage` persistence and runtime item validation (`isQuoteCartItem`). |
 | 4 | `app/(public)/layout.tsx` | Wrap public pages in `QuoteCartProvider`. |
 | 5 | `components/layout/main-header.tsx` | Add `aria-current="page"` to active nav links, update logo source to `/logo.webp`, and add Quote Cart item count badge. |
 | 6 | `components/layout/mobile-nav.tsx` | Refactor drawer using `shadcn/ui Sheet` for accessible focus trapping, Esc key handling, and aria states; consume `CONTACT_INFO`; update logo path to `/logo.webp`. |
@@ -31,9 +31,9 @@ We will resolve all 11 CodeRabbit findings across 12 specific files:
 | 8 | `app/(public)/privacy/page.tsx` & `terms/page.tsx` | **[NEW]** Create Privacy Policy and Terms of Service page shells to eliminate 404 dead links. |
 | 9 | `app/(public)/page.tsx` | Update hero badge, heading, description, image alt text, and product category links to strictly represent Medical Technology & Broadcast Computer Hardware. |
 | 10 | `app/(public)/contact/page.tsx` | Add client state, form `name` attributes, Zod/native validation, loading state, and success/error alert feedback. |
-| 11 | `app/(public)/products/page.tsx` | Add client-side search input, category filtering (synced with URL params), and "Add to Quote Cart" actions. |
+| 11 | `app/(public)/products/page.tsx` | Add client-side search input, category filtering (synced with URL params), filter accessibility labels (`aria-label`), and "Add to Quote Cart" actions. |
 | 12 | `app/(public)/quote/page.tsx` | Render dynamic Quote Cart items, quantity controls, clear cart, and enable RFQ submission form only when cart has items. |
-| 13 | `eslint.config.mjs` | Scope `nextTs` mappings strictly to TypeScript files (`.ts`, `.tsx`) and add `.jsx` to `nextVitals`. |
+| 13 | `eslint.config.mjs` | Scope `ignores` to doc files (`**/context/**/*.md`) and add `constants/**` and `context/**` to TypeScript/Next lint coverage globs. |
 | 14 | `context/progress-tracker.md` | Replace absolute Windows `file:///c:/black-swan-v1/` URIs with relative paths, remove `.env.local` entry. |
 
 ---
@@ -46,7 +46,7 @@ We will resolve all 11 CodeRabbit findings across 12 specific files:
    - Using `shadcn/ui Sheet` guarantees built-in WAI-ARIA dialog patterns (Focus Trap, Esc to close, focus return to trigger element).
 
 2. **Domain Positioning Consistency (`project-overview.md`):**
-   - The platform is explicitly built for *Black Swan International* as a provider of Medical Technology and Broadcast Computer Hardware.
+   - The platform is explicitly built for *Black Swan International* as a provider of Medical Technology (diagnostic workstations, telehealth gateways) and Broadcast Computer Hardware (video encoding servers, video wall processors).
 
 3. **Quote-First Core Architecture (`project-overview.md`):**
    - Black Swan operates on a quote-cart model, not traditional e-commerce checkout.
@@ -80,15 +80,16 @@ We will resolve all 11 CodeRabbit findings across 12 specific files:
       full: "100 Industrial Parkway, Suite 400, Industrial District",
     },
     hours: {
-      display: "Mon - Fri: 8:00 AM - 5:00 PM EST",
+      display: "Mon - Fri: 8:00 AM - 5:00 PM Eastern Time",
     },
   } as const;
   ```
 
 - **File:** `components/providers/quote-cart-provider.tsx`
-  - Define `QuoteItem` type (`id`, `name`, `sku`, `category`, `quantity`).
+  - Define `QuoteCartItem` interface (`id`, `name`, `sku`, `category`, `quantity`).
+  - Implement runtime item validation guard `isQuoteCartItem` to ensure `localStorage` entries are valid objects with string fields and positive integer quantities (`quantity > 0`).
   - Provide `addItem`, `removeItem`, `updateQuantity`, `clearCart`, `items`, and `itemCount`.
-  - Persist state to `localStorage` with a `mounted` check to avoid SSR hydration mismatches in Next.js App Router.
+  - Persist state to `localStorage` safely after client hydration with a `mounted` check to avoid SSR hydration mismatches in Next.js App Router.
 
 ### Step 2: Image Asset & Header/Footer Refactoring
 - Convert `public/logo.png` to `public/logo.webp` and `public/hero.png` to `public/hero.webp`.

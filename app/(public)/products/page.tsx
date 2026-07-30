@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Package, Filter, Search, PlusCircle, Check } from "lucide-react";
 import { useQuoteCart } from "@/components/providers/quote-cart-provider";
 
@@ -41,16 +41,27 @@ const sampleProducts = [
 ];
 
 function ProductsCatalogContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [addedIds, setAddedIds] = useState<Record<string, boolean>>({});
 
   const { addItem } = useQuoteCart();
 
-  const activeCategory = selectedCategory ?? (categoryParam || "all");
+  const activeCategory = categoryParam || "all";
+
+  const handleCategoryChange = (newCategory: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (newCategory === "all") {
+      params.delete("category");
+    } else {
+      params.set("category", newCategory);
+    }
+    const queryString = params.toString();
+    router.push(queryString ? `/products?${queryString}` : "/products");
+  };
 
   const filteredProducts = sampleProducts.filter((prod) => {
     const matchesCategory =
@@ -86,6 +97,7 @@ function ProductsCatalogContent() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
             type="text"
+            aria-label="Search products"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search products by SKU or keyword..."
@@ -99,8 +111,9 @@ function ProductsCatalogContent() {
             <span>Category:</span>
           </div>
           <select
+            aria-label="Product category"
             value={activeCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            onChange={(e) => handleCategoryChange(e.target.value)}
             className="px-3 py-2 text-sm bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="all">All Categories</option>
@@ -119,7 +132,7 @@ function ProductsCatalogContent() {
           <button
             onClick={() => {
               setSearchQuery("");
-              setSelectedCategory("all");
+              handleCategoryChange("all");
             }}
             className="text-xs font-semibold text-primary hover:underline"
           >

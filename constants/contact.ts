@@ -14,6 +14,6 @@ export const CONTACT_INFO = {
     full: "100 Industrial Parkway, Suite 400, Industrial District",
   },
   hours: {
-    display: "Mon - Fri: 8:00 AM - 5:00 PM EST",
+    display: "Mon - Fri: 8:00 AM - 5:00 PM Eastern Time",
   },
 } as const;

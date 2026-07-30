@@ -11,7 +11,7 @@ const eslintConfig = [
       "**/node_modules/**",
       "**/next-env.d.ts",
       "**/.agents/**",
-      "**/context/**",
+      "**/context/**/*.md",
       "**/docs/**",
     ],
   },
@@ -22,6 +22,8 @@ const eslintConfig = [
       "components/**/*.{js,mjs,cjs,jsx,ts,tsx}",
       "lib/**/*.{js,mjs,cjs,jsx,ts,tsx}",
       "db/**/*.{js,mjs,cjs,jsx,ts,tsx}",
+      "constants/**/*.{js,mjs,cjs,jsx,ts,tsx}",
+      "context/**/*.{js,mjs,cjs,jsx,ts,tsx}",
     ],
   })),
   ...nextTs.map((config) => ({
@@ -31,6 +33,8 @@ const eslintConfig = [
       "components/**/*.{ts,tsx}",
       "lib/**/*.{ts,tsx}",
       "db/**/*.{ts,tsx}",
+      "constants/**/*.{ts,tsx}",
+      "context/**/*.{ts,tsx}",
     ],
   })),
 ];
