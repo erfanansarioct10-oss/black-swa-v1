@@ -12,7 +12,7 @@ export function PublicFooter() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/logo.webp"
+                src="/logo/logo.webp"
                 alt="Black Swan International Logo"
                 width={40}
                 height={40}

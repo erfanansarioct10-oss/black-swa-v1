@@ -22,7 +22,7 @@ export default function ContactPage() {
     mainEntity: {
       "@type": "LocalBusiness",
       name: SITE_CONFIG.name,
-      image: `${SITE_CONFIG.url}/logo.webp`,
+      image: `${SITE_CONFIG.url}/logo/logo.webp`,
       telephone: CONTACT_INFO.phone.display,
       email: CONTACT_INFO.email.display,
       address: {

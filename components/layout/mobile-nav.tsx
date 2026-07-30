@@ -50,7 +50,7 @@ export function MobileNav() {
                 className="flex items-center gap-2"
               >
                 <Image
-                  src="/logo.webp"
+                  src="/logo/logo.webp"
                   alt="Black Swan International Logo"
                   width={36}
                   height={36}

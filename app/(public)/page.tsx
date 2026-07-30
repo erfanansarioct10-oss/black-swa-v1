@@ -1,14 +1,17 @@
+import { preload } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ShieldCheck, FileText } from "lucide-react";
 import { AnimatedCount } from "@/components/ui/animated-count";
 import { BrandMarquee } from "@/components/sections/brand-marquee";
+import { WhoWeAreSection } from "@/components/sections/who-we-are-section";
 import { CertificationsSection } from "@/components/sections/certifications-section";
 import { FeaturedProductsSection } from "@/components/sections/featured-products-section";
 import { PopularServicesSection } from "@/components/sections/popular-services-section";
 import { EnterpriseAdvantageSection } from "@/components/sections/enterprise-advantage-section";
 import { ProcurementWorkflowSection } from "@/components/sections/procurement-workflow-section";
 import { CustomerReviewsSection } from "@/components/sections/customer-reviews-section";
+import { GetInTouchSection } from "@/components/sections/get-in-touch-section";
 import { generatePageMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_CONFIG } from "@/constants/site";
@@ -22,12 +25,14 @@ export const metadata = generatePageMetadata({
 });
 
 export default function HomePage() {
+  preload("/hero/hero.webp", { as: "image", type: "image/webp", fetchPriority: "high" });
+  preload("/logo/logo.webp", { as: "image", type: "image/webp", fetchPriority: "high" });
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/logo.webp`,
+    logo: `${SITE_CONFIG.url}/logo/logo.webp`,
     contactPoint: {
       "@type": "ContactPoint",
       telephone: CONTACT_INFO.phone.display,
@@ -78,15 +83,15 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-3 sm:pt-4 justify-center sm:justify-start">
               <Link
                 href="/products"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-brand-onyx font-bold text-sm sm:text-base rounded-lg shadow-md hover:bg-slate-100 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-brand-onyx font-bold text-sm sm:text-base rounded-lg shadow-md hover:bg-slate-100 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 transition-all duration-200 group cursor-pointer"
               >
                 <span>Browse Hardware Catalog</span>
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <Link
                 href="/quote"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-brand-charcoal text-white border border-brand-marble font-semibold text-sm sm:text-base rounded-lg hover:bg-brand-marble/50 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-brand-charcoal text-white border border-brand-marble font-semibold text-sm sm:text-base rounded-lg hover:bg-brand-marble/50 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 transition-all duration-200 group cursor-pointer"
               >
                 <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400" />
                 <span>Request Custom Quote</span>
@@ -131,7 +136,7 @@ export default function HomePage() {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
 
               <Image
-                src="/hero.webp"
+                src="/hero/hero.webp"
                 alt="Medical Technology & Broadcast Computer Hardware Showcase"
                 width={900}
                 height={750}
@@ -144,8 +149,14 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Who We Are (About Us) Legacy Section */}
+      <WhoWeAreSection />
+
       {/* Brand Logos Trust Marquee Section */}
       <BrandMarquee />
+
+      {/* Enterprise Advantage & Corporate Trust Grid Section ("Why Choose Black Swan") */}
+      <EnterpriseAdvantageSection />
 
       {/* Certifications & Compliance Section */}
       <CertificationsSection />
@@ -156,14 +167,14 @@ export default function HomePage() {
       {/* Popular Engineering & Integration Services Section */}
       <PopularServicesSection />
 
-      {/* Enterprise Advantage & Corporate Trust Grid Section */}
-      <EnterpriseAdvantageSection />
-
       {/* Enterprise Procurement Process & Workflow Section */}
       <ProcurementWorkflowSection />
 
       {/* Customer Reviews & Executive Testimonials Section */}
       <CustomerReviewsSection />
+
+      {/* Get in Touch Section with Contact Form & Embedded Square Google Map */}
+      <GetInTouchSection />
     </div>
   );
 }

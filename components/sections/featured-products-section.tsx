@@ -47,24 +47,23 @@ export function FeaturedProductsSection() {
   );
 
   return (
-    <section className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background border-b border-border w-full overflow-hidden">
-      {/* Subtle Background Ambient Gray Lighting (Hero-style) */}
-      <div className="absolute inset-0 bg-radial from-slate-200/50 via-background to-background pointer-events-none dark:from-slate-800/30" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] sm:w-[900px] h-[400px] bg-slate-400/10 dark:bg-slate-600/15 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-slate-50/70 to-white border-b border-slate-200/80 w-full overflow-hidden">
+      {/* Background Ambient Lighting */}
+      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] sm:w-[900px] h-[400px] bg-blue-500/5 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full space-y-12">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-charcoal text-slate-300 border border-brand-marble text-xs font-semibold uppercase tracking-wider shadow-xs">
-            <Sparkles className="h-4 w-4 text-blue-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200/90 text-brand-granite text-xs font-bold uppercase tracking-wider shadow-2xs">
+            <Sparkles className="h-4 w-4 text-blue-500" />
             <span>Featured Enterprise Hardware</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground uppercase">
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-brand-onyx uppercase">
             Flagship Hardware & Systems
           </h2>
 
-          <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+          <p className="text-brand-granite text-sm sm:text-base leading-relaxed">
             High-performance medical technology processors, telehealth hardware gateways, and broadcast video workstations engineered for mission-critical uptime.
           </p>
         </div>
@@ -152,7 +151,7 @@ export function FeaturedProductsSection() {
 
                   <button
                     onClick={() => handleAddToQuote(spotlightProduct)}
-                    className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-bold text-sm cursor-pointer transition-all shadow-sm ${
+                    className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-bold text-sm cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 ${
                       addedIds[spotlightProduct.id]
                         ? "bg-slate-300 text-brand-onyx"
                         : "bg-white text-brand-onyx hover:bg-slate-100"
@@ -231,7 +230,7 @@ export function FeaturedProductsSection() {
 
                       <button
                         onClick={() => handleAddToQuote(prod)}
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all shadow-xs ${
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 ${
                           isAdded
                             ? "bg-slate-300 text-brand-onyx"
                             : "bg-white text-brand-onyx hover:bg-slate-100"
@@ -261,10 +260,10 @@ export function FeaturedProductsSection() {
         <div className="pt-4 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-brand-charcoal text-white border border-brand-marble font-bold text-sm sm:text-base rounded-lg cursor-pointer transition-all shadow-sm"
+            className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-brand-charcoal text-white border border-brand-marble font-bold text-sm sm:text-base rounded-lg cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 group"
           >
             <span>Explore Full Hardware Catalog</span>
-            <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400" />
+            <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>
