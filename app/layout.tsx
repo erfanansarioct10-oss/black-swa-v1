@@ -59,7 +59,11 @@ export const metadata: Metadata = {
     creator: "@BlackSwanInt",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/logo/logo.webp", type: "image/webp" },
+    ],
+    shortcut: "/logo/logo.webp",
+    apple: "/logo/logo.webp",
   },
 };
 
