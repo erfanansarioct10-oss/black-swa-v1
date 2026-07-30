@@ -1,9 +1,57 @@
 import Link from "next/link";
 import { Cpu, Server, Activity, Wrench, ArrowRight } from "lucide-react";
+import { generatePageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { JsonLd } from "@/components/seo/json-ld";
+import { SITE_CONFIG } from "@/constants/site";
+
+export const metadata = generatePageMetadata({
+  title: "System Integration & Technical Services",
+  description:
+    "Custom medical device system integration, broadcast server rack buildouts, DICOM compliance calibration, and global SLA maintenance.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Medical Technology & Broadcast System Integration",
+    provider: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
+    },
+    areaServed: "Global",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Engineering & Hardware Integration Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Medical Hardware System Integration",
+            description: "Custom assembly, DICOM compliance calibration, and HIPAA security hardening.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Broadcast Hardware Configuration",
+            description: "Rack assembly, SDI/IP routing configuration, and 8K encoding cluster optimization.",
+          },
+        },
+      ],
+    },
+  };
+
   return (
-    <div className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12">
+    <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-10">
+      <JsonLd data={serviceSchema} />
+      <Breadcrumbs items={[{ label: "Services", href: "/services" }]} />
+
       <div className="space-y-4 text-center sm:text-left border-b border-border pb-8">
         <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
           Expert Services

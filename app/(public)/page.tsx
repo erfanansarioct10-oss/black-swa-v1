@@ -3,10 +3,49 @@ import Image from "next/image";
 import { ArrowRight, ShieldCheck, Cpu, Tv, Activity, FileText } from "lucide-react";
 import { AnimatedCount } from "@/components/ui/animated-count";
 import { BrandMarquee } from "@/components/sections/brand-marquee";
+import { CertificationsSection } from "@/components/sections/certifications-section";
+import { generatePageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { SITE_CONFIG } from "@/constants/site";
+import { CONTACT_INFO } from "@/constants/contact";
+
+export const metadata = generatePageMetadata({
+  title: "Enterprise Medical & Broadcast Computer Hardware Solutions",
+  description:
+    "Black Swan International delivers medical imaging processors, telehealth hardware gateways, broadcast media servers, and studio computing infrastructure.",
+  path: "/",
+});
 
 export default function HomePage() {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_CONFIG.name,
+    url: SITE_CONFIG.url,
+    logo: `${SITE_CONFIG.url}/logo.webp`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: CONTACT_INFO.phone.display,
+      contactType: "customer service",
+      email: CONTACT_INFO.email.display,
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: CONTACT_INFO.address.full,
+    },
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_CONFIG.name,
+    url: SITE_CONFIG.url,
+  };
+
   return (
     <div className="flex flex-col w-full">
+      <JsonLd data={[organizationSchema, websiteSchema]} />
+
       {/* Hero Section */}
       <section className="relative bg-brand-onyx text-white min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)] py-6 sm:py-10 lg:py-12 px-4 sm:px-6 lg:px-8 border-b border-brand-marble/40 overflow-hidden flex items-center">
         {/* Subtle background ambient lighting */}
@@ -101,6 +140,10 @@ export default function HomePage() {
 
       {/* Brand Logos Trust Marquee Section */}
       <BrandMarquee />
+
+      {/* Certifications & Compliance Section */}
+      <CertificationsSection />
+
 
 
       {/* Product Categories Overview */}

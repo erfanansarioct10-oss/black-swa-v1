@@ -1,9 +1,35 @@
 import Link from "next/link";
 import { ShieldCheck, Award, Target, ArrowRight } from "lucide-react";
+import { generatePageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { JsonLd } from "@/components/seo/json-ld";
+import { SITE_CONFIG } from "@/constants/site";
+
+export const metadata = generatePageMetadata({
+  title: "About Us | Pioneering Medical & Broadcast Hardware",
+  description:
+    "Learn about Black Swan International's 15-year history supplying mission-critical medical imaging systems, broadcast video encoding nodes, and telehealth compute gateways.",
+  path: "/about",
+});
 
 export default function AboutPage() {
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "About Black Swan International",
+    description: "Pioneering Medical & Broadcast Hardware Solutions Provider",
+    publisher: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
+    },
+  };
+
   return (
-    <div className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-16">
+    <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12">
+      <JsonLd data={aboutSchema} />
+      <Breadcrumbs items={[{ label: "About Us", href: "/about" }]} />
+
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">

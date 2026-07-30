@@ -27,11 +27,13 @@ Update this file after every meaningful implementation change.
 - Authored detailed implementation specification: `context/implementation-specs/01-fix-coderabbit-pr-review-findings.md`.
 - Resolved all 11 CodeRabbit PR #1 review findings across layout components, accessibility, quote cart state, contact form, legal routes, ESLint globs, and progress documentation.
 - Implemented homepage dual-row brand marquee section (`context/implementation-specs/02-homepage-brand-marquee-section.md`) featuring 18 compressed WebP brand logos (`public/brands/`), priority preloading, 70s slow-motion pure CSS keyframe tracks (`animate-marquee`, `animate-marquee-reverse`), navbar accent cards (`bg-accent`), trust badge header, and subtle blue ambient radial glow. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Resolved 6 CodeRabbit review comments (`context/implementation-specs/03-fix-coderabbit-marquee-and-catalog-review-findings.md`) covering product catalog category normalization (`VALID_CATEGORIES`), prefers-reduced-motion CSS media query, brand asset path standardization (`cg.webp`), brand marquee array helper (`repeatArray`), screen reader accessibility (`aria-hidden` tracks & `sr-only` list), priority preloading optimization, and spec documentation layout. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
+- Implemented homepage certifications & compliance section (`context/implementation-specs/04-homepage-certifications-section.md`) featuring 6 medical & broadcast standards (ISO 13485, IEC 60601-1, CE MDR, FDA Registered, ISO 9001, FCC/RoHS), strongly-typed dataset (`constants/certifications.ts`), dynamic icon mapping, optional custom dataset prop for future CMS/DB replacement, responsive card grid, and accessible detail `Dialog` modal. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
+- Implemented Stage 1 Foundational SEO Architecture (`context/implementation-specs/05-seo-compliance-and-technical-optimization.md`) introducing `constants/site.ts`, `lib/seo.ts`, `components/seo/json-ld.tsx`, `components/ui/breadcrumbs.tsx`, dynamic metadata routes `app/robots.ts` (`robots.txt`) and `app/sitemap.ts` (`sitemap.xml`), root layout metadata defaults (`metadataBase`, title template, OpenGraph, Twitter cards), page metadata exports, and Schema.org JSON-LD structured data across all public routes. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
 
 ## In Progress
 
 - None
+
 
 ## Next Up
 

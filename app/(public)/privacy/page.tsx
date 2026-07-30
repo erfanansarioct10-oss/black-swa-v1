@@ -1,6 +1,18 @@
+import { generatePageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+
+export const metadata = generatePageMetadata({
+  title: "Privacy Policy",
+  description:
+    "Privacy Policy and data collection guidelines for Black Swan International B2B platform users.",
+  path: "/privacy",
+});
+
 export default function PrivacyPage() {
   return (
-    <div className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full space-y-8">
+    <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full space-y-6">
+      <Breadcrumbs items={[{ label: "Privacy Policy", href: "/privacy" }]} />
+
       <div className="space-y-4 border-b border-border pb-6">
         <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
           Legal Notice

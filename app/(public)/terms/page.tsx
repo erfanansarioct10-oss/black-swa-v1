@@ -1,6 +1,18 @@
+import { generatePageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+
+export const metadata = generatePageMetadata({
+  title: "Terms of Service",
+  description:
+    "Commercial terms, quotation agreements, and technical procurement terms for Black Swan International.",
+  path: "/terms",
+});
+
 export default function TermsPage() {
   return (
-    <div className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full space-y-8">
+    <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full space-y-6">
+      <Breadcrumbs items={[{ label: "Terms of Service", href: "/terms" }]} />
+
       <div className="space-y-4 border-b border-border pb-6">
         <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
           Legal Agreement
