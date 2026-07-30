@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useSyncExternalStore } from "react";
 
 export interface QuoteCartItem {
   id: string;
@@ -22,24 +22,29 @@ interface QuoteCartContextType {
 
 const STORAGE_KEY = "blackswan_quote_cart";
 
+const getInitialItems = (): QuoteCartItem[] => {
+  if (typeof window === "undefined") return [];
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (e) {
+    console.error("Failed to parse quote cart items from localStorage:", e);
+    return [];
+  }
+};
+
+const emptySubscribe = () => () => {};
+
 const QuoteCartContext = createContext<QuoteCartContextType | undefined>(undefined);
 
 export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<QuoteCartItem[]>([]);
-  const [mounted, setMounted] = useState(false);
-
-  // Load from localStorage after component mounts on client
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        setItems(JSON.parse(stored));
-      }
-    } catch (e) {
-      console.error("Failed to parse quote cart items from localStorage:", e);
-    }
-    setMounted(true);
-  }, []);
+  const [items, setItems] = useState<QuoteCartItem[]>(getInitialItems);
+  
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   // Sync to localStorage whenever items change
   useEffect(() => {

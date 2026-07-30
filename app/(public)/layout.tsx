@@ -1,6 +1,6 @@
 import { MainHeader } from "@/components/layout/main-header";
 import { PublicFooter } from "@/components/layout/public-footer";
-import { QuoteCartProvider } from "@/context/quote-cart-context";
+import { QuoteCartProvider } from "@/components/providers/quote-cart-provider";
 
 export default function PublicLayout({
   children,

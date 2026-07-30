@@ -2,7 +2,7 @@
 
 > **Spec ID:** 01-fix-coderabbit-pr-review-findings  
 > **Target Branch / PR:** PR #1 (`feat: add public pages, layout components, and UI system`)  
-> **Status:** Draft / Pending Approval  
+> **Status:** Complete  
 > **Created Date:** 2026-07-30  
 
 ---
@@ -21,21 +21,20 @@ We will resolve all 11 CodeRabbit findings across 12 specific files:
 
 | # | Target File | Action Required |
 |---|---|---|
-| 1 | `public/logo (2).webp` | Rename file to `public/logo.png` (fixing PNG bytes / WebP extension mismatch and spaces in filename); update references in headers & footers. |
+| 1 | `public/logo.webp` & `public/hero.webp` | Convert PNG assets to optimized WebP image format; update references in headers, footers & hero. |
 | 2 | `constants/contact.ts` | **[NEW]** Create central source of truth for company contact details (phone, email, address, operating hours). |
-| 3 | `context/quote-cart-context.tsx` | **[NEW]** Implement React Context & `useQuoteCart` hook with `localStorage` persistence for client-side Quote Cart state. |
-| 4 | `components/layout/top-utility-bar.tsx` | Consume `CONTACT_INFO` constant and render component in public layout. |
-| 5 | `app/(public)/layout.tsx` | Wrap public pages in `QuoteCartProvider` and render `TopUtilityBar` above `MainHeader`. |
-| 6 | `components/layout/main-header.tsx` | Add `aria-current="page"` to active nav links, update logo source to `/logo.png`, and add Quote Cart item count badge. |
-| 7 | `components/layout/mobile-nav.tsx` | Refactor drawer using `shadcn/ui Sheet` for accessible focus trapping, Esc key handling, and aria states; consume `CONTACT_INFO`; update logo path. |
-| 8 | `components/layout/public-footer.tsx` | Consume `CONTACT_INFO` constants, update logo path to `/logo.png`. |
-| 9 | `app/(public)/privacy/page.tsx` & `terms/page.tsx` | **[NEW]** Create Privacy Policy and Terms of Service page shells to eliminate 404 dead links. |
-| 10 | `app/(public)/page.tsx` | Update hero badge, heading, description, image alt text, and product category links to strictly represent industrial machinery & equipment. |
-| 11 | `app/(public)/contact/page.tsx` | Add client state, form `name` attributes, Zod/native validation, loading state, and success/error alert feedback. |
-| 12 | `app/(public)/products/page.tsx` | Add client-side search input, category filtering (synced with URL params), and "Add to Quote Cart" actions. |
-| 13 | `app/(public)/quote/page.tsx` | Render dynamic Quote Cart items, quantity controls, clear cart, and enable RFQ submission form only when cart has items. |
-| 14 | `eslint.config.mjs` | Scope `nextTs` mappings strictly to TypeScript files (`.ts`, `.tsx`) and add `.jsx` to `nextVitals`. |
-| 15 | `context/progress-tracker.md` | Replace absolute Windows `file:///c:/black-swan-v1/` URIs with relative paths, remove `.env.local` entry. |
+| 3 | `components/providers/quote-cart-provider.tsx` | **[NEW]** Implement React Context & `useQuoteCart` hook with `localStorage` persistence for client-side Quote Cart state. |
+| 4 | `app/(public)/layout.tsx` | Wrap public pages in `QuoteCartProvider`. |
+| 5 | `components/layout/main-header.tsx` | Add `aria-current="page"` to active nav links, update logo source to `/logo.webp`, and add Quote Cart item count badge. |
+| 6 | `components/layout/mobile-nav.tsx` | Refactor drawer using `shadcn/ui Sheet` for accessible focus trapping, Esc key handling, and aria states; consume `CONTACT_INFO`; update logo path to `/logo.webp`. |
+| 7 | `components/layout/public-footer.tsx` | Consume `CONTACT_INFO` constants, update logo path to `/logo.webp`. |
+| 8 | `app/(public)/privacy/page.tsx` & `terms/page.tsx` | **[NEW]** Create Privacy Policy and Terms of Service page shells to eliminate 404 dead links. |
+| 9 | `app/(public)/page.tsx` | Update hero badge, heading, description, image alt text, and product category links to strictly represent Medical Technology & Broadcast Computer Hardware. |
+| 10 | `app/(public)/contact/page.tsx` | Add client state, form `name` attributes, Zod/native validation, loading state, and success/error alert feedback. |
+| 11 | `app/(public)/products/page.tsx` | Add client-side search input, category filtering (synced with URL params), and "Add to Quote Cart" actions. |
+| 12 | `app/(public)/quote/page.tsx` | Render dynamic Quote Cart items, quantity controls, clear cart, and enable RFQ submission form only when cart has items. |
+| 13 | `eslint.config.mjs` | Scope `nextTs` mappings strictly to TypeScript files (`.ts`, `.tsx`) and add `.jsx` to `nextVitals`. |
+| 14 | `context/progress-tracker.md` | Replace absolute Windows `file:///c:/black-swan-v1/` URIs with relative paths, remove `.env.local` entry. |
 
 ---
 
@@ -47,16 +46,15 @@ We will resolve all 11 CodeRabbit findings across 12 specific files:
    - Using `shadcn/ui Sheet` guarantees built-in WAI-ARIA dialog patterns (Focus Trap, Esc to close, focus return to trigger element).
 
 2. **Domain Positioning Consistency (`project-overview.md`):**
-   - The platform is explicitly built for *Black Swan International* as an industrial equipment and heavy machinery B2B provider.
-   - Text references to "Broadcast/Media Tech" on the homepage conflict directly with the product catalog and company purpose.
+   - The platform is explicitly built for *Black Swan International* as a provider of Medical Technology and Broadcast Computer Hardware.
 
 3. **Quote-First Core Architecture (`project-overview.md`):**
    - Black Swan operates on a quote-cart model, not traditional e-commerce checkout.
    - Presentational product buttons that do not store items prevent users from building a quotation request, breaking the core workflow.
 
 4. **Data Hygiene & Maintenance:**
-   - Image assets whose file headers do not match their file extensions (`.png` content inside `.webp` filename) break image optimization pipelines and can cause decoding failures.
-   - Hardcoding contact details across 4 separate components creates maintenance drift.
+   - Converting PNG assets to `.webp` reduces bundle size and optimizes Next.js image loading.
+   - Hardcoding contact details across multiple components creates maintenance drift.
    - Absolute local filesystem paths (`file:///c:/...`) in tracked Markdown docs break rendering on GitHub and in non-Windows developer environments.
 
 ---
@@ -87,16 +85,16 @@ We will resolve all 11 CodeRabbit findings across 12 specific files:
   } as const;
   ```
 
-- **File:** `context/quote-cart-context.tsx`
+- **File:** `components/providers/quote-cart-provider.tsx`
   - Define `QuoteItem` type (`id`, `name`, `sku`, `category`, `quantity`).
   - Provide `addItem`, `removeItem`, `updateQuantity`, `clearCart`, `items`, and `itemCount`.
   - Persist state to `localStorage` with a `mounted` check to avoid SSR hydration mismatches in Next.js App Router.
 
 ### Step 2: Image Asset & Header/Footer Refactoring
-- Rename `public/logo (2).webp` to `public/logo.png`.
-- In `components/layout/top-utility-bar.tsx`, `components/layout/main-header.tsx`, `components/layout/mobile-nav.tsx`, and `components/layout/public-footer.tsx`:
+- Convert `public/logo.png` to `public/logo.webp` and `public/hero.png` to `public/hero.webp`.
+- In `components/layout/main-header.tsx`, `components/layout/mobile-nav.tsx`, and `components/layout/public-footer.tsx`:
   - Consume `CONTACT_INFO`.
-  - Update `src="/logo (2).webp"` to `src="/logo.png"`.
+  - Update logo image source to `/logo.webp`.
   - In `main-header.tsx`, add `aria-current={isActive ? "page" : undefined}`.
   - In `main-header.tsx`, add a Quote Cart badge link showing `itemCount`.
 
@@ -112,10 +110,9 @@ We will resolve all 11 CodeRabbit findings across 12 specific files:
 
 ### Step 5: Homepage Alignment
 - In `app/(public)/page.tsx`:
-  - Replace "Next-Gen Media Tech & Broadcast Solutions" with "Certified Heavy Industrial Equipment & Machinery".
-  - Replace hero paragraph text to describe heavy industrial pumps, mechanical seals, control valves, precision bearings, and custom fabrication.
-  - Update hero image `alt` to "Black Swan Industrial Equipment Showcase".
-  - Ensure category links point to `/products?category=pumps`, `/products?category=seals`, `/products?category=valves`, `/products?category=bearings`.
+  - Update hero text to Medical Technology and Broadcast Computer Hardware.
+  - Set exact short two-line heading title.
+  - Update hero image source to `/hero.webp`.
 
 ### Step 6: Contact Form Interactivity
 - In `app/(public)/contact/page.tsx`:
@@ -154,10 +151,10 @@ We will resolve all 11 CodeRabbit findings across 12 specific files:
 The execution timeline is ordered sequentially to ensure zero build errors at any phase:
 
 ```text
-Phase 1: Foundation & Shared State (contact.ts, quote-cart-context.tsx)
+Phase 1: Foundation & Shared State (contact.ts, quote-cart-provider.tsx)
     │
     ▼
-Phase 2: Assets & Layouts (logo.png, layout.tsx, top-utility-bar, main-header, mobile-nav, public-footer, legal routes)
+Phase 2: Assets & Layouts (logo.webp, layout.tsx, main-header, mobile-nav, public-footer, legal routes)
     │
     ▼
 Phase 3: Public Page Interactivity & Form Flows (page.tsx, contact/page.tsx, products/page.tsx, quote/page.tsx)
@@ -175,10 +172,10 @@ Phase 5: Verification & Validation (pnpm run lint, pnpm run typecheck, pnpm run 
 
 | Data Requirement | Origin / Source | Usage |
 |---|---|---|
-| Company Contact Info | `constants/contact.ts` | Displayed across TopUtilityBar, MainHeader, MobileNav, PublicFooter, and ContactPage. |
-| Quote Cart State | Client `localStorage` (`blackswan_quote_cart`) via `QuoteCartContext` | Persisted client-side cart items, quantities, badge count. |
-| Product Inventory | `sampleProducts` array in `app/(public)/products/page.tsx` (migratable to DB in Phase 3) | Displayed in Product Catalog, filtered by category/search, added to cart. |
-| URL Search Category | `useSearchParams()` in `app/(public)/products/page.tsx` | Synchronizes URL query string `?category=pumps` with product filter state. |
+| Company Contact Info | `constants/contact.ts` | Displayed across MainHeader, MobileNav, PublicFooter, and ContactPage. |
+| Quote Cart State | Client `localStorage` (`blackswan_quote_cart`) via `useQuoteCart` | Persisted client-side cart items, quantities, badge count. |
+| Product Inventory | `sampleProducts` array in `app/(public)/products/page.tsx` | Displayed in Product Catalog, filtered by category/search, added to cart. |
+| URL Search Category | `useSearchParams()` in `app/(public)/products/page.tsx` | Synchronizes URL query string `?category=medical` with product filter state. |
 | Contact & RFQ Inputs | Form elements in `contact/page.tsx` and `quote/page.tsx` | Validated by Zod schemas / browser constraints before simulated API submission. |
 
 ---
@@ -199,5 +196,5 @@ Phase 5: Verification & Validation (pnpm run lint, pnpm run typecheck, pnpm run 
 
 The plan will be considered complete when:
 1. `pnpm run lint` executes with zero errors or warnings.
-2. `pnpm run typecheck` (or `pnpm run build`) builds the application cleanly without TypeScript errors.
-3. Manual verification confirms Quote Cart persistence, contact form feedback, industrial hero text consistency, responsive drawer accessibility, and legal routes.
+2. `pnpm run build` builds the application cleanly without TypeScript errors.
+3. Manual verification confirms Quote Cart persistence, contact form feedback, medical/broadcast hero text consistency, responsive drawer accessibility, and legal routes.

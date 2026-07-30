@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FileText, ShoppingCart, ArrowLeft, Send, Trash2, Plus, Minus, CheckCircle2 } from "lucide-react";
-import { useQuoteCart } from "@/context/quote-cart-context";
+import { useQuoteCart } from "@/components/providers/quote-cart-provider";
 
 export default function QuotePage() {
   const { items, itemCount, updateQuantity, removeItem, clearCart, mounted } = useQuoteCart();

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FileText, ShoppingCart } from "lucide-react";
 import { MobileNav } from "@/components/layout/mobile-nav";
-import { useQuoteCart } from "@/context/quote-cart-context";
+import { useQuoteCart } from "@/components/providers/quote-cart-provider";
 
 interface NavItem {
   label: string;

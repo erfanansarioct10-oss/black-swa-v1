@@ -3,7 +3,7 @@
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Package, Filter, Search, PlusCircle, Check } from "lucide-react";
-import { useQuoteCart } from "@/context/quote-cart-context";
+import { useQuoteCart } from "@/components/providers/quote-cart-provider";
 
 const sampleProducts = [
   {
