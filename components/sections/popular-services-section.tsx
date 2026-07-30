@@ -124,10 +124,10 @@ export function PopularServicesSection({
 
                     <Link
                       href={`/contact?service=${service.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-slate-300 transition-colors cursor-pointer py-2 px-3.5 rounded-lg bg-brand-onyx border border-brand-marble/60"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-slate-300 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 cursor-pointer py-2 px-3.5 rounded-lg bg-brand-onyx border border-brand-marble/60 group"
                     >
                       <span>Inquire About Service</span>
-                      <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
+                      <ArrowRight className="h-3.5 w-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
                     </Link>
                   </div>
                 </div>
@@ -140,10 +140,10 @@ export function PopularServicesSection({
         <div className="pt-4 text-center">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-brand-charcoal text-white border border-brand-marble font-bold text-sm sm:text-base rounded-lg transition-all shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-brand-charcoal text-white border border-brand-marble font-bold text-sm sm:text-base rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 shadow-sm cursor-pointer group"
           >
             <span>Explore Full Technical Services</span>
-            <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400" />
+            <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>

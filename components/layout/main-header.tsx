@@ -30,7 +30,7 @@ export function MainHeader() {
         {/* Brand Logo & Name */}
         <Link href="/" className="flex items-center gap-3 group">
           <Image
-            src="/logo.webp"
+            src="/logo/logo.webp"
             alt="Black Swan International Logo"
             width={44}
             height={44}

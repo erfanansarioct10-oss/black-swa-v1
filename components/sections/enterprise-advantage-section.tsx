@@ -24,22 +24,26 @@ export function EnterpriseAdvantageSection({
   subtitle = "Direct Tier-1 component traceability, guaranteed 4-hour SLA field response, factory-certified compliance, and insured white-glove global transport.",
 }: EnterpriseAdvantageSectionProps) {
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-b border-border space-y-12 sm:space-y-16">
-      {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-muted text-muted-foreground border border-border text-xs font-semibold uppercase tracking-wider">
-          <ShieldCheck className="h-4 w-4 text-blue-400" />
-          <span>Enterprise Quality & Uptime Guarantees</span>
+    <section className="relative w-full bg-gradient-to-b from-slate-50/80 via-white to-slate-50/80 border-b border-slate-200/80 py-16 sm:py-24 overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-500/5 rounded-full blur-3xl" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200/90 text-brand-granite text-xs font-bold uppercase tracking-wider shadow-2xs">
+            <ShieldCheck className="h-4 w-4 text-blue-500" />
+            <span>Enterprise Quality & Uptime Guarantees</span>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-brand-onyx uppercase">
+            {title}
+          </h2>
+
+          <p className="text-brand-granite text-sm sm:text-base lg:text-lg leading-relaxed">
+            {subtitle}
+          </p>
         </div>
-
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground uppercase">
-          {title}
-        </h2>
-
-        <p className="text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed">
-          {subtitle}
-        </p>
-      </div>
 
       {/* 4-Column Advantage Card Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
@@ -111,6 +115,7 @@ export function EnterpriseAdvantageSection({
           );
         })}
       </div>
-    </section>
+    </div>
+  </section>
   );
 }

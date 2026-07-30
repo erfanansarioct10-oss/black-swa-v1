@@ -4,7 +4,7 @@ import { BRAND_LOGOS_ROW_1, BRAND_LOGOS_ROW_2, type BrandLogo } from "@/constant
 
 function BrandItem({ brand, priority = false }: { brand: BrandLogo; priority?: boolean }) {
   return (
-    <div className="group flex items-center justify-center shrink-0 px-6 py-3.5 sm:px-8 sm:py-4.5 bg-accent hover:bg-slate-200/90 rounded-xl border border-border/80 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 select-none">
+    <div className="group flex items-center justify-center shrink-0 px-6 py-3.5 sm:px-8 sm:py-4.5 bg-white hover:bg-slate-100 rounded-xl border border-brand-marble/60 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 select-none">
       <Image
         src={brand.imageSrc}
         alt={brand.name}
@@ -27,7 +27,7 @@ export function BrandMarquee() {
   const allBrands = [...BRAND_LOGOS_ROW_1, ...BRAND_LOGOS_ROW_2];
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-slate-50/80 via-white to-slate-50/80 border-y border-slate-200/80 py-14 sm:py-20 lg:py-24 overflow-hidden">
+    <section className="relative w-full bg-brand-onyx text-white border-y border-brand-marble/40 py-14 sm:py-20 lg:py-24 overflow-hidden">
       {/* Accessible Non-Duplicated Screen Reader Brand List */}
       <div className="sr-only">
         <h3>Featured Brand Partners</h3>
@@ -38,25 +38,26 @@ export function BrandMarquee() {
         </ul>
       </div>
 
-      {/* Soft Ambient Background Radial Lighting Effect */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-500/5 rounded-full blur-3xl" />
+      {/* Subtle Background Ambient Charcoal & Blue Radial Lighting */}
+      <div className="pointer-events-none absolute inset-0 bg-radial from-brand-charcoal/60 via-brand-onyx to-brand-onyx" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-600/10 rounded-full blur-3xl" />
 
       {/* Edge gradient fade masks for smooth floating entry/exit */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-12 sm:w-24 lg:w-36 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-12 sm:w-24 lg:w-36 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-12 sm:w-24 lg:w-36 bg-gradient-to-r from-brand-onyx via-brand-onyx/90 to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-12 sm:w-24 lg:w-36 bg-gradient-to-l from-brand-onyx via-brand-onyx/90 to-transparent" />
 
       {/* Header Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 mb-12 sm:mb-16 text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200/90 text-brand-granite text-xs font-bold uppercase tracking-wider shadow-2xs">
-          <ShieldCheck className="h-4 w-4 text-blue-500" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-charcoal text-slate-300 border border-brand-marble/60 text-xs font-bold uppercase tracking-wider shadow-2xs">
+          <ShieldCheck className="h-4 w-4 text-blue-400" />
           <span>Industry Proven Reliability</span>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-brand-onyx via-brand-charcoal to-brand-onyx uppercase">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white uppercase">
           Trusted Brand Partners
         </h2>
         
-        <p className="text-sm sm:text-base lg:text-lg text-brand-granite max-w-2xl mx-auto leading-relaxed">
+        <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
           Powering mission-critical medical technology, healthcare facilities, and broadcast computing infrastructure worldwide.
         </p>
       </div>

@@ -62,33 +62,36 @@ export function CustomerReviewsSection() {
   };
 
   return (
-    <section className="w-full bg-white border-b border-border py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative">
+    <section className="relative w-full bg-brand-onyx text-white border-b border-brand-marble/40 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Ambient Radial Background Lighting */}
+      <div className="absolute inset-0 bg-radial from-brand-charcoal/60 via-brand-onyx to-brand-onyx pointer-events-none" />
+
       <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-muted text-muted-foreground border border-border text-xs font-semibold uppercase tracking-wider shadow-2xs">
-            <MessageSquareQuote className="h-4 w-4 text-blue-500" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-charcoal text-slate-300 border border-brand-marble/60 text-xs font-semibold uppercase tracking-wider shadow-2xs">
+            <MessageSquareQuote className="h-4 w-4 text-blue-400" />
             <span>Verified Executive Testimonials</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground uppercase">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white uppercase">
             Trusted by Medical &amp; Broadcast Leaders
           </h2>
 
-          <p className="text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed">
             Discover how Black Swan&apos;s pre-calibrated enterprise hardware and guaranteed 4-hour replacement SLA power mission-critical healthcare systems and broadcast networks worldwide.
           </p>
 
           {/* Industry Filter Tabs */}
           <div className="pt-2 flex justify-center">
-            <div className="inline-flex items-center p-1.5 rounded-xl bg-slate-100 border border-slate-200 shadow-inner">
+            <div className="inline-flex items-center p-1.5 rounded-xl bg-brand-charcoal border border-brand-marble/60 shadow-inner">
               <button
                 type="button"
                 onClick={() => handleTabChange("all")}
                 className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   activeTab === "all"
-                    ? "bg-brand-charcoal text-white shadow-xs"
-                    : "text-muted-foreground hover:text-foreground hover:bg-slate-200/60"
+                    ? "bg-white text-brand-onyx font-bold shadow-xs hover:-translate-y-0.5"
+                    : "text-slate-300 hover:text-white hover:bg-brand-marble/50 hover:-translate-y-0.5"
                 }`}
               >
                 All Reviews ({CUSTOMER_REVIEWS.length})
@@ -98,8 +101,8 @@ export function CustomerReviewsSection() {
                 onClick={() => handleTabChange("medical")}
                 className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   activeTab === "medical"
-                    ? "bg-brand-charcoal text-white shadow-xs"
-                    : "text-muted-foreground hover:text-foreground hover:bg-slate-200/60"
+                    ? "bg-white text-brand-onyx font-bold shadow-xs hover:-translate-y-0.5"
+                    : "text-slate-300 hover:text-white hover:bg-brand-marble/50 hover:-translate-y-0.5"
                 }`}
               >
                 Medical Technology
@@ -109,8 +112,8 @@ export function CustomerReviewsSection() {
                 onClick={() => handleTabChange("broadcast")}
                 className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   activeTab === "broadcast"
-                    ? "bg-brand-charcoal text-white shadow-xs"
-                    : "text-muted-foreground hover:text-foreground hover:bg-slate-200/60"
+                    ? "bg-white text-brand-onyx font-bold shadow-xs hover:-translate-y-0.5"
+                    : "text-slate-300 hover:text-white hover:bg-brand-marble/50 hover:-translate-y-0.5"
                 }`}
               >
                 Broadcast Systems
@@ -120,11 +123,10 @@ export function CustomerReviewsSection() {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative pt-3 pb-3 px-1 overflow-visible">
-          {/* Reviews Card Display: Horizontal Carousel on mobile (< md), Grid on desktop (>= md) */}
+        <div className="relative">
           <div
             ref={scrollContainerRef}
-            className="flex md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-5 sm:gap-6 lg:gap-8 pb-4 md:pb-0 scrollbar-none scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+            className="flex md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-5 sm:gap-6 lg:gap-8 pt-3 pb-5 md:pt-2 md:pb-2 scrollbar-none scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
           >
             {filteredReviews.map((review: CustomerReviewItem, index: number) => {
               // Highlight cards based on active index position
@@ -237,7 +239,7 @@ export function CustomerReviewsSection() {
               onClick={handlePrev}
               disabled={currentIndex === 0}
               aria-label="Previous testimonial"
-              className="p-2 rounded-full border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              className="p-2.5 rounded-full border border-brand-marble/60 bg-brand-charcoal text-slate-200 hover:bg-brand-marble/50 hover:text-white hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 shadow-2xs cursor-pointer"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -250,8 +252,8 @@ export function CustomerReviewsSection() {
                   onClick={() => scrollToCard(idx)}
                   className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                     idx === currentIndex
-                      ? "w-8 bg-blue-600"
-                      : "w-2 bg-slate-300 hover:bg-slate-400"
+                      ? "w-8 bg-blue-500"
+                      : "w-2 bg-brand-marble/60 hover:bg-slate-400"
                   }`}
                   aria-label={`Go to review ${idx + 1}`}
                 />
@@ -263,7 +265,7 @@ export function CustomerReviewsSection() {
               onClick={handleNext}
               disabled={currentIndex === filteredReviews.length - 1}
               aria-label="Next testimonial"
-              className="p-2 rounded-full border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              className="p-2.5 rounded-full border border-brand-marble/60 bg-brand-charcoal text-slate-200 hover:bg-brand-marble/50 hover:text-white hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 shadow-2xs cursor-pointer"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -271,50 +273,50 @@ export function CustomerReviewsSection() {
         </div>
 
         {/* Bottom Executive Metrics & Trust Bar */}
-        <div className="pt-8 border-t border-slate-200 grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center gap-3">
-            <Award className="w-6 h-6 text-blue-500 shrink-0" />
+        <div className="pt-8 border-t border-brand-marble/60 grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+          <div className="p-4 rounded-xl bg-brand-charcoal border border-brand-marble/60 flex items-center justify-center gap-3">
+            <Award className="w-6 h-6 text-blue-400 shrink-0" />
             <div className="text-left">
-              <span className="block text-lg font-extrabold text-slate-900 font-mono">
+              <span className="block text-lg font-extrabold text-white font-mono">
                 4.98 / 5.0
               </span>
-              <span className="text-xs text-slate-500 font-medium">
+              <span className="text-xs text-slate-300 font-medium">
                 Executive Rating
               </span>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center gap-3">
-            <ShieldCheck className="w-6 h-6 text-blue-500 shrink-0" />
+          <div className="p-4 rounded-xl bg-brand-charcoal border border-brand-marble/60 flex items-center justify-center gap-3">
+            <ShieldCheck className="w-6 h-6 text-blue-400 shrink-0" />
             <div className="text-left">
-              <span className="block text-lg font-extrabold text-slate-900 font-mono">
+              <span className="block text-lg font-extrabold text-white font-mono">
                 100%
               </span>
-              <span className="text-xs text-slate-500 font-medium">
+              <span className="text-xs text-slate-300 font-medium">
                 Verified Executives
               </span>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center gap-3">
-            <Clock className="w-6 h-6 text-blue-500 shrink-0" />
+          <div className="p-4 rounded-xl bg-brand-charcoal border border-brand-marble/60 flex items-center justify-center gap-3">
+            <Clock className="w-6 h-6 text-blue-400 shrink-0" />
             <div className="text-left">
-              <span className="block text-lg font-extrabold text-slate-900 font-mono">
+              <span className="block text-lg font-extrabold text-white font-mono">
                 4-Hour
               </span>
-              <span className="text-xs text-slate-500 font-medium">
+              <span className="text-xs text-slate-300 font-medium">
                 Guaranteed On-Site SLA
               </span>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center gap-3">
-            <TrendingUp className="w-6 h-6 text-blue-500 shrink-0" />
+          <div className="p-4 rounded-xl bg-brand-charcoal border border-brand-marble/60 flex items-center justify-center gap-3">
+            <TrendingUp className="w-6 h-6 text-blue-400 shrink-0" />
             <div className="text-left">
-              <span className="block text-lg font-extrabold text-slate-900 font-mono">
+              <span className="block text-lg font-extrabold text-white font-mono">
                 99.999%
               </span>
-              <span className="text-xs text-slate-500 font-medium">
+              <span className="text-xs text-slate-300 font-medium">
                 Mission-Critical Uptime
               </span>
             </div>
