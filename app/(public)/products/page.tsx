@@ -40,6 +40,8 @@ const sampleProducts = [
   },
 ];
 
+const VALID_CATEGORIES = ["all", "medical", "broadcast"] as const;
+
 function ProductsCatalogContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -50,14 +52,24 @@ function ProductsCatalogContent() {
 
   const { addItem } = useQuoteCart();
 
-  const activeCategory = categoryParam || "all";
+  const normalizedCategoryParam = categoryParam?.toLowerCase();
+  const activeCategory =
+    normalizedCategoryParam &&
+    (VALID_CATEGORIES as readonly string[]).includes(normalizedCategoryParam)
+      ? normalizedCategoryParam
+      : "all";
 
   const handleCategoryChange = (newCategory: string) => {
+    const normalizedCategory = newCategory.toLowerCase();
+    const targetCategory = (VALID_CATEGORIES as readonly string[]).includes(normalizedCategory)
+      ? normalizedCategory
+      : "all";
+
     const params = new URLSearchParams(searchParams.toString());
-    if (newCategory === "all") {
+    if (targetCategory === "all") {
       params.delete("category");
     } else {
-      params.set("category", newCategory);
+      params.set("category", targetCategory);
     }
     const queryString = params.toString();
     router.push(queryString ? `/products?${queryString}` : "/products");
@@ -65,7 +77,7 @@ function ProductsCatalogContent() {
 
   const filteredProducts = sampleProducts.filter((prod) => {
     const matchesCategory =
-      activeCategory === "all" || prod.category.toLowerCase() === activeCategory.toLowerCase();
+      activeCategory === "all" || prod.category.toLowerCase() === activeCategory;
 
     const matchesSearch =
       prod.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

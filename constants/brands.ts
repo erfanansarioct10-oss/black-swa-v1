@@ -40,7 +40,7 @@ export const BRAND_LOGOS_ROW_1: BrandLogo[] = [
     id: "cg",
     name: "Chaudhary Group",
     category: "hardware",
-    imageSrc: "/brands/cg-new.webp",
+    imageSrc: "/brands/cg.webp",
   },
   {
     id: "gnn",

@@ -149,8 +149,6 @@ State explicit conditions required for completion:
 2. `pnpm run build` (or `pnpm run typecheck`) compiles cleanly without TypeScript errors.
 3. Manual UI verification across mobile (320px+), tablet, and desktop viewports.
 
-```
-
 ---
 
 ## 8. Agent Workflow Integration
@@ -165,4 +163,3 @@ When working on a feature or review fix:
 4. **Obtain Approval (Mandatory Pause):** Present the implementation spec to the user and request explicit permission to proceed. Do **NOT** immediately start coding.
 5. **Execute & Validate:** Implement step-by-step only after receiving explicit user approval, running `pnpm run lint` and `pnpm run build` upon completion.
 
-```

@@ -64,6 +64,13 @@ Added marquee keyframes and helper classes to `app/globals.css`:
   animation: marquee-reverse 70s linear infinite;
   will-change: transform;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation-play-state: paused;
+  }
+}
 ```
 
 ### Step 2: Brand Constants (`constants/brands.ts`)
@@ -209,9 +216,21 @@ Phase 5: Verification & Lint/Build Validation (Passed clean) [COMPLETED]
 
 ---
 
-## 6. Verification & Definition of Done
+## 6. What Could Possibly Go Wrong & Mitigation Plan
+
+| Potential Risk | Root Cause | Prevention / Mitigation Strategy |
+| -------------- | ---------- | -------------------------------- |
+| **Motion Sensitivity / Vestibular Triggers** | Continuous 70s looping marquee without reduced-motion safeguards. | Pause animations via `@media (prefers-reduced-motion: reduce)`. |
+| **Accessibility Tree Pollution** | Marquee tracks repeat images 4x for continuous infinite scrolling. | Mark decorative scrolling container `aria-hidden="true"` and render an `sr-only` non-duplicated list of brand names. |
+| **Preload Cost Overhead** | Eagerly requesting priority image preloading across all marquee logos. | Limit `priority` preloading to the initial 2-3 logos visible on load in Row 1. |
+| **Horizontal Page Overflow** | Track width exceeding viewport width on narrow mobile viewports. | Apply `overflow-hidden` to the outer `<section>` container. |
+
+---
+
+## 7. Verification & Definition of Done
 
 1. `pnpm run lint` executed with **0 errors and 0 warnings**.
 2. `pnpm run build` compiled cleanly without TypeScript or SSR errors.
 3. Verified responsive behavior across mobile (320px+), tablet, laptop, and desktop viewports.
 4. Dual-row marquee flows smoothly in opposing directions (70s slow-motion) with priority preloading.
+

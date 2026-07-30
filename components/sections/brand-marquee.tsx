@@ -17,23 +17,27 @@ function BrandItem({ brand, priority = false }: { brand: BrandLogo; priority?: b
   );
 }
 
+const repeatArray = <T,>(arr: T[], times = 4): T[] =>
+  Array.from({ length: times }, () => arr).flat();
+
 export function BrandMarquee() {
   // Quadruple arrays to guarantee continuous infinite marquee tracks on wide screens
-  const row1 = [
-    ...BRAND_LOGOS_ROW_1,
-    ...BRAND_LOGOS_ROW_1,
-    ...BRAND_LOGOS_ROW_1,
-    ...BRAND_LOGOS_ROW_1,
-  ];
-  const row2 = [
-    ...BRAND_LOGOS_ROW_2,
-    ...BRAND_LOGOS_ROW_2,
-    ...BRAND_LOGOS_ROW_2,
-    ...BRAND_LOGOS_ROW_2,
-  ];
+  const row1 = repeatArray(BRAND_LOGOS_ROW_1);
+  const row2 = repeatArray(BRAND_LOGOS_ROW_2);
+  const allBrands = [...BRAND_LOGOS_ROW_1, ...BRAND_LOGOS_ROW_2];
 
   return (
     <section className="relative w-full bg-gradient-to-b from-slate-50/80 via-white to-slate-50/80 border-y border-slate-200/80 py-14 sm:py-20 lg:py-24 overflow-hidden">
+      {/* Accessible Non-Duplicated Screen Reader Brand List */}
+      <div className="sr-only">
+        <h3>Featured Brand Partners</h3>
+        <ul>
+          {allBrands.map((brand) => (
+            <li key={`sr-${brand.id}`}>{brand.name}</li>
+          ))}
+        </ul>
+      </div>
+
       {/* Soft Ambient Background Radial Lighting Effect */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-500/5 rounded-full blur-3xl" />
 
@@ -57,15 +61,15 @@ export function BrandMarquee() {
         </p>
       </div>
 
-      {/* Dual-Row Marquee Tracks */}
-      <div className="relative z-10 space-y-6 sm:space-y-8 lg:space-y-10">
+      {/* Dual-Row Marquee Tracks (Decorative Visual Display) */}
+      <div className="relative z-10 space-y-6 sm:space-y-8 lg:space-y-10" aria-hidden="true">
         {/* Row 1 (Right-to-Left, Slow Motion) */}
         <div className="flex w-max animate-marquee items-center gap-6 sm:gap-8 lg:gap-10">
           {row1.map((logo, idx) => (
             <BrandItem
               key={`r1-${logo.id}-${idx}`}
               brand={logo}
-              priority={idx < BRAND_LOGOS_ROW_1.length}
+              priority={idx < 3}
             />
           ))}
         </div>
@@ -76,7 +80,7 @@ export function BrandMarquee() {
             <BrandItem
               key={`r2-${logo.id}-${idx}`}
               brand={logo}
-              priority={idx < BRAND_LOGOS_ROW_2.length}
+              priority={false}
             />
           ))}
         </div>
