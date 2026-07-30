@@ -18,12 +18,13 @@ This repository is designed to be developed by both humans and AI coding agents.
 
 Before touching any file in this repository, you **MUST** complete the following steps **in order**:
 
-2. Read `context/project-overview.md`
-3. Read `context/architecture.md`
-4. Read `context/code-standards.md`
-5. Read `context/ui-context.md`
-6. Read `context/ai-workflow-rules.md`
-7. Read `context/progress-tracker.md`
+1. Read `context/project-overview.md`
+2. Read `context/architecture.md`
+3. Read `context/code-standards.md`
+4. Read `context/ui-context.md`
+5. Read `context/ai-workflow-rules.md`
+6. Read `context/progress-tracker.md`
+7. Read `context/seo.md`
 
 Do **NOT** begin implementation until the complete project context has been loaded.
 
@@ -145,6 +146,7 @@ The following documents define the project:
 5. `context/ui-context.md`
 6. `context/ai-workflow-rules.md`
 7. `context/progress-tracker.md`
+8. `context/seo.md`
 
 If any implementation conflicts with these documents, **the project documentation always takes precedence**.
 

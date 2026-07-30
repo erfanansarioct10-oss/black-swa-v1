@@ -1,26 +1,169 @@
-@import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tailwindcss";
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-brand-onyx: var(--brand-onyx);
+  --color-brand-charcoal: var(--brand-charcoal);
+  --color-brand-marble: var(--brand-marble);
+  --color-brand-granite: var(--brand-granite);
+  --color-brand-pewter: var(--brand-pewter);
+  --color-brand-slate: var(--brand-slate);
+  --color-brand-platinum: var(--brand-platinum);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #1c1e24; /* Onyx */
+    
+    --card: #f8fafc;
+    --card-foreground: #1c1e24;
+    
+    --popover: #ffffff;
+    --popover-foreground: #1c1e24;
+    
+    /* Primary: Deep Onyx / Metallic Charcoal */
+    --primary: #1c1e24;
+    --primary-foreground: #f8fafc;
+    
+    /* Secondary: Light Metallic Slate surface */
+    --secondary: #e2e8f0;
+    --secondary-foreground: #1c1e24;
+    
+    /* Muted: Pewter / Slate tint */
+    --muted: #f1f5f9;
+    --muted-foreground: #575e67; /* Granite */
+    
+    /* Accent: Metallic Slate / Platinum */
+    --accent: #e2e8f0;
+    --accent-foreground: #1c1e24;
+    
+    --destructive: #ef4444;
+    --destructive-foreground: #f8fafc;
+    
+    --border: #cbd5e1;
+    --input: #cbd5e1;
+    --ring: #1c1e24;
+    
+    --radius: 0.5rem;
+
+    /* Custom Metallic Brand Color Palette */
+    --brand-onyx: #1c1e24;
+    --brand-charcoal: #30333a;
+    --brand-marble: #434952;
+    --brand-granite: #575e67;
+    --brand-pewter: #767f88;
+    --brand-slate: #9da3a9;
+    --brand-platinum: #f8fafc;
+  }
+
+  .dark {
+    --background: #1c1e24; /* Onyx */
+    --foreground: #f8fafc; /* Platinum / White */
+    
+    --card: #30333a; /* Charcoal */
+    --card-foreground: #f8fafc;
+    
+    --popover: #1c1e24;
+    --popover-foreground: #f8fafc;
+    
+    /* Primary in Dark Mode: Bright Platinum / White on Onyx */
+    --primary: #f8fafc;
+    --primary-foreground: #1c1e24;
+    
+    /* Secondary: Marble */
+    --secondary: #434952;
+    --secondary-foreground: #f8fafc;
+    
+    --muted: #30333a;
+    --muted-foreground: #767f88;
+    
+    --accent: #434952;
+    --accent-foreground: #f8fafc;
+    
+    --destructive: #991b1b;
+    --destructive-foreground: #f8fafc;
+    
+    --border: #434952;
+    --input: #434952;
+    --ring: #767f88;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  button,
+  [role="button"],
+  a {
+    cursor: pointer;
+  }
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 70s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 70s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation-play-state: paused;
+  }
+}
+
+/* Opt-in Brand Icon Accent class for designated badge/seal icon containers */
+.brand-icon-accent > svg {
+  color: #60a5fa;
+}
+
+
