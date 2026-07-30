@@ -119,6 +119,11 @@
     color: var(--foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  button,
+  [role="button"],
+  a {
+    cursor: pointer;
+  }
 }
 
 @keyframes marquee {
@@ -154,6 +159,23 @@
   .animate-marquee-reverse {
     animation-play-state: paused;
   }
+}
+
+/* Global Brand Icon Accent Rules for Badges, Seals, and Icon Containers */
+.inline-flex[class*="rounded-full"]:not([class*="emerald"]):not([class*="green"]) > svg:not(.text-emerald-400):not(.text-emerald-500),
+.inline-flex[class*="rounded-md"]:not([class*="emerald"]):not([class*="green"]) > svg:not(.text-emerald-400):not(.text-emerald-500),
+div[class*="rounded-full"]:not([class*="emerald"]):not([class*="green"]) > svg:only-child:not(.text-emerald-400):not(.text-emerald-500),
+div[class*="rounded-xl"]:not([class*="emerald"]):not([class*="green"]) > svg:only-child:not(.text-emerald-400):not(.text-emerald-500),
+div[class*="rounded-lg"]:not([class*="emerald"]):not([class*="green"]) > svg:only-child:not(.text-emerald-400):not(.text-emerald-500) {
+  color: #60a5fa;
+}
+
+/* Guarantee green ticks / checkmark icons always remain vibrant emerald green */
+.text-emerald-400 {
+  color: #34d399 !important;
+}
+.text-emerald-500 {
+  color: #10b981 !important;
 }
 
 

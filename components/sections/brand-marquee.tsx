@@ -48,7 +48,7 @@ export function BrandMarquee() {
       {/* Header Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 mb-12 sm:mb-16 text-center space-y-3">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200/90 text-brand-granite text-xs font-bold uppercase tracking-wider shadow-2xs">
-          <ShieldCheck className="h-4 w-4 text-brand-charcoal" />
+          <ShieldCheck className="h-4 w-4 text-blue-500" />
           <span>Industry Proven Reliability</span>
         </div>
 

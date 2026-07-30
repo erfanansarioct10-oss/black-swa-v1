@@ -1,9 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, Cpu, Tv, Activity, FileText } from "lucide-react";
+import { ArrowRight, ShieldCheck, FileText } from "lucide-react";
 import { AnimatedCount } from "@/components/ui/animated-count";
 import { BrandMarquee } from "@/components/sections/brand-marquee";
 import { CertificationsSection } from "@/components/sections/certifications-section";
+import { FeaturedProductsSection } from "@/components/sections/featured-products-section";
+import { PopularServicesSection } from "@/components/sections/popular-services-section";
+import { EnterpriseAdvantageSection } from "@/components/sections/enterprise-advantage-section";
+import { ProcurementWorkflowSection } from "@/components/sections/procurement-workflow-section";
+import { CustomerReviewsSection } from "@/components/sections/customer-reviews-section";
 import { generatePageMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_CONFIG } from "@/constants/site";
@@ -55,7 +60,7 @@ export default function HomePage() {
           {/* Left Text Column */}
           <div className="lg:col-span-7 space-y-7 sm:space-y-8 text-center sm:text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-charcoal text-slate-300 border border-brand-marble text-xs font-semibold uppercase tracking-wider">
-              <ShieldCheck className="h-4 w-4 text-slate-200" />
+              <ShieldCheck className="h-4 w-4 text-blue-400" />
               <span>Medical Tech & Broadcast Hardware Solutions</span>
             </div>
 
@@ -83,7 +88,7 @@ export default function HomePage() {
                 href="/quote"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-brand-charcoal text-white border border-brand-marble font-semibold text-sm sm:text-base rounded-lg hover:bg-brand-marble/50 transition-all"
               >
-                <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-slate-300" />
+                <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400" />
                 <span>Request Custom Quote</span>
               </Link>
             </div>
@@ -130,7 +135,6 @@ export default function HomePage() {
                 alt="Medical Technology & Broadcast Computer Hardware Showcase"
                 width={900}
                 height={750}
-                priority
                 className="relative z-10 w-full h-auto object-contain filter drop-shadow-[0_10px_20px_rgba(37,99,235,0.12)] drop-shadow-xl scale-105 lg:scale-110 origin-center"
               />
             </div>
@@ -144,72 +148,20 @@ export default function HomePage() {
       {/* Certifications & Compliance Section */}
       <CertificationsSection />
 
+      {/* Featured Products Spotlight & Grid Section */}
+      <FeaturedProductsSection />
 
+      {/* Popular Engineering & Integration Services Section */}
+      <PopularServicesSection />
 
-      {/* Product Categories Overview */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="text-center space-y-3 mb-12">
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-            Our Hardware Specializations
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto">
-            High-performance computing infrastructure, medical technology devices, and broadcast hardware solutions.
-          </p>
-        </div>
+      {/* Enterprise Advantage & Corporate Trust Grid Section */}
+      <EnterpriseAdvantageSection />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              icon: Activity,
-              title: "Medical Technology Hardware",
-              desc: "Diagnostic imaging workstations, clinical processing hardware, and secure medical IoT hardware gateways.",
-              href: "/products?category=medical",
-            },
-            {
-              icon: Tv,
-              title: "Broadcast Computer Systems",
-              desc: "4K/8K real-time media encoding servers, video wall controllers, and studio production computing rigs.",
-              href: "/products?category=broadcast",
-            },
-            {
-              icon: Cpu,
-              title: "Custom Infrastructure Integration",
-              desc: "Bespoke hardware assembly, rack-mount server optimization, and enterprise system support services.",
-              href: "/services",
-            },
-          ].map((cat, idx) => {
-            const IconComponent = cat.icon;
-            return (
-              <div
-                key={idx}
-                className="group p-6 bg-card border border-border rounded-xl shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
-              >
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center text-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    <IconComponent className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground">
-                    {cat.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {cat.desc}
-                  </p>
-                </div>
+      {/* Enterprise Procurement Process & Workflow Section */}
+      <ProcurementWorkflowSection />
 
-                <div className="pt-6">
-                  <Link
-                    href={cat.href}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-primary transition-colors"
-                  >
-                    <span>Explore Hardware</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* Customer Reviews & Executive Testimonials Section */}
+      <CustomerReviewsSection />
     </div>
   );
 }

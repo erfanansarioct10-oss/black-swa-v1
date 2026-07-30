@@ -41,6 +41,7 @@ export interface CertificationItem {
   auditFrequency: string;
   badgeColor: string;
   iconName: string;
+  image: string;
   verificationUrl?: string;
   pdfSampleUrl?: string;
 }
@@ -65,8 +66,6 @@ export function getCertificationIcon(iconName: string): LucideIcon {
 
 /**
  * Centralized Certifications Dataset
- * To replace or add certifications in the future, simply update or append items to this array
- * (or fetch from API/Database without changing component markup).
  */
 export const CERTIFICATIONS_DATA: CertificationItem[] = [
   {
@@ -83,8 +82,9 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     summary: "Certified quality management standard for medical device assembly, hardware integration, and risk management.",
     details: "Specifies requirements for a quality management system where an organization needs to demonstrate its ability to provide medical devices and related services that consistently meet customer and applicable regulatory requirements.",
     auditFrequency: "Annual Surveillance Audit",
-    badgeColor: "bg-emerald-100 text-emerald-800 border-emerald-300",
+    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
     iconName: "ShieldCheck",
+    image: "/certifications/iso-13485.webp",
   },
   {
     id: "iec-60601-1",
@@ -100,8 +100,9 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     summary: "Comprehensive compliance for electrical insulation, risk mitigation, and electromagnetic compatibility in operating rooms.",
     details: "Ensures that medical computer systems and imaging hardware pass rigorous testing for electrical shock prevention, thermal safety, radiation exposure safety, and electromagnetic interference resistance.",
     auditFrequency: "Bi-Annual Hardware Testing",
-    badgeColor: "bg-blue-100 text-blue-800 border-blue-300",
+    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
     iconName: "Zap",
+    image: "/certifications/iec-60601.webp",
   },
   {
     id: "ce-mdr",
@@ -117,8 +118,9 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     summary: "Mandatory EU product compliance for medical technology units deployed in European and partner healthcare systems.",
     details: "Demonstrates full compliance with EU Regulation 2017/745, confirming clinical evaluation, post-market surveillance, and technical documentation integrity for hardware systems.",
     auditFrequency: "Annual Notified Body Review",
-    badgeColor: "bg-indigo-100 text-indigo-800 border-indigo-300",
+    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
     iconName: "Award",
+    image: "/certifications/ce-mdr.webp",
   },
   {
     id: "fda-registered",
@@ -134,8 +136,9 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     summary: "Registered facility compliance meeting US FDA Quality System Regulation (QSR 21 CFR Part 820) criteria.",
     details: "Facilitates seamless deployment of clinical hardware gateways into US-regulated hospitals and diagnostic facilities adhering to strict traceability and quality controls.",
     auditFrequency: "Annual Establishment Registration",
-    badgeColor: "bg-cyan-100 text-cyan-800 border-cyan-300",
+    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
     iconName: "FileCheck",
+    image: "/certifications/fda.webp",
   },
   {
     id: "iso-9001",
@@ -151,8 +154,9 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     summary: "Internationally recognized framework for continuous quality improvement, supply chain reliability, and customer satisfaction.",
     details: "Provides structure for operational efficiency, risk-based thinking, vendor qualification, and standardized quality assurance protocols across all business divisions.",
     auditFrequency: "Annual Quality Audit",
-    badgeColor: "bg-slate-200 text-slate-800 border-slate-300",
+    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
     iconName: "CheckCircle2",
+    image: "/certifications/iso-9001.webp",
   },
   {
     id: "fcc-rohs",
@@ -168,7 +172,8 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     summary: "Guarantees zero radio interference in studio environments and hazardous material compliance (Directive 2011/65/EU).",
     details: "Certified for commercial broadcast environments to prevent interference with live audio/video spectrum while adhering to global environmental standards for lead, mercury, and cadmium reduction.",
     auditFrequency: "Per Batch Production Testing",
-    badgeColor: "bg-amber-100 text-amber-800 border-amber-300",
+    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
     iconName: "Building2",
+    image: "/certifications/fcc-rohs.webp",
   },
 ];
