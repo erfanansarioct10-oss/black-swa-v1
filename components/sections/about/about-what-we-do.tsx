@@ -13,6 +13,21 @@ export function AboutWhatWeDo() {
   const activePillar: AboutPillar =
     ABOUT_PILLARS.find((p) => p.id === activeTabId) || ABOUT_PILLARS[0];
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const currentIndex = ABOUT_PILLARS.findIndex((p) => p.id === activeTabId);
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const nextIndex = (currentIndex + 1) % ABOUT_PILLARS.length;
+      setActiveTabId(ABOUT_PILLARS[nextIndex].id);
+      document.getElementById(`tab-${ABOUT_PILLARS[nextIndex].id}`)?.focus();
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prevIndex = (currentIndex - 1 + ABOUT_PILLARS.length) % ABOUT_PILLARS.length;
+      setActiveTabId(ABOUT_PILLARS[prevIndex].id);
+      document.getElementById(`tab-${ABOUT_PILLARS[prevIndex].id}`)?.focus();
+    }
+  };
+
   return (
     <section id="capabilities" className="relative w-full bg-brand-onyx text-white border-b border-brand-marble/40 py-14 sm:py-20 lg:py-24 overflow-hidden">
       {/* Neutral metallic ambient radial background matching homepage */}
@@ -37,7 +52,12 @@ export function AboutWhatWeDo() {
         </div>
 
         {/* Desktop Interactive Tabs Header */}
-        <div className="hidden lg:flex items-center justify-center gap-2 p-1.5 rounded-xl bg-brand-charcoal border border-brand-marble/80" role="tablist">
+        <div
+          role="tablist"
+          aria-label="Capabilities and Services"
+          onKeyDown={handleKeyDown}
+          className="hidden lg:flex items-center justify-center gap-2 p-1.5 rounded-xl bg-brand-charcoal border border-brand-marble/80"
+        >
           {ABOUT_PILLARS.map((pillar) => {
             const IconComponent = pillar.icon;
             const isActive = pillar.id === activeTabId;
@@ -46,11 +66,12 @@ export function AboutWhatWeDo() {
                 key={pillar.id}
                 id={`tab-${pillar.id}`}
                 role="tab"
+                tabIndex={isActive ? 0 : -1}
                 aria-selected={isActive}
                 aria-controls={`tabpanel-${pillar.id}`}
                 onClick={() => setActiveTabId(pillar.id)}
                 className={cn(
-                  "flex items-center gap-2.5 px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer select-none",
+                  "flex items-center gap-2.5 px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer select-none focus:outline-none focus:ring-2 focus:ring-blue-400",
                   isActive
                     ? "bg-brand-onyx text-white border border-brand-marble/80 shadow-md hover:-translate-y-0.5"
                     : "text-slate-400 hover:text-slate-200 hover:bg-brand-onyx/60 hover:-translate-y-0.5"
@@ -115,7 +136,7 @@ export function AboutWhatWeDo() {
                 src={activePillar.image}
                 alt={activePillar.title}
                 fill
-                sizes="35vw"
+                sizes="(min-width: 1024px) 35vw, 90vw"
                 className="object-cover opacity-95"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-onyx/80 via-transparent to-transparent" />
@@ -137,7 +158,7 @@ export function AboutWhatWeDo() {
                     <div className="w-10 h-10 rounded-xl bg-brand-onyx border border-brand-marble/60 flex items-center justify-center text-slate-300 shrink-0 shadow-2xs">
                       <IconComponent className="h-5 w-5 text-blue-400" />
                     </div>
-                    <span className="text-2xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand-onyx border border-brand-marble/60 text-slate-300">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand-onyx border border-brand-marble/60 text-slate-300">
                       {pillar.badge}
                     </span>
                   </div>

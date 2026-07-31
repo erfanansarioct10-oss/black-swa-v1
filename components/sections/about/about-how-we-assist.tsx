@@ -52,7 +52,7 @@ export function AboutHowWeAssist() {
 
                 {/* Deliverables List */}
                 <div className="pt-4 border-t border-slate-100 space-y-2 text-left">
-                  <p className="text-2xs font-bold text-brand-granite uppercase tracking-wider">Key Deliverables:</p>
+                  <p className="text-[10px] font-bold text-brand-granite uppercase tracking-wider">Key Deliverables:</p>
                   {item.deliverables.map((deliv, dIdx) => (
                     <div key={dIdx} className="flex items-start gap-2 text-xs text-brand-granite">
                       <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />

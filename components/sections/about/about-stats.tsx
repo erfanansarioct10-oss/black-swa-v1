@@ -4,6 +4,7 @@ export function AboutStats() {
   return (
     <section className="w-full bg-brand-onyx border-b border-brand-marble/40 py-10 sm:py-14 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="sr-only">Key Performance Statistics &amp; Engineering Track Record</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {ABOUT_STATS.map((stat, idx) => (
             <div

@@ -93,7 +93,7 @@ export const ABOUT_PILLARS: AboutPillar[] = [
     fullDesc:
       "Specialized in head-end architecture, we deploy carrier-grade DVB-C (Cable), DVB-S2 (Satellite), and IPTV processing nodes. Our head-end solutions support multi-channel descrambling, stream encoding/transcoding, PSI/SI generation, and high-reliability transmission to millions of subscriber endpoints.",
     icon: Tv,
-    image: "/about/broadcast-headend.png",
+    image: "/about/noc-operations.png",
     features: [
       "DVB-C, DVB-S2 satellite receiver & multiplexer arrays",
       "IPTV streaming head-ends with IGMP multicast distribution",
@@ -110,7 +110,7 @@ export const ABOUT_PILLARS: AboutPillar[] = [
     fullDesc:
       "We assist broadcasters and content owners in launching robust OTT streaming solutions. From ingest and packaging (HLS / DASH) to CDN integration and custom front-end player applications, our OTT implementations deliver secure, low-latency live TV and video-on-demand (VOD) to smart TVs, mobile apps, and web browsers.",
     icon: MonitorPlay,
-    image: "/about/noc-operations.png",
+    image: "/about/ott-platform.png",
     features: [
       "Live TV channel ingestion & dynamic packaging (HLS/DASH)",
       "Multi-bitrate adaptive streaming & origin shield setup",
@@ -144,7 +144,7 @@ export const ABOUT_PILLARS: AboutPillar[] = [
     fullDesc:
       "Operational continuity is vital for broadcast and media infrastructure. Our Annual Maintenance Contracts (AMC) guarantee round-the-clock technical support, scheduled hardware health audits, emergency spare part replacement, and software/firmware updates to keep your systems operating flawlessly.",
     icon: Wrench,
-    image: "/about/noc-operations.png",
+    image: "/about/amc-support.png",
     features: [
       "Guaranteed response time SLAs (Up to 4-hour on-site dispatch)",
       "24/7/365 remote monitoring & diagnostic telemetry",
