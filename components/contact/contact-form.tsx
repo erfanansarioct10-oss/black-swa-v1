@@ -1,10 +1,18 @@
 "use client";
 
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { CONTACT_INFO } from "@/constants/contact";
+import { ALL_SERVICES } from "@/constants/services";
 import { InquiryForm } from "./inquiry-form";
 
-export function ContactForm() {
+function ContactFormInner() {
+  const searchParams = useSearchParams();
+  const serviceSlug = searchParams.get("service");
+  const matchingService = ALL_SERVICES.find((s) => s.slug === serviceSlug);
+  const defaultServiceName = matchingService ? matchingService.title : undefined;
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-4">
       {/* Direct Contact Information Cards */}
@@ -74,9 +82,18 @@ export function ContactForm() {
 
       {/* Inquiry Form */}
       <div className="lg:col-span-7 bg-card p-6 sm:p-8 rounded-xl border border-border shadow-sm">
-        <InquiryForm />
+        <InquiryForm defaultService={defaultServiceName} />
       </div>
     </div>
   );
 }
+
+export function ContactForm() {
+  return (
+    <Suspense fallback={<div className="py-12 text-center text-muted-foreground">Loading inquiry form...</div>}>
+      <ContactFormInner />
+    </Suspense>
+  );
+}
+
 

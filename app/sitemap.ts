@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { SITE_CONFIG } from "@/constants/site";
+import { ALL_SERVICES } from "@/constants/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url;
   const lastModified = new Date();
 
-  const publicRoutes = [
+  const staticRoutes = [
     "",
     "/about",
     "/services",
@@ -16,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
   ];
 
-  return publicRoutes.map((route) => {
+  const staticSitemapEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => {
     let priority = 0.5;
     let changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "monthly";
 
@@ -24,10 +25,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority = 1.0;
       changeFrequency = "daily";
     } else if (route === "/products" || route === "/services") {
-      priority = 0.8;
+      priority = 0.9;
       changeFrequency = "weekly";
     } else if (route === "/about" || route === "/contact" || route === "/quote") {
-      priority = 0.7;
+      priority = 0.8;
       changeFrequency = "monthly";
     }
 
@@ -38,4 +39,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority,
     };
   });
+
+  const serviceSitemapEntries: MetadataRoute.Sitemap = ALL_SERVICES.map((serv) => ({
+    url: `${baseUrl}/services/${serv.slug}`,
+    lastModified: new Date(serv.blogContent.publishedDate),
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
+
+  return [...staticSitemapEntries, ...serviceSitemapEntries];
 }
