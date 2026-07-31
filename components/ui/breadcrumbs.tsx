@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_CONFIG } from "@/constants/site";
+import { cn } from "@/lib/utils";
 
 export interface BreadcrumbItem {
   label: string;
@@ -10,9 +11,11 @@ export interface BreadcrumbItem {
 
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
+  variant?: "light" | "dark";
+  className?: string;
 }
 
-export function Breadcrumbs({ items }: BreadcrumbsProps) {
+export function Breadcrumbs({ items, variant = "light", className }: BreadcrumbsProps) {
   const allItems = [{ label: "Home", href: "/" }, ...items];
 
   // Schema.org BreadcrumbList payload
@@ -27,23 +30,40 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
     })),
   };
 
+  const isDark = variant === "dark";
+
   return (
     <>
       <JsonLd data={jsonLdPayload} />
-      <nav aria-label="Breadcrumb" className="py-2 px-1">
-        <ol className="flex items-center flex-wrap gap-1.5 text-xs text-muted-foreground">
+      <nav aria-label="Breadcrumb" className={cn("py-2 px-1", className)}>
+        <ol
+          className={cn(
+            "flex items-center flex-wrap gap-1.5 text-xs font-medium",
+            isDark ? "text-slate-400" : "text-slate-500"
+          )}
+        >
           {allItems.map((item, index) => {
             const isLast = index === allItems.length - 1;
 
             return (
               <li key={index} className="inline-flex items-center gap-1.5">
                 {index > 0 && (
-                  <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/60 flex-shrink-0" />
+                  <ChevronRight
+                    className={cn(
+                      "h-3.5 w-3.5 flex-shrink-0",
+                      isDark ? "text-slate-500" : "text-slate-400"
+                    )}
+                  />
                 )}
                 {index === 0 ? (
                   <Link
                     href="/"
-                    className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
+                    className={cn(
+                      "inline-flex items-center gap-1 transition-colors",
+                      isDark
+                        ? "text-slate-400 hover:text-white"
+                        : "text-slate-500 hover:text-slate-900"
+                    )}
                   >
                     <Home className="h-3.5 w-3.5" />
                     <span className="sr-only">Home</span>
@@ -51,14 +71,22 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
                 ) : isLast || !item.href ? (
                   <span
                     aria-current={isLast ? "page" : undefined}
-                    className="font-medium text-foreground truncate max-w-[200px]"
+                    className={cn(
+                      "font-semibold truncate max-w-[200px]",
+                      isDark ? "text-white" : "text-slate-900"
+                    )}
                   >
                     {item.label}
                   </span>
                 ) : (
                   <Link
                     href={item.href}
-                    className="hover:text-foreground transition-colors truncate max-w-[150px]"
+                    className={cn(
+                      "transition-colors truncate max-w-[150px]",
+                      isDark
+                        ? "text-slate-300 hover:text-white"
+                        : "text-slate-600 hover:text-slate-900"
+                    )}
                   >
                     {item.label}
                   </Link>

@@ -163,3 +163,24 @@ When working on a feature or review fix:
 4. **Obtain Approval (Mandatory Pause):** Present the implementation spec to the user and request explicit permission to proceed. Do **NOT** immediately start coding.
 5. **Execute & Validate:** Implement step-by-step only after receiving explicit user approval, running `pnpm run lint` and `pnpm run build` upon completion.
 
+---
+
+## 9. Specification Registry Index
+
+| Spec ID | Title | Status | Target Area |
+| --- | --- | --- | --- |
+| [01-fix-coderabbit-pr-review-findings](file:///c:/black-swan-v1/context/implementation-specs/01-fix-coderabbit-pr-review-findings.md) | Fix CodeRabbit PR Review Findings | Complete | Layouts, Auth, Forms |
+| [02-homepage-brand-marquee-section](file:///c:/black-swan-v1/context/implementation-specs/02-homepage-brand-marquee-section.md) | Homepage Dual-Row Brand Marquee Section | Complete | Homepage Marquee |
+| [03-fix-coderabbit-marquee-and-catalog-review-findings](file:///c:/black-swan-v1/context/implementation-specs/03-fix-coderabbit-marquee-and-catalog-review-findings.md) | Fix Marquee & Catalog Review Findings | Complete | Marquee & Catalog |
+| [04-homepage-certifications-section](file:///c:/black-swan-v1/context/implementation-specs/04-homepage-certifications-section.md) | Homepage Certifications & Standards Grid | Complete | Homepage Certifications |
+| [05-seo-compliance-and-technical-optimization](file:///c:/black-swan-v1/context/implementation-specs/05-seo-compliance-and-technical-optimization.md) | SEO Architecture & Technical Optimization | Complete | Global SEO & Metadata |
+| [06-homepage-featured-products-section](file:///c:/black-swan-v1/context/implementation-specs/06-homepage-featured-products-section.md) | Homepage Featured Products Spotlight | Complete | Homepage Catalog |
+| [07-homepage-popular-services-section](file:///c:/black-swan-v1/context/implementation-specs/07-homepage-popular-services-section.md) | Homepage Popular Services Section | Complete | Homepage Services |
+| [08-homepage-enterprise-advantage-section](file:///c:/black-swan-v1/context/implementation-specs/08-homepage-enterprise-advantage-section.md) | Homepage Enterprise Advantage & Trust Grid | Complete | Homepage Advantages |
+| [09-homepage-procurement-workflow-section](file:///c:/black-swan-v1/context/implementation-specs/09-homepage-procurement-workflow-section.md) | Homepage 4-Step Procurement Workflow | Complete | Homepage Workflow |
+| [10-homepage-customer-reviews-section](file:///c:/black-swan-v1/context/implementation-specs/10-homepage-customer-reviews-section.md) | Homepage Customer Reviews & Testimonials | Complete | Homepage Reviews |
+| [11-fix-coderabbit-latest-pr-review-findings](file:///c:/black-swan-v1/context/implementation-specs/11-fix-coderabbit-latest-pr-review-findings.md) | Fix Latest CodeRabbit PR Review Findings | Complete | Component Refactoring |
+| [12-homepage-who-we-are-section](file:///c:/black-swan-v1/context/implementation-specs/12-homepage-who-we-are-section.md) | Homepage Who We Are Section | Complete | Homepage Brand |
+| [13-about-us-page](file:///c:/black-swan-v1/context/implementation-specs/13-about-us-page.md) | Full-Service About Us Page | Complete | About Us Route |
+| [14-fix-coderabbit-about-page-findings](file:///c:/black-swan-v1/context/implementation-specs/14-fix-coderabbit-about-page-findings.md) | Fix CodeRabbit About Page Review Findings | Complete | About Page Accessibility & Visuals |
+
