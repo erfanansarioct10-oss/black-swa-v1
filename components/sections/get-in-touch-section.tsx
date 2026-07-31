@@ -5,9 +5,6 @@ import { CONTACT_INFO } from "@/constants/contact";
 export function GetInTouchSection() {
   return (
     <section className="relative w-full bg-gradient-to-b from-slate-50/80 via-white to-slate-50/80 border-b border-slate-200/80 py-14 sm:py-20 lg:py-24 overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-10 sm:mb-14">
@@ -25,30 +22,30 @@ export function GetInTouchSection() {
           </p>
         </div>
 
-        {/* 2-Column Content Layout with Gray Metallic Cards */}
+        {/* 2-Column Content Layout with Clean Light Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-          {/* Left Column: Dark/Gray Card Reusable Contact Inquiry Form */}
-          <div className="lg:col-span-6 bg-brand-charcoal text-white p-6 sm:p-8 rounded-2xl border border-brand-marble/80 shadow-lg flex flex-col justify-between">
+          {/* Left Column: Light Card Reusable Contact Inquiry Form */}
+          <div className="lg:col-span-6 bg-white text-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col justify-between">
             <InquiryForm
-              variant="dark"
+              variant="light"
               title="SEND US A MESSAGE"
               subtitle="Provide your technical requirements below and our team will get back to you within 1 business day."
             />
           </div>
 
-          {/* Right Column: Dark/Gray Card Embedded Square Google Map */}
-          <div className="lg:col-span-6 bg-brand-charcoal text-white p-4 sm:p-6 rounded-2xl border border-brand-marble/80 shadow-lg flex flex-col justify-between space-y-4">
-            <div className="flex items-center justify-between border-b border-brand-marble/60 pb-3">
+          {/* Right Column: Light Card Embedded Square Google Map */}
+          <div className="lg:col-span-6 bg-white text-slate-900 p-4 sm:p-6 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
               <div>
-                <h3 className="text-lg font-bold text-white uppercase">OUR LOCATION</h3>
-                <p className="text-xs text-slate-300">Global Headquarters &amp; Hardware Operations Center</p>
+                <h3 className="text-lg font-bold text-slate-900 uppercase">OUR LOCATION</h3>
+                <p className="text-xs text-slate-600">Global Headquarters &amp; Hardware Operations Center</p>
               </div>
 
               <a
                 href="https://goo.gl/maps/t5CsYQntExX9mF3y9?g_st=aw"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
               >
                 <span>Full Map</span>
                 <ExternalLink className="h-3.5 w-3.5" />
@@ -56,7 +53,7 @@ export function GetInTouchSection() {
             </div>
 
             {/* Embedded Square Google Map Container */}
-            <div className="relative aspect-square w-full rounded-xl overflow-hidden border border-brand-marble/60 bg-brand-onyx shadow-inner">
+            <div className="relative aspect-square w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-inner">
               <iframe
                 src="https://maps.google.com/maps?q=27.688477,85.344228&z=15&output=embed"
                 width="100%"
@@ -73,15 +70,15 @@ export function GetInTouchSection() {
 
             {/* Quick Location Meta Info Footer */}
             <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="flex items-center gap-2 text-slate-300">
-                <Phone className="h-4 w-4 text-blue-400 shrink-0" />
-                <a href={CONTACT_INFO.phone.href} className="hover:text-white transition-colors">
+              <div className="flex items-center gap-2 text-slate-600">
+                <Phone className="h-4 w-4 text-blue-600 shrink-0" />
+                <a href={CONTACT_INFO.phone.href} className="hover:text-slate-900 transition-colors font-medium">
                   {CONTACT_INFO.phone.display}
                 </a>
               </div>
-              <div className="flex items-center gap-2 text-slate-300">
-                <Mail className="h-4 w-4 text-blue-400 shrink-0" />
-                <a href={CONTACT_INFO.email.href} className="hover:text-white transition-colors truncate">
+              <div className="flex items-center gap-2 text-slate-600">
+                <Mail className="h-4 w-4 text-blue-600 shrink-0" />
+                <a href={CONTACT_INFO.email.href} className="hover:text-slate-900 transition-colors font-medium truncate">
                   {CONTACT_INFO.email.display}
                 </a>
               </div>

@@ -183,4 +183,6 @@ When working on a feature or review fix:
 | [12-homepage-who-we-are-section](file:///c:/black-swan-v1/context/implementation-specs/12-homepage-who-we-are-section.md) | Homepage Who We Are Section | Complete | Homepage Brand |
 | [13-about-us-page](file:///c:/black-swan-v1/context/implementation-specs/13-about-us-page.md) | Full-Service About Us Page | Complete | About Us Route |
 | [14-fix-coderabbit-about-page-findings](file:///c:/black-swan-v1/context/implementation-specs/14-fix-coderabbit-about-page-findings.md) | Fix CodeRabbit About Page Review Findings | Complete | About Page Accessibility & Visuals |
+| [15-services-page-and-detail-blog-system](file:///c:/black-swan-v1/context/implementation-specs/15-services-page-and-detail-blog-system.md) | Services Page & 15 Service Detail / Blog System | Approved | Services Catalog & Blog Routes |
+
 

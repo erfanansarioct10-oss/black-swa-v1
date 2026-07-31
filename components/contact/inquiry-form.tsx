@@ -9,6 +9,7 @@ interface InquiryFormProps {
   subtitle?: string;
   className?: string;
   variant?: "light" | "dark";
+  defaultService?: string;
 }
 
 export function InquiryForm({
@@ -16,6 +17,7 @@ export function InquiryForm({
   subtitle,
   className,
   variant = "light",
+  defaultService,
 }: InquiryFormProps) {
   const isDark = variant === "dark";
 
@@ -33,7 +35,9 @@ export function InquiryForm({
       companyName: "",
       email: "",
       phone: "",
-      message: "",
+      message: defaultService
+        ? `I would like to inquire about system integration, architecture, and pricing for ${defaultService}.`
+        : "",
     },
   });
 
