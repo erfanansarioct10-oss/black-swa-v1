@@ -19,7 +19,7 @@ Rebuild the `/services` route into an enterprise-grade broadcast and media techn
 | --- | ----------- | --------------- |
 | 1   | `constants/services.ts` | **[MODIFY]** Expand dataset with 15 complete services, category labels, SLA badges, key features, deliverables, and full engineering blog article content. |
 | 2   | `public/services/*.webp` (15 files) | **[NEW]** Generate 15 high-tech broadcast visual assets using AI matching the dark metallic charcoal studio aesthetic. |
-| 3   | `components/services/services-client-grid.tsx` | **[NEW]** Client component for tab state filtering ("All", "Automation & Newsroom", "Media Asset Management", "Graphics & Processing", "Signal & Distribution") and responsive 3-column service cards. |
+| 3   | `components/services/services-client-grid.tsx` | **[NEW]** Client component for tab state filtering ("All", "Playout Automation", "Asset Management", "Graphics & Display", "Distribution & Telecom", "Turnkey & Infrastructure") and clean light theme 3-column service cards (`bg-white border-slate-200/90`). |
 | 4   | `app/(public)/services/page.tsx` | **[MODIFY]** Rebuild main `/services` page with header, breadcrumbs, category tabs, card grid, and Schema.org `Service` catalog JSON-LD. |
 | 5   | `app/(public)/services/[slug]/page.tsx` | **[NEW]** Dynamic SSG detail & engineering blog page for all 15 services with breadcrumbs, hero section, 4 key features grid, full blog article body, prefilled `InquiryForm` sidebar, and Schema.org JSON-LD (`Service` & `TechArticle`). |
 | 6   | `context/implementation-specs/README.md` | **[MODIFY]** Update specification index with Spec 15. |

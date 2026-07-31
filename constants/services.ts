@@ -191,7 +191,7 @@ export const ALL_SERVICES: ServiceItem[] = [
     category: "automation",
     categoryLabel: "Newsroom Technology",
     slaBadge: "MOS Protocol Certified",
-    desc: "NRCS (Newsroom Computer System) empowers journalists, producers, and editors to collaboratively create stories, build rundown rundowns, and drive live studio playout devices.",
+    desc: "NRCS (Newsroom Computer System) empowers journalists, producers, and editors to collaboratively create stories, build rundowns, and drive live studio playout devices.",
     longDescription:
       "Black Swan's NRCS platform consolidates story drafting, wire agency feeds (AP, Reuters, AFP), media previewing, and MOS-driven studio device automation into a unified web interface for modern newsrooms.",
     image: "/services/nrcs.webp",
@@ -493,7 +493,7 @@ export const ALL_SERVICES: ServiceItem[] = [
     slaBadge: "Multi-Layer Keyer Engine",
     desc: "Character Generator (CG) delivers frame-accurate broadcast channel titling, lower-thirds, tickers, scoreboards, and emergency alert system (EAS) graphics.",
     longDescription:
-      "Black Swan's Character Generator platform combines a intuitive template designer with an ultra-reliable playout server. Built for rapid news operations, sports broadcasts, and live events.",
+      "Black Swan's Character Generator platform combines an intuitive template designer with an ultra-reliable playout server. Built for rapid news operations, sports broadcasts, and live events.",
     image: "/services/character-generator.webp",
     iconName: "Type",
     deliverables: [
@@ -543,7 +543,7 @@ export const ALL_SERVICES: ServiceItem[] = [
         "60fps smooth anti-aliased text rendering engine",
         "Direct Daktronics & Sportzcast scoreboard serial protocols",
         "HTML5 / Web-based template authoring suite",
-        "Key & Fill Fill/Key SDI output pair",
+        "Key & Fill SDI output pair",
       ],
       faq: [
         {

@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const serviceSitemapEntries: MetadataRoute.Sitemap = ALL_SERVICES.map((serv) => ({
     url: `${baseUrl}/services/${serv.slug}`,
-    lastModified,
+    lastModified: new Date(serv.blogContent.publishedDate),
     changeFrequency: "weekly",
     priority: 0.8,
   }));

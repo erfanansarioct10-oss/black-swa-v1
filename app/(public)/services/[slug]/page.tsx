@@ -105,10 +105,24 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
     },
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: service.blogContent.faq.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <div className="w-full min-h-screen bg-slate-50/60 text-slate-900 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <JsonLd data={serviceDetailSchema} />
       <JsonLd data={articleSchema} />
+      <JsonLd data={faqSchema} />
 
       <div className="max-w-7xl mx-auto w-full space-y-8 sm:space-y-12">
         {/* Breadcrumbs */}

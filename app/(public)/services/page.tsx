@@ -59,13 +59,13 @@ export default function ServicesPage() {
           </h1>
 
           <p className="text-slate-600 text-sm sm:text-base lg:text-lg max-w-4xl leading-relaxed">
-            From 24/7 linear playout automation and newsroom computer systems (NRCS) to high-density IP TV headends, satellite teleport operations, and custom OB van coachbuilding—explore our 15 specialized engineering solutions backed by guaranteed SLA support.
+            From 24/7 linear playout automation and newsroom computer systems (NRCS) to high-density IP TV headends, satellite teleport operations, and custom OB van coachbuilding—explore our {ALL_SERVICES.length} specialized engineering solutions backed by guaranteed SLA support.
           </p>
 
           {/* Quick Statistics Bar */}
           <div className="pt-6 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
             <div>
-              <span className="text-xl sm:text-2xl font-black text-slate-900">15+</span>
+              <span className="text-xl sm:text-2xl font-black text-slate-900">{ALL_SERVICES.length}</span>
               <p className="text-xs text-slate-500 uppercase font-semibold">Specialized Services</p>
             </div>
             <div>

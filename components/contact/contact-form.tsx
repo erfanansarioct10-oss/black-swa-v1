@@ -11,7 +11,7 @@ function ContactFormInner() {
   const searchParams = useSearchParams();
   const serviceSlug = searchParams.get("service");
   const matchingService = ALL_SERVICES.find((s) => s.slug === serviceSlug);
-  const defaultServiceName = matchingService ? matchingService.title : serviceSlug || undefined;
+  const defaultServiceName = matchingService ? matchingService.title : undefined;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-4">
