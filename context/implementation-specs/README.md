@@ -185,5 +185,16 @@ When working on a feature or review fix:
 | [14-fix-coderabbit-about-page-findings](file:///c:/black-swan-v1/context/implementation-specs/14-fix-coderabbit-about-page-findings.md) | Fix CodeRabbit About Page Review Findings | Complete | About Page Accessibility & Visuals |
 | [15-services-page-and-detail-blog-system](file:///c:/black-swan-v1/context/implementation-specs/15-services-page-and-detail-blog-system.md) | Services Page & 15 Service Detail / Blog System | Complete | Services Catalog & Blog Routes |
 | [16-fix-coderabbit-services-page-findings](file:///c:/black-swan-v1/context/implementation-specs/16-fix-coderabbit-services-page-findings.md) | Fix CodeRabbit Review Findings for Services System | Complete | Services System Cleanups |
+| [17-phase-3a-quote-database-schema-and-server-actions](file:///c:/black-swan-v1/context/implementation-specs/17-phase-3a-quote-database-schema-and-server-actions.md) | Phase 3A: Database Schema & Server Actions | Complete | Quote Database & Actions |
+| [18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui](file:///c:/black-swan-v1/context/implementation-specs/18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui.md) | Phase 3B: Interactive Quote Cart & Multi-Step RFQ Wizard UI | Complete | Quote Cart & RFQ Wizard UI |
+| [19-phase-3c-automated-notifications-and-integration-pipeline](file:///c:/black-swan-v1/context/implementation-specs/19-phase-3c-automated-notifications-and-integration-pipeline.md) | Phase 3C: Automated Notifications & Integration Pipeline | Complete | Resend & Telegram Notifications |
+| [20-phase-3d-public-quote-tracking-portal](file:///c:/black-swan-v1/context/implementation-specs/20-phase-3d-public-quote-tracking-portal.md) | Phase 3D: Public Quote Tracking Portal | Complete | Public Quote Tracking Portal (`/quote/track`) |
+| [21-phase-3-refinements-and-bug-fixes](file:///c:/black-swan-v1/context/implementation-specs/21-phase-3-refinements-and-bug-fixes.md) | Phase 3: Quote System Refinements & Bug Fixes | Complete | Quote System Refinements & UI Fixes |
+| [22-supabase-rls-security-and-index-optimizations](file:///c:/black-swan-v1/context/implementation-specs/22-supabase-rls-security-and-index-optimizations.md) | Supabase RLS Security & Performance Index Optimizations | Complete | Database RLS & Indexes |
+
+
+
+
+
 
 

@@ -5,7 +5,7 @@ import { CONTACT_INFO } from "@/constants/contact";
 
 export function PublicFooter() {
   return (
-    <footer className="bg-brand-onyx text-slate-300 border-t border-brand-marble/40">
+    <footer className="bg-brand-onyx text-slate-300 border-t border-brand-marble/40 print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Column 1: Brand & Overview */}
@@ -65,6 +65,11 @@ export function PublicFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/quote/track" className="hover:text-white transition-colors text-slate-200">
+                  Track Quotation Status
+                </Link>
+              </li>
+              <li>
                 <Link href="/quote" className="hover:text-white font-medium text-slate-200 transition-colors flex items-center gap-1">
                   <span>Request a Quotation</span>
                   <ArrowUpRight className="h-3.5 w-3.5 text-slate-400" />
@@ -72,6 +77,7 @@ export function PublicFooter() {
               </li>
             </ul>
           </div>
+
 
           {/* Column 3: Featured Product Categories */}
           <div className="space-y-4">

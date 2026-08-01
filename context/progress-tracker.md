@@ -4,24 +4,33 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- Phase 3: Quote System (See complete breakdown in [`docs/feature-roadmap.md`](../docs/feature-roadmap.md))
+- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`)
 
 ## Current Goal
 
-- Implement Phase 3A: Database Schema & Server Actions for Quote Request System.
+- Implement Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
 
 ## Completed
 
 - Completed Phase 2: Public Marketing Website (Homepage, About, Products, Services, Contact, Legal, SEO architecture).
 - Structured Phase 3 Quote System into 4 step-by-step sub-phases (3A: Schema & Server Actions, 3B: Cart & Multi-Step Wizard UI, 3C: Resend & Telegram Notifications, 3D: Public Quote Tracking Portal) in [`docs/feature-roadmap.md`](../docs/feature-roadmap.md).
+- Completed Phase 3A: Database Schema & Server Actions (`quotes` & `quote_items` Drizzle ORM tables in `db/schema.ts`, Zod validation schemas in `schemas/quote.ts`, Server Actions in `actions/quote.ts`, and `pnpm db:push` migration; see spec in [`context/implementation-specs/17-phase-3a-quote-database-schema-and-server-actions.md`](./implementation-specs/17-phase-3a-quote-database-schema-and-server-actions.md)).
+- Completed Phase 3B: Interactive Quote Cart & Multi-Step RFQ Wizard UI (`QuoteCartProvider` with item technical specs/notes, 3-step RFQ wizard with Cloudflare Turnstile anti-bot verification, Zod validation, and `createQuoteAction` integration; see spec in [`context/implementation-specs/18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui.md`](./implementation-specs/18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui.md)).
+- Completed Phase 3C: Automated Notifications & Integration Pipeline (Resend branded customer HTML email receipts & Telegram Bot API management alerts with non-blocking async dispatch; see spec in [`context/implementation-specs/19-phase-3c-automated-notifications-and-integration-pipeline.md`](./implementation-specs/19-phase-3c-automated-notifications-and-integration-pipeline.md)).
+- Completed Phase 3D: Public Quote Tracking Portal (Search lookup page at `/quote/track`, dynamic status tracking page at `/quote/track/[referenceId]`, 5-stage visual stepper timeline, account manager contact card, equipment breakdown table, and printable proposal view; see spec in [`context/implementation-specs/20-phase-3d-public-quote-tracking-portal.md`](./implementation-specs/20-phase-3d-public-quote-tracking-portal.md)).
+- Completed Phase 3 Refinement & Bug Fixes (Email domain url fallback fix, PDF proposal print media layout isolation via `print:hidden`, Nepalese Rupee NPR budget ranges, Telegram Bot API HTML formatting without backslashes, and global Track Quote navigation buttons; see spec in [`context/implementation-specs/21-phase-3-refinements-and-bug-fixes.md`](./implementation-specs/21-phase-3-refinements-and-bug-fixes.md)).
+- Completed Supabase RLS Security & Performance Index Optimizations (Enabled RLS on `quotes`, `quote_items`, `profiles`, configured access policies, added foreign key index `idx_quote_items_quote_id` and user index `idx_quotes_clerk_user_id`; see spec in [`context/implementation-specs/22-supabase-rls-security-and-index-optimizations.md`](./implementation-specs/22-supabase-rls-security-and-index-optimizations.md)).
 
 ## In Progress
 
-- Phase 3A: Database Schema & Server Actions (`quotes` & `quote_items` Drizzle ORM tables in `db/schema.ts`, Zod validation schemas in `schemas/quote.ts`, Server Actions in `actions/quote.ts`, and `pnpm db:push` migration).
+- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
+
 
 ## Next Up
 
-- Phase 3B: Interactive Quote Cart & Multi-Step RFQ Wizard UI.
+- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
+
+
 
 ## Open Questions
 

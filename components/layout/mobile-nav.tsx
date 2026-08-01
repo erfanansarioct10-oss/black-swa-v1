@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, Phone, Mail, ChevronRight, FileText } from "lucide-react";
+import { Menu, Phone, Mail, ChevronRight, Search, FileText } from "lucide-react";
 import {
   Sheet,
   SheetTrigger,
@@ -76,10 +76,22 @@ export function MobileNav() {
                 <ChevronRight className="h-4 w-4 text-muted-foreground" />
               </Link>
             ))}
+            
+            <Link
+              href="/quote/track"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between py-3 px-4 text-base font-medium text-primary hover:bg-accent rounded-lg transition-colors"
+            >
+              <span className="flex items-center gap-2">
+                <Search className="h-4 w-4" />
+                Track Quotation Status
+              </span>
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            </Link>
           </div>
 
           {/* Drawer Footer - Contact & Quote CTA */}
-          <div className="p-4 border-t border-border bg-muted/30 space-y-4">
+          <div className="p-4 border-t border-border bg-muted/30 space-y-3">
             <div className="space-y-2 text-sm text-muted-foreground">
               <a
                 href={CONTACT_INFO.phone.href}
@@ -106,8 +118,11 @@ export function MobileNav() {
               <span>Request a Quote</span>
             </Link>
           </div>
+
+
         </SheetContent>
       </Sheet>
     </div>
   );
 }
+

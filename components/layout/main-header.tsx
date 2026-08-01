@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FileText, ShoppingCart } from "lucide-react";
+import { ShoppingCart, Search } from "lucide-react";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { useQuoteCart } from "@/components/providers/quote-cart-provider";
 
@@ -25,7 +25,7 @@ export function MainHeader() {
   const { itemCount, mounted } = useQuoteCart();
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-background opacity-100 border-b border-border shadow-xs">
+    <header className="sticky top-0 z-40 w-full bg-background opacity-100 border-b border-border shadow-xs print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
         {/* Brand Logo & Name */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -68,7 +68,7 @@ export function MainHeader() {
           })}
         </nav>
 
-        {/* Action Group: Quote Cart Badge & CTA */}
+        {/* Action Group: Quote Cart Badge & Black Track Quote CTA */}
         <div className="flex items-center gap-3">
           {/* Quote Cart Badge */}
           <Link
@@ -84,14 +84,15 @@ export function MainHeader() {
             )}
           </Link>
 
-          {/* Request a Quote Primary CTA (Desktop) */}
+          {/* Track Quote Primary CTA (Desktop) - Solid Black Button */}
           <Link
-            href="/quote"
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 rounded-md shadow-xs transition-all"
+            href="/quote/track"
+            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-black text-white hover:bg-slate-800 rounded-md shadow-xs transition-all border border-black"
           >
-            <FileText className="h-4 w-4" />
-            <span>Request Quote</span>
+            <Search className="h-4 w-4 text-white" />
+            <span className="text-white">Track Quote</span>
           </Link>
+
 
           {/* Mobile Navigation Drawer Trigger */}
           <MobileNav />
@@ -100,3 +101,4 @@ export function MainHeader() {
     </header>
   );
 }
+

@@ -119,7 +119,7 @@ The current Clerk Next.js SDK reference marks `createRouteMatcher()` as deprecat
 <details>
 <summary>🤖 Prompt for AI Agents</summary>
 
-```
+```text
 Verify each finding against current code. Fix only still-valid issues, skip the
 rest with a brief reason, keep changes minimal, and validate.
 
@@ -141,7 +141,7 @@ clerkMiddleware authorization flow to preserve admin-route protection.
 <details>
 <summary>🤖 Prompt for all review comments with AI agents</summary>
 
-```
+```text
 Verify each finding against current code. Fix only still-valid issues, skip the
 rest with a brief reason, keep changes minimal, and validate.
 

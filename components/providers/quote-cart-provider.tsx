@@ -8,6 +8,7 @@ export interface QuoteCartItem {
   sku: string;
   category: string;
   quantity: number;
+  notes?: string;
 }
 
 interface QuoteCartContextType {
@@ -17,6 +18,7 @@ interface QuoteCartContextType {
   addItem: (product: { id: string; name: string; sku: string; category: string }) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
+  updateNotes: (id: string, notes: string) => void;
   clearCart: () => void;
 }
 
@@ -32,7 +34,8 @@ function isQuoteCartItem(value: unknown): value is QuoteCartItem {
     typeof item.category === "string" &&
     typeof item.quantity === "number" &&
     Number.isSafeInteger(item.quantity) &&
-    item.quantity > 0
+    item.quantity > 0 &&
+    (item.notes === undefined || typeof item.notes === "string")
   );
 }
 
@@ -97,6 +100,12 @@ export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const updateNotes = (id: string, notes: string) => {
+    setItems((prevItems) =>
+      prevItems.map((item) => (item.id === id ? { ...item, notes } : item))
+    );
+  };
+
   const clearCart = () => {
     setItems([]);
   };
@@ -112,6 +121,7 @@ export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
         addItem,
         removeItem,
         updateQuantity,
+        updateNotes,
         clearCart,
       }}
     >

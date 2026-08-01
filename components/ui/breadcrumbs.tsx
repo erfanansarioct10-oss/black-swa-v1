@@ -35,7 +35,7 @@ export function Breadcrumbs({ items, variant = "light", className }: Breadcrumbs
   return (
     <>
       <JsonLd data={jsonLdPayload} />
-      <nav aria-label="Breadcrumb" className={cn("py-2 px-1", className)}>
+      <nav aria-label="Breadcrumb" className={cn("py-2 px-1 print:hidden", className)}>
         <ol
           className={cn(
             "flex items-center flex-wrap gap-1.5 text-xs font-medium",
