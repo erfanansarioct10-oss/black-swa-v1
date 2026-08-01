@@ -48,26 +48,29 @@ export function QuoteRequest() {
 
   // Restore state from sessionStorage after initial mount
   useEffect(() => {
-    try {
-      const savedStep = sessionStorage.getItem(STEP_STORAGE_KEY);
-      if (savedStep) {
-        const stepNum = parseInt(savedStep, 10);
-        if (!isNaN(stepNum) && stepNum >= 1 && stepNum <= 3) {
-          setCurrentStep(stepNum);
+    const timer = setTimeout(() => {
+      try {
+        const savedStep = sessionStorage.getItem(STEP_STORAGE_KEY);
+        if (savedStep) {
+          const stepNum = parseInt(savedStep, 10);
+          if (!isNaN(stepNum) && stepNum >= 1 && stepNum <= 3) {
+            setCurrentStep(stepNum);
+          }
         }
-      }
-      const savedForm = sessionStorage.getItem(FORM_STORAGE_KEY);
-      if (savedForm) {
-        const parsed: unknown = JSON.parse(savedForm);
-        if (parsed && typeof parsed === "object") {
-          setFormData(parsed as Partial<CreateQuoteSchemaType>);
+        const savedForm = sessionStorage.getItem(FORM_STORAGE_KEY);
+        if (savedForm) {
+          const parsed: unknown = JSON.parse(savedForm);
+          if (parsed && typeof parsed === "object") {
+            setFormData(parsed as Partial<CreateQuoteSchemaType>);
+          }
         }
+      } catch {
+        // Ignore storage read exceptions
+      } finally {
+        setInitialized(true);
       }
-    } catch {
-      // Ignore storage read exceptions
-    } finally {
-      setInitialized(true);
-    }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   // Persist form data to sessionStorage whenever formData changes (excluding turnstileToken)

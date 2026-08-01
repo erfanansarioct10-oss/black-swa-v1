@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, useSyncExternalStore } from "react";
+import React, { createContext, useContext, useSyncExternalStore } from "react";
 
 export interface QuoteCartItem {
   id: string;
@@ -39,61 +39,71 @@ function isQuoteCartItem(value: unknown): value is QuoteCartItem {
   );
 }
 
-const emptySubscribe = () => () => {};
+const subscribeQuoteCart = (callback: () => void) => {
+  window.addEventListener("storage", callback);
+  window.addEventListener("quote-cart-change", callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener("quote-cart-change", callback);
+  };
+};
+
+const getQuoteCartSnapshot = (): string => {
+  if (typeof window === "undefined") return "[]";
+  return localStorage.getItem(STORAGE_KEY) || "[]";
+};
+
+const getQuoteCartServerSnapshot = (): string => "[]";
 
 const QuoteCartContext = createContext<QuoteCartContextType | undefined>(undefined);
 
 export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<QuoteCartItem[]>([]);
-  const [initialized, setInitialized] = useState(false);
-  
+  const rawCart = useSyncExternalStore(
+    subscribeQuoteCart,
+    getQuoteCartSnapshot,
+    getQuoteCartServerSnapshot
+  );
+
   const mounted = useSyncExternalStore(
-    emptySubscribe,
+    subscribeQuoteCart,
     () => true,
     () => false
   );
 
-  // Load stored items from localStorage after initial render to avoid SSR hydration mismatch
-  useEffect(() => {
+  const items = React.useMemo(() => {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed: unknown = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          setItems(parsed.filter(isQuoteCartItem));
-        }
-      }
-    } catch (e) {
-      console.error("Failed to parse quote cart items from localStorage:", e);
-    } finally {
-      setInitialized(true);
+      const parsed: unknown = JSON.parse(rawCart);
+      return Array.isArray(parsed) ? parsed.filter(isQuoteCartItem) : [];
+    } catch {
+      return [];
     }
-  }, []);
+  }, [rawCart]);
 
-  // Sync to localStorage whenever items change (only after initial load)
-  useEffect(() => {
-    if (!initialized) return;
+  const saveItemsToStorage = (newItems: QuoteCartItem[]) => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newItems));
+      window.dispatchEvent(new Event("quote-cart-change"));
     } catch (e) {
       console.error("Failed to save quote cart items to localStorage:", e);
     }
-  }, [items, initialized]);
+  };
 
   const addItem = (product: { id: string; name: string; sku: string; category: string }) => {
-    setItems((prevItems) => {
-      const existing = prevItems.find((item) => item.id === product.id);
-      if (existing) {
-        return prevItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      }
-      return [...prevItems, { ...product, quantity: 1 }];
-    });
+    const existing = items.find((item) => item.id === product.id);
+    let updated: QuoteCartItem[];
+    if (existing) {
+      updated = items.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    } else {
+      updated = [...items, { ...product, quantity: 1 }];
+    }
+    saveItemsToStorage(updated);
   };
 
   const removeItem = (id: string) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    const updated = items.filter((item) => item.id !== id);
+    saveItemsToStorage(updated);
   };
 
   const updateQuantity = (id: string, quantity: number) => {
@@ -101,19 +111,17 @@ export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
       removeItem(id);
       return;
     }
-    setItems((prevItems) =>
-      prevItems.map((item) => (item.id === id ? { ...item, quantity } : item))
-    );
+    const updated = items.map((item) => (item.id === id ? { ...item, quantity } : item));
+    saveItemsToStorage(updated);
   };
 
   const updateNotes = (id: string, notes: string) => {
-    setItems((prevItems) =>
-      prevItems.map((item) => (item.id === id ? { ...item, notes } : item))
-    );
+    const updated = items.map((item) => (item.id === id ? { ...item, notes } : item));
+    saveItemsToStorage(updated);
   };
 
   const clearCart = () => {
-    setItems([]);
+    saveItemsToStorage([]);
   };
 
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
