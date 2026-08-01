@@ -2,9 +2,9 @@
 
 Update this file after every meaningful implementation change.
 
-### Current Phase
+## Current Phase
 
-- Phase 3: Quote System (See complete breakdown in [`docs/feature-roadmap.md`](file:///c:/black-swan-v1/docs/feature-roadmap.md))
+- Phase 3: Quote System (See complete breakdown in [`docs/feature-roadmap.md`](../docs/feature-roadmap.md))
 
 ## Current Goal
 
@@ -13,7 +13,7 @@ Update this file after every meaningful implementation change.
 ## Completed
 
 - Completed Phase 2: Public Marketing Website (Homepage, About, Products, Services, Contact, Legal, SEO architecture).
-- Structured Phase 3 Quote System into 4 step-by-step sub-phases (3A: Schema & Server Actions, 3B: Cart & Multi-Step Wizard UI, 3C: Resend & Telegram Notifications, 3D: Public Quote Tracking Portal) in [`docs/feature-roadmap.md`](file:///c:/black-swan-v1/docs/feature-roadmap.md).
+- Structured Phase 3 Quote System into 4 step-by-step sub-phases (3A: Schema & Server Actions, 3B: Cart & Multi-Step Wizard UI, 3C: Resend & Telegram Notifications, 3D: Public Quote Tracking Portal) in [`docs/feature-roadmap.md`](../docs/feature-roadmap.md).
 
 ## In Progress
 

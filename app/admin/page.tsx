@@ -45,8 +45,8 @@ export default function AdminDashboardPage() {
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
             System Status
           </h3>
-          <p className="text-3xl font-extrabold text-emerald-500">Operational</p>
-          <p className="text-xs text-muted-foreground">Clerk Auth & Supabase DB Linked</p>
+          <p className="text-3xl font-extrabold text-amber-500">Active (Dev)</p>
+          <p className="text-xs text-muted-foreground">Clerk Auth Active | DB Schema Pending Phase 3A</p>
         </div>
       </main>
     </div>
