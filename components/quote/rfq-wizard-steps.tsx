@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 
 import { useQuoteCart, type QuoteCartItem } from "@/components/providers/quote-cart-provider";
-import type { CreateQuoteSchemaType } from "@/schemas/quote";
+import { createQuoteSchema, type CreateQuoteSchemaType } from "@/schemas/quote";
 
 /* -------------------------------------------------------------------------- */
 /* STEP 1: Equipment & Cart Review with Custom Item Specs                    */
@@ -95,7 +95,7 @@ export function RFQStepEquipment({ onNext }: RFQStepEquipmentProps) {
       <div className="space-y-4">
         {items.map((item: QuoteCartItem) => {
           const hasNotes = Boolean(item.notes && item.notes.trim().length > 0);
-          const isNotesExpanded = activeNotesId === item.id || hasNotes;
+          const isNotesExpanded = activeNotesId === item.id || (activeNotesId === null && hasNotes);
 
           return (
             <div
@@ -157,7 +157,7 @@ export function RFQStepEquipment({ onNext }: RFQStepEquipmentProps) {
                 <button
                   type="button"
                   onClick={() =>
-                    setActiveNotesId((prev) => (prev === item.id ? null : item.id))
+                    setActiveNotesId(isNotesExpanded ? `collapsed-${item.id}` : item.id)
                   }
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
                 >
@@ -220,25 +220,28 @@ export function RFQStepDetails({ formData, onChange, onNext, onBack }: RFQStepDe
 
   const validateAndProceed = (e: React.FormEvent) => {
     e.preventDefault();
-    const newErrors: Record<string, string> = {};
 
-    if (!formData.fullName || formData.fullName.trim().length < 2) {
-      newErrors.fullName = "Contact name must be at least 2 characters.";
+    const step2Schema = createQuoteSchema.pick({
+      fullName: true,
+      email: true,
+      phone: true,
+    });
+
+    const parsed = step2Schema.safeParse(formData);
+
+    if (!parsed.success) {
+      const newErrors: Record<string, string> = {};
+      parsed.error.issues.forEach((issue) => {
+        if (issue.path[0] !== undefined) {
+          newErrors[String(issue.path[0])] = issue.message;
+        }
+      });
+      setErrors(newErrors);
+      return;
     }
 
-    if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      newErrors.email = "Please provide a valid corporate email address.";
-    }
-
-    if (!formData.phone || formData.phone.trim().length < 7) {
-      newErrors.phone = "Phone number must be at least 7 digits.";
-    }
-
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length === 0) {
-      onNext();
-    }
+    setErrors({});
+    onNext();
   };
 
   return (
@@ -264,6 +267,8 @@ export function RFQStepDetails({ formData, onChange, onNext, onBack }: RFQStepDe
             id="fullName"
             type="text"
             required
+            aria-invalid={Boolean(errors.fullName)}
+            aria-describedby={errors.fullName ? "fullName-error" : undefined}
             value={formData.fullName || ""}
             onChange={(e) => {
               onChange("fullName", e.target.value);
@@ -273,7 +278,7 @@ export function RFQStepDetails({ formData, onChange, onNext, onBack }: RFQStepDe
             className="w-full px-3.5 py-2.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
           {errors.fullName && (
-            <p className="text-xs font-medium text-destructive">{errors.fullName}</p>
+            <p id="fullName-error" className="text-xs font-medium text-destructive">{errors.fullName}</p>
           )}
         </div>
 
@@ -287,6 +292,8 @@ export function RFQStepDetails({ formData, onChange, onNext, onBack }: RFQStepDe
             id="email"
             type="email"
             required
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "email-error" : undefined}
             value={formData.email || ""}
             onChange={(e) => {
               onChange("email", e.target.value);
@@ -296,7 +303,7 @@ export function RFQStepDetails({ formData, onChange, onNext, onBack }: RFQStepDe
             className="w-full px-3.5 py-2.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
           {errors.email && (
-            <p className="text-xs font-medium text-destructive">{errors.email}</p>
+            <p id="email-error" className="text-xs font-medium text-destructive">{errors.email}</p>
           )}
         </div>
 
@@ -310,6 +317,8 @@ export function RFQStepDetails({ formData, onChange, onNext, onBack }: RFQStepDe
             id="phone"
             type="tel"
             required
+            aria-invalid={Boolean(errors.phone)}
+            aria-describedby={errors.phone ? "phone-error" : undefined}
             value={formData.phone || ""}
             onChange={(e) => {
               onChange("phone", e.target.value);
@@ -319,7 +328,7 @@ export function RFQStepDetails({ formData, onChange, onNext, onBack }: RFQStepDe
             className="w-full px-3.5 py-2.5 rounded-lg border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
           {errors.phone && (
-            <p className="text-xs font-medium text-destructive">{errors.phone}</p>
+            <p id="phone-error" className="text-xs font-medium text-destructive">{errors.phone}</p>
           )}
         </div>
 

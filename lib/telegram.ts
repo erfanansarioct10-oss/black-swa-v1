@@ -70,6 +70,7 @@ ${params.projectScope ? `📝 <b>Project Scope:</b>\n<i>${escapeHtml(params.proj
         text: messageText,
         parse_mode: "HTML",
       }),
+      signal: AbortSignal.timeout(8000),
     });
 
     if (!response.ok) {

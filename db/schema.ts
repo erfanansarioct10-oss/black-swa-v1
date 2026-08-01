@@ -28,9 +28,9 @@ export const quotes = pgTable("quotes", {
   adminNotes: text("admin_notes"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
-}, (table) => ({
-  clerkUserIdIdx: index("idx_quotes_clerk_user_id").on(table.clerkUserId),
-}));
+}, (table) => [
+  index("idx_quotes_clerk_user_id").on(table.clerkUserId),
+]);
 
 // Quote Line Items table
 export const quoteItems = pgTable("quote_items", {
@@ -44,7 +44,7 @@ export const quoteItems = pgTable("quote_items", {
   quantity: integer("quantity").notNull().default(1),
   notes: text("notes"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-}, (table) => ({
-  quoteIdIdx: index("idx_quote_items_quote_id").on(table.quoteId),
-}));
+}, (table) => [
+  index("idx_quote_items_quote_id").on(table.quoteId),
+]);
 

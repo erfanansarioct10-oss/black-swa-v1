@@ -43,7 +43,10 @@ export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   });
+
+  const canPrintQuotation = quote.status === "quoted" || quote.status === "completed";
 
   return (
     <div className="space-y-8 w-full print:space-y-4">
@@ -56,13 +59,15 @@ export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
           <ArrowLeft className="w-4 h-4" />
           Look Up Another Quote
         </Link>
-        <button
-          onClick={handlePrint}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground text-sm font-semibold rounded-lg transition-colors cursor-pointer border border-border"
-        >
-          <Printer className="w-4 h-4" />
-          Print / Download Quotation (PDF)
-        </button>
+        {canPrintQuotation && (
+          <button
+            onClick={handlePrint}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground text-sm font-semibold rounded-lg transition-colors cursor-pointer border border-border"
+          >
+            <Printer className="w-4 h-4" />
+            Print / Download Quotation (PDF)
+          </button>
+        )}
       </div>
 
       {/* Top Banner Card */}

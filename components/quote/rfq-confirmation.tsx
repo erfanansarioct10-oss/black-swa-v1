@@ -100,7 +100,7 @@ export function RFQConfirmation({
       {/* Navigation CTA Buttons */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
         <Link
-          href={`/quote/track?referenceId=${encodeURIComponent(referenceId)}&email=${encodeURIComponent(email)}`}
+          href={`/quote/track?referenceId=${encodeURIComponent(referenceId)}`}
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold shadow hover:opacity-90 transition-opacity"
         >
           <Search className="h-4 w-4" />

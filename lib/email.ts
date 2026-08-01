@@ -25,8 +25,13 @@ export interface SendQuoteConfirmationEmailParams {
  */
 export function generateQuoteConfirmationHtml(params: SendQuoteConfirmationEmailParams): string {
   const { fullName, referenceId, companyName, items } = params;
+  if (!process.env.NEXT_PUBLIC_APP_URL) {
+    console.warn(
+      "[Email Warning]: NEXT_PUBLIC_APP_URL environment variable is not set. Falling back to http://localhost:3000 for tracking link."
+    );
+  }
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const trackingUrl = `${baseUrl}/quote/track?referenceId=${encodeURIComponent(referenceId)}&email=${encodeURIComponent(params.email)}`;
+  const trackingUrl = `${baseUrl}/quote/track?referenceId=${encodeURIComponent(referenceId)}`;
 
   const itemsRowsHtml = items
     .map(

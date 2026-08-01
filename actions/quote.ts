@@ -1,6 +1,7 @@
 "use server";
 
 import crypto from "crypto";
+import { after } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { and, eq, sql } from "drizzle-orm";
 
@@ -17,6 +18,37 @@ import {
 import type { ActionResponse, QuoteWithItems } from "@/types/quote";
 
 /**
+ * Server-side validation of Cloudflare Turnstile anti-bot token.
+ */
+async function verifyTurnstileToken(token?: string): Promise<boolean> {
+  const secretKey = process.env.TURNSTILE_SECRET_KEY;
+  // If Turnstile secret key is not set (e.g. local dev without Turnstile configured), bypass check safely
+  if (!secretKey) return true;
+  if (!token) return false;
+
+  try {
+    const formData = new URLSearchParams();
+    formData.append("secret", secretKey);
+    formData.append("response", token);
+
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        body: formData,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      }
+    );
+
+    const data = await response.json();
+    return Boolean(data.success);
+  } catch (error) {
+    console.error("[Turnstile Verification Exception]:", error);
+    return false;
+  }
+}
+
+/**
  * Creates a new quotation request header and its line items inside an atomic database transaction.
  */
 export async function createQuoteAction(
@@ -25,80 +57,123 @@ export async function createQuoteAction(
   try {
     const validated = createQuoteSchema.parse(rawInput);
 
+    // Turnstile anti-bot verification check
+    const isTurnstileValid = await verifyTurnstileToken(validated.turnstileToken);
+    if (!isTurnstileValid) {
+      return {
+        success: false,
+        error: "Security verification failed. Please refresh and complete the bot protection check.",
+      };
+    }
+
     // Optional user identity from Clerk auth
     const { userId } = await auth();
-
-    // Format Reference ID: RFQ-YYYYMMDD-XXXX (e.g. RFQ-20260801-9F2C)
-    const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-    const randomHex = crypto.randomBytes(2).toString("hex").toUpperCase();
-    const referenceId = `RFQ-${dateStr}-${randomHex}`;
 
     // Unique UUID for secure public tracking link
     const lookupToken = crypto.randomUUID();
 
-    const result = await db.transaction(async (tx) => {
-      const [insertedQuote] = await tx
-        .insert(quotes)
-        .values({
-          referenceId,
-          lookupToken,
-          clerkUserId: userId || null,
+    // Generate reference ID with high entropy (4 bytes / 8 hex characters) and bounded retry for collision safety
+    const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    let insertedQuote: { id: string; referenceId: string; lookupToken: string } | undefined;
+    let attempts = 0;
+    const maxAttempts = 3;
+
+    while (attempts < maxAttempts && !insertedQuote) {
+      attempts++;
+      const randomHex = crypto.randomBytes(4).toString("hex").toUpperCase();
+      const referenceId = `RFQ-${dateStr}-${randomHex}`;
+
+      try {
+        insertedQuote = await db.transaction(async (tx) => {
+          const [inserted] = await tx
+            .insert(quotes)
+            .values({
+              referenceId,
+              lookupToken,
+              clerkUserId: userId || null,
+              fullName: validated.fullName,
+              email: validated.email,
+              phone: validated.phone,
+              companyName: validated.companyName || null,
+              projectScope: validated.projectScope || null,
+              budgetRange: validated.budgetRange || null,
+              timeline: validated.timeline || null,
+              status: "pending",
+            })
+            .returning({
+              id: quotes.id,
+              referenceId: quotes.referenceId,
+              lookupToken: quotes.lookupToken,
+            });
+
+          if (!inserted) {
+            throw new Error("Failed to create quote record header.");
+          }
+
+          const itemsToInsert = validated.items.map((item) => ({
+            quoteId: inserted.id,
+            productId: item.productId,
+            productTitle: item.productTitle,
+            category: item.category,
+            quantity: item.quantity,
+            notes: item.notes || null,
+          }));
+
+          await tx.insert(quoteItems).values(itemsToInsert);
+
+          return inserted;
+        });
+      } catch (err: unknown) {
+        // If it's a unique constraint collision and we have attempts remaining, retry
+        if (
+          attempts < maxAttempts &&
+          err instanceof Error &&
+          (err.message.includes("unique constraint") || err.message.includes("quotes_reference_id_unique"))
+        ) {
+          continue;
+        }
+        throw err;
+      }
+    }
+
+    if (!insertedQuote) {
+      throw new Error("Failed to generate a unique quotation reference ID.");
+    }
+
+    const result = insertedQuote;
+
+    // Use Next.js 16 after() to ensure background notifications complete safely after the response
+    after(async () => {
+      const results = await Promise.allSettled([
+        sendQuoteConfirmationEmail({
+          email: validated.email,
+          fullName: validated.fullName,
+          referenceId: result.referenceId,
+          lookupToken: result.lookupToken,
+          companyName: validated.companyName,
+          items: validated.items,
+        }),
+        sendTelegramQuoteAlert({
+          referenceId: result.referenceId,
           fullName: validated.fullName,
           email: validated.email,
           phone: validated.phone,
-          companyName: validated.companyName || null,
-          projectScope: validated.projectScope || null,
-          budgetRange: validated.budgetRange || null,
-          timeline: validated.timeline || null,
-          status: "pending",
-        })
-        .returning({
-          id: quotes.id,
-          referenceId: quotes.referenceId,
-          lookupToken: quotes.lookupToken,
-        });
+          companyName: validated.companyName,
+          budgetRange: validated.budgetRange,
+          timeline: validated.timeline,
+          projectScope: validated.projectScope,
+          items: validated.items,
+        }),
+      ]);
 
-      if (!insertedQuote) {
-        throw new Error("Failed to create quote record header.");
-      }
-
-      const itemsToInsert = validated.items.map((item) => ({
-        quoteId: insertedQuote.id,
-        productId: item.productId,
-        productTitle: item.productTitle,
-        category: item.category,
-        quantity: item.quantity,
-        notes: item.notes || null,
-      }));
-
-      await tx.insert(quoteItems).values(itemsToInsert);
-
-      return insertedQuote;
-    });
-
-    // Asynchronously dispatch Resend email & Telegram alert non-blockingly
-    Promise.allSettled([
-      sendQuoteConfirmationEmail({
-        email: validated.email,
-        fullName: validated.fullName,
-        referenceId: result.referenceId,
-        lookupToken: result.lookupToken,
-        companyName: validated.companyName,
-        items: validated.items,
-      }),
-      sendTelegramQuoteAlert({
-        referenceId: result.referenceId,
-        fullName: validated.fullName,
-        email: validated.email,
-        phone: validated.phone,
-        companyName: validated.companyName,
-        budgetRange: validated.budgetRange,
-        timeline: validated.timeline,
-        projectScope: validated.projectScope,
-        items: validated.items,
-      }),
-    ]).catch((err) => {
-      console.error("[Notification Dispatch Background Error]:", err);
+      results.forEach((res, index) => {
+        const serviceName = index === 0 ? "Resend Email" : "Telegram Alert";
+        if (res.status === "rejected") {
+          console.error(`[${serviceName} Dispatch Rejected]:`, res.reason);
+        } else if (!res.value.success) {
+          console.warn(`[${serviceName} Dispatch Warning]:`, res.value.error);
+        }
+      });
     });
 
     return {
@@ -135,7 +210,7 @@ export async function getQuoteByTrackingAction(
       .from(quotes)
       .where(
         and(
-          eq(quotes.referenceId, validated.referenceId),
+          sql`UPPER(${quotes.referenceId}) = UPPER(${validated.referenceId})`,
           sql`LOWER(${quotes.email}) = LOWER(${validated.email})`
         )
       )
@@ -218,3 +293,4 @@ export async function getQuoteByLookupTokenAction(
     };
   }
 }
+

@@ -40,25 +40,10 @@ export interface QuoteWithItems extends Quote {
   items: QuoteItem[];
 }
 
-export interface CreateQuoteItemInput {
-  productId: string;
-  productTitle: string;
-  category: string;
-  quantity: number;
-  notes?: string;
-}
+import type { QuoteItemSchemaType, CreateQuoteSchemaType } from "@/schemas/quote";
 
-export interface CreateQuoteInput {
-  fullName: string;
-  email: string;
-  phone: string;
-  companyName?: string;
-  projectScope?: string;
-  budgetRange?: string;
-  timeline?: string;
-  turnstileToken?: string;
-  items: CreateQuoteItemInput[];
-}
+export type CreateQuoteItemInput = QuoteItemSchemaType;
+export type CreateQuoteInput = CreateQuoteSchemaType;
 
 export type ActionResponse<T> =
   | { success: true; data: T; error?: never }

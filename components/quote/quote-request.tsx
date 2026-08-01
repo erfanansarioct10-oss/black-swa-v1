@@ -14,18 +14,20 @@ import { RFQConfirmation } from "./rfq-confirmation";
 const FORM_STORAGE_KEY = "blackswan_quote_wizard_form";
 const STEP_STORAGE_KEY = "blackswan_quote_wizard_step";
 
+const EMPTY_FORM: Partial<CreateQuoteSchemaType> = {
+  fullName: "",
+  email: "",
+  phone: "",
+  companyName: "",
+  budgetRange: "",
+  timeline: "",
+  projectScope: "",
+  turnstileToken: "",
+};
+
 const getInitialFormData = (): Partial<CreateQuoteSchemaType> => {
   if (typeof window === "undefined") {
-    return {
-      fullName: "",
-      email: "",
-      phone: "",
-      companyName: "",
-      budgetRange: "",
-      timeline: "",
-      projectScope: "",
-      turnstileToken: "",
-    };
+    return { ...EMPTY_FORM };
   }
   try {
     const savedForm = sessionStorage.getItem(FORM_STORAGE_KEY);
@@ -38,16 +40,7 @@ const getInitialFormData = (): Partial<CreateQuoteSchemaType> => {
   } catch {
     // Ignore storage read exceptions
   }
-  return {
-    fullName: "",
-    email: "",
-    phone: "",
-    companyName: "",
-    budgetRange: "",
-    timeline: "",
-    projectScope: "",
-    turnstileToken: "",
-  };
+  return { ...EMPTY_FORM };
 };
 
 const getInitialStep = (): number => {
@@ -86,11 +79,13 @@ export function QuoteRequest() {
     itemCount: number;
   } | null>(null);
 
-  // Persist form data to sessionStorage whenever formData changes
+  // Persist form data to sessionStorage whenever formData changes (excluding turnstileToken)
   useEffect(() => {
     if (!mounted) return;
     try {
-      sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(formData));
+      const draft = { ...formData };
+      delete draft.turnstileToken;
+      sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(draft));
     } catch (e) {
       console.error("Failed to persist quote wizard form to sessionStorage:", e);
     }
@@ -106,11 +101,17 @@ export function QuoteRequest() {
     }
   }, [currentStep, mounted]);
 
-  // Compute effective initial form data using user identity if logged in
+  // Active form data with fallback to Clerk identity if field has not been explicitly modified
   const activeFormData: Partial<CreateQuoteSchemaType> = {
     ...formData,
-    fullName: formData.fullName || (user?.fullName || user?.firstName || ""),
-    email: formData.email || (user?.primaryEmailAddress?.emailAddress || ""),
+    fullName:
+      formData.fullName !== undefined
+        ? formData.fullName
+        : user?.fullName || user?.firstName || "",
+    email:
+      formData.email !== undefined
+        ? formData.email
+        : user?.primaryEmailAddress?.emailAddress || "",
   };
 
   const handleFieldChange = (field: keyof CreateQuoteSchemaType, value: string) => {
@@ -202,16 +203,7 @@ export function QuoteRequest() {
         itemCount={confirmationData.itemCount}
         onReset={() => {
           setConfirmationData(null);
-          setFormData({
-            fullName: "",
-            email: "",
-            phone: "",
-            companyName: "",
-            budgetRange: "",
-            timeline: "",
-            projectScope: "",
-            turnstileToken: "",
-          });
+          setFormData({ ...EMPTY_FORM });
           try {
             sessionStorage.removeItem(FORM_STORAGE_KEY);
             sessionStorage.removeItem(STEP_STORAGE_KEY);
