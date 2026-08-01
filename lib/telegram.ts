@@ -96,3 +96,73 @@ function escapeHtml(text: string): string {
     .replace(/>/g, "&gt;");
 }
 
+export interface SendTelegramContactInquiryParams {
+  fullName: string;
+  email: string;
+  companyName: string;
+  phone?: string | null;
+  serviceSlug?: string | null;
+  message: string;
+}
+
+/**
+ * Sends an instant management alert for contact / service inquiries to the internal Telegram channel.
+ */
+export async function sendTelegramContactInquiryAlert(
+  params: SendTelegramContactInquiryParams
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+
+    if (!botToken || !chatId) {
+      console.warn(
+        `[Telegram Dev Fallback] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured. Contact inquiry alert skipped in local environment.`
+      );
+      return { success: true };
+    }
+
+    const messageText = `
+📩 <b>NEW CONTACT / SERVICE INQUIRY</b>
+
+👤 <b>Name:</b> ${escapeHtml(params.fullName)}
+🏢 <b>Company:</b> ${escapeHtml(params.companyName)}
+✉️ <b>Email:</b> <code>${escapeHtml(params.email)}</code>
+${params.phone ? `📞 <b>Phone:</b> ${escapeHtml(params.phone)}\n` : ""}${params.serviceSlug ? `⚙️ <b>Service Context:</b> <code>${escapeHtml(params.serviceSlug)}</code>\n` : ""}
+📝 <b>Message:</b>
+<i>${escapeHtml(params.message)}</i>
+
+⏰ <b>Action Required:</b> Response SLA &lt; 1 business day.
+`.trim();
+
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: messageText,
+        parse_mode: "HTML",
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("[Telegram Bot API Error]:", errorText);
+      return { success: false, error: `Telegram API returned status ${response.status}` };
+    }
+
+    return { success: true };
+  } catch (err) {
+    console.error("[Telegram Alert Exception]:", err);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : "Unknown Telegram alert error",
+    };
+  }
+}
+
+

@@ -454,7 +454,8 @@ export function RFQStepReview({
   const { items } = useQuoteCart();
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
-  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+  const turnstileSiteKey =
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
 
   return (
     <div className="space-y-6">

@@ -7,6 +7,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Check,
+  BookOpen,
 } from "lucide-react";
 import {
   POPULAR_SERVICES,
@@ -116,18 +117,22 @@ export function PopularServicesSection({
                     </div>
                   </div>
 
-                  {/* Card Footer Action */}
-                  <div className="pt-4 border-t border-brand-marble/50 flex items-center justify-between gap-4">
-                    <span className="text-xs font-mono text-slate-400">
-                      SLA Response Guaranteed
-                    </span>
+                  {/* Card Footer Action Buttons: Read More & Inquire About Service */}
+                  <div className="pt-4 border-t border-brand-marble/50 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white transition-colors py-2 px-3 rounded-lg bg-brand-onyx hover:bg-slate-800 border border-brand-marble/60 group/read cursor-pointer"
+                    >
+                      <BookOpen className="h-3.5 w-3.5 text-blue-400" />
+                      <span>Read More</span>
+                      <ArrowRight className="h-3 w-3 text-slate-400 group-hover/read:translate-x-0.5 transition-transform" />
+                    </Link>
 
                     <Link
                       href={`/contact?service=${service.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-slate-300 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 cursor-pointer py-2 px-3.5 rounded-lg bg-brand-onyx border border-brand-marble/60 group/link"
+                      className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white hover:text-slate-100 transition-all duration-200 py-2 px-3.5 rounded-lg bg-black hover:bg-slate-900 border border-slate-700/80 shadow-sm cursor-pointer group/inquire"
                     >
                       <span>Inquire About Service</span>
-                      <ArrowRight className="h-3.5 w-3.5 text-slate-400 group-hover/link:translate-x-0.5 transition-transform" />
                     </Link>
                   </div>
                 </div>

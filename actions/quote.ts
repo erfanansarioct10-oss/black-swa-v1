@@ -22,9 +22,17 @@ import type { ActionResponse, QuoteWithItems } from "@/types/quote";
  */
 async function verifyTurnstileToken(token?: string): Promise<boolean> {
   const secretKey = process.env.TURNSTILE_SECRET_KEY;
-  // If Turnstile secret key is not set (e.g. local dev without Turnstile configured), bypass check safely
-  if (!secretKey) return true;
-  if (!token) return false;
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+  // If Turnstile is not configured or using test dummy keys, bypass check safely
+  if (!secretKey || !siteKey || secretKey.startsWith("1x000000")) return true;
+  if (!token) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("[Turnstile Dev Warning]: No token provided, bypassing in non-production environment.");
+      return true;
+    }
+    return false;
+  }
 
   try {
     const formData = new URLSearchParams();
@@ -44,9 +52,10 @@ async function verifyTurnstileToken(token?: string): Promise<boolean> {
     return Boolean(data.success);
   } catch (error) {
     console.error("[Turnstile Verification Exception]:", error);
-    return false;
+    return process.env.NODE_ENV !== "production";
   }
 }
+
 
 /**
  * Creates a new quotation request header and its line items inside an atomic database transaction.

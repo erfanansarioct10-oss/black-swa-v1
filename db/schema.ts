@@ -48,3 +48,21 @@ export const quoteItems = pgTable("quote_items", {
   index("idx_quote_items_quote_id").on(table.quoteId),
 ]);
 
+// Contact & Service Inquiries table
+export const contactInquiries = pgTable("contact_inquiries", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  fullName: text("full_name").notNull(),
+  companyName: text("company_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  serviceSlug: text("service_slug"),
+  message: text("message").notNull(),
+  status: text("status").notNull().default("new"),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index("idx_contact_inquiries_email").on(table.email),
+  index("idx_contact_inquiries_status").on(table.status),
+]);
+
+

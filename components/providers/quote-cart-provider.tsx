@@ -39,24 +39,13 @@ function isQuoteCartItem(value: unknown): value is QuoteCartItem {
   );
 }
 
-const getInitialItems = (): QuoteCartItem[] => {
-  if (typeof window === "undefined") return [];
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    const parsed: unknown = stored ? JSON.parse(stored) : [];
-    return Array.isArray(parsed) ? parsed.filter(isQuoteCartItem) : [];
-  } catch (e) {
-    console.error("Failed to parse quote cart items from localStorage:", e);
-    return [];
-  }
-};
-
 const emptySubscribe = () => () => {};
 
 const QuoteCartContext = createContext<QuoteCartContextType | undefined>(undefined);
 
 export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<QuoteCartItem[]>(getInitialItems);
+  const [items, setItems] = useState<QuoteCartItem[]>([]);
+  const [initialized, setInitialized] = useState(false);
   
   const mounted = useSyncExternalStore(
     emptySubscribe,
@@ -64,15 +53,32 @@ export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
     () => false
   );
 
-  // Sync to localStorage whenever items change
+  // Load stored items from localStorage after initial render to avoid SSR hydration mismatch
   useEffect(() => {
-    if (!mounted) return;
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed: unknown = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          setItems(parsed.filter(isQuoteCartItem));
+        }
+      }
+    } catch (e) {
+      console.error("Failed to parse quote cart items from localStorage:", e);
+    } finally {
+      setInitialized(true);
+    }
+  }, []);
+
+  // Sync to localStorage whenever items change (only after initial load)
+  useEffect(() => {
+    if (!initialized) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch (e) {
       console.error("Failed to save quote cart items to localStorage:", e);
     }
-  }, [items, mounted]);
+  }, [items, initialized]);
 
   const addItem = (product: { id: string; name: string; sku: string; category: string }) => {
     setItems((prevItems) => {

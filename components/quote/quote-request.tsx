@@ -25,50 +25,17 @@ const EMPTY_FORM: Partial<CreateQuoteSchemaType> = {
   turnstileToken: "",
 };
 
-const getInitialFormData = (): Partial<CreateQuoteSchemaType> => {
-  if (typeof window === "undefined") {
-    return { ...EMPTY_FORM };
-  }
-  try {
-    const savedForm = sessionStorage.getItem(FORM_STORAGE_KEY);
-    if (savedForm) {
-      const parsed: unknown = JSON.parse(savedForm);
-      if (parsed && typeof parsed === "object") {
-        return parsed as Partial<CreateQuoteSchemaType>;
-      }
-    }
-  } catch {
-    // Ignore storage read exceptions
-  }
-  return { ...EMPTY_FORM };
-};
-
-const getInitialStep = (): number => {
-  if (typeof window === "undefined") return 1;
-  try {
-    const savedStep = sessionStorage.getItem(STEP_STORAGE_KEY);
-    if (savedStep) {
-      const stepNum = parseInt(savedStep, 10);
-      if (!isNaN(stepNum) && stepNum >= 1 && stepNum <= 3) {
-        return stepNum;
-      }
-    }
-  } catch {
-    // Ignore storage read exceptions
-  }
-  return 1;
-};
-
 export function QuoteRequest() {
   const { user } = useUser();
   const { items, mounted, clearCart } = useQuoteCart();
 
-  const [currentStep, setCurrentStep] = useState<number>(getInitialStep);
+  const [currentStep, setCurrentStep] = useState<number>(1);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   // Form details state
-  const [formData, setFormData] = useState<Partial<CreateQuoteSchemaType>>(getInitialFormData);
+  const [formData, setFormData] = useState<Partial<CreateQuoteSchemaType>>({ ...EMPTY_FORM });
+  const [initialized, setInitialized] = useState(false);
 
   // Success result state
   const [confirmationData, setConfirmationData] = useState<{
@@ -79,9 +46,33 @@ export function QuoteRequest() {
     itemCount: number;
   } | null>(null);
 
+  // Restore state from sessionStorage after initial mount
+  useEffect(() => {
+    try {
+      const savedStep = sessionStorage.getItem(STEP_STORAGE_KEY);
+      if (savedStep) {
+        const stepNum = parseInt(savedStep, 10);
+        if (!isNaN(stepNum) && stepNum >= 1 && stepNum <= 3) {
+          setCurrentStep(stepNum);
+        }
+      }
+      const savedForm = sessionStorage.getItem(FORM_STORAGE_KEY);
+      if (savedForm) {
+        const parsed: unknown = JSON.parse(savedForm);
+        if (parsed && typeof parsed === "object") {
+          setFormData(parsed as Partial<CreateQuoteSchemaType>);
+        }
+      }
+    } catch {
+      // Ignore storage read exceptions
+    } finally {
+      setInitialized(true);
+    }
+  }, []);
+
   // Persist form data to sessionStorage whenever formData changes (excluding turnstileToken)
   useEffect(() => {
-    if (!mounted) return;
+    if (!initialized) return;
     try {
       const draft = { ...formData };
       delete draft.turnstileToken;
@@ -89,17 +80,17 @@ export function QuoteRequest() {
     } catch (e) {
       console.error("Failed to persist quote wizard form to sessionStorage:", e);
     }
-  }, [formData, mounted]);
+  }, [formData, initialized]);
 
   // Persist current step to sessionStorage whenever currentStep changes
   useEffect(() => {
-    if (!mounted) return;
+    if (!initialized) return;
     try {
       sessionStorage.setItem(STEP_STORAGE_KEY, currentStep.toString());
     } catch (e) {
       console.error("Failed to persist quote wizard step to sessionStorage:", e);
     }
-  }, [currentStep, mounted]);
+  }, [currentStep, initialized]);
 
   // Active form data with fallback to Clerk identity if field has not been explicitly modified
   const activeFormData: Partial<CreateQuoteSchemaType> = {

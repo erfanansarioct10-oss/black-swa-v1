@@ -191,6 +191,7 @@ When working on a feature or review fix:
 | [20-phase-3d-public-quote-tracking-portal](20-phase-3d-public-quote-tracking-portal.md) | Phase 3D: Public Quote Tracking Portal | Complete | Public Quote Tracking Portal (`/quote/track`) |
 | [21-phase-3-refinements-and-bug-fixes](21-phase-3-refinements-and-bug-fixes.md) | Phase 3: Quote System Refinements & Bug Fixes | Complete | Quote System Refinements & UI Fixes |
 | [22-supabase-rls-security-and-index-optimizations](22-supabase-rls-security-and-index-optimizations.md) | Supabase RLS Security & Performance Index Optimizations | Complete | Database RLS & Indexes |
+| [23-contact-and-service-inquiry-automated-notifications](23-contact-and-service-inquiry-automated-notifications.md) | Contact & Service Inquiry Automated Notifications | Complete | Contact Form & Notifications |
 
 
 

@@ -1,10 +1,11 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-
-const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
-const isAdminLoginRoute = createRouteMatcher(["/admin/login(.*)"]);
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
 export default clerkMiddleware(async (auth, req) => {
-  if (isAdminRoute(req) && !isAdminLoginRoute(req)) {
+  const { pathname } = req.nextUrl;
+  const isAdminRoute = pathname.startsWith("/admin");
+  const isAdminLoginRoute = pathname.startsWith("/admin/login");
+
+  if (isAdminRoute && !isAdminLoginRoute) {
     await auth.protect();
   }
 });

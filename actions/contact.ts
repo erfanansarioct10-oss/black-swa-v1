@@ -1,0 +1,131 @@
+"use server";
+
+import { after } from "next/server";
+import { db } from "@/db";
+import { contactInquiries } from "@/db/schema";
+import { contactInquirySchema, type ContactInquirySchemaType } from "@/schemas/contact";
+import { sendContactInquiryConfirmationEmail } from "@/lib/email";
+import { sendTelegramContactInquiryAlert } from "@/lib/telegram";
+import type { ActionResponse } from "@/types/quote";
+
+/**
+ * Server-side validation of Cloudflare Turnstile anti-bot token.
+ */
+async function verifyTurnstileToken(token?: string): Promise<boolean> {
+  const secretKey = process.env.TURNSTILE_SECRET_KEY;
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+  // If Turnstile is not configured or using test dummy keys, bypass check safely
+  if (!secretKey || !siteKey || secretKey.startsWith("1x000000")) return true;
+  if (!token) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("[Turnstile Dev Warning]: No token provided, bypassing in non-production environment.");
+      return true;
+    }
+    return false;
+  }
+
+  try {
+    const formData = new URLSearchParams();
+    formData.append("secret", secretKey);
+    formData.append("response", token);
+
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        body: formData,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      }
+    );
+
+    const data = await response.json();
+    return Boolean(data.success);
+  } catch (error) {
+    console.error("[Turnstile Verification Exception]:", error);
+    return process.env.NODE_ENV !== "production";
+  }
+}
+
+
+/**
+ * Submits a contact or service inquiry, records it in the database, and triggers async background notifications.
+ */
+export async function submitContactInquiryAction(
+  input: ContactInquirySchemaType
+): Promise<ActionResponse<{ message: string }>> {
+  try {
+    const validated = contactInquirySchema.safeParse(input);
+    if (!validated.success) {
+      return {
+        success: false,
+        error: validated.error.issues[0]?.message || "Invalid contact inquiry details.",
+      };
+    }
+
+    const isTurnstileValid = await verifyTurnstileToken(validated.data.turnstileToken);
+    if (!isTurnstileValid) {
+      return {
+        success: false,
+        error: "Security verification failed. Please refresh and complete the bot protection check.",
+      };
+    }
+
+    // Persist contact inquiry record into PostgreSQL
+    await db.insert(contactInquiries).values({
+      fullName: validated.data.fullName,
+      companyName: validated.data.companyName,
+      email: validated.data.email,
+      phone: validated.data.phone || null,
+      serviceSlug: validated.data.serviceSlug || null,
+      message: validated.data.message,
+      status: "new",
+    });
+
+
+    after(async () => {
+      const results = await Promise.allSettled([
+        sendContactInquiryConfirmationEmail({
+          email: validated.data.email,
+          fullName: validated.data.fullName,
+          companyName: validated.data.companyName,
+          phone: validated.data.phone,
+          serviceSlug: validated.data.serviceSlug,
+          message: validated.data.message,
+        }),
+        sendTelegramContactInquiryAlert({
+          fullName: validated.data.fullName,
+          email: validated.data.email,
+          companyName: validated.data.companyName,
+          phone: validated.data.phone,
+          serviceSlug: validated.data.serviceSlug,
+          message: validated.data.message,
+        }),
+      ]);
+
+      results.forEach((res, index) => {
+        const serviceName = index === 0 ? "Resend Email" : "Telegram Alert";
+        if (res.status === "rejected") {
+          console.error(`[${serviceName} Dispatch Rejected]:`, res.reason);
+        } else if (!res.value.success) {
+          console.warn(`[${serviceName} Dispatch Warning]:`, res.value.error);
+        }
+      });
+    });
+
+    return {
+      success: true,
+      data: { message: "Inquiry submitted successfully." },
+    };
+  } catch (error) {
+    console.error("Error submitting contact inquiry:", error);
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "An unexpected error occurred while processing your inquiry.";
+    return {
+      success: false,
+      error: errorMessage,
+    };
+  }
+}
