@@ -5,19 +5,14 @@ import {
   Briefcase,
   CheckCircle2,
   Clock,
-  FileText,
-  Inbox,
   MessageSquare,
-  Server,
   ShieldCheck,
   TrendingUp,
 } from "lucide-react";
 
-
 import { PendingDirectivesAlert } from "@/components/admin/pending-directives-alert";
 import { ActivityItem, RecentActivityStream } from "@/components/admin/recent-activity-stream";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { db } from "@/db";
 import { contactInquiries, quotes } from "@/db/schema";
 import { generatePageMetadata } from "@/lib/seo";
@@ -120,21 +115,6 @@ export default async function AdminDashboardPage() {
           <p className="text-xs text-muted-foreground mt-1">
             Real-time commercial quotation metrics, client service inquiry monitoring, and system status.
           </p>
-        </div>
-
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          <Button asChild size="sm" variant="outline" className="text-xs font-semibold">
-            <Link href="/admin/quotes">
-              <FileText className="w-3.5 h-3.5 mr-1.5" />
-              Manage RFQs
-            </Link>
-          </Button>
-          <Button asChild size="sm" className="text-xs font-semibold">
-            <Link href="/admin/inquiries">
-              <Inbox className="w-3.5 h-3.5 mr-1.5" />
-              Manage Inquiries
-            </Link>
-          </Button>
         </div>
       </div>
 
@@ -264,127 +244,9 @@ export default async function AdminDashboardPage() {
 
       </div>
 
-      {/* Main Content Area: Recent Activity Stream + Quick Operations */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
-        {/* Left 2-Columns: Recent Activity Feed */}
-        <div className="lg:col-span-2 space-y-6">
-          <RecentActivityStream items={activityItems} />
-        </div>
-
-        {/* Right Column: Managing Director Quick Directives & Shortcuts */}
-        <div className="space-y-6">
-          {/* Quick Directives Control Box */}
-          <div className="p-5 bg-card border border-border rounded-xl space-y-4 shadow-xs">
-            <div className="border-b border-border pb-3">
-              <h3 className="text-sm font-extrabold text-foreground tracking-tight flex items-center gap-2">
-                <Briefcase className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                Director Quick Operations
-              </h3>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                Primary management workflows for executive oversight.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <Link
-                href="/admin/quotes"
-                className="flex items-center justify-between p-3 rounded-lg border border-border/80 hover:border-border hover:bg-muted/40 transition-all text-xs font-semibold group"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="p-1.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400">
-                    <FileText className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-foreground block">Commercial Quotes</span>
-                    <span className="text-[11px] text-muted-foreground font-normal">
-                      {pendingCount} pending review
-                    </span>
-                  </div>
-                </div>
-                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-
-              <Link
-                href="/admin/inquiries"
-                className="flex items-center justify-between p-3 rounded-lg border border-border/80 hover:border-border hover:bg-muted/40 transition-all text-xs font-semibold group"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="p-1.5 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400">
-                    <Inbox className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-foreground block">Contact & Inquiries</span>
-                    <span className="text-[11px] text-muted-foreground font-normal">
-                      {newInquiriesCount} new unreviewed
-                    </span>
-                  </div>
-                </div>
-                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-
-              <Link
-                href="/admin/analytics"
-                className="flex items-center justify-between p-3 rounded-lg border border-border/80 hover:border-border hover:bg-muted/40 transition-all text-xs font-semibold group"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="p-1.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                    <TrendingUp className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-foreground block">Executive Analytics</span>
-                    <span className="text-[11px] text-muted-foreground font-normal">
-                      Phase 4C preview
-                    </span>
-                  </div>
-                </div>
-                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-
-              <Link
-                href="/admin/diagnostics"
-                className="flex items-center justify-between p-3 rounded-lg border border-border/80 hover:border-border hover:bg-muted/40 transition-all text-xs font-semibold group"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="p-1.5 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400">
-                    <Server className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-foreground block">System Diagnostics</span>
-                    <span className="text-[11px] text-muted-foreground font-normal">
-                      Database & Auth status
-                    </span>
-                  </div>
-                </div>
-                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Infrastructure Health Card */}
-          <div className="p-5 bg-card border border-border rounded-xl space-y-3 shadow-xs">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Platform Architecture
-            </h4>
-            <div className="space-y-2 text-xs">
-              <div className="flex items-center justify-between py-1 border-b border-border/60">
-                <span className="text-muted-foreground">Database Engine</span>
-                <span className="font-semibold text-foreground">Supabase PostgreSQL</span>
-              </div>
-              <div className="flex items-center justify-between py-1 border-b border-border/60">
-                <span className="text-muted-foreground">ORM Access Layer</span>
-                <span className="font-semibold text-foreground">Drizzle ORM</span>
-              </div>
-              <div className="flex items-center justify-between py-1 border-b border-border/60">
-                <span className="text-muted-foreground">Auth & Role Guard</span>
-                <span className="font-semibold text-foreground">Clerk Security</span>
-              </div>
-              <div className="flex items-center justify-between py-1">
-                <span className="text-muted-foreground">Security RLS</span>
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">Enabled</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Main Content Area: Recent Activity Stream */}
+      <div className="pt-2">
+        <RecentActivityStream items={activityItems} />
       </div>
     </div>
   );
