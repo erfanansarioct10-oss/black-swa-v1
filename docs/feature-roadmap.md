@@ -90,12 +90,12 @@ Dashboard
 - [x] Preset Horizon Date Range Controls (7 Days, 30 Days, Year-to-Date, All Time)
 
 
-## Phase 4D: Command Center, Quick Search & System Health Monitor
+## Phase 4D: Command Center, Quick Search & Executive Notification Center
 
-- [ ] Global Admin Command Palette (`Ctrl+K` / `Cmd+K` Quick RFQ & Inquiry Lookup Modal)
-- [ ] Live System Services & Health Monitor Widget (Supabase PostgreSQL, Clerk Auth, Resend, Telegram Bot)
-- [ ] Unread Notification Bell Drawer (Quick Preview of Pending Tasks & Inquiries)
-- [ ] Admin Diagnostics & Environment Configuration Status Page
+- [x] Global Admin Command Palette (`Ctrl+K` / `Cmd+K` Quick RFQ & Inquiry Lookup Modal)
+- [x] Unread Notification Bell Drawer (Quick Preview of Pending Directives, RFQs & Inquiries)
+- [x] Administrative Quick Search Server Action & Data Lookup Integration (`actions/admin.ts`)
+- [x] Directives & Management Portal Views (`/admin/quotes`, `/admin/inquiries`)
 
 
 ---
