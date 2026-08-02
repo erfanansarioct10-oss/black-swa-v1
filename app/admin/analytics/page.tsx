@@ -25,7 +25,9 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
   await requireAdminAuth();
 
   const resolvedParams = await searchParams;
-  const rangeParam = (resolvedParams?.range as PresetRange) || "30d";
+  const rawRange = resolvedParams?.range as PresetRange;
+  const VALID_RANGES: PresetRange[] = ["7d", "30d", "ytd", "all"];
+  const rangeParam: PresetRange = VALID_RANGES.includes(rawRange) ? rawRange : "30d";
 
   // Calculate start date based on selected preset horizon
   const now = new Date();
@@ -143,7 +145,7 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
       },
     ];
 
-    // 4. SLA Response Time Calculations
+    // 4. SLA Response Time Calculations using stage-specific timestamps
     let totalAssignmentHours = 0;
     let assignmentCount = 0;
     let totalQuotingHours = 0;
@@ -153,18 +155,22 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
 
     filteredQuotes.forEach((q) => {
       const created = new Date(q.createdAt).getTime();
-      const updated = new Date(q.updatedAt).getTime();
-      const diffHours = (updated - created) / (1000 * 60 * 60);
 
-      if (q.assignedManagerId || ["manager_assigned", "quoted", "completed"].includes(q.status)) {
+      if (q.assignedAt || q.assignedManagerId || ["manager_assigned", "quoted", "completed"].includes(q.status)) {
+        const assignedTime = q.assignedAt ? new Date(q.assignedAt).getTime() : new Date(q.updatedAt).getTime();
+        const diffHours = (assignedTime - created) / (1000 * 60 * 60);
         totalAssignmentHours += Math.max(diffHours, 0.5);
         assignmentCount++;
       }
-      if (["quoted", "completed"].includes(q.status)) {
+      if (q.quotedAt || ["quoted", "completed"].includes(q.status)) {
+        const quotedTime = q.quotedAt ? new Date(q.quotedAt).getTime() : new Date(q.updatedAt).getTime();
+        const diffHours = (quotedTime - created) / (1000 * 60 * 60);
         totalQuotingHours += Math.max(diffHours, 1);
         quotingCount++;
       }
-      if (q.status === "completed") {
+      if (q.completedAt || q.status === "completed") {
+        const completedTime = q.completedAt ? new Date(q.completedAt).getTime() : new Date(q.updatedAt).getTime();
+        const diffHours = (completedTime - created) / (1000 * 60 * 60);
         totalCompletionHours += Math.max(diffHours, 2);
         completionCount++;
       }
@@ -201,20 +207,27 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
       }))
       .sort((a, b) => b.count - a.count);
 
-    const topCat = categoryBreakdowns[0] || { category: "Medical Imaging", count: 0 };
+    const topCat = categoryBreakdowns[0] || { category: "N/A", count: 0 };
 
-    // 6. Time-Series Trend Aggregation
-    const trendMap = new Map<string, number>();
+    // 6. Time-Series Trend Aggregation (grouped by full ISO date & sorted chronologically)
+    const trendMap = new Map<string, { date: Date; count: number }>();
     filteredQuotes.forEach((q) => {
       const d = new Date(q.createdAt);
-      const dateKey = `${d.getMonth() + 1}/${d.getDate()}`;
-      trendMap.set(dateKey, (trendMap.get(dateKey) || 0) + 1);
+      const isoKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+      const existing = trendMap.get(isoKey);
+      if (existing) {
+        existing.count++;
+      } else {
+        trendMap.set(isoKey, { date: d, count: 1 });
+      }
     });
 
-    trendPoints = Array.from(trendMap.entries()).map(([label, count]) => ({
-      label,
-      count,
-    }));
+    trendPoints = Array.from(trendMap.values())
+      .sort((a, b) => a.date.getTime() - b.date.getTime())
+      .map(({ date, count }) => ({
+        label: `${date.getMonth() + 1}/${date.getDate()}`,
+        count,
+      }));
 
     if (trendPoints.length === 0) {
       trendPoints = [

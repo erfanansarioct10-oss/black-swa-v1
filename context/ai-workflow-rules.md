@@ -300,7 +300,7 @@ Before completing UI work verify:
 Always:
 
 - Use Drizzle
-- Read and analyze SQL migration files in `supabase/migrations/` for any backend or database task
+- Inspect `db/schema.ts` for current Drizzle ORM table definitions, read and analyze all SQL migration files in `supabase/migrations/`, and verify that any proposed schema modification, query, or Server Action aligns with existing Supabase PostgreSQL RLS policies and performance indexes before modifying or executing code
 - Use transactions where appropriate
 - Keep queries inside server code
 - Validate data before writing

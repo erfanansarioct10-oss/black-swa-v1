@@ -39,7 +39,7 @@ export async function requireAdminAuth(): Promise<AdminAuthSession> {
 
   const isAdmin = isAdminSession(has);
 
-  if (!isAdmin && !isDevBypass) {
+  if (!isAdmin) {
     redirect("/admin/unauthorized");
   }
 

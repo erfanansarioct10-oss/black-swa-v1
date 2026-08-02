@@ -43,7 +43,7 @@ export function PendingDirectivesAlert({
     <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 p-4 sm:p-5 rounded-xl border border-amber-500/30 bg-amber-500/5 dark:bg-amber-500/10 text-card-foreground shadow-xs transition-all">
       <div className="flex items-start gap-3.5">
         <div className="p-2.5 rounded-lg bg-amber-500/15 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5 sm:mt-0">
-          <AlertTriangle className="w-5 h-5 animate-pulse" />
+          <AlertTriangle className="w-5 h-5 motion-safe:animate-pulse" />
         </div>
         <div className="space-y-1">
           <div className="flex flex-wrap items-center gap-2">

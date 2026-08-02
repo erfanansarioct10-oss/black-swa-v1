@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -10,7 +10,6 @@ import {
   Filter,
   MessageSquare,
 } from "lucide-react";
-
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -32,6 +31,10 @@ interface RecentActivityStreamProps {
 }
 
 type FilterTab = "all" | "rfqs" | "inquiries";
+
+const emptySubscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 function formatRelativeTime(dateString: string): string {
   try {
@@ -85,6 +88,7 @@ function formatStatusText(status: string): string {
 
 export function RecentActivityStream({ items }: RecentActivityStreamProps) {
   const [activeTab, setActiveTab] = useState<FilterTab>("all");
+  const mounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
 
   const filteredItems = useMemo(() => {
     if (activeTab === "rfqs") return items.filter((item) => item.type === "rfq");
@@ -211,7 +215,7 @@ export function RecentActivityStream({ items }: RecentActivityStreamProps) {
                 <div className="flex items-center gap-3 shrink-0 self-end sm:self-center pt-1 sm:pt-0">
                   <div className="flex items-center gap-1 text-[11px] text-muted-foreground font-mono">
                     <Clock className="w-3 h-3" />
-                    <span>{formatRelativeTime(item.createdAt)}</span>
+                    <span>{mounted ? formatRelativeTime(item.createdAt) : item.createdAt.slice(0, 10)}</span>
                   </div>
 
                   <Badge

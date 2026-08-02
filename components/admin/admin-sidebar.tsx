@@ -11,12 +11,13 @@ import { cn } from "@/lib/utils";
 
 export function AdminSidebar() {
   const pathname = usePathname();
-  const { isCollapsed, toggleCollapsed } = useAdminShell();
+  const { isCollapsed, toggleCollapsed, mounted } = useAdminShell();
 
   return (
     <aside
       className={cn(
-        "hidden lg:flex flex-col border-r border-border bg-card/60 backdrop-blur-md transition-all duration-300 select-none z-30 sticky top-0 h-screen shrink-0 overflow-y-auto",
+        "hidden lg:flex flex-col border-r border-border bg-card/60 backdrop-blur-md select-none z-30 sticky top-0 h-screen shrink-0 overflow-y-auto",
+        mounted && "transition-all duration-300",
         isCollapsed ? "w-20" : "w-64"
       )}
     >

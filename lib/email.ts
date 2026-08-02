@@ -5,7 +5,13 @@ import { escapeHtml } from "@/lib/html";
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-const rawFromEmail = (process.env.RESEND_FROM_EMAIL || "").trim().replace(/^["']|["']$/g, "").trim();
+let rawFromEmail = (process.env.RESEND_FROM_EMAIL || "").trim();
+if (
+  (rawFromEmail.startsWith('"') && rawFromEmail.endsWith('"')) ||
+  (rawFromEmail.startsWith("'") && rawFromEmail.endsWith("'"))
+) {
+  rawFromEmail = rawFromEmail.slice(1, -1).trim();
+}
 const FROM_EMAIL = rawFromEmail || "Black Swan International <quotes@nooridigital.site>";
 
 

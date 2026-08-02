@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { and, desc, eq, inArray, isNull, ne, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, isNull, sql } from "drizzle-orm";
 import {
   Activity,
   ArrowRight,
@@ -51,7 +51,7 @@ export default async function AdminDashboardPage() {
     ] = await Promise.all([
       db.select({ count: sql<number>`count(*)` }).from(quotes).where(eq(quotes.status, "pending")),
       db.select({ count: sql<number>`count(*)` }).from(quotes).where(and(eq(quotes.status, "pending"), isNull(quotes.assignedManagerId))),
-      db.select({ count: sql<number>`count(*)` }).from(quotes).where(ne(quotes.status, "pending")),
+      db.select({ count: sql<number>`count(*)` }).from(quotes).where(inArray(quotes.status, ["quoted", "completed"])),
       db.select({ count: sql<number>`count(*)` }).from(quotes),
       db.select({ count: sql<number>`count(*)` }).from(contactInquiries).where(inArray(contactInquiries.status, ["new", "in_progress"])),
       db.select({ count: sql<number>`count(*)` }).from(contactInquiries).where(eq(contactInquiries.status, "new")),

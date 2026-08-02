@@ -25,7 +25,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getAdminRouteTitle } from "@/constants/admin-navigation";
+import { ADMIN_NAV_SECTIONS, getAdminRouteTitle } from "@/constants/admin-navigation";
 
 
 export function AdminHeader() {
@@ -36,6 +36,10 @@ export function AdminHeader() {
 
   const currentTitle = getAdminRouteTitle(pathname);
 
+  // Derive nav destinations from navigation constants source of truth
+  const quotesHref = ADMIN_NAV_SECTIONS.flatMap((s) => s.items).find((i) => i.href === "/admin/quotes")?.href || "/admin/quotes";
+  const inquiriesHref = ADMIN_NAV_SECTIONS.flatMap((s) => s.items).find((i) => i.href === "/admin/inquiries")?.href || "/admin/inquiries";
+  const diagnosticsHref = ADMIN_NAV_SECTIONS.flatMap((s) => s.items).find((i) => i.href === "/admin/diagnostics")?.href || "/admin/diagnostics";
 
   // Derive role string for identity badge
   const userRole =
@@ -100,19 +104,19 @@ export function AdminHeader() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild className="cursor-pointer">
-              <Link href="/admin/quotes" className="flex items-center gap-2 text-xs">
+              <Link href={quotesHref} className="flex items-center gap-2 text-xs">
                 <FileText className="w-4 h-4 text-emerald-500" />
                 <span>View Pending RFQs</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="cursor-pointer">
-              <Link href="/admin/inquiries" className="flex items-center gap-2 text-xs">
+              <Link href={inquiriesHref} className="flex items-center gap-2 text-xs">
                 <MessageSquare className="w-4 h-4 text-blue-500" />
                 <span>Review Contact Inquiries</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="cursor-pointer">
-              <Link href="/admin/diagnostics" className="flex items-center gap-2 text-xs">
+              <Link href={diagnosticsHref} className="flex items-center gap-2 text-xs">
                 <Zap className="w-4 h-4 text-amber-500" />
                 <span>System Diagnostics</span>
               </Link>
@@ -143,7 +147,7 @@ export function AdminHeader() {
             <DropdownMenuSeparator />
             <div className="p-2 space-y-2 text-xs">
               <Link
-                href="/admin/quotes"
+                href={quotesHref}
                 className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-muted transition-colors group"
               >
                 <FileText className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
@@ -157,7 +161,7 @@ export function AdminHeader() {
                 </div>
               </Link>
               <Link
-                href="/admin/inquiries"
+                href={inquiriesHref}
                 className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-muted transition-colors group"
               >
                 <MessageSquare className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />

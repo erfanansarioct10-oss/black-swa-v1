@@ -22,7 +22,8 @@ export default clerkMiddleware(async (auth, req) => {
       return NextResponse.redirect(loginUrl);
     }
 
-    if (process.env.NODE_ENV === "production") {
+    const isDevBypass = process.env.NODE_ENV !== "production" && process.env.ADMIN_DEV_BYPASS === "true";
+    if (!isDevBypass) {
       const isAdmin = isAdminSession(has);
       if (!isAdmin) {
         return NextResponse.redirect(new URL("/admin/unauthorized", req.url));

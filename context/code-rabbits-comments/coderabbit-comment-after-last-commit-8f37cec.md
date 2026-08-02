@@ -122,7 +122,7 @@ Based on learnings, project context and database validation must occur before co
 <details>
 <summary>🤖 Prompt for AI Agents</summary>
 
-```
+```text
 Verify each finding against current code. Fix only still-valid issues, skip the
 rest with a brief reason, keep changes minimal, and validate.
 
@@ -152,7 +152,7 @@ Line 52 permits a financial estimate based on budget ranges or volume calculatio
 <details>
 <summary>🤖 Prompt for AI Agents</summary>
 
-```
+```text
 Verify each finding against current code. Fix only still-valid issues, skip the
 rest with a brief reason, keep changes minimal, and validate.
 
@@ -182,7 +182,7 @@ As per coding guidelines, the Definition of Done includes `Tested`; add automate
 <details>
 <summary>🤖 Prompt for AI Agents</summary>
 
-```
+```text
 Verify each finding against current code. Fix only still-valid issues, skip the
 rest with a brief reason, keep changes minimal, and validate.
 
@@ -238,7 +238,7 @@ _Source: Coding guidelines_
 <details>
 <summary>🤖 Prompt for AI Agents</summary>
 
-```
+```text
 Verify each finding against current code. Fix only still-valid issues, skip the
 rest with a brief reason, keep changes minimal, and validate.
 
@@ -264,7 +264,7 @@ This map re-declares route titles already defined in `constants/admin-navigation
 <details>
 <summary>🤖 Prompt for AI Agents</summary>
 
-```
+```text
 Verify each finding against current code. Fix only still-valid issues, skip the
 rest with a brief reason, keep changes minimal, and validate.
 
@@ -294,7 +294,7 @@ breadcrumb behavior while ensuring routes such as /admin/quotes share one label.
 <details>
 <summary>🤖 Prompt for AI Agents</summary>
 
-```
+```text
 Verify each finding against current code. Fix only still-valid issues, skip the
 rest with a brief reason, keep changes minimal, and validate.
 
@@ -324,7 +324,7 @@ one place.
 <details>
 <summary>🤖 Prompt for AI Agents</summary>
 
-```
+```text
 Verify each finding against current code. Fix only still-valid issues, skip the
 rest with a brief reason, keep changes minimal, and validate.
 

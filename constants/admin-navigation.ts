@@ -73,7 +73,7 @@ export const ADMIN_NAV_SECTIONS: AdminNavSection[] = [
 export function getAdminRouteTitle(pathname: string): string {
   for (const section of ADMIN_NAV_SECTIONS) {
     for (const item of section.items) {
-      if (item.href === pathname) {
+      if (isNavItemActive(pathname, item.href)) {
         return item.title;
       }
     }
