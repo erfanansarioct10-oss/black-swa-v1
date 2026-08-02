@@ -43,12 +43,14 @@ export function NotificationDrawer() {
       }
     } catch (err) {
       console.error("Failed to fetch admin notifications:", err);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     let isMounted = true;
-    const loadData = async () => {
+    const load = async () => {
       try {
         const res = await getAdminNotificationsAction();
         if (isMounted && res.success && res.data) {
@@ -63,7 +65,7 @@ export function NotificationDrawer() {
       }
     };
 
-    loadData();
+    load();
 
     return () => {
       isMounted = false;

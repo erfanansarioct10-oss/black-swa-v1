@@ -60,7 +60,7 @@ Update `AdminDashboardPage` as a Next.js Server Component:
 - **Drizzle ORM Queries**: Executed concurrently via `Promise.all` inside `try/catch`:
   1. `pendingQuotesCount`: `quotes` table where `status = 'pending'`.
   2. `unassignedQuotesCount`: `quotes` table where `status = 'pending'` and `assignedManagerId IS NULL`.
-  3. `processedQuotesCount`: `quotes` table where `status != 'pending'`.
+  3. `processedQuotesCount`: `quotes` table where `status IN ('quoted', 'completed')`.
   4. `totalQuotesCount`: `quotes` table total count.
   5. `activeInquiriesCount`: `contact_inquiries` table where `status IN ('new', 'in_progress')`.
   6. `newInquiriesCount`: `contact_inquiries` table where `status = 'new'`.
@@ -69,8 +69,8 @@ Update `AdminDashboardPage` as a Next.js Server Component:
 - **4 Responsive KPI Cards Grid**:
   1. **Pending RFQs**: Count of pending requests, with unassigned breakdown subtext.
   2. **Active Inquiries**: Count of active inquiries, with unreviewed count subtext.
-  3. **Total Quotes Processed**: Count of processed quotes and conversion throughput.
-  4. **System Health Status**: Database connection latency and operational status badge.
+  3. **Total Quotes Processed**: Count of completed/quoted proposals and conversion throughput.
+  4. **Total Commercial Portfolio**: Total RFQ volume and active quotation summary.
 - **Directives Banner & Activity Stream**: Rendered below KPI cards with desktop sidebar quick actions.
 
 ---
@@ -101,7 +101,7 @@ Phase 5: Type Safety & Lint Validation (`pnpm exec tsc --noEmit` & `pnpm run lin
 | ---------------- | --------------- | ----- |
 | Pending Quotes Count | Drizzle `db.select().from(quotes).where(eq(quotes.status, 'pending'))` | KPI Card 1 & Priority Alert Banner |
 | Unassigned Quotes Count | Drizzle `db.select().from(quotes).where(and(eq(quotes.status, 'pending'), isNull(quotes.assignedManagerId)))` | Priority Alert Banner |
-| Processed Quotes Count | Drizzle `db.select().from(quotes).where(ne(quotes.status, 'pending'))` | KPI Card 3 |
+| Processed Quotes Count | Drizzle `db.select().from(quotes).where(inArray(quotes.status, ['quoted', 'completed']))` | KPI Card 3 |
 | Active Inquiries Count | Drizzle `db.select().from(contactInquiries).where(inArray(contactInquiries.status, ['new', 'in_progress']))` | KPI Card 2 |
 | New Inquiries Count | Drizzle `db.select().from(contactInquiries).where(eq(contactInquiries.status, 'new'))` | Priority Alert Banner |
 | Latest Activity Items | Drizzle queries on `quotes` and `contactInquiries` ordered by `createdAt desc` | Recent Activity Stream |

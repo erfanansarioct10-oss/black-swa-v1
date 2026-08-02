@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { desc, eq, sql } from "drizzle-orm";
+import { desc, eq, ilike, sql } from "drizzle-orm";
 import {
   ArrowLeft,
   Clock,
@@ -41,22 +41,21 @@ export default async function AdminQuotesPage({ searchParams }: QuotesPageProps)
   let totalCount = 0;
 
   try {
+    const whereCondition = status
+      ? eq(quotes.status, status as typeof quotes.status._.data)
+      : ref
+      ? ilike(quotes.referenceId, `%${ref}%`)
+      : undefined;
+
     const [[pendingRes], [totalRes], fetchedQuotes] = await Promise.all([
       db.select({ count: sql<number>`count(*)` }).from(quotes).where(eq(quotes.status, "pending")),
       db.select({ count: sql<number>`count(*)` }).from(quotes),
-      db.select().from(quotes).orderBy(desc(quotes.createdAt)).limit(50),
+      db.select().from(quotes).where(whereCondition).orderBy(desc(quotes.createdAt)).limit(50),
     ]);
 
     pendingCount = Number(pendingRes?.count || 0);
     totalCount = Number(totalRes?.count || 0);
-
-    if (status) {
-      allQuotes = fetchedQuotes.filter((q) => q.status === status);
-    } else if (ref) {
-      allQuotes = fetchedQuotes.filter((q) => q.referenceId.toLowerCase().includes(ref.toLowerCase()));
-    } else {
-      allQuotes = fetchedQuotes;
-    }
+    allQuotes = fetchedQuotes;
   } catch (err) {
     console.error("Failed to fetch quotes for admin management:", err);
   }

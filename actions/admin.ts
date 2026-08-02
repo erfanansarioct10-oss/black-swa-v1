@@ -1,5 +1,6 @@
 "use server";
 
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { revalidatePath } from "next/cache";
 import { and, desc, eq, ilike, isNull, or, sql } from "drizzle-orm";
 
@@ -24,7 +25,6 @@ export interface AdminSearchResponseData {
 }
 
 export interface AdminNotificationItem {
-
   id: string;
   type: "rfq" | "inquiry";
   title: string;
@@ -119,6 +119,9 @@ export async function adminSearchAction(
       },
     };
   } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
     console.error("Error executing adminSearchAction:", error);
     return {
       success: false,
@@ -126,8 +129,6 @@ export async function adminSearchAction(
     };
   }
 }
-
-
 
 /**
  * Retrieves unread notification items requiring executive action (unassigned pending RFQs and new inquiries).
@@ -188,6 +189,9 @@ export async function getAdminNotificationsAction(): Promise<ActionResponse<Admi
       },
     };
   } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
     console.error("Error executing getAdminNotificationsAction:", error);
     return {
       success: false,
@@ -205,7 +209,7 @@ export async function assignQuoteToSelfAction(
   try {
     const session = await requireAdminAuth();
 
-    await db
+    const updated = await db
       .update(quotes)
       .set({
         assignedManagerId: session.userId,
@@ -213,7 +217,15 @@ export async function assignQuoteToSelfAction(
         status: "manager_assigned",
         updatedAt: new Date(),
       })
-      .where(eq(quotes.id, quoteId));
+      .where(and(eq(quotes.id, quoteId), isNull(quotes.assignedManagerId)))
+      .returning({ id: quotes.id });
+
+    if (!updated || updated.length === 0) {
+      return {
+        success: false,
+        error: "Quotation request was not found or has already been assigned.",
+      };
+    }
 
     revalidatePath("/admin");
     revalidatePath("/admin/quotes");
@@ -223,6 +235,9 @@ export async function assignQuoteToSelfAction(
       data: { message: "Quotation request successfully assigned." },
     };
   } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
     console.error("Error assigning quote to director:", error);
     return {
       success: false,
@@ -257,6 +272,9 @@ export async function updateInquiryStatusAction(
       data: { message: "Inquiry status updated successfully." },
     };
   } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
     console.error("Error updating inquiry status:", error);
     return {
       success: false,

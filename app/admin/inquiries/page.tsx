@@ -41,22 +41,21 @@ export default async function AdminInquiriesPage({ searchParams }: InquiriesPage
   let totalCount = 0;
 
   try {
+    const whereCondition = status
+      ? eq(contactInquiries.status, status as typeof contactInquiries.status._.data)
+      : id
+      ? eq(contactInquiries.id, id)
+      : undefined;
+
     const [[newRes], [totalRes], fetchedInquiries] = await Promise.all([
       db.select({ count: sql<number>`count(*)` }).from(contactInquiries).where(eq(contactInquiries.status, "new")),
       db.select({ count: sql<number>`count(*)` }).from(contactInquiries),
-      db.select().from(contactInquiries).orderBy(desc(contactInquiries.createdAt)).limit(50),
+      db.select().from(contactInquiries).where(whereCondition).orderBy(desc(contactInquiries.createdAt)).limit(50),
     ]);
 
     newCount = Number(newRes?.count || 0);
     totalCount = Number(totalRes?.count || 0);
-
-    if (status) {
-      allInquiries = fetchedInquiries.filter((i) => i.status === status);
-    } else if (id) {
-      allInquiries = fetchedInquiries.filter((i) => i.id === id);
-    } else {
-      allInquiries = fetchedInquiries;
-    }
+    allInquiries = fetchedInquiries;
   } catch (err) {
     console.error("Failed to fetch contact inquiries for admin management:", err);
   }

@@ -36,6 +36,8 @@ async function runPhase4DTests() {
   const {
     adminSearchAction,
     getAdminNotificationsAction,
+    assignQuoteToSelfAction,
+    updateInquiryStatusAction,
   } = await import("../actions/admin");
 
   // -------------------------------------------------------------
@@ -83,6 +85,27 @@ async function runPhase4DTests() {
     }
   } catch (err) {
     console.error("  ❌ Quick Search Threw Error:", err);
+    failedTests++;
+  }
+
+  console.log("\n-------------------------------------------------\n");
+
+  // -------------------------------------------------------------
+  // Test 3: Quote Assignment Guard on Already Assigned Quote
+  // -------------------------------------------------------------
+  console.log("🔒 Test 3: Testing assignQuoteToSelfAction() guard on invalid/already-assigned ID...");
+  try {
+    const invalidAssignResult = await assignQuoteToSelfAction("00000000-0000-0000-0000-000000000000");
+    if (!invalidAssignResult.success && invalidAssignResult.error) {
+      console.log("  ✅ Assignment Guard Succeeded!");
+      console.log(`     Rejection Message: "${invalidAssignResult.error}"`);
+      passedTests++;
+    } else {
+      console.error("  ❌ Assignment Guard Failed: Allowed invalid assignment.");
+      failedTests++;
+    }
+  } catch (err) {
+    console.error("  ❌ Assignment Guard Threw Error:", err);
     failedTests++;
   }
 
