@@ -1,10 +1,12 @@
 import { runCustomerManagementStressTest } from "./33-customer-management-stress";
 import { runLeadManagementStressTest } from "./34-lead-management-stress";
+import { runCodeRabbitPR14StressTest } from "./35-coderabbit-pr14-stress";
 
 async function runPhase5StressSuite() {
   console.log("================================================================");
   console.log("🚀 STARTING PHASE 5 FEATURE STRESS TEST & SECURITY AUDIT SUITE");
   console.log("================================================================\n");
+
 
   const startTime = Date.now();
   let totalTests = 0;
@@ -24,7 +26,15 @@ async function runPhase5StressSuite() {
     allErrors.push(...spec34Result.errors.map((e) => `[Spec 34 Lead Management] ${e}`));
   }
 
+  // Spec 35: CodeRabbit PR #14 Review Findings Audit
+  const spec35Result = await runCodeRabbitPR14StressTest();
+  totalTests += spec35Result.testsRun;
+  if (!spec35Result.success) {
+    allErrors.push(...spec35Result.errors.map((e) => `[Spec 35 PR #14 Review Audit] ${e}`));
+  }
+
   const durationMs = Date.now() - startTime;
+
 
   console.log("\n================================================================");
   console.log("📊 PHASE 5 STRESS TEST SUITE SUMMARY REPORT");

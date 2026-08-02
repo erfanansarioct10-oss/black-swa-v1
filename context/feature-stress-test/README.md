@@ -230,3 +230,5 @@ To mark this stress test plan **Verified Clean**, all the following conditions m
 | [32-phase-4d-command-center-and-diagnostics](32-phase-4d-command-center-and-diagnostics.md) | Command Center Palette Search Fuzzing & Diagnostics Audit | Verified Clean | Quick Search Actions & System Diagnostics |
 | [33-phase-5a-customer-and-account-management-core](33-phase-5a-customer-and-account-management-core.md) | Customer & Account Core RLS & Concurrency Stress Test | Verified Clean | Customer Directory, Profile DB Actions |
 | [34-phase-5b-lead-management-and-inquiry-processing](34-phase-5b-lead-management-and-inquiry-processing.md) | Lead Management Pipeline RLS & State Transition Stress Test | Verified Clean | Lead Pipeline, Inquiry Server Actions |
+| [35-fix-coderabbit-pr-review-findings](35-fix-coderabbit-pr-review-findings.md) | CodeRabbit PR #14 Review Findings Audit | Verified Clean | Lead Transactions, Search Bounds, Notification Counts, RLS Policies |
+

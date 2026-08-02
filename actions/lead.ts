@@ -438,25 +438,26 @@ export async function convertLeadToCustomerAction(
       let resolvedId = existingCustomer?.id;
 
       if (!resolvedId) {
-        try {
-          const [newCust] = await tx
-            .insert(customers)
-            .values({
-              organizationName: validated.organizationName,
-              organizationType: validated.organizationType,
-              primaryContactName: lead.contactName,
-              primaryContactEmail: emailLower,
-              primaryContactPhone: lead.phone || null,
-              taxRegistrationId: validated.taxRegistrationId || null,
-              leadSource: lead.leadSource,
-              status: "active",
-              notes: validated.notes || lead.notes || null,
-            })
-            .returning({ id: customers.id });
+        const [newCust] = await tx
+          .insert(customers)
+          .values({
+            organizationName: validated.organizationName,
+            organizationType: validated.organizationType,
+            primaryContactName: lead.contactName,
+            primaryContactEmail: emailLower,
+            primaryContactPhone: lead.phone || null,
+            taxRegistrationId: validated.taxRegistrationId || null,
+            leadSource: lead.leadSource,
+            status: "active",
+            notes: validated.notes || lead.notes || null,
+          })
+          .onConflictDoNothing()
+          .returning({ id: customers.id });
 
+        if (newCust?.id) {
           resolvedId = newCust.id;
-        } catch {
-          // If unique constraint triggers during concurrent insertion, query existing customer
+        } else {
+          // If conflict occurred in concurrent insertion, query existing customer record
           const [existing] = await tx
             .select({ id: customers.id })
             .from(customers)
@@ -465,6 +466,7 @@ export async function convertLeadToCustomerAction(
           resolvedId = existing?.id;
         }
       }
+
 
       if (!resolvedId) {
         throw new Error("Failed to create or resolve customer record");
