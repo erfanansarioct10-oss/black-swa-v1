@@ -153,8 +153,13 @@ export async function runLeadManagementStressTest(): Promise<{ success: boolean;
   } catch (err) {
     errors.push(`Lead management stress test error: ${err instanceof Error ? err.message : String(err)}`);
   } finally {
-    process.env.ADMIN_DEV_BYPASS = origDevBypass;
+    if (origDevBypass === undefined) {
+      delete process.env.ADMIN_DEV_BYPASS;
+    } else {
+      process.env.ADMIN_DEV_BYPASS = origDevBypass;
+    }
   }
+
 
   const passed = errors.length === 0;
   console.log(`  └─ Completed Spec 34 Stress Test: ${testsRun} assertions, ${errors.length} errors.`);

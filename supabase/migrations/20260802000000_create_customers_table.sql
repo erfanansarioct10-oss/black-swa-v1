@@ -21,6 +21,18 @@ CREATE TABLE IF NOT EXISTS "public"."customers" (
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 
+ALTER TABLE "public"."customers"
+  ADD CONSTRAINT "customers_organization_type_check"
+  CHECK ("organization_type" IN ('hospital', 'clinic', 'broadcast_studio', 'media_network', 'enterprise'));
+
+ALTER TABLE "public"."customers"
+  ADD CONSTRAINT "customers_status_check"
+  CHECK ("status" IN ('active', 'lead', 'prospect', 'archived'));
+
+ALTER TABLE "public"."customers"
+  ADD CONSTRAINT "customers_lead_source_check"
+  CHECK ("lead_source" IS NULL OR "lead_source" IN ('website_rfq', 'direct_inquiry', 'referral', 'trade_show', 'outreach'));
+
 -- Add optional customer_id foreign key to quotes table if not present
 DO $$
 BEGIN
@@ -35,7 +47,7 @@ BEGIN
 END $$;
 
 -- B-Tree Performance Indexes
-CREATE INDEX IF NOT EXISTS "idx_customers_email" ON "public"."customers" (lower("primary_contact_email"));
+CREATE UNIQUE INDEX IF NOT EXISTS "idx_customers_email" ON "public"."customers" (lower("primary_contact_email"));
 CREATE INDEX IF NOT EXISTS "idx_customers_org_name" ON "public"."customers" (lower("organization_name"));
 CREATE INDEX IF NOT EXISTS "idx_customers_status" ON "public"."customers" ("status");
 CREATE INDEX IF NOT EXISTS "idx_customers_org_type" ON "public"."customers" ("organization_type");
@@ -44,10 +56,11 @@ CREATE INDEX IF NOT EXISTS "idx_quotes_customer_id" ON "public"."quotes" ("custo
 -- Enable Row Level Security (RLS)
 ALTER TABLE "public"."customers" ENABLE ROW LEVEL SECURITY;
 
--- RLS Policy: Allow authenticated administrative access to customers
-CREATE POLICY "Allow authenticated read and write access to customers"
+-- RLS Policy: Allow service role access to customers
+CREATE POLICY "Allow service_role access to customers"
   ON "public"."customers"
   FOR ALL
-  TO authenticated
+  TO service_role
   USING (true)
   WITH CHECK (true);
+

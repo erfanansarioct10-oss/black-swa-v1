@@ -38,47 +38,72 @@ export function LeadDetailClient({ data }: LeadDetailClientProps) {
   const [savingNotes, setSavingNotes] = useState(false);
   const [updatingStatus, setUpdatingStatus] = useState(false);
 
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [convertModalOpen, setConvertModalOpen] = useState(false);
 
   const handleStatusChange = async (newStatus: string) => {
+    const previous = status;
     setStatus(newStatus);
     setUpdatingStatus(true);
+    setErrorMsg(null);
     try {
-      await updateLeadAction(lead.id, { id: lead.id, status: newStatus as LeadStatus });
+      const res = await updateLeadAction(lead.id, { id: lead.id, status: newStatus as LeadStatus });
+      if (!res.success) {
+        setStatus(previous);
+        setErrorMsg(res.error ?? "Failed to update lead status");
+        return;
+      }
       router.refresh();
     } catch (err) {
       console.error("[LeadDetailClient] Status update error:", err);
+      setStatus(previous);
+      setErrorMsg("Failed to update lead status");
     } finally {
       setUpdatingStatus(false);
     }
   };
 
   const handlePriorityChange = async (newPriority: string) => {
+    const previous = priority;
     setPriority(newPriority);
     setUpdatingStatus(true);
+    setErrorMsg(null);
     try {
-      await updateLeadAction(lead.id, { id: lead.id, priority: newPriority as LeadPriority });
+      const res = await updateLeadAction(lead.id, { id: lead.id, priority: newPriority as LeadPriority });
+      if (!res.success) {
+        setPriority(previous);
+        setErrorMsg(res.error ?? "Failed to update lead priority");
+        return;
+      }
       router.refresh();
     } catch (err) {
       console.error("[LeadDetailClient] Priority update error:", err);
+      setPriority(previous);
+      setErrorMsg("Failed to update lead priority");
     } finally {
       setUpdatingStatus(false);
     }
   };
 
-
   const handleSaveNotes = async () => {
     setSavingNotes(true);
+    setErrorMsg(null);
     try {
-      await updateLeadAction(lead.id, { id: lead.id, notes });
+      const res = await updateLeadAction(lead.id, { id: lead.id, notes });
+      if (!res.success) {
+        setErrorMsg(res.error ?? "Failed to save lead notes");
+        return;
+      }
       router.refresh();
     } catch (err) {
       console.error("[LeadDetailClient] Notes save error:", err);
+      setErrorMsg("Failed to save lead notes");
     } finally {
       setSavingNotes(false);
     }
   };
+
 
 
   const formattedLeadListItem = {
@@ -103,7 +128,14 @@ export function LeadDetailClient({ data }: LeadDetailClientProps) {
 
   return (
     <div className="space-y-6">
+      {errorMsg && (
+        <div className="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-md text-xs text-red-700 dark:text-red-300">
+          {errorMsg}
+        </div>
+      )}
+
       {/* Header & Back Navigation */}
+
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="space-y-1">
           <Link
@@ -355,11 +387,13 @@ export function LeadDetailClient({ data }: LeadDetailClientProps) {
 
       {/* Modals */}
       <LeadFormModal
+        key={`${lead.id}-${lead.updatedAt.toISOString()}`}
         open={editModalOpen}
         onOpenChange={setEditModalOpen}
         initialData={formattedLeadListItem}
         onSuccess={() => router.refresh()}
       />
+
 
       <ConvertLeadModal
         open={convertModalOpen}

@@ -74,15 +74,21 @@ export function NotificationDrawer() {
 
 
 
+  const [actionError, setActionError] = useState<string | null>(null);
+
   const handleAssignQuote = async (quoteId: string) => {
     setActioningId(quoteId);
+    setActionError(null);
     try {
       const res = await assignQuoteToSelfAction(quoteId);
       if (res.success) {
         await fetchNotifications();
+      } else {
+        setActionError(res.error ?? "Failed to assign quotation request.");
       }
     } catch (err) {
       console.error("Failed to assign quote:", err);
+      setActionError("Failed to assign quotation request.");
     } finally {
       setActioningId(null);
     }
@@ -90,17 +96,22 @@ export function NotificationDrawer() {
 
   const handleMarkInquiryInProgress = async (inquiryId: string) => {
     setActioningId(inquiryId);
+    setActionError(null);
     try {
       const res = await updateInquiryStatusAction(inquiryId, "in_progress");
       if (res.success) {
         await fetchNotifications();
+      } else {
+        setActionError(res.error ?? "Failed to update inquiry status.");
       }
     } catch (err) {
       console.error("Failed to update inquiry status:", err);
+      setActionError("Failed to update inquiry status.");
     } finally {
       setActioningId(null);
     }
   };
+
 
   const totalUnread = data?.totalUnread || 0;
 
@@ -145,7 +156,14 @@ export function NotificationDrawer() {
 
         {/* Notifications Feed Area */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 text-xs">
+          {actionError && (
+            <div className="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-lg text-xs text-red-700 dark:text-red-300">
+              {actionError}
+            </div>
+          )}
+
           {loading ? (
+
             <div className="space-y-3">
               <div className="h-20 bg-muted/60 rounded-xl animate-pulse" />
               <div className="h-20 bg-muted/60 rounded-xl animate-pulse" />

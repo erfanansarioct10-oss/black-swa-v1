@@ -70,7 +70,16 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
   try {
     // 1. Fetch filtered quotes
     const filteredQuotes = await db
-      .select()
+      .select({
+        status: quotes.status,
+        budgetRange: quotes.budgetRange,
+        createdAt: quotes.createdAt,
+        updatedAt: quotes.updatedAt,
+        assignedAt: quotes.assignedAt,
+        assignedManagerId: quotes.assignedManagerId,
+        quotedAt: quotes.quotedAt,
+        completedAt: quotes.completedAt,
+      })
       .from(quotes)
       .where(dateFilter);
 
@@ -145,7 +154,7 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
       },
     ];
 
-    // 4. SLA Response Time Calculations using stage-specific timestamps
+    // 4. SLA Response Time Calculations using measured stage timestamps
     let totalAssignmentHours = 0;
     let assignmentCount = 0;
     let totalQuotingHours = 0;
@@ -156,22 +165,19 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
     filteredQuotes.forEach((q) => {
       const created = new Date(q.createdAt).getTime();
 
-      if (q.assignedAt || q.assignedManagerId || ["manager_assigned", "quoted", "completed"].includes(q.status)) {
-        const assignedTime = q.assignedAt ? new Date(q.assignedAt).getTime() : new Date(q.updatedAt).getTime();
-        const diffHours = (assignedTime - created) / (1000 * 60 * 60);
-        totalAssignmentHours += Math.max(diffHours, 0.5);
+      if (q.assignedAt) {
+        const diffHours = (new Date(q.assignedAt).getTime() - created) / (1000 * 60 * 60);
+        totalAssignmentHours += Math.max(diffHours, 0);
         assignmentCount++;
       }
-      if (q.quotedAt || ["quoted", "completed"].includes(q.status)) {
-        const quotedTime = q.quotedAt ? new Date(q.quotedAt).getTime() : new Date(q.updatedAt).getTime();
-        const diffHours = (quotedTime - created) / (1000 * 60 * 60);
-        totalQuotingHours += Math.max(diffHours, 1);
+      if (q.quotedAt) {
+        const diffHours = (new Date(q.quotedAt).getTime() - created) / (1000 * 60 * 60);
+        totalQuotingHours += Math.max(diffHours, 0);
         quotingCount++;
       }
-      if (q.completedAt || q.status === "completed") {
-        const completedTime = q.completedAt ? new Date(q.completedAt).getTime() : new Date(q.updatedAt).getTime();
-        const diffHours = (completedTime - created) / (1000 * 60 * 60);
-        totalCompletionHours += Math.max(diffHours, 2);
+      if (q.completedAt) {
+        const diffHours = (new Date(q.completedAt).getTime() - created) / (1000 * 60 * 60);
+        totalCompletionHours += Math.max(diffHours, 0);
         completionCount++;
       }
     });
@@ -181,6 +187,7 @@ export default async function AnalyticsPage({ searchParams }: PageProps) {
       quotingAvgHours: quotingCount > 0 ? totalQuotingHours / quotingCount : 0,
       completionAvgHours: completionCount > 0 ? totalCompletionHours / completionCount : 0,
     };
+
 
     // 5. Query quote_items for Equipment Popularity
     const filteredItems = await db

@@ -26,6 +26,7 @@ interface QuotesPageProps {
   searchParams: Promise<{
     status?: string;
     ref?: string;
+    page?: string;
   }>;
 }
 
@@ -33,12 +34,17 @@ type QuoteRecord = typeof quotes.$inferSelect;
 
 export default async function AdminQuotesPage({ searchParams }: QuotesPageProps) {
   await requireAdminAuth();
-  const { status, ref } = await searchParams;
+  const { status, ref, page: pageParam } = await searchParams;
+
+  const currentPage = Math.max(1, parseInt(pageParam || "1", 10) || 1);
+  const pageSize = 50;
+  const offset = (currentPage - 1) * pageSize;
 
   let allQuotes: QuoteRecord[] = [];
 
   let pendingCount = 0;
   let totalCount = 0;
+  let filteredTotalCount = 0;
 
   try {
     const whereCondition = status
@@ -47,18 +53,23 @@ export default async function AdminQuotesPage({ searchParams }: QuotesPageProps)
       ? ilike(quotes.referenceId, `%${ref}%`)
       : undefined;
 
-    const [[pendingRes], [totalRes], fetchedQuotes] = await Promise.all([
+    const [[pendingRes], [totalRes], [filteredTotalRes], fetchedQuotes] = await Promise.all([
       db.select({ count: sql<number>`count(*)` }).from(quotes).where(eq(quotes.status, "pending")),
       db.select({ count: sql<number>`count(*)` }).from(quotes),
-      db.select().from(quotes).where(whereCondition).orderBy(desc(quotes.createdAt)).limit(50),
+      db.select({ count: sql<number>`count(*)` }).from(quotes).where(whereCondition),
+      db.select().from(quotes).where(whereCondition).orderBy(desc(quotes.createdAt)).limit(pageSize).offset(offset),
     ]);
 
     pendingCount = Number(pendingRes?.count || 0);
     totalCount = Number(totalRes?.count || 0);
+    filteredTotalCount = Number(filteredTotalRes?.count || 0);
     allQuotes = fetchedQuotes;
   } catch (err) {
     console.error("Failed to fetch quotes for admin management:", err);
   }
+
+  const totalPages = Math.ceil(filteredTotalCount / pageSize);
+
 
   const getStatusBadge = (s: string) => {
     switch (s) {
@@ -191,6 +202,32 @@ export default async function AdminQuotesPage({ searchParams }: QuotesPageProps)
           </div>
         )}
       </div>
+
+      {/* Pagination controls */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between pt-4 text-xs">
+          <p className="text-muted-foreground font-mono">
+            Showing Page {currentPage} of {totalPages} ({filteredTotalCount} RFQs)
+          </p>
+          <div className="flex items-center gap-2">
+            {currentPage > 1 && (
+              <Button asChild size="sm" variant="outline" className="text-xs">
+                <Link href={`/admin/quotes?${new URLSearchParams({ ...(status && { status }), ...(ref && { ref }), page: String(currentPage - 1) }).toString()}`}>
+                  Previous
+                </Link>
+              </Button>
+            )}
+            {currentPage < totalPages && (
+              <Button asChild size="sm" variant="outline" className="text-xs">
+                <Link href={`/admin/quotes?${new URLSearchParams({ ...(status && { status }), ...(ref && { ref }), page: String(currentPage + 1) }).toString()}`}>
+                  Next
+                </Link>
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+

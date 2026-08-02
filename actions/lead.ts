@@ -427,51 +427,69 @@ export async function convertLeadToCustomerAction(
 
     const emailLower = lead.email.toLowerCase();
 
-    // Check if customer account already exists for this email
-    const [existingCustomer] = await db
-      .select()
-      .from(customers)
-      .where(eq(sql`lower(${customers.primaryContactEmail})`, emailLower))
-      .limit(1);
+    // Perform atomic lead conversion & customer association within a database transaction
+    const customerId = await db.transaction(async (tx) => {
+      const [existingCustomer] = await tx
+        .select({ id: customers.id })
+        .from(customers)
+        .where(eq(sql`lower(${customers.primaryContactEmail})`, emailLower))
+        .limit(1);
 
-    let customerId = existingCustomer?.id;
+      let resolvedId = existingCustomer?.id;
 
-    if (!customerId) {
-      // Create new customer account
-      const [newCust] = await db
-        .insert(customers)
-        .values({
-          organizationName: validated.organizationName,
-          organizationType: validated.organizationType,
-          primaryContactName: lead.contactName,
-          primaryContactEmail: emailLower,
-          primaryContactPhone: lead.phone || null,
-          taxRegistrationId: validated.taxRegistrationId || null,
-          leadSource: lead.leadSource,
-          status: "active",
-          notes: validated.notes || lead.notes || null,
+      if (!resolvedId) {
+        try {
+          const [newCust] = await tx
+            .insert(customers)
+            .values({
+              organizationName: validated.organizationName,
+              organizationType: validated.organizationType,
+              primaryContactName: lead.contactName,
+              primaryContactEmail: emailLower,
+              primaryContactPhone: lead.phone || null,
+              taxRegistrationId: validated.taxRegistrationId || null,
+              leadSource: lead.leadSource,
+              status: "active",
+              notes: validated.notes || lead.notes || null,
+            })
+            .returning({ id: customers.id });
+
+          resolvedId = newCust.id;
+        } catch {
+          // If unique constraint triggers during concurrent insertion, query existing customer
+          const [existing] = await tx
+            .select({ id: customers.id })
+            .from(customers)
+            .where(eq(sql`lower(${customers.primaryContactEmail})`, emailLower))
+            .limit(1);
+          resolvedId = existing?.id;
+        }
+      }
+
+      if (!resolvedId) {
+        throw new Error("Failed to create or resolve customer record");
+      }
+
+      // Update lead record
+      await tx
+        .update(leads)
+        .set({
+          status: "converted",
+          customerId: resolvedId,
+          companyName: validated.organizationName,
+          updatedAt: new Date(),
         })
-        .returning({ id: customers.id });
+        .where(eq(leads.id, lead.id));
 
-      customerId = newCust.id;
-    }
+      // Link any quotes matching lead email
+      await tx
+        .update(quotes)
+        .set({ customerId: resolvedId, updatedAt: new Date() })
+        .where(and(eq(sql`lower(${quotes.email})`, emailLower), sql`${quotes.customerId} IS NULL`));
 
-    // Update lead record
-    await db
-      .update(leads)
-      .set({
-        status: "converted",
-        customerId,
-        companyName: validated.organizationName,
-        updatedAt: new Date(),
-      })
-      .where(eq(leads.id, lead.id));
+      return resolvedId;
+    });
 
-    // Link any quotes matching lead email
-    await db
-      .update(quotes)
-      .set({ customerId, updatedAt: new Date() })
-      .where(and(eq(sql`lower(${quotes.email})`, emailLower), sql`${quotes.customerId} IS NULL`));
 
     try {
       revalidatePath("/admin/leads");

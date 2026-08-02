@@ -1,4 +1,4 @@
-import { and, eq, inArray, isNull } from "drizzle-orm";
+import { and, desc, eq, inArray, isNull, sql } from "drizzle-orm";
 import { db } from "../../db";
 import { contactInquiries, quotes } from "../../db/schema";
 
@@ -23,26 +23,26 @@ export async function runExecutiveMetricsStressTest(): Promise<{ success: boolea
       latestQuotesRes,
       latestInquiriesRes,
     ] = await Promise.all([
-      db.select({ id: quotes.id }).from(quotes).where(eq(quotes.status, "pending")),
+      db.select({ count: sql<number>`count(*)` }).from(quotes).where(eq(quotes.status, "pending")),
       db
-        .select({ id: quotes.id })
+        .select({ count: sql<number>`count(*)` })
         .from(quotes)
         .where(and(eq(quotes.status, "pending"), isNull(quotes.assignedManagerId))),
       db
-        .select({ id: quotes.id })
+        .select({ count: sql<number>`count(*)` })
         .from(quotes)
         .where(inArray(quotes.status, ["quoted", "completed"])),
-      db.select({ id: quotes.id }).from(quotes),
+      db.select({ count: sql<number>`count(*)` }).from(quotes),
       db
-        .select({ id: contactInquiries.id })
+        .select({ count: sql<number>`count(*)` })
         .from(contactInquiries)
         .where(inArray(contactInquiries.status, ["new", "in_progress"])),
       db
-        .select({ id: contactInquiries.id })
+        .select({ count: sql<number>`count(*)` })
         .from(contactInquiries)
         .where(eq(contactInquiries.status, "new")),
-      db.select().from(quotes).limit(6),
-      db.select().from(contactInquiries).limit(6),
+      db.select().from(quotes).orderBy(desc(quotes.createdAt)).limit(6),
+      db.select().from(contactInquiries).orderBy(desc(contactInquiries.createdAt)).limit(6),
     ]);
 
     const duration = Date.now() - startTime;
@@ -52,12 +52,13 @@ export async function runExecutiveMetricsStressTest(): Promise<{ success: boolea
 
     // Test 2: KPI Card metric fallback assertions
     testsRun++;
-    const pendingCount = pendingCountRes.length;
-    const unassignedCount = unassignedCountRes.length;
-    const processedCount = processedCountRes.length;
-    const totalCount = totalCountRes.length;
-    const activeInquiriesCount = activeInquiriesRes.length;
-    const newInquiriesCount = newInquiriesRes.length;
+    const pendingCount = Number(pendingCountRes[0]?.count || 0);
+    const unassignedCount = Number(unassignedCountRes[0]?.count || 0);
+    const processedCount = Number(processedCountRes[0]?.count || 0);
+    const totalCount = Number(totalCountRes[0]?.count || 0);
+    const activeInquiriesCount = Number(activeInquiriesRes[0]?.count || 0);
+    const newInquiriesCount = Number(newInquiriesRes[0]?.count || 0);
+
 
     if (pendingCount < 0 || typeof pendingCount !== "number" || Number.isNaN(pendingCount)) {
       errors.push("Pending quotes count evaluated to invalid numeric value");

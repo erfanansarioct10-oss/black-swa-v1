@@ -40,6 +40,7 @@ export function LeadsTableContainer({ leads }: LeadsTableContainerProps) {
 
       {selectedEditLead && (
         <LeadFormModal
+          key={selectedEditLead.id}
           open={editModalOpen}
           onOpenChange={(open) => {
             setEditModalOpen(open);
@@ -49,6 +50,7 @@ export function LeadsTableContainer({ leads }: LeadsTableContainerProps) {
           onSuccess={() => router.refresh()}
         />
       )}
+
 
       {selectedConvertLead && (
         <ConvertLeadModal

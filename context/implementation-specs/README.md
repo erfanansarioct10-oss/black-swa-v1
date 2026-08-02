@@ -204,3 +204,5 @@ When working on a feature or review fix:
 | [32-phase-4d-command-center-and-diagnostics](32-phase-4d-command-center-and-diagnostics.md)                                           | Phase 4D Command Center, Quick Search & Executive Notification Center | Complete | Command Palette, Quick Search & Notifications |
 | [33-phase-5a-customer-and-account-management-core](33-phase-5a-customer-and-account-management-core.md)                 | Phase 5A: Customer & Account Management Core                | Complete | Customer Directory & Profiles (`/admin/customers`) |
 | [34-phase-5b-lead-management-and-inquiry-processing](34-phase-5b-lead-management-and-inquiry-processing.md)         | Phase 5B: Lead Management & Inquiry Processing              | Complete | Lead Pipeline & Inquiry Management (`/admin/leads`) |
+| [35-fix-coderabbit-pr-review-findings](35-fix-coderabbit-pr-review-findings.md)                                 | Fix CodeRabbit PR Review Findings (Commit 7e695b6)         | In Progress | Security, Data Integrity, UI & Analytics |
+

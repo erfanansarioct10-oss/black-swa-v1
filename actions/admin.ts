@@ -61,12 +61,13 @@ export async function adminSearchAction(
     await requireAdminAuth();
 
     const trimmed = (query || "").trim();
-    if (!trimmed || trimmed.length < 2) {
+    if (!trimmed || trimmed.length < 2 || trimmed.length > 500) {
       return {
         success: true,
         data: { quotes: [], inquiries: [] },
       };
     }
+
 
     const searchPattern = `%${trimmed}%`;
 
@@ -146,7 +147,7 @@ export async function getAdminNotificationsAction(): Promise<ActionResponse<Admi
   try {
     await requireAdminAuth();
 
-    const [unassignedQuotes, newInquiries] = await Promise.all([
+    const [unassignedQuotes, newInquiries, [unassignedTotal], [newInquiriesTotal]] = await Promise.all([
       db
         .select()
         .from(quotes)
@@ -159,6 +160,14 @@ export async function getAdminNotificationsAction(): Promise<ActionResponse<Admi
         .where(eq(contactInquiries.status, "new"))
         .orderBy(desc(contactInquiries.createdAt))
         .limit(10),
+      db
+        .select({ count: sql<number>`count(*)` })
+        .from(quotes)
+        .where(and(eq(quotes.status, "pending"), isNull(quotes.assignedManagerId))),
+      db
+        .select({ count: sql<number>`count(*)` })
+        .from(contactInquiries)
+        .where(eq(contactInquiries.status, "new")),
     ]);
 
     const quoteItemsMapped: AdminNotificationItem[] = unassignedQuotes.map((q) => ({
@@ -187,15 +196,19 @@ export async function getAdminNotificationsAction(): Promise<ActionResponse<Admi
       (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
 
+    const totalUnassigned = Number(unassignedTotal?.count || 0);
+    const totalNewInquiries = Number(newInquiriesTotal?.count || 0);
+
     return {
       success: true,
       data: {
-        totalUnread: combinedItems.length,
-        unassignedQuotesCount: quoteItemsMapped.length,
-        newInquiriesCount: inquiryItemsMapped.length,
+        totalUnread: totalUnassigned + totalNewInquiries,
+        unassignedQuotesCount: totalUnassigned,
+        newInquiriesCount: totalNewInquiries,
         items: combinedItems,
       },
     };
+
   } catch (error) {
     if (isRedirectError(error)) {
       throw error;
@@ -254,6 +267,8 @@ export async function assignQuoteToSelfAction(
   }
 }
 
+const INQUIRY_STATUSES = ["new", "in_progress", "resolved", "archived"] as const;
+
 /**
  * Updates the operational status of a contact inquiry.
  */
@@ -264,13 +279,28 @@ export async function updateInquiryStatusAction(
   try {
     await requireAdminAuth();
 
-    await db
+    if (!INQUIRY_STATUSES.includes(status as (typeof INQUIRY_STATUSES)[number])) {
+      return {
+        success: false,
+        error: "Invalid inquiry status.",
+      };
+    }
+
+    const updated = await db
       .update(contactInquiries)
       .set({
         status,
         updatedAt: new Date(),
       })
-      .where(eq(contactInquiries.id, inquiryId));
+      .where(eq(contactInquiries.id, inquiryId))
+      .returning({ id: contactInquiries.id });
+
+    if (!updated || updated.length === 0) {
+      return {
+        success: false,
+        error: "Inquiry was not found.",
+      };
+    }
 
     safeRevalidatePath("/admin");
     safeRevalidatePath("/admin/inquiries");
@@ -279,6 +309,7 @@ export async function updateInquiryStatusAction(
       success: true,
       data: { message: "Inquiry status updated successfully." },
     };
+
   } catch (error) {
     if (isRedirectError(error)) {
       throw error;

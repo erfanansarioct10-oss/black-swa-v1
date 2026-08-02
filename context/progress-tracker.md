@@ -39,7 +39,9 @@ Update this file after every meaningful implementation change.
 
 ## In Progress
 
-- Phase 5B: Lead Management & Inquiry Processing (`context/implementation-specs/34-phase-5b-lead-management-and-inquiry-processing.md`)
+- Fix CodeRabbit PR Review Findings (Commit 7e695b6) ([`context/implementation-specs/35-fix-coderabbit-pr-review-findings.md`](./implementation-specs/35-fix-coderabbit-pr-review-findings.md))
+- Phase 5B: Lead Management & Inquiry Processing ([`context/implementation-specs/34-phase-5b-lead-management-and-inquiry-processing.md`](./implementation-specs/34-phase-5b-lead-management-and-inquiry-processing.md))
+
 
 ## Next Up
 

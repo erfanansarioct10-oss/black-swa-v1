@@ -31,10 +31,11 @@ CREATE INDEX IF NOT EXISTS "idx_leads_customer_id" ON "public"."leads" ("custome
 -- Enable Row Level Security (RLS)
 ALTER TABLE "public"."leads" ENABLE ROW LEVEL SECURITY;
 
--- RLS Policy: Allow authenticated administrative access to leads
-CREATE POLICY "Allow authenticated read and write access to leads"
+-- RLS Policy: Allow service role access to leads
+CREATE POLICY "Allow service_role access to leads"
   ON "public"."leads"
   FOR ALL
-  TO authenticated
+  TO service_role
   USING (true)
   WITH CHECK (true);
+

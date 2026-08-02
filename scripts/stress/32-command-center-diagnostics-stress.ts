@@ -39,8 +39,8 @@ export async function runCommandCenterDiagnosticsStressTest(): Promise<{ success
     }
 
     const longSearch = await adminSearchAction("A".repeat(600));
-    if (!longSearch.success) {
-      errors.push(`Extreme length search payload error: ${longSearch.error}`);
+    if (!longSearch.success || longSearch.data?.quotes.length !== 0 || longSearch.data?.inquiries.length !== 0) {
+      errors.push("Extreme length search payload (>500 chars) failed to return empty dataset");
     }
 
     // Test 2: Executive Notification Center Data retrieval
@@ -69,20 +69,27 @@ export async function runCommandCenterDiagnosticsStressTest(): Promise<{ success
       errors.push("Assigning non-existent quote returned success: expected failure due to atomic isNull filter");
     }
 
-    // Test 4: Inquiry Status Mutation Validation across enum states
+    // Test 4: Inquiry Status Mutation Validation across enum states & non-existent ID rejection
     testsRun++;
-    const validStatuses = ["new", "in_progress", "resolved", "archived"] as const;
-    for (const status of validStatuses) {
-      const updateResult = await updateInquiryStatusAction(nonExistentId, status);
-      if (!updateResult.success) {
-        errors.push(`Failed status update mutation for status '${status}'`);
-      }
+    const invalidStatusResult = await updateInquiryStatusAction(nonExistentId, "invalid_status" as any);
+    if (invalidStatusResult.success) {
+      errors.push("Invalid status mutation returned success: expected validation failure");
+    }
+
+    const nonExistentInquiryResult = await updateInquiryStatusAction(nonExistentId, "in_progress");
+    if (nonExistentInquiryResult.success) {
+      errors.push("Updating status for non-existent inquiry returned success: expected existence failure");
     }
   } catch (err) {
     errors.push(`Command center server action error: ${err instanceof Error ? err.message : String(err)}`);
   } finally {
-    process.env.ADMIN_DEV_BYPASS = origDevBypass;
+    if (origDevBypass === undefined) {
+      delete process.env.ADMIN_DEV_BYPASS;
+    } else {
+      process.env.ADMIN_DEV_BYPASS = origDevBypass;
+    }
   }
+
 
   const passed = errors.length === 0;
   console.log(`  └─ Completed Spec 32 Stress Test: ${testsRun} assertions, ${errors.length} errors.`);

@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
-import { index, integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { index, integer, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+
 
 // Starter table for Clerk profiles sync
 export const profiles = pgTable("profiles", {
@@ -41,8 +42,9 @@ export const customers = pgTable("customers", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [
-  index("idx_customers_email").on(sql`lower(${table.primaryContactEmail})`),
+  uniqueIndex("idx_customers_email").on(sql`lower(${table.primaryContactEmail})`),
   index("idx_customers_org_name").on(sql`lower(${table.organizationName})`),
+
   index("idx_customers_status").on(table.status),
   index("idx_customers_org_type").on(table.organizationType),
 ]);
