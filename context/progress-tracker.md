@@ -4,12 +4,12 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- Phase 4C: Advanced Analytics & Visualizations (`/admin/analytics`)
+- Phase 4D: Command Center & System Diagnostics (`/admin/diagnostics`)
 
 
 ### Current Goal
 
-- Implement Phase 4C: Advanced Analytics & Visualizations (`/admin/analytics`).
+- Implement Phase 4D: Command Center & System Diagnostics (`/admin/diagnostics`).
 
 ## Completed
 
@@ -31,10 +31,12 @@ Update this file after every meaningful implementation change.
 - Completed Phase 4A Responsive Admin Layout & Shell (`app/admin/layout.tsx`, `constants/admin-navigation.ts`, `AdminShellProvider` with `useSyncExternalStore` hydration safety, `AdminSidebar` with collapsible desktop width, `AdminMobileNav` drawer sheet, `AdminHeader` with breadcrumbs & Clerk UserButton; see spec in [`context/implementation-specs/26-phase-4a-responsive-admin-layout-and-shell.md`](./implementation-specs/26-phase-4a-responsive-admin-layout-and-shell.md)).
 - Completed Phase 4A Sub-Task 2 Server-Side Clerk Role Guard & Security Architecture (`lib/admin-auth.ts`, `app/admin/unauthorized/page.tsx`, `proxy.ts`, `app/admin/layout.tsx`, `components/admin/admin-header.tsx`; see spec in [`context/implementation-specs/27-phase-4a-clerk-role-authorization-guard.md`](./implementation-specs/27-phase-4a-clerk-role-authorization-guard.md)).
 - Completed Phase 4B Executive Metrics & Activity Overview Dashboard (`app/admin/page.tsx`, `components/admin/pending-directives-alert.tsx`, `components/admin/recent-activity-stream.tsx`; see spec in [`context/implementation-specs/28-phase-4b-executive-metrics-and-activity-overview.md`](./implementation-specs/28-phase-4b-executive-metrics-and-activity-overview.md)).
+- Completed Phase 4C Advanced Analytics, Funnel Visualizations & Data Insights (`app/admin/analytics/page.tsx`, `components/admin/analytics/analytics-filter-bar.tsx`, `components/admin/analytics/executive-throughput-cards.tsx`, `components/admin/analytics/analytics-charts.tsx`, `components/admin/analytics/conversion-funnel-sla.tsx`; see spec in [`context/implementation-specs/29-phase-4c-advanced-analytics-and-visualizations.md`](./implementation-specs/29-phase-4c-advanced-analytics-and-visualizations.md)).
 
 ## In Progress
 
-- Phase 4C: Advanced Analytics & Visualizations (`/admin/analytics`; see spec in [`context/implementation-specs/29-phase-4c-advanced-analytics-and-visualizations.md`](./implementation-specs/29-phase-4c-advanced-analytics-and-visualizations.md)).
+- Phase 4D: Command Center & System Diagnostics (`/admin/diagnostics`).
+
 
 
 
