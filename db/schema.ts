@@ -31,6 +31,9 @@ export const quotes = pgTable("quotes", {
     .default("pending"),
   assignedManagerId: text("assigned_manager_id"),
   adminNotes: text("admin_notes"),
+  assignedAt: timestamp("assigned_at", { withTimezone: true }),
+  quotedAt: timestamp("quoted_at", { withTimezone: true }),
+  completedAt: timestamp("completed_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [
