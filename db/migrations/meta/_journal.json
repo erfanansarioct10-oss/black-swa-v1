@@ -8,6 +8,13 @@
       "when": 1785568263968,
       "tag": "0000_nappy_silverclaw",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1785648994258,
+      "tag": "0001_nosy_deathbird",
+      "breakpoints": true
     }
   ]
 }
