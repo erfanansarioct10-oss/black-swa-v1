@@ -45,5 +45,13 @@
     "supabase": "^2.110.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "overrides": {
+      "sharp": ">=0.35.0",
+      "postcss": ">=8.5.18",
+      "esbuild": ">=0.25.0"
+    }
   }
 }
+

@@ -21,6 +21,7 @@ Update this file after every meaningful implementation change.
 - Completed Phase 3 Refinement & Bug Fixes (Email domain url fallback fix, PDF proposal print media layout isolation via `print:hidden`, Nepalese Rupee NPR budget ranges, Telegram Bot API HTML formatting without backslashes, and global Track Quote navigation buttons; see spec in [`context/implementation-specs/21-phase-3-refinements-and-bug-fixes.md`](./implementation-specs/21-phase-3-refinements-and-bug-fixes.md)).
 - Completed Supabase RLS Security & Performance Index Optimizations (Enabled RLS on `quotes`, `quote_items`, `profiles`, configured access policies, added foreign key index `idx_quote_items_quote_id` and user index `idx_quotes_clerk_user_id`; see spec in [`context/implementation-specs/22-supabase-rls-security-and-index-optimizations.md`](./implementation-specs/22-supabase-rls-security-and-index-optimizations.md)).
 - Completed Contact & Service Inquiry Automated Notifications & Database Persistence (Supabase PostgreSQL `contact_inquiries` table, Resend Email receipts, Telegram Bot Alerts, Server Action `submitContactInquiryAction`, and Next.js 16 `after()` background dispatch; see spec in [`context/implementation-specs/23-contact-and-service-inquiry-automated-notifications.md`](./implementation-specs/23-contact-and-service-inquiry-automated-notifications.md)).
+- Completed Transitive Security Vulnerability Overrides (see spec in [`context/implementation-specs/25-security-vulnerability-overrides.md`](./implementation-specs/25-security-vulnerability-overrides.md)).
 - Completed Clerk Middleware Refactoring (Replaced deprecated `createRouteMatcher` with native URL pathname checking in `proxy.ts`).
 - Completed Homepage Popular Services UI Alignment (Added "Read More" detail buttons matching `/services` grid, linking to `/services/[slug]`).
 - Completed React Hydration Mismatch Fixes & Service Button Styling (Added `suppressHydrationWarning` to `html`/`body`, fixed deterministic `localStorage`/`sessionStorage` state initialization in `QuoteCartProvider` and `QuoteRequest`, updated "Inquire About Service" buttons to solid black).
@@ -28,6 +29,7 @@ Update this file after every meaningful implementation change.
 ## In Progress
 
 - Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
+
 
 
 ## Next Up

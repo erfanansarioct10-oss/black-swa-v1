@@ -1,3 +1,5 @@
+import { escapeHtml } from "@/lib/html";
+
 export interface SendTelegramQuoteAlertParams {
   referenceId: string;
   fullName: string;
@@ -89,12 +91,7 @@ ${params.projectScope ? `📝 <b>Project Scope:</b>\n<i>${escapeHtml(params.proj
   }
 }
 
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
+
 
 export interface SendTelegramContactInquiryParams {
   fullName: string;

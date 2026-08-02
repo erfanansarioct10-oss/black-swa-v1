@@ -1,5 +1,7 @@
 import { Resend } from "resend";
 
+import { escapeHtml } from "@/lib/html";
+
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
@@ -148,14 +150,7 @@ export function generateQuoteConfirmationHtml(params: SendQuoteConfirmationEmail
   `;
 }
 
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+
 
 /**
  * Dispatches a customer quote confirmation receipt via Resend Email API.

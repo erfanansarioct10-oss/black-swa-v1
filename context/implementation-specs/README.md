@@ -157,6 +157,7 @@ State explicit conditions required for completion:
 > **Mandatory User Permission Rule:** After drafting an implementation spec in `context/implementation-specs/` and updating `context/progress-tracker.md`, AI agents MUST **NOT** immediately start coding. Agents MUST present the plan to the user and obtain explicit permission before making any code changes.
 
 When working on a feature or review fix:
+
 1. **Load Context:** Read `AGENTS.md` and all files in `context/`.
 2. **Draft Spec:** Create `context/implementation-specs/XX-[spec-name].md` using the template above.
 3. **Update Progress Tracker:** Add the spec reference to `In Progress` in `context/progress-tracker.md`.
@@ -167,35 +168,30 @@ When working on a feature or review fix:
 
 ## 9. Specification Registry Index
 
-| Spec ID | Title | Status | Target Area |
-| --- | --- | --- | --- |
-| [01-fix-coderabbit-pr-review-findings](file:///c:/black-swan-v1/context/implementation-specs/01-fix-coderabbit-pr-review-findings.md) | Fix CodeRabbit PR Review Findings | Complete | Layouts, Auth, Forms |
-| [02-homepage-brand-marquee-section](file:///c:/black-swan-v1/context/implementation-specs/02-homepage-brand-marquee-section.md) | Homepage Dual-Row Brand Marquee Section | Complete | Homepage Marquee |
-| [03-fix-coderabbit-marquee-and-catalog-review-findings](file:///c:/black-swan-v1/context/implementation-specs/03-fix-coderabbit-marquee-and-catalog-review-findings.md) | Fix Marquee & Catalog Review Findings | Complete | Marquee & Catalog |
-| [04-homepage-certifications-section](file:///c:/black-swan-v1/context/implementation-specs/04-homepage-certifications-section.md) | Homepage Certifications & Standards Grid | Complete | Homepage Certifications |
-| [05-seo-compliance-and-technical-optimization](file:///c:/black-swan-v1/context/implementation-specs/05-seo-compliance-and-technical-optimization.md) | SEO Architecture & Technical Optimization | Complete | Global SEO & Metadata |
-| [06-homepage-featured-products-section](file:///c:/black-swan-v1/context/implementation-specs/06-homepage-featured-products-section.md) | Homepage Featured Products Spotlight | Complete | Homepage Catalog |
-| [07-homepage-popular-services-section](file:///c:/black-swan-v1/context/implementation-specs/07-homepage-popular-services-section.md) | Homepage Popular Services Section | Complete | Homepage Services |
-| [08-homepage-enterprise-advantage-section](file:///c:/black-swan-v1/context/implementation-specs/08-homepage-enterprise-advantage-section.md) | Homepage Enterprise Advantage & Trust Grid | Complete | Homepage Advantages |
-| [09-homepage-procurement-workflow-section](file:///c:/black-swan-v1/context/implementation-specs/09-homepage-procurement-workflow-section.md) | Homepage 4-Step Procurement Workflow | Complete | Homepage Workflow |
-| [10-homepage-customer-reviews-section](file:///c:/black-swan-v1/context/implementation-specs/10-homepage-customer-reviews-section.md) | Homepage Customer Reviews & Testimonials | Complete | Homepage Reviews |
-| [11-fix-coderabbit-latest-pr-review-findings](file:///c:/black-swan-v1/context/implementation-specs/11-fix-coderabbit-latest-pr-review-findings.md) | Fix Latest CodeRabbit PR Review Findings | Complete | Component Refactoring |
-| [12-homepage-who-we-are-section](file:///c:/black-swan-v1/context/implementation-specs/12-homepage-who-we-are-section.md) | Homepage Who We Are Section | Complete | Homepage Brand |
-| [13-about-us-page](file:///c:/black-swan-v1/context/implementation-specs/13-about-us-page.md) | Full-Service About Us Page | Complete | About Us Route |
-| [14-fix-coderabbit-about-page-findings](file:///c:/black-swan-v1/context/implementation-specs/14-fix-coderabbit-about-page-findings.md) | Fix CodeRabbit About Page Review Findings | Complete | About Page Accessibility & Visuals |
-| [15-services-page-and-detail-blog-system](file:///c:/black-swan-v1/context/implementation-specs/15-services-page-and-detail-blog-system.md) | Services Page & 15 Service Detail / Blog System | Complete | Services Catalog & Blog Routes |
-| [16-fix-coderabbit-services-page-findings](file:///c:/black-swan-v1/context/implementation-specs/16-fix-coderabbit-services-page-findings.md) | Fix CodeRabbit Review Findings for Services System | Complete | Services System Cleanups |
-| [17-phase-3a-quote-database-schema-and-server-actions](17-phase-3a-quote-database-schema-and-server-actions.md) | Phase 3A: Database Schema & Server Actions | Complete | Quote Database & Actions |
-| [18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui](18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui.md) | Phase 3B: Interactive Quote Cart & Multi-Step RFQ Wizard UI | Complete | Quote Cart & RFQ Wizard UI |
-| [19-phase-3c-automated-notifications-and-integration-pipeline](19-phase-3c-automated-notifications-and-integration-pipeline.md) | Phase 3C: Automated Notifications & Integration Pipeline | Complete | Resend & Telegram Notifications |
-| [20-phase-3d-public-quote-tracking-portal](20-phase-3d-public-quote-tracking-portal.md) | Phase 3D: Public Quote Tracking Portal | Complete | Public Quote Tracking Portal (`/quote/track`) |
-| [21-phase-3-refinements-and-bug-fixes](21-phase-3-refinements-and-bug-fixes.md) | Phase 3: Quote System Refinements & Bug Fixes | Complete | Quote System Refinements & UI Fixes |
-| [22-supabase-rls-security-and-index-optimizations](22-supabase-rls-security-and-index-optimizations.md) | Supabase RLS Security & Performance Index Optimizations | Complete | Database RLS & Indexes |
-| [23-contact-and-service-inquiry-automated-notifications](23-contact-and-service-inquiry-automated-notifications.md) | Contact & Service Inquiry Automated Notifications | Complete | Contact Form & Notifications |
-
-
-
-
-
-
-
+| Spec ID                                                                                                                                                                 | Title                                                       | Status   | Target Area                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | -------- | --------------------------------------------- |
+| [01-fix-coderabbit-pr-review-findings](file:///c:/black-swan-v1/context/implementation-specs/01-fix-coderabbit-pr-review-findings.md)                                   | Fix CodeRabbit PR Review Findings                           | Complete | Layouts, Auth, Forms                          |
+| [02-homepage-brand-marquee-section](file:///c:/black-swan-v1/context/implementation-specs/02-homepage-brand-marquee-section.md)                                         | Homepage Dual-Row Brand Marquee Section                     | Complete | Homepage Marquee                              |
+| [03-fix-coderabbit-marquee-and-catalog-review-findings](file:///c:/black-swan-v1/context/implementation-specs/03-fix-coderabbit-marquee-and-catalog-review-findings.md) | Fix Marquee & Catalog Review Findings                       | Complete | Marquee & Catalog                             |
+| [04-homepage-certifications-section](file:///c:/black-swan-v1/context/implementation-specs/04-homepage-certifications-section.md)                                       | Homepage Certifications & Standards Grid                    | Complete | Homepage Certifications                       |
+| [05-seo-compliance-and-technical-optimization](file:///c:/black-swan-v1/context/implementation-specs/05-seo-compliance-and-technical-optimization.md)                   | SEO Architecture & Technical Optimization                   | Complete | Global SEO & Metadata                         |
+| [06-homepage-featured-products-section](file:///c:/black-swan-v1/context/implementation-specs/06-homepage-featured-products-section.md)                                 | Homepage Featured Products Spotlight                        | Complete | Homepage Catalog                              |
+| [07-homepage-popular-services-section](file:///c:/black-swan-v1/context/implementation-specs/07-homepage-popular-services-section.md)                                   | Homepage Popular Services Section                           | Complete | Homepage Services                             |
+| [08-homepage-enterprise-advantage-section](file:///c:/black-swan-v1/context/implementation-specs/08-homepage-enterprise-advantage-section.md)                           | Homepage Enterprise Advantage & Trust Grid                  | Complete | Homepage Advantages                           |
+| [09-homepage-procurement-workflow-section](file:///c:/black-swan-v1/context/implementation-specs/09-homepage-procurement-workflow-section.md)                           | Homepage 4-Step Procurement Workflow                        | Complete | Homepage Workflow                             |
+| [10-homepage-customer-reviews-section](file:///c:/black-swan-v1/context/implementation-specs/10-homepage-customer-reviews-section.md)                                   | Homepage Customer Reviews & Testimonials                    | Complete | Homepage Reviews                              |
+| [11-fix-coderabbit-latest-pr-review-findings](file:///c:/black-swan-v1/context/implementation-specs/11-fix-coderabbit-latest-pr-review-findings.md)                     | Fix Latest CodeRabbit PR Review Findings                    | Complete | Component Refactoring                         |
+| [12-homepage-who-we-are-section](file:///c:/black-swan-v1/context/implementation-specs/12-homepage-who-we-are-section.md)                                               | Homepage Who We Are Section                                 | Complete | Homepage Brand                                |
+| [13-about-us-page](file:///c:/black-swan-v1/context/implementation-specs/13-about-us-page.md)                                                                           | Full-Service About Us Page                                  | Complete | About Us Route                                |
+| [14-fix-coderabbit-about-page-findings](file:///c:/black-swan-v1/context/implementation-specs/14-fix-coderabbit-about-page-findings.md)                                 | Fix CodeRabbit About Page Review Findings                   | Complete | About Page Accessibility & Visuals            |
+| [15-services-page-and-detail-blog-system](file:///c:/black-swan-v1/context/implementation-specs/15-services-page-and-detail-blog-system.md)                             | Services Page & 15 Service Detail / Blog System             | Complete | Services Catalog & Blog Routes                |
+| [16-fix-coderabbit-services-page-findings](file:///c:/black-swan-v1/context/implementation-specs/16-fix-coderabbit-services-page-findings.md)                           | Fix CodeRabbit Review Findings for Services System          | Complete | Services System Cleanups                      |
+| [17-phase-3a-quote-database-schema-and-server-actions](17-phase-3a-quote-database-schema-and-server-actions.md)                                                         | Phase 3A: Database Schema & Server Actions                  | Complete | Quote Database & Actions                      |
+| [18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui](18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui.md)                                   | Phase 3B: Interactive Quote Cart & Multi-Step RFQ Wizard UI | Complete | Quote Cart & RFQ Wizard UI                    |
+| [19-phase-3c-automated-notifications-and-integration-pipeline](19-phase-3c-automated-notifications-and-integration-pipeline.md)                                         | Phase 3C: Automated Notifications & Integration Pipeline    | Complete | Resend & Telegram Notifications               |
+| [20-phase-3d-public-quote-tracking-portal](20-phase-3d-public-quote-tracking-portal.md)                                                                                 | Phase 3D: Public Quote Tracking Portal                      | Complete | Public Quote Tracking Portal (`/quote/track`) |
+| [21-phase-3-refinements-and-bug-fixes](21-phase-3-refinements-and-bug-fixes.md)                                                                                         | Phase 3: Quote System Refinements & Bug Fixes               | Complete | Quote System Refinements & UI Fixes           |
+| [22-supabase-rls-security-and-index-optimizations](22-supabase-rls-security-and-index-optimizations.md)                                                                 | Supabase RLS Security & Performance Index Optimizations     | Complete | Database RLS & Indexes                        |
+| [23-contact-and-service-inquiry-automated-notifications](23-contact-and-service-inquiry-automated-notifications.md)                                                     | Contact & Service Inquiry Automated Notifications           | Complete | Contact Form & Notifications                  |
+| [24-pre-commit-audit-polish-and-code-deduplication](24-pre-commit-audit-polish-and-code-deduplication.md)                                                               | Pre-Commit Audit Polish & Code Deduplication                | Complete | Server Actions, Lib Utilities, Marquee        |
+| [25-security-vulnerability-overrides](25-security-vulnerability-overrides.md)                                                                                         | Transitive Security Vulnerability Overrides                 | Complete | Package Management (`package.json`)           |
