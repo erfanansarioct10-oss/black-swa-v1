@@ -300,6 +300,7 @@ Before completing UI work verify:
 Always:
 
 - Use Drizzle
+- Read and analyze SQL migration files in `supabase/migrations/` for any backend or database task
 - Use transactions where appropriate
 - Keep queries inside server code
 - Validate data before writing

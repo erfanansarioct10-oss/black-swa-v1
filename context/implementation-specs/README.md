@@ -195,3 +195,13 @@ When working on a feature or review fix:
 | [23-contact-and-service-inquiry-automated-notifications](23-contact-and-service-inquiry-automated-notifications.md)                                                     | Contact & Service Inquiry Automated Notifications           | Complete | Contact Form & Notifications                  |
 | [24-pre-commit-audit-polish-and-code-deduplication](24-pre-commit-audit-polish-and-code-deduplication.md)                                                               | Pre-Commit Audit Polish & Code Deduplication                | Complete | Server Actions, Lib Utilities, Marquee        |
 | [25-security-vulnerability-overrides](25-security-vulnerability-overrides.md)                                                                                         | Transitive Security Vulnerability Overrides                 | Complete | Package Management (`package.json`)           |
+| [26-phase-4a-responsive-admin-layout-and-shell](26-phase-4a-responsive-admin-layout-and-shell.md)                                                                     | Phase 4A Responsive Admin Layout & Collapsible Sidebar Shell| Complete | Admin Shell (`app/admin/layout.tsx`)          |
+| [27-phase-4a-clerk-role-authorization-guard](27-phase-4a-clerk-role-authorization-guard.md)                                                           | Phase 4A Server-Side Clerk Role Guard & Security            | Complete | Security Architecture (`lib/admin-auth.ts`)  |
+| [28-phase-4b-executive-metrics-and-activity-overview](28-phase-4b-executive-metrics-and-activity-overview.md)                           | Phase 4B Executive Metrics & Activity Overview Dashboard   | Complete | Executive Dashboard (`app/admin/page.tsx`) |
+| [29-phase-4c-advanced-analytics-and-visualizations](29-phase-4c-advanced-analytics-and-visualizations.md)               | Phase 4C Advanced Analytics, Funnel Visualizations & Data Insights | In Progress | Executive Analytics (`app/admin/analytics/page.tsx`) |
+
+
+
+
+
+

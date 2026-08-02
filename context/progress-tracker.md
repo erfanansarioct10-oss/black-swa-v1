@@ -4,11 +4,12 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`)
+- Phase 4C: Advanced Analytics & Visualizations (`/admin/analytics`)
 
-## Current Goal
 
-- Implement Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
+### Current Goal
+
+- Implement Phase 4C: Advanced Analytics & Visualizations (`/admin/analytics`).
 
 ## Completed
 
@@ -26,16 +27,23 @@ Update this file after every meaningful implementation change.
 - Completed Homepage Popular Services UI Alignment (Added "Read More" detail buttons matching `/services` grid, linking to `/services/[slug]`).
 - Completed React Hydration Mismatch Fixes & Service Button Styling (Added `suppressHydrationWarning` to `html`/`body`, fixed deterministic `localStorage`/`sessionStorage` state initialization in `QuoteCartProvider` and `QuoteRequest`, updated "Inquire About Service" buttons to solid black).
 - Completed CodeRabbit PR Review Findings Resolution (Addressed 34 security, correctness, and code quality items: sanitized server action error returns, gated Turnstile test keys to non-production, tightened Supabase RLS policies, enforced Clerk role-based middleware protection, added DB expression indexes for quote lookups, fixed timeline completed state, fixed RFQ notes toggle isolation, added Zod .max() limits, deduplicated Telegram dispatch helper, fixed localStorage stale closures, and updated documentation/metadata).
+- Structured Phase 4 Admin Portal into 4 sub-phases (4A: Admin Shell & Security, 4B: Executive Metrics & Activity Overview, 4C: Advanced Analytics & Visualizations, 4D: Command Center & System Diagnostics) in [`docs/feature-roadmap.md`](../docs/feature-roadmap.md).
+- Completed Phase 4A Responsive Admin Layout & Shell (`app/admin/layout.tsx`, `constants/admin-navigation.ts`, `AdminShellProvider` with `useSyncExternalStore` hydration safety, `AdminSidebar` with collapsible desktop width, `AdminMobileNav` drawer sheet, `AdminHeader` with breadcrumbs & Clerk UserButton; see spec in [`context/implementation-specs/26-phase-4a-responsive-admin-layout-and-shell.md`](./implementation-specs/26-phase-4a-responsive-admin-layout-and-shell.md)).
+- Completed Phase 4A Sub-Task 2 Server-Side Clerk Role Guard & Security Architecture (`lib/admin-auth.ts`, `app/admin/unauthorized/page.tsx`, `proxy.ts`, `app/admin/layout.tsx`, `components/admin/admin-header.tsx`; see spec in [`context/implementation-specs/27-phase-4a-clerk-role-authorization-guard.md`](./implementation-specs/27-phase-4a-clerk-role-authorization-guard.md)).
+- Completed Phase 4B Executive Metrics & Activity Overview Dashboard (`app/admin/page.tsx`, `components/admin/pending-directives-alert.tsx`, `components/admin/recent-activity-stream.tsx`; see spec in [`context/implementation-specs/28-phase-4b-executive-metrics-and-activity-overview.md`](./implementation-specs/28-phase-4b-executive-metrics-and-activity-overview.md)).
 
 ## In Progress
 
-- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
+- Phase 4C: Advanced Analytics & Visualizations (`/admin/analytics`; see spec in [`context/implementation-specs/29-phase-4c-advanced-analytics-and-visualizations.md`](./implementation-specs/29-phase-4c-advanced-analytics-and-visualizations.md)).
+
 
 
 
 ## Next Up
 
-- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
+- Phase 4D: Command Center & System Diagnostics (`/admin/diagnostics`).
+
+
 
 
 
