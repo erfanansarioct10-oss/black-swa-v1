@@ -4,53 +4,40 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- Phase 2: Public Marketing Website
+- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`)
 
 ## Current Goal
 
-- Completed About Us page implementation and CodeRabbit review resolutions.
+- Implement Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
 
 ## Completed
 
-- Installed `zod`, `@clerk/nextjs`, `@supabase/supabase-js`, `drizzle-orm`, `postgres`, `resend`, `ai`, `@marsidev/react-turnstile`, `lucide-react`, `clsx`, `tailwind-merge`, `class-variance-authority`.
-- Installed `drizzle-kit` and `supabase` CLI in devDependencies.
-- Created `components.json` for `shadcn/ui` configuration and installed primitives (`button`, `sheet`, `badge`, `dropdown-menu`, `navigation-menu`).
-- Created `lib/utils.ts` (`cn` helper).
-- Created `drizzle.config.ts`, `db/schema.ts`, and `db/index.ts`.
-- Initialized and started fresh local Supabase container stack via Docker Desktop (`pnpm exec supabase start`).
-- Executed `pnpm db:push` to verify Drizzle ORM schema syncing with local Postgres (`postgresql://postgres:postgres@127.0.0.1:54322/postgres`).
-- Configured `app/globals.css` with official Black Swan metallic gray color palette (Onyx `#1c1e24`, Charcoal `#30333a`, Marble `#434952`, Granite `#575e67`, Pewter `#767f88`, Slate `#9da3a9`) and shadcn/ui CSS variable tokens.
-- Implemented `components/layout/main-header.tsx` (sticky opaque header with logo, nav links, Quote Cart badge, and CTA button).
-- Implemented touch-friendly `components/layout/mobile-nav.tsx` slide-out drawer using `shadcn/ui Sheet`.
-- Implemented 4-column responsive `components/layout/public-footer.tsx`.
-- Created public layout wrapper `app/(public)/layout.tsx` and page shells: Homepage (`app/(public)/page.tsx`), About (`app/(public)/about/page.tsx`), Products (`app/(public)/products/page.tsx`), Services (`app/(public)/services/page.tsx`), Contact (`app/(public)/contact/page.tsx`), and Quote (`app/(public)/quote/page.tsx`).
-- Authored detailed implementation specification: `context/implementation-specs/01-fix-coderabbit-pr-review-findings.md`.
-- Resolved all 11 CodeRabbit PR #1 review findings across layout components, accessibility, quote cart state, contact form, legal routes, ESLint globs, and progress documentation.
-- Implemented homepage dual-row brand marquee section (`context/implementation-specs/02-homepage-brand-marquee-section.md`) featuring 18 compressed WebP brand logos (`public/brands/`), priority preloading, 70s slow-motion pure CSS keyframe tracks (`animate-marquee`, `animate-marquee-reverse`), navbar accent cards (`bg-accent`), trust badge header, and subtle blue ambient radial glow. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Implemented homepage certifications & compliance section (`context/implementation-specs/04-homepage-certifications-section.md`) featuring 6 medical & broadcast standards (ISO 13485, IEC 60601-1, CE MDR, FDA Registered, ISO 9001, FCC/RoHS), strongly-typed dataset (`constants/certifications.ts`), dynamic icon mapping, optional custom dataset prop for future CMS/DB replacement, responsive card grid, and accessible detail `Dialog` modal. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Implemented Stage 1 Foundational SEO Architecture (`context/implementation-specs/05-seo-compliance-and-technical-optimization.md`) introducing `constants/site.ts`, `lib/seo.ts`, `components/seo/json-ld.tsx`, `components/ui/breadcrumbs.tsx`, dynamic metadata routes `app/robots.ts` (`robots.txt`) and `app/sitemap.ts` (`sitemap.xml`), root layout metadata defaults (`metadataBase`, title template, OpenGraph, Twitter cards), page metadata exports, and Schema.org JSON-LD structured data across all public routes. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Implemented homepage Featured Products section (`context/implementation-specs/06-homepage-featured-products-section.md`) featuring a Spotlight + Card Grid layout with clean white background and charcoal contrast cards (`bg-brand-onyx` / `bg-brand-charcoal`, `border-brand-marble`), extended product dataset with key technical specifications and compliance standards (ISO 13485, IEC 60601-1, DICOM Part 14, SMPTE ST 2110), seamless Quote Cart state integration with checkmark feedback, and hardware catalog CTA. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Implemented homepage Popular Services section (`context/implementation-specs/07-homepage-popular-services-section.md`) featuring a 2x2 Feature List Card Grid (`grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8`), metallic charcoal cards (`bg-brand-charcoal`, `border-brand-marble/80`), icon seals (`Activity`, `Server`, `Cpu`, `Wrench`), SLA badges (HIPAA & DICOM Certified, SMPTE ST 2110 Ready, 4-Hour On-Site SLA), key deliverables bullet lists, and direct contact inquiry links (`/contact?service=...` with `cursor-pointer`). Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Implemented homepage Enterprise Advantage & Trust Grid section (`context/implementation-specs/08-homepage-enterprise-advantage-section.md`) featuring a 4-column card grid (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8`), metallic charcoal cards with visual top header images (`public/advantages/*.webp`), green metric badges (Tier-1 Provenance, Guaranteed Uptime, Zero Setup Required, Climate Controlled), and core guarantee bullet points. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Implemented homepage 4-Step Enterprise Procurement Workflow section (`context/implementation-specs/09-homepage-procurement-workflow-section.md`) featuring a 4-step horizontal card grid (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8`), metallic charcoal cards (`bg-brand-charcoal`, `border-brand-marble/80`), step badges (`01` to `04`), step icons (`FileText`, `Cpu`, `ShieldCheck`, `Truck`), B2B deliverable badges, and desktop process connector track. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Implemented homepage Customer Reviews & Testimonials section (`context/implementation-specs/10-homepage-customer-reviews-section.md`) featuring executive avatars, industry filtering, and deployment badges. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Resolved all 17 latest CodeRabbit PR review findings (`context/implementation-specs/11-fix-coderabbit-latest-pr-review-findings.md`) including FeatureCard abstraction, form handlers & hooks, accessible quantity/cart controls, SEO title template deduplication, robots environment check, and CSS scoping. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Permanently removed the top contact utility bar (`components/layout/top-utility-bar.tsx`) per user directive from `app/(public)/layout.tsx`.
-- Implemented homepage "Get in Touch" section (`components/sections/get-in-touch-section.tsx`) positioned immediately following Customer Reviews section, featuring an uppercase main heading, metallic dark charcoal cards (`bg-brand-charcoal text-white border border-brand-marble/80`) matching the Customer Reviews card aesthetic, a dark-variant reusable client inquiry form (`components/contact/inquiry-form.tsx`) on the left side, and an embedded 1:1 square Google Map (`27.688477, 85.344228`) with "Full Map" link on the right side (floating "Get Directions" overlay removed per user feedback). Refactored `ContactForm` on `/contact` to share the extracted `InquiryForm` component. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Implemented comprehensive Services Page & 15 Service Detail / Blog System (`context/implementation-specs/15-services-page-and-detail-blog-system.md`). Expanded `constants/services.ts` with 15 specialized broadcast & media services, AI-generated image assets, category filter tabs (`ServicesClientGrid`), dynamic SSG detail blog pages (`/services/[slug]`), prefilled `InquiryForm` integration, and Schema.org `Service` & `TechArticle` JSON-LD. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
-- Resolved all CodeRabbit PR review findings for Services System (`context/implementation-specs/16-fix-coderabbit-services-page-findings.md`). Corrected copy typos in `constants/services.ts`, dynamic count binding in `/services` hero, WAI-ARIA `aria-pressed` filter accessibility, `FAQPage` JSON-LD structured data on `/services/[slug]`, accurate sitemap `lastModified` dates, and clean service query fallbacks. Verified 100% clean (`pnpm run lint` & `pnpm run build`).
+- Completed Phase 2: Public Marketing Website (Homepage, About, Products, Services, Contact, Legal, SEO architecture).
+- Structured Phase 3 Quote System into 4 step-by-step sub-phases (3A: Schema & Server Actions, 3B: Cart & Multi-Step Wizard UI, 3C: Resend & Telegram Notifications, 3D: Public Quote Tracking Portal) in [`docs/feature-roadmap.md`](../docs/feature-roadmap.md).
+- Completed Phase 3A: Database Schema & Server Actions (`quotes` & `quote_items` Drizzle ORM tables in `db/schema.ts`, Zod validation schemas in `schemas/quote.ts`, Server Actions in `actions/quote.ts`, and `pnpm db:push` migration; see spec in [`context/implementation-specs/17-phase-3a-quote-database-schema-and-server-actions.md`](./implementation-specs/17-phase-3a-quote-database-schema-and-server-actions.md)).
+- Completed Phase 3B: Interactive Quote Cart & Multi-Step RFQ Wizard UI (`QuoteCartProvider` with item technical specs/notes, 3-step RFQ wizard with Cloudflare Turnstile anti-bot verification, Zod validation, and `createQuoteAction` integration; see spec in [`context/implementation-specs/18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui.md`](./implementation-specs/18-phase-3b-interactive-quote-cart-and-multi-step-rfq-wizard-ui.md)).
+- Completed Phase 3C: Automated Notifications & Integration Pipeline (Resend branded customer HTML email receipts & Telegram Bot API management alerts with non-blocking async dispatch; see spec in [`context/implementation-specs/19-phase-3c-automated-notifications-and-integration-pipeline.md`](./implementation-specs/19-phase-3c-automated-notifications-and-integration-pipeline.md)).
+- Completed Phase 3D: Public Quote Tracking Portal (Search lookup page at `/quote/track`, dynamic status tracking page at `/quote/track/[referenceId]`, 5-stage visual stepper timeline, account manager contact card, equipment breakdown table, and printable proposal view; see spec in [`context/implementation-specs/20-phase-3d-public-quote-tracking-portal.md`](./implementation-specs/20-phase-3d-public-quote-tracking-portal.md)).
+- Completed Phase 3 Refinement & Bug Fixes (Email domain url fallback fix, PDF proposal print media layout isolation via `print:hidden`, Nepalese Rupee NPR budget ranges, Telegram Bot API HTML formatting without backslashes, and global Track Quote navigation buttons; see spec in [`context/implementation-specs/21-phase-3-refinements-and-bug-fixes.md`](./implementation-specs/21-phase-3-refinements-and-bug-fixes.md)).
+- Completed Supabase RLS Security & Performance Index Optimizations (Enabled RLS on `quotes`, `quote_items`, `profiles`, configured access policies, added foreign key index `idx_quote_items_quote_id` and user index `idx_quotes_clerk_user_id`; see spec in [`context/implementation-specs/22-supabase-rls-security-and-index-optimizations.md`](./implementation-specs/22-supabase-rls-security-and-index-optimizations.md)).
+- Completed Contact & Service Inquiry Automated Notifications & Database Persistence (Supabase PostgreSQL `contact_inquiries` table, Resend Email receipts, Telegram Bot Alerts, Server Action `submitContactInquiryAction`, and Next.js 16 `after()` background dispatch; see spec in [`context/implementation-specs/23-contact-and-service-inquiry-automated-notifications.md`](./implementation-specs/23-contact-and-service-inquiry-automated-notifications.md)).
+- Completed Transitive Security Vulnerability Overrides (see spec in [`context/implementation-specs/25-security-vulnerability-overrides.md`](./implementation-specs/25-security-vulnerability-overrides.md)).
+- Completed Clerk Middleware Refactoring (Replaced deprecated `createRouteMatcher` with native URL pathname checking in `proxy.ts`).
+- Completed Homepage Popular Services UI Alignment (Added "Read More" detail buttons matching `/services` grid, linking to `/services/[slug]`).
+- Completed React Hydration Mismatch Fixes & Service Button Styling (Added `suppressHydrationWarning` to `html`/`body`, fixed deterministic `localStorage`/`sessionStorage` state initialization in `QuoteCartProvider` and `QuoteRequest`, updated "Inquire About Service" buttons to solid black).
+- Completed CodeRabbit PR Review Findings Resolution (Addressed 34 security, correctness, and code quality items: sanitized server action error returns, gated Turnstile test keys to non-production, tightened Supabase RLS policies, enforced Clerk role-based middleware protection, added DB expression indexes for quote lookups, fixed timeline completed state, fixed RFQ notes toggle isolation, added Zod .max() limits, deduplicated Telegram dispatch helper, fixed localStorage stale closures, and updated documentation/metadata).
 
 ## In Progress
 
-- None
-
-
+- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
 
 
 
 ## Next Up
 
-- Product Catalog Data Models & Dynamic Page Enhancements
+- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
+
+
 
 ## Open Questions
 

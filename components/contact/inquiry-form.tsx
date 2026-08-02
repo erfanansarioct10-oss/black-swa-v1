@@ -1,7 +1,10 @@
 "use client";
 
-import { Send, CheckCircle2, AlertCircle } from "lucide-react";
-import { useSimulatedFormSubmit } from "@/hooks/use-simulated-form-submit";
+import React, { useState } from "react";
+import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { submitContactInquiryAction } from "@/actions/contact";
+import { contactInquirySchema } from "@/schemas/contact";
 import { cn } from "@/lib/utils";
 
 interface InquiryFormProps {
@@ -10,6 +13,7 @@ interface InquiryFormProps {
   className?: string;
   variant?: "light" | "dark";
   defaultService?: string;
+  serviceSlug?: string;
 }
 
 export function InquiryForm({
@@ -18,28 +22,83 @@ export function InquiryForm({
   className,
   variant = "light",
   defaultService,
+  serviceSlug,
 }: InquiryFormProps) {
   const isDark = variant === "dark";
+  const turnstileSiteKey =
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+    (process.env.NODE_ENV !== "production" ? "1x00000000000000000000AA" : "");
 
-  const {
-    formData,
-    submitting,
-    submitted,
-    errorMessage,
-    handleChange,
-    handleSubmit,
-    handleReset,
-  } = useSimulatedFormSubmit({
-    initialValues: {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    companyName: "",
+    email: "",
+    phone: "",
+    message: defaultService
+      ? `I would like to inquire about system integration, architecture, and pricing for ${defaultService}.`
+      : "",
+  });
+
+  const [turnstileToken, setTurnstileToken] = useState<string | undefined>(undefined);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errorMessage) setErrorMessage(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage(null);
+
+    const payload = {
+      ...formData,
+      serviceSlug: serviceSlug || defaultService,
+      turnstileToken,
+    };
+
+    const clientValidation = contactInquirySchema.safeParse(payload);
+    if (!clientValidation.success) {
+      setErrorMessage(
+        clientValidation.error.issues[0]?.message || "Please check your input details."
+      );
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const response = await submitContactInquiryAction(payload);
+      if (response.success) {
+        setSubmitted(true);
+      } else {
+        setErrorMessage(response.error || "Failed to submit inquiry.");
+      }
+    } catch (err) {
+      console.error("[Inquiry Submission Exception]:", err);
+      setErrorMessage("An unexpected error occurred. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleReset = () => {
+    setFormData({
       fullName: "",
       companyName: "",
       email: "",
       phone: "",
-      message: defaultService
-        ? `I would like to inquire about system integration, architecture, and pricing for ${defaultService}.`
-        : "",
-    },
-  });
+      message: "",
+    });
+    setTurnstileToken(undefined);
+    setErrorMessage(null);
+    setSubmitted(false);
+  };
 
   return (
     <div className={cn("space-y-6", className)}>
@@ -52,7 +111,7 @@ export function InquiryForm({
             Message Received
           </h3>
           <p className={cn("max-w-md mx-auto text-sm sm:text-base leading-relaxed", isDark ? "text-slate-300" : "text-slate-600")}>
-            Thank you for contacting Black Swan International. A dedicated technical accounts manager will review your request and respond within 1 business day.
+            Thank you for contacting Black Swan International. A confirmation receipt has been sent to your email, and a dedicated technical account manager will respond within 1 business day.
           </p>
           <button
             onClick={handleReset}
@@ -195,6 +254,17 @@ export function InquiryForm({
             />
           </div>
 
+          {turnstileSiteKey ? (
+            <div className="flex justify-center py-2">
+              <Turnstile
+                siteKey={turnstileSiteKey}
+                onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken(undefined)}
+                onError={() => setTurnstileToken(undefined)}
+              />
+            </div>
+          ) : null}
+
           <button
             type="submit"
             disabled={submitting}
@@ -206,7 +276,10 @@ export function InquiryForm({
             )}
           >
             {submitting ? (
-              <span>Sending Inquiry...</span>
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>Sending Inquiry...</span>
+              </>
             ) : (
               <>
                 <Send className={cn("h-4 w-4", isDark ? "text-blue-600" : "text-blue-400")} />

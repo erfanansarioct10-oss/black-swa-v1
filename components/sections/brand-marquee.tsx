@@ -67,7 +67,7 @@ export function BrandMarquee() {
             <BrandItem
               key={`r1-${logo.id}-${idx}`}
               brand={logo}
-              priority={idx < 3}
+              priority={false}
             />
           ))}
         </div>
