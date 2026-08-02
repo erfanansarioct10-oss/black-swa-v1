@@ -25,6 +25,7 @@ Update this file after every meaningful implementation change.
 - Completed Clerk Middleware Refactoring (Replaced deprecated `createRouteMatcher` with native URL pathname checking in `proxy.ts`).
 - Completed Homepage Popular Services UI Alignment (Added "Read More" detail buttons matching `/services` grid, linking to `/services/[slug]`).
 - Completed React Hydration Mismatch Fixes & Service Button Styling (Added `suppressHydrationWarning` to `html`/`body`, fixed deterministic `localStorage`/`sessionStorage` state initialization in `QuoteCartProvider` and `QuoteRequest`, updated "Inquire About Service" buttons to solid black).
+- Completed CodeRabbit PR Review Findings Resolution (Addressed 34 security, correctness, and code quality items: sanitized server action error returns, gated Turnstile test keys to non-production, tightened Supabase RLS policies, enforced Clerk role-based middleware protection, added DB expression indexes for quote lookups, fixed timeline completed state, fixed RFQ notes toggle isolation, added Zod .max() limits, deduplicated Telegram dispatch helper, fixed localStorage stale closures, and updated documentation/metadata).
 
 ## In Progress
 

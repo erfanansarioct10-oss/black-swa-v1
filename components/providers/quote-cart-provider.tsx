@@ -50,7 +50,11 @@ const subscribeQuoteCart = (callback: () => void) => {
 
 const getQuoteCartSnapshot = (): string => {
   if (typeof window === "undefined") return "[]";
-  return localStorage.getItem(STORAGE_KEY) || "[]";
+  try {
+    return localStorage.getItem(STORAGE_KEY) || "[]";
+  } catch {
+    return "[]";
+  }
 };
 
 const getQuoteCartServerSnapshot = (): string => "[]";
@@ -88,21 +92,33 @@ export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const getCurrentItemsSnapshot = (): QuoteCartItem[] => {
+    try {
+      const snapshot = getQuoteCartSnapshot();
+      const parsed: unknown = JSON.parse(snapshot);
+      return Array.isArray(parsed) ? parsed.filter(isQuoteCartItem) : [];
+    } catch {
+      return [];
+    }
+  };
+
   const addItem = (product: { id: string; name: string; sku: string; category: string }) => {
-    const existing = items.find((item) => item.id === product.id);
+    const current = getCurrentItemsSnapshot();
+    const existing = current.find((item) => item.id === product.id);
     let updated: QuoteCartItem[];
     if (existing) {
-      updated = items.map((item) =>
+      updated = current.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
     } else {
-      updated = [...items, { ...product, quantity: 1 }];
+      updated = [...current, { ...product, quantity: 1 }];
     }
     saveItemsToStorage(updated);
   };
 
   const removeItem = (id: string) => {
-    const updated = items.filter((item) => item.id !== id);
+    const current = getCurrentItemsSnapshot();
+    const updated = current.filter((item) => item.id !== id);
     saveItemsToStorage(updated);
   };
 
@@ -111,12 +127,14 @@ export function QuoteCartProvider({ children }: { children: React.ReactNode }) {
       removeItem(id);
       return;
     }
-    const updated = items.map((item) => (item.id === id ? { ...item, quantity } : item));
+    const current = getCurrentItemsSnapshot();
+    const updated = current.map((item) => (item.id === id ? { ...item, quantity } : item));
     saveItemsToStorage(updated);
   };
 
   const updateNotes = (id: string, notes: string) => {
-    const updated = items.map((item) => (item.id === id ? { ...item, notes } : item));
+    const current = getCurrentItemsSnapshot();
+    const updated = current.map((item) => (item.id === id ? { ...item, notes } : item));
     saveItemsToStorage(updated);
   };
 

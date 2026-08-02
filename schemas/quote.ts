@@ -8,7 +8,7 @@ export const quoteItemSchema = z.object({
     .number()
     .int("Quantity must be a whole number")
     .min(1, "Quantity must be at least 1"),
-  notes: z.string().optional(),
+  notes: z.string().max(2000, "Notes cannot exceed 2000 characters").optional(),
 });
 
 export const createQuoteSchema = z.object({
@@ -27,10 +27,10 @@ export const createQuoteSchema = z.object({
     .trim()
     .min(7, "Phone number must be at least 7 digits")
     .max(25, "Phone number cannot exceed 25 characters"),
-  companyName: z.string().trim().optional(),
-  projectScope: z.string().trim().optional(),
-  budgetRange: z.string().trim().optional(),
-  timeline: z.string().trim().optional(),
+  companyName: z.string().trim().max(150, "Company name cannot exceed 150 characters").optional(),
+  projectScope: z.string().trim().max(5000, "Project scope cannot exceed 5000 characters").optional(),
+  budgetRange: z.string().trim().max(100, "Budget range cannot exceed 100 characters").optional(),
+  timeline: z.string().trim().max(100, "Timeline cannot exceed 100 characters").optional(),
   turnstileToken: z.string().optional(),
   items: z
     .array(quoteItemSchema)

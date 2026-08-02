@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import { index, integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 // Starter table for Clerk profiles sync
@@ -23,13 +24,20 @@ export const quotes = pgTable("quotes", {
   projectScope: text("project_scope"),
   budgetRange: text("budget_range"),
   timeline: text("timeline"),
-  status: text("status").notNull().default("pending"),
+  status: text("status", {
+    enum: ["pending", "under_review", "manager_assigned", "quoted", "completed", "rejected"],
+  })
+    .notNull()
+    .default("pending"),
   assignedManagerId: text("assigned_manager_id"),
   adminNotes: text("admin_notes"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [
   index("idx_quotes_clerk_user_id").on(table.clerkUserId),
+  index("idx_quotes_status").on(table.status),
+  index("idx_quotes_upper_reference_id").on(sql`upper(${table.referenceId})`),
+  index("idx_quotes_lower_email").on(sql`lower(${table.email})`),
 ]);
 
 // Quote Line Items table
@@ -57,7 +65,11 @@ export const contactInquiries = pgTable("contact_inquiries", {
   phone: text("phone"),
   serviceSlug: text("service_slug"),
   message: text("message").notNull(),
-  status: text("status").notNull().default("new"),
+  status: text("status", {
+    enum: ["new", "in_progress", "resolved", "archived"],
+  })
+    .notNull()
+    .default("new"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [

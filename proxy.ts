@@ -6,7 +6,12 @@ export default clerkMiddleware(async (auth, req) => {
   const isAdminLoginRoute = pathname.startsWith("/admin/login");
 
   if (isAdminRoute && !isAdminLoginRoute) {
-    await auth.protect();
+    await auth.protect((has) => {
+      if (process.env.NODE_ENV !== "production") {
+        return true;
+      }
+      return has({ role: "admin" }) || has({ role: "org:admin" });
+    });
   }
 });
 

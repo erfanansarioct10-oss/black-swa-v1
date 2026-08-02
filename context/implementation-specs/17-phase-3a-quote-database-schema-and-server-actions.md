@@ -21,11 +21,11 @@ List of target files to create and modify:
 
 | #   | Target File | Action Required |
 | --- | --- | --- |
-| 1   | [`db/schema.ts`](file:///c:/black-swan-v1/db/schema.ts) | **[MODIFY]** Define `quotes` and `quote_items` tables using Drizzle ORM pgTable syntax. |
-| 2   | [`schemas/quote.ts`](file:///c:/black-swan-v1/schemas/quote.ts) | **[NEW]** Create Zod validation schemas for quote items, quote submission payloads, and tracking lookups. |
-| 3   | [`actions/quote.ts`](file:///c:/black-swan-v1/actions/quote.ts) | **[NEW]** Implement `"use server"` Server Actions for quote creation, token lookup, and reference tracking. |
-| 4   | [`types/quote.ts`](file:///c:/black-swan-v1/types/quote.ts) | **[NEW]** Export clean TypeScript interfaces and infer Zod types for backend and frontend sharing. |
-| 5   | [`context/progress-tracker.md`](file:///c:/black-swan-v1/context/progress-tracker.md) | **[MODIFY]** Update phase status and completion logs for Phase 3A. |
+| 1   | [`db/schema.ts`](../../db/schema.ts) | **[MODIFY]** Define `quotes` and `quote_items` tables using Drizzle ORM pgTable syntax. |
+| 2   | [`schemas/quote.ts`](../../schemas/quote.ts) | **[NEW]** Create Zod validation schemas for quote items, quote submission payloads, and tracking lookups. |
+| 3   | [`actions/quote.ts`](../../actions/quote.ts) | **[NEW]** Implement `"use server"` Server Actions for quote creation, token lookup, and reference tracking. |
+| 4   | [`types/quote.ts`](../../types/quote.ts) | **[NEW]** Export clean TypeScript interfaces and infer Zod types for backend and frontend sharing. |
+| 5   | [`context/progress-tracker.md`](../progress-tracker.md) | **[MODIFY]** Update phase status and completion logs for Phase 3A. |
 
 ---
 

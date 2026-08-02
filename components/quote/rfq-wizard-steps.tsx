@@ -36,7 +36,7 @@ interface RFQStepEquipmentProps {
 
 export function RFQStepEquipment({ onNext }: RFQStepEquipmentProps) {
   const { items, itemCount, updateQuantity, updateNotes, removeItem, clearCart } = useQuoteCart();
-  const [activeNotesId, setActiveNotesId] = useState<string | null>(null);
+  const [expandedItemIds, setExpandedItemIds] = useState<Record<string, boolean>>({});
 
   const handleClearCartWithConfirm = () => {
     if (window.confirm("Are you sure you want to clear all items from your quotation cart?")) {
@@ -48,24 +48,21 @@ export function RFQStepEquipment({ onNext }: RFQStepEquipmentProps) {
     return (
       <div className="p-8 sm:p-12 bg-card border border-border rounded-2xl text-center max-w-xl mx-auto space-y-5 shadow-sm">
         <div className="w-14 h-14 bg-muted text-muted-foreground rounded-full flex items-center justify-center mx-auto">
-          <ShoppingCart className="h-7 w-7" />
+          <ShoppingCart className="h-7 w-7 text-muted-foreground" />
         </div>
-        <div className="space-y-1">
-          <h2 className="text-xl font-bold text-foreground">
-            Your Quote Cart is Empty
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            Browse our medical imaging and broadcasting computer hardware catalog to add items for quotation.
+        <div className="space-y-2">
+          <h2 className="text-xl font-bold text-foreground">Your Quote Cart is Empty</h2>
+          <p className="text-sm text-muted-foreground max-w-md mx-auto">
+            Explore our commercial catalog of medical workstations, telehealth gateways, and broadcast processing hardware to start building your quote.
           </p>
         </div>
-        <div>
-          <Link
-            href="/products"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
-          >
-            Browse Products Catalog
-          </Link>
-        </div>
+        <Link
+          href="/products"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-bold rounded-xl text-sm transition-all hover:bg-primary/90 shadow-sm"
+        >
+          Browse Equipment Catalog
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
     );
   }
@@ -75,11 +72,11 @@ export function RFQStepEquipment({ onNext }: RFQStepEquipmentProps) {
       <div className="flex items-center justify-between pb-3 border-b border-border">
         <div>
           <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
-            <FileText className="h-5 w-5 text-primary" />
-            Selected Equipment Items ({itemCount})
+            <ShoppingCart className="h-5 w-5 text-primary" />
+            Equipment Line Items ({itemCount})
           </h2>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Review quantities and specify custom technical requirements per line item.
+            Adjust quantities or attach technical specifications and deployment requirements to line items.
           </p>
         </div>
 
@@ -95,7 +92,7 @@ export function RFQStepEquipment({ onNext }: RFQStepEquipmentProps) {
       <div className="space-y-4">
         {items.map((item: QuoteCartItem) => {
           const hasNotes = Boolean(item.notes && item.notes.trim().length > 0);
-          const isNotesExpanded = activeNotesId === item.id || (activeNotesId === null && hasNotes);
+          const isNotesExpanded = expandedItemIds[item.id] ?? hasNotes;
 
           return (
             <div
@@ -157,7 +154,10 @@ export function RFQStepEquipment({ onNext }: RFQStepEquipmentProps) {
                 <button
                   type="button"
                   onClick={() =>
-                    setActiveNotesId(isNotesExpanded ? `collapsed-${item.id}` : item.id)
+                    setExpandedItemIds((prev) => ({
+                      ...prev,
+                      [item.id]: !isNotesExpanded,
+                    }))
                   }
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
                 >
@@ -436,7 +436,7 @@ export function RFQStepDetails({ formData, onChange, onNext, onBack }: RFQStepDe
 
 interface RFQStepReviewProps {
   formData: Partial<CreateQuoteSchemaType>;
-  onTurnstileSuccess: (token: string) => void;
+  onTurnstileSuccess: (token?: string) => void;
   onSubmit: () => void;
   onBack: () => void;
   submitting: boolean;
@@ -455,7 +455,8 @@ export function RFQStepReview({
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const turnstileSiteKey =
-    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+    (process.env.NODE_ENV !== "production" ? "1x00000000000000000000AA" : "");
 
   return (
     <div className="space-y-6">
@@ -566,6 +567,8 @@ export function RFQStepReview({
             <Turnstile
               siteKey={turnstileSiteKey}
               onSuccess={(token) => onTurnstileSuccess(token)}
+              onExpire={() => onTurnstileSuccess(undefined)}
+              onError={() => onTurnstileSuccess(undefined)}
             />
           </div>
         ) : (

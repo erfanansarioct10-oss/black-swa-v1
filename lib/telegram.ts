@@ -17,33 +17,67 @@ export interface SendTelegramQuoteAlertParams {
   }>;
 }
 
+async function sendTelegramMessage(
+  text: string,
+  devContext: string
+): Promise<{ success: boolean; error?: string }> {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
+    console.warn(
+      `[Telegram Dev Fallback] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured. ${devContext} skipped in local environment.`
+    );
+    return { success: true };
+  }
+
+  try {
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: "HTML",
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("[Telegram Bot API Error]:", errorText);
+      return { success: false, error: `Telegram API returned status ${response.status}` };
+    }
+
+    return { success: true };
+  } catch (err) {
+    console.error("[Telegram Alert Exception]:", err);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : "Unknown Telegram alert error",
+    };
+  }
+}
+
 /**
  * Sends an instant management alert to the internal Telegram channel via Telegram Bot API.
  */
 export async function sendTelegramQuoteAlert(
   params: SendTelegramQuoteAlertParams
 ): Promise<{ success: boolean; error?: string }> {
-  try {
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+  const itemsSummary = params.items
+    .map(
+      (item, idx) =>
+        `  ${idx + 1}. <b>${escapeHtml(item.productTitle)}</b> (x${item.quantity}) - <i>${escapeHtml(
+          item.category
+        )}</i>${item.notes ? `\n     └ Specs: ${escapeHtml(item.notes)}` : ""}`
+    )
+    .join("\n");
 
-    if (!botToken || !chatId) {
-      console.warn(
-        `[Telegram Dev Fallback] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured. Alert for ${params.referenceId} skipped in local environment.`
-      );
-      return { success: true };
-    }
-
-    const itemsSummary = params.items
-      .map(
-        (item, idx) =>
-          `  ${idx + 1}. <b>${escapeHtml(item.productTitle)}</b> (x${item.quantity}) - <i>${escapeHtml(
-            item.category
-          )}</i>${item.notes ? `\n     └ Specs: ${escapeHtml(item.notes)}` : ""}`
-      )
-      .join("\n");
-
-    const messageText = `
+  const messageText = `
 🚨 <b>NEW B2B QUOTATION REQUEST</b>
 
 📌 <b>Reference ID:</b> <code>${escapeHtml(params.referenceId)}</code>
@@ -61,37 +95,8 @@ ${params.projectScope ? `📝 <b>Project Scope:</b>\n<i>${escapeHtml(params.proj
 ⏰ <b>Action Required:</b> Response SLA &lt; 2 business hours.
 `.trim();
 
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: messageText,
-        parse_mode: "HTML",
-      }),
-      signal: AbortSignal.timeout(8000),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("[Telegram Bot API Error]:", errorText);
-      return { success: false, error: `Telegram API returned status ${response.status}` };
-    }
-
-    return { success: true };
-  } catch (err) {
-    console.error("[Telegram Alert Exception]:", err);
-    return {
-      success: false,
-      error: err instanceof Error ? err.message : "Unknown Telegram alert error",
-    };
-  }
+  return sendTelegramMessage(messageText, `Alert for ${params.referenceId}`);
 }
-
-
 
 export interface SendTelegramContactInquiryParams {
   fullName: string;
@@ -108,18 +113,7 @@ export interface SendTelegramContactInquiryParams {
 export async function sendTelegramContactInquiryAlert(
   params: SendTelegramContactInquiryParams
 ): Promise<{ success: boolean; error?: string }> {
-  try {
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
-
-    if (!botToken || !chatId) {
-      console.warn(
-        `[Telegram Dev Fallback] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured. Contact inquiry alert skipped in local environment.`
-      );
-      return { success: true };
-    }
-
-    const messageText = `
+  const messageText = `
 📩 <b>NEW CONTACT / SERVICE INQUIRY</b>
 
 👤 <b>Name:</b> ${escapeHtml(params.fullName)}
@@ -132,34 +126,7 @@ ${params.phone ? `📞 <b>Phone:</b> ${escapeHtml(params.phone)}\n` : ""}${param
 ⏰ <b>Action Required:</b> Response SLA &lt; 1 business day.
 `.trim();
 
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: messageText,
-        parse_mode: "HTML",
-      }),
-      signal: AbortSignal.timeout(8000),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("[Telegram Bot API Error]:", errorText);
-      return { success: false, error: `Telegram API returned status ${response.status}` };
-    }
-
-    return { success: true };
-  } catch (err) {
-    console.error("[Telegram Alert Exception]:", err);
-    return {
-      success: false,
-      error: err instanceof Error ? err.message : "Unknown Telegram alert error",
-    };
-  }
+  return sendTelegramMessage(messageText, "Contact inquiry alert");
 }
 
 

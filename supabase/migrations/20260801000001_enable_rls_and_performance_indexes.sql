@@ -6,6 +6,9 @@
 -- ==========================================
 CREATE INDEX IF NOT EXISTS "idx_quote_items_quote_id" ON "public"."quote_items" ("quote_id");
 CREATE INDEX IF NOT EXISTS "idx_quotes_clerk_user_id" ON "public"."quotes" ("clerk_user_id");
+CREATE INDEX IF NOT EXISTS "idx_quotes_status" ON "public"."quotes" ("status");
+CREATE INDEX IF NOT EXISTS "idx_quotes_upper_reference_id" ON "public"."quotes" (upper("reference_id"));
+CREATE INDEX IF NOT EXISTS "idx_quotes_lower_email" ON "public"."quotes" (lower("email"));
 
 -- ==========================================
 -- 2. Enable Row Level Security (RLS)
@@ -17,38 +20,42 @@ ALTER TABLE "public"."quote_items" ENABLE ROW LEVEL SECURITY;
 -- ==========================================
 -- 3. RLS Policies for Profiles
 -- ==========================================
-CREATE POLICY "Allow public read access to profiles"
+CREATE POLICY "Allow authenticated read access to profiles"
   ON "public"."profiles"
   FOR SELECT
-  TO public
+  TO authenticated
   USING (true);
 
 -- ==========================================
 -- 4. RLS Policies for Quotes
 -- ==========================================
-CREATE POLICY "Allow anonymous and authenticated quote creation"
+CREATE POLICY "Allow pending quote creation"
   ON "public"."quotes"
   FOR INSERT
   TO public
-  WITH CHECK (true);
+  WITH CHECK (
+    status = 'pending'
+    AND assigned_manager_id IS NULL
+    AND admin_notes IS NULL
+  );
 
-CREATE POLICY "Allow quote lookup by reference or token"
+CREATE POLICY "Allow authenticated quote select"
   ON "public"."quotes"
   FOR SELECT
-  TO public
+  TO authenticated
   USING (true);
 
 -- ==========================================
 -- 5. RLS Policies for Quote Items
 -- ==========================================
-CREATE POLICY "Allow anonymous and authenticated quote item creation"
+CREATE POLICY "Allow quote item creation"
   ON "public"."quote_items"
   FOR INSERT
   TO public
   WITH CHECK (true);
 
-CREATE POLICY "Allow quote item lookup"
+CREATE POLICY "Allow authenticated quote item select"
   ON "public"."quote_items"
   FOR SELECT
-  TO public
+  TO authenticated
   USING (true);

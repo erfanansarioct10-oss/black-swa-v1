@@ -1,4 +1,7 @@
 import { UserButton } from "@clerk/nextjs";
+import { eq, sql } from "drizzle-orm";
+import { db } from "@/db";
+import { contactInquiries, quotes } from "@/db/schema";
 import { generatePageMetadata } from "@/lib/seo";
 
 export const metadata = generatePageMetadata({
@@ -7,7 +10,27 @@ export const metadata = generatePageMetadata({
   path: "/admin",
 });
 
-export default function AdminDashboardPage() {
+export default async function AdminDashboardPage() {
+  let pendingCount = 0;
+  let inquiriesCount = 0;
+  let dbStatus = "Connected";
+
+  try {
+    const [pendingRes] = await db
+      .select({ count: sql<number>`count(*)` })
+      .from(quotes)
+      .where(eq(quotes.status, "pending"));
+    pendingCount = Number(pendingRes?.count || 0);
+
+    const [inquiriesRes] = await db
+      .select({ count: sql<number>`count(*)` })
+      .from(contactInquiries);
+    inquiriesCount = Number(inquiriesRes?.count || 0);
+  } catch (error) {
+    console.error("Failed to query admin metrics:", error);
+    dbStatus = "Degraded";
+  }
+
   return (
     <div className="min-h-screen bg-background p-6 sm:p-8 space-y-6">
       <header className="flex items-center justify-between pb-6 border-b border-border">
@@ -27,26 +50,26 @@ export default function AdminDashboardPage() {
       <main className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
         <div className="p-6 bg-card border border-border rounded-xl space-y-2 shadow-sm">
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-            Active RFQ Requests
+            Pending RFQ Requests
           </h3>
-          <p className="text-3xl font-extrabold text-foreground">0</p>
-          <p className="text-xs text-muted-foreground">Phase 3A Schema pending execution</p>
+          <p className="text-3xl font-extrabold text-foreground">{pendingCount}</p>
+          <p className="text-xs text-muted-foreground">Quotes awaiting director assignment</p>
         </div>
 
         <div className="p-6 bg-card border border-border rounded-xl space-y-2 shadow-sm">
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-            Assigned Quotes
+            Contact Inquiries
           </h3>
-          <p className="text-3xl font-extrabold text-foreground">0</p>
-          <p className="text-xs text-muted-foreground">Managing Director assignments</p>
+          <p className="text-3xl font-extrabold text-foreground">{inquiriesCount}</p>
+          <p className="text-xs text-muted-foreground">Submitted customer inquiries</p>
         </div>
 
         <div className="p-6 bg-card border border-border rounded-xl space-y-2 shadow-sm">
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
             System Status
           </h3>
-          <p className="text-3xl font-extrabold text-amber-500">Active (Dev)</p>
-          <p className="text-xs text-muted-foreground">Clerk Auth Active | DB Schema Pending Phase 3A</p>
+          <p className="text-3xl font-extrabold text-emerald-600 font-mono">{dbStatus}</p>
+          <p className="text-xs text-muted-foreground">Clerk Auth & Supabase PostgreSQL</p>
         </div>
       </main>
     </div>

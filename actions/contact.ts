@@ -82,13 +82,9 @@ export async function submitContactInquiryAction(
     };
   } catch (error) {
     console.error("Error submitting contact inquiry:", error);
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "An unexpected error occurred while processing your inquiry.";
     return {
       success: false,
-      error: errorMessage,
+      error: "An unexpected error occurred while processing your inquiry. Please try again.",
     };
   }
 }

@@ -28,12 +28,16 @@ export interface SendQuoteConfirmationEmailParams {
 export function generateQuoteConfirmationHtml(params: SendQuoteConfirmationEmailParams): string {
   const { fullName, referenceId, companyName, items } = params;
   if (!process.env.NEXT_PUBLIC_APP_URL) {
-    console.warn(
-      "[Email Warning]: NEXT_PUBLIC_APP_URL environment variable is not set. Falling back to http://localhost:3000 for tracking link."
-    );
+    if (process.env.NODE_ENV === "production") {
+      console.error("[Email Error]: NEXT_PUBLIC_APP_URL is not set in production!");
+    } else {
+      console.warn(
+        "[Email Warning]: NEXT_PUBLIC_APP_URL environment variable is not set. Falling back to http://localhost:3000 for tracking link."
+      );
+    }
   }
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const trackingUrl = `${baseUrl}/quote/track?referenceId=${encodeURIComponent(referenceId)}`;
+  const trackingUrl = `${baseUrl}/quote/track/${encodeURIComponent(referenceId)}?token=${encodeURIComponent(params.lookupToken)}`;
 
   const itemsRowsHtml = items
     .map(

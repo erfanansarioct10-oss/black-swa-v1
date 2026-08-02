@@ -6,8 +6,14 @@ export async function verifyTurnstileToken(token?: string): Promise<boolean> {
   const secretKey = process.env.TURNSTILE_SECRET_KEY;
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-  // If Turnstile is not configured or using test dummy keys, bypass check safely
-  if (!secretKey || !siteKey || secretKey.startsWith("1x000000")) return true;
+  // In non-production environments, bypass check safely if Turnstile is unconfigured or using test keys
+  if (!secretKey || !siteKey || secretKey.startsWith("1x000000")) {
+    if (process.env.NODE_ENV !== "production") {
+      return true;
+    }
+    console.error("[Turnstile Error]: Missing or test Turnstile credentials in production environment.");
+    return false;
+  }
   if (!token) {
     if (process.env.NODE_ENV !== "production") {
       console.warn("[Turnstile Dev Warning]: No token provided, bypassing in non-production environment.");
@@ -27,6 +33,7 @@ export async function verifyTurnstileToken(token?: string): Promise<boolean> {
         method: "POST",
         body: formData,
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        signal: AbortSignal.timeout(8000),
       }
     );
 

@@ -99,11 +99,11 @@ export function QuoteRequest() {
   const activeFormData: Partial<CreateQuoteSchemaType> = {
     ...formData,
     fullName:
-      formData.fullName !== undefined
+      formData.fullName && formData.fullName.trim() !== ""
         ? formData.fullName
         : user?.fullName || user?.firstName || "",
     email:
-      formData.email !== undefined
+      formData.email && formData.email.trim() !== ""
         ? formData.email
         : user?.primaryEmailAddress?.emailAddress || "",
   };
@@ -112,56 +112,54 @@ export function QuoteRequest() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleTurnstileSuccess = (token: string) => {
-    setFormData((prev) => ({ ...prev, turnstileToken: token }));
+  const handleTurnstileSuccess = (token?: string) => {
+    setFormData((prev) => ({ ...prev, turnstileToken: token || "" }));
   };
 
   const handleSubmitQuote = async () => {
     if (items.length === 0) {
-      setSubmitError("Your quote cart is empty. Please add hardware items before submitting.");
+      setSubmitError("Your quote cart is empty. Please add items before submitting.");
       return;
     }
 
     setSubmitting(true);
     setSubmitError(null);
 
+    const payload: CreateQuoteSchemaType = {
+      fullName: activeFormData.fullName || "",
+      email: activeFormData.email || "",
+      phone: activeFormData.phone || "",
+      companyName: activeFormData.companyName || undefined,
+      budgetRange: activeFormData.budgetRange || undefined,
+      timeline: activeFormData.timeline || undefined,
+      projectScope: activeFormData.projectScope || undefined,
+      turnstileToken: activeFormData.turnstileToken || undefined,
+      items: items.map((item) => ({
+        productId: item.id,
+        productTitle: item.name,
+        category: item.category,
+        quantity: item.quantity,
+        notes: item.notes || undefined,
+      })),
+    };
+
     try {
-      const payload: CreateQuoteSchemaType = {
-        fullName: activeFormData.fullName || "",
-        email: activeFormData.email || "",
-        phone: activeFormData.phone || "",
-        companyName: activeFormData.companyName || undefined,
-        budgetRange: activeFormData.budgetRange || undefined,
-        timeline: activeFormData.timeline || undefined,
-        projectScope: activeFormData.projectScope || undefined,
-        turnstileToken: activeFormData.turnstileToken || undefined,
-        items: items.map((item) => ({
-          productId: item.id,
-          productTitle: item.name,
-          category: item.category,
-          quantity: item.quantity,
-          notes: item.notes || undefined,
-        })),
-      };
-
-      const response = await createQuoteAction(payload);
-
-      if (!response.success) {
-        setSubmitError(response.error || "An error occurred while submitting your quote request.");
-        setSubmitting(false);
+      const res = await createQuoteAction(payload);
+      if (!res.success || !res.data) {
+        setSubmitError(res.error || "Failed to process quotation request.");
         return;
       }
 
-      // Save confirmation state & advance to Step 4 (Confirmation View)
       setConfirmationData({
-        referenceId: response.data.referenceId,
+        referenceId: res.data.referenceId,
         contactName: payload.fullName,
         email: payload.email,
         companyName: payload.companyName,
         itemCount: items.length,
       });
 
-      // Clear draft form & step from sessionStorage and clear cart
+      // Reset form state, clear draft form & step from sessionStorage, and clear cart
+      setFormData({ ...EMPTY_FORM });
       try {
         sessionStorage.removeItem(FORM_STORAGE_KEY);
         sessionStorage.removeItem(STEP_STORAGE_KEY);

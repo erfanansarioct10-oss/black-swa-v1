@@ -26,4 +26,4 @@ CREATE POLICY "Allow public insert to contact_inquiries"
   ON "public"."contact_inquiries"
   FOR INSERT
   TO public
-  WITH CHECK (true);
+  WITH CHECK (status = 'new');

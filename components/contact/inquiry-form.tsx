@@ -26,7 +26,8 @@ export function InquiryForm({
 }: InquiryFormProps) {
   const isDark = variant === "dark";
   const turnstileSiteKey =
-    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+    (process.env.NODE_ENV !== "production" ? "1x00000000000000000000AA" : "");
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -253,14 +254,16 @@ export function InquiryForm({
             />
           </div>
 
-          {turnstileSiteKey && (
+          {turnstileSiteKey ? (
             <div className="flex justify-center py-2">
               <Turnstile
                 siteKey={turnstileSiteKey}
                 onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken(undefined)}
+                onError={() => setTurnstileToken(undefined)}
               />
             </div>
-          )}
+          ) : null}
 
           <button
             type="submit"

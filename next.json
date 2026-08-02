@@ -6,7 +6,7 @@
   "targetRepository": "black-swan-v1",
   "frameworkStack": {
     "frontend": "Next.js 16 (App Router & Turbopack), React 19, Tailwind CSS v4",
-    "database": "Supabase PostgreSQL 15, Drizzle ORM",
+    "database": "Supabase PostgreSQL 17, Drizzle ORM",
     "auth": "Clerk Authentication (@clerk/nextjs)",
     "validation": "Zod Schema Validation",
     "packageManager": "pnpm"

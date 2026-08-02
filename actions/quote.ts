@@ -157,13 +157,9 @@ export async function createQuoteAction(
     };
   } catch (error) {
     console.error("Error creating quote request:", error);
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "An unexpected error occurred while processing your quote request.";
     return {
       success: false,
-      error: errorMessage,
+      error: "An unexpected error occurred while processing your quote request. Please try again.",
     };
   }
 }

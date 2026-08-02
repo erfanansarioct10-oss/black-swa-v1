@@ -93,8 +93,9 @@ export function QuoteTrackingTimeline({ status }: QuoteTrackingTimelineProps) {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4 relative z-10">
           {STEPS.map((step, idx) => {
             const stepNumber = idx + 1;
-            const isCompleted = stepNumber < currentStepIndex;
-            const isCurrent = stepNumber === currentStepIndex;
+            const isCompleted =
+              stepNumber < currentStepIndex || (status === "completed" && stepNumber === currentStepIndex);
+            const isCurrent = stepNumber === currentStepIndex && status !== "completed";
             const Icon = step.icon;
 
             return (

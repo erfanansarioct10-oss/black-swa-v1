@@ -29,9 +29,16 @@ export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopyRef = () => {
-    navigator.clipboard.writeText(quote.referenceId);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (!navigator.clipboard) return;
+    navigator.clipboard
+      .writeText(quote.referenceId)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => {
+        /* clipboard write failed or denied */
+      });
   };
 
   const handlePrint = () => {

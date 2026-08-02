@@ -1,3 +1,5 @@
+import type { QuoteItemSchemaType, CreateQuoteSchemaType } from "@/schemas/quote";
+
 export type QuoteStatus =
   | "pending"
   | "under_review"
@@ -39,8 +41,6 @@ export interface Quote {
 export interface QuoteWithItems extends Quote {
   items: QuoteItem[];
 }
-
-import type { QuoteItemSchemaType, CreateQuoteSchemaType } from "@/schemas/quote";
 
 export type CreateQuoteItemInput = QuoteItemSchemaType;
 export type CreateQuoteInput = CreateQuoteSchemaType;
