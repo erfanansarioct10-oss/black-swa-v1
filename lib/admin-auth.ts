@@ -9,19 +9,26 @@ export interface AdminAuthSession {
 }
 
 /**
+ * Checks whether the current Clerk session has administrative role authorization ('admin' or 'org:admin').
+ */
+export function isAdminSession(has: (params: { role: string }) => boolean): boolean {
+  return has({ role: "admin" }) || has({ role: "org:admin" });
+}
+
+/**
  * Server-side helper to enforce administrative authorization.
  * Verifies that the current user has 'admin' or 'org:admin' role in Clerk.
- * Enforces non-production bypass for local development testing and strict production gating.
+ * Supports explicit development bypass when ADMIN_DEV_BYPASS="true" in non-production environments.
  */
 export async function requireAdminAuth(): Promise<AdminAuthSession> {
   const { userId, orgId, orgRole, has } = await auth();
-  const isDev = process.env.NODE_ENV !== "production";
+  const isDevBypass = process.env.NODE_ENV !== "production" && process.env.ADMIN_DEV_BYPASS === "true";
 
-  if (isDev) {
+  if (isDevBypass && !userId) {
     return {
-      userId: userId ?? "dev_admin_user",
-      orgId: orgId ?? null,
-      orgRole: orgRole ?? "admin",
+      userId: "dev_admin_user",
+      orgId: null,
+      orgRole: "admin",
       isDevBypass: true,
     };
   }
@@ -30,9 +37,9 @@ export async function requireAdminAuth(): Promise<AdminAuthSession> {
     redirect("/admin/login");
   }
 
-  const isAdmin = has({ role: "admin" }) || has({ role: "org:admin" });
+  const isAdmin = isAdminSession(has);
 
-  if (!isAdmin) {
+  if (!isAdmin && !isDevBypass) {
     redirect("/admin/unauthorized");
   }
 
@@ -40,6 +47,6 @@ export async function requireAdminAuth(): Promise<AdminAuthSession> {
     userId,
     orgId: orgId ?? null,
     orgRole: orgRole ?? null,
-    isDevBypass: false,
+    isDevBypass,
   };
 }

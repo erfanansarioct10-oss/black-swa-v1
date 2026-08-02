@@ -26,7 +26,6 @@ export default function AdminLoginPage() {
         <div className="flex justify-center">
           <SignIn
             fallbackRedirectUrl="/admin"
-            forceRedirectUrl="/admin"
             appearance={{
               elements: {
                 rootBox: "w-full",

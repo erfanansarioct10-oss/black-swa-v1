@@ -2,39 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Activity,
-  BarChart3,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-  FileText,
-  LayoutDashboard,
-  Mail,
-  Package,
-  Settings,
-  ShieldCheck,
-  Users,
-  Wrench,
-  type LucideIcon,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, LayoutDashboard, ShieldCheck } from "lucide-react";
 
 import { useAdminShell } from "@/components/providers/admin-shell-provider";
 import { Button } from "@/components/ui/button";
-import { ADMIN_NAV_SECTIONS, isNavItemActive } from "@/constants/admin-navigation";
+import { ADMIN_NAV_SECTIONS, ICON_MAP, isNavItemActive } from "@/constants/admin-navigation";
 import { cn } from "@/lib/utils";
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  LayoutDashboard,
-  BarChart3,
-  FileText,
-  Mail,
-  Users,
-  Package,
-  Wrench,
-  Activity,
-  Settings,
-};
 
 export function AdminSidebar() {
   const pathname = usePathname();
@@ -85,6 +58,7 @@ export function AdminSidebar() {
                     key={item.href}
                     href={item.href}
                     title={isCollapsed ? item.title : undefined}
+                    aria-label={isCollapsed ? item.title : undefined}
                     className={cn(
                       "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors relative group",
                       active
@@ -92,6 +66,7 @@ export function AdminSidebar() {
                         : "text-muted-foreground hover:text-foreground hover:bg-accent/60"
                     )}
                   >
+
                     <IconComponent
                       className={cn(
                         "w-5 h-5 shrink-0 transition-transform group-hover:scale-105",

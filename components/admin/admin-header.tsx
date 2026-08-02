@@ -25,18 +25,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getAdminRouteTitle } from "@/constants/admin-navigation";
 
-const ROUTE_NAME_MAP: Record<string, string> = {
-  "/admin": "Executive Dashboard",
-  "/admin/quotes": "Quote Requests (RFQ)",
-  "/admin/inquiries": "Contact Inquiries",
-  "/admin/customers": "Customer Database",
-  "/admin/products": "Product Catalog",
-  "/admin/services": "Service Offerings",
-  "/admin/analytics": "Analytics & Reports",
-  "/admin/diagnostics": "System Diagnostics",
-  "/admin/settings": "Settings & Access",
-};
 
 export function AdminHeader() {
   const pathname = usePathname();
@@ -44,7 +34,8 @@ export function AdminHeader() {
   const { user } = useUser();
   const { membership } = useOrganization();
 
-  const currentTitle = ROUTE_NAME_MAP[pathname] || "Admin Portal";
+  const currentTitle = getAdminRouteTitle(pathname);
+
 
   // Derive role string for identity badge
   const userRole =

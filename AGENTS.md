@@ -83,7 +83,8 @@ Whenever a **backend-related task**, database schema change, Server Action, API 
 
 1. Inspect `db/schema.ts` for current Drizzle ORM table definitions.
 2. Read and analyze all SQL migration files in `supabase/migrations/` to understand existing table structures, constraints, foreign keys, performance indexes, and Row-Level Security (RLS) policies.
-3. Verify that any proposed schema modification, query, or Server Action aligns with existing Supabase PostgreSQL RLS policies and performance indexes before executing code.
+3. Verify that any proposed schema modification, query, or Server Action aligns with existing Supabase PostgreSQL RLS policies and performance indexes before modifying or executing code.
+
 
 ---
 

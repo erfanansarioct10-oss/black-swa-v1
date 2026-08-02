@@ -3,20 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Activity,
-  BarChart3,
-  ExternalLink,
-  FileText,
-  LayoutDashboard,
-  Mail,
-  Package,
-  Settings,
-  ShieldCheck,
-  Users,
-  Wrench,
-  type LucideIcon,
-} from "lucide-react";
+import { ExternalLink, LayoutDashboard, ShieldCheck } from "lucide-react";
 
 import { useAdminShell } from "@/components/providers/admin-shell-provider";
 import {
@@ -26,22 +13,11 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { ADMIN_NAV_SECTIONS, isNavItemActive } from "@/constants/admin-navigation";
+import { ADMIN_NAV_SECTIONS, ICON_MAP, isNavItemActive } from "@/constants/admin-navigation";
 import { cn } from "@/lib/utils";
 
-const ICON_MAP: Record<string, LucideIcon> = {
-  LayoutDashboard,
-  BarChart3,
-  FileText,
-  Mail,
-  Users,
-  Package,
-  Wrench,
-  Activity,
-  Settings,
-};
-
 export function AdminMobileNav() {
+
   const pathname = usePathname();
   const { isMobileOpen, setMobileOpen } = useAdminShell();
 
