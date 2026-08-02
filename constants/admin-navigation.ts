@@ -6,6 +6,7 @@ import {
   Mail,
   Package,
   Settings,
+  Target,
   Users,
   Wrench,
   type LucideIcon,
@@ -29,6 +30,7 @@ export const ICON_MAP: Record<string, LucideIcon> = {
   FileText,
   Mail,
   Users,
+  Target,
   Package,
   Wrench,
   Activity,
@@ -49,8 +51,10 @@ export const ADMIN_NAV_SECTIONS: AdminNavSection[] = [
       { title: "Quote Requests", href: "/admin/quotes", iconName: "FileText", badge: "RFQ" },
       { title: "Contact Inquiries", href: "/admin/inquiries", iconName: "Mail" },
       { title: "Customer Database", href: "/admin/customers", iconName: "Users" },
+      { title: "Lead Pipeline", href: "/admin/leads", iconName: "Target" },
     ],
   },
+
   {
     title: "Catalog & Content",
     items: [
@@ -86,8 +90,9 @@ export function getAdminRouteTitle(pathname: string): string {
  * Prevents partial prefix matching (e.g. /admin/settings-legacy matching /admin/settings).
  */
 export function isNavItemActive(pathname: string, href: string): boolean {
+  const cleanPath = (pathname || "").split("?")[0];
   if (href === "/admin") {
-    return pathname === "/admin";
+    return cleanPath === "/admin";
   }
-  return pathname === href || pathname.startsWith(`${href}/`);
+  return cleanPath === href || cleanPath.startsWith(`${href}/`);
 }

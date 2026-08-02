@@ -14,8 +14,12 @@
     "supabase:stop": "supabase stop",
     "supabase:status": "supabase status",
     "supabase:reset": "supabase db reset",
-    "test:phase4d": "tsx scripts/test-phase4d.ts"
+    "test:phase4d": "tsx scripts/test-phase4d.ts",
+    "test:phase5a": "tsx scripts/test-phase5a-customers.ts",
+    "test:phase5b": "tsx scripts/test-phase5b-leads.ts"
   },
+
+
 
   "dependencies": {
     "@clerk/nextjs": "^7.6.2",

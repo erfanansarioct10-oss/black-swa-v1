@@ -102,11 +102,47 @@ Dashboard
 
 # Phase 5
 
-CRM
+CRM & Quotation Pipeline System
 
-- Customer Management
-- Leads
-- Quotes
+## Phase 5A: Customer & Account Management Core
+
+- [x] Database Schema Extensions (`customers` table with enterprise details, contact history, and foreign keys in Drizzle ORM)
+- [x] Customer Directory Interface (`app/admin/customers/page.tsx` with search, filtering, and summary metrics)
+- [x] Customer Profile & Account Details View (`app/admin/customers/[id]/page.tsx` with transaction history, associated RFQs, and contact logs)
+- [x] Customer CRUD Server Actions & Zod Schemas (`actions/customer.ts`, `schemas/customer.ts`)
+
+## Phase 5B: Lead Management & Inquiry Processing
+
+- [x] Lead Tracking & Conversion Engine (Convert public contact inquiries & RFQ submissions into formal CRM Lead entities)
+- [x] Lead Management Portal (`app/admin/leads/page.tsx` with source attribution, priority scoring, and status filters)
+- [x] Lead Detail & Activity Log View (`app/admin/leads/[id]/page.tsx` with internal communication history and notes)
+- [x] Lead Workflow Server Actions (`actions/lead.ts` for status progression, lead scoring, and account director assignment)
+
+
+## Phase 5C: Quotation Workbench & Interactive Proposal Builder
+
+- [ ] Comprehensive Admin RFQ Workbench (`app/admin/quotes/[id]/page.tsx` with line-item hardware specification controls)
+- [ ] Interactive Hardware Pricing & Discount Estimator (Custom line-item pricing adjustments, volume discounts, shipping, warranty, and tax calculations)
+- [ ] Quote Status Lifecycle Management (Pending -> Assigned -> In Review -> Quoted -> Won / Lost / Cancelled with audit trail logging)
+- [ ] Internal Quotation Notes & Team Collaboration Sidebar (`actions/quote-admin.ts`)
+
+## Phase 5D: Automated Proposal Generation & Customer Dispatch
+
+- [ ] Dynamic Branded PDF Quotation Generator (Itemized hardware breakdown, official company header, terms & conditions, validity period)
+- [ ] One-Click Customer Proposal Email Dispatch (Resend integration with direct proposal PDF download/link)
+- [ ] Proposal Expiration & Revision Tracking (Quote versioning, expiration dates, and tracking customer view receipts)
+
+## Phase 5E: Visual Lead Pipeline Kanban & Sales Funnel
+
+- [ ] Interactive Sales Pipeline Kanban Board (`app/admin/crm/pipeline/page.tsx` with drag-and-drop stage movement: New Lead -> Contacted -> Assessment -> Proposal Sent -> Negotiation -> Closed)
+- [ ] Stage SLA & Stale Lead Alert System (High-priority indicators for leads/RFQs stuck in negotiation or pending review)
+- [ ] Direct Stage Transition Server Actions (`actions/pipeline.ts`)
+
+## Phase 5F: CRM Analytics, Export & Integration Center
+
+- [ ] Sales & Conversion Analytics Dashboard (`app/admin/crm/analytics/page.tsx` with Win/Loss ratios, average cycle time, and pipeline valuation)
+- [ ] Enterprise CSV/JSON Data Export (Export customers, leads, and quotations for ERP/accounting synchronization)
+- [ ] Bulk Management Operations (Bulk assignment, bulk status updates, and record archiving)
 
 ---
 

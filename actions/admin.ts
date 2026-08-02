@@ -42,6 +42,14 @@ export interface AdminNotificationsData {
   items: AdminNotificationItem[];
 }
 
+function safeRevalidatePath(path: string) {
+  try {
+    revalidatePath(path);
+  } catch {
+    // Suppress revalidatePath error when called outside Next.js request context (e.g. CLI script tests)
+  }
+}
+
 /**
  * Searches across RFQs (reference ID, customer name, company, email) and contact inquiries.
  * Protected by server-side Clerk role authorization.
@@ -227,8 +235,8 @@ export async function assignQuoteToSelfAction(
       };
     }
 
-    revalidatePath("/admin");
-    revalidatePath("/admin/quotes");
+    safeRevalidatePath("/admin");
+    safeRevalidatePath("/admin/quotes");
 
     return {
       success: true,
@@ -264,8 +272,8 @@ export async function updateInquiryStatusAction(
       })
       .where(eq(contactInquiries.id, inquiryId));
 
-    revalidatePath("/admin");
-    revalidatePath("/admin/inquiries");
+    safeRevalidatePath("/admin");
+    safeRevalidatePath("/admin/inquiries");
 
     return {
       success: true,

@@ -199,16 +199,8 @@ When working on a feature or review fix:
 | [27-phase-4a-clerk-role-authorization-guard](27-phase-4a-clerk-role-authorization-guard.md)                                                           | Phase 4A Server-Side Clerk Role Guard & Security            | Complete | Security Architecture (`lib/admin-auth.ts`)  |
 | [28-phase-4b-executive-metrics-and-activity-overview](28-phase-4b-executive-metrics-and-activity-overview.md)                           | Phase 4B Executive Metrics & Activity Overview Dashboard   | Complete | Executive Dashboard (`app/admin/page.tsx`) |
 | [29-phase-4c-advanced-analytics-and-visualizations](29-phase-4c-advanced-analytics-and-visualizations.md)               | Phase 4C Advanced Analytics, Funnel Visualizations & Data Insights | Complete | Executive Analytics (`app/admin/analytics/page.tsx`) |
-
 | [30-fix-coderabbit-pr-review-findings](30-fix-coderabbit-pr-review-findings.md)                                                           | Fix CodeRabbit PR Review Findings (PR #11)                 | Complete | Security, Middleware, Navigation & Accessibility |
 | [31-fix-coderabbit-pr-review-findings](31-fix-coderabbit-pr-review-findings.md)                                                           | Fix CodeRabbit PR Review Findings (PR #12)                 | Complete | Security, Middleware, Database & Visualizations |
 | [32-phase-4d-command-center-and-diagnostics](32-phase-4d-command-center-and-diagnostics.md)                                           | Phase 4D Command Center, Quick Search & Executive Notification Center | Complete | Command Palette, Quick Search & Notifications |
-
-
-
-
-
-
-
-
-
+| [33-phase-5a-customer-and-account-management-core](33-phase-5a-customer-and-account-management-core.md)                 | Phase 5A: Customer & Account Management Core                | Complete | Customer Directory & Profiles (`/admin/customers`) |
+| [34-phase-5b-lead-management-and-inquiry-processing](34-phase-5b-lead-management-and-inquiry-processing.md)         | Phase 5B: Lead Management & Inquiry Processing              | Complete | Lead Pipeline & Inquiry Management (`/admin/leads`) |
