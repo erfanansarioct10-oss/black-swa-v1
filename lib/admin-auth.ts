@@ -21,8 +21,24 @@ export function isAdminSession(has: (params: { role: string }) => boolean): bool
  * Supports explicit development bypass when ADMIN_DEV_BYPASS="true" in non-production environments.
  */
 export async function requireAdminAuth(): Promise<AdminAuthSession> {
-  const { userId, orgId, orgRole, has } = await auth();
   const isDevBypass = process.env.NODE_ENV !== "production" && process.env.ADMIN_DEV_BYPASS === "true";
+
+  let session: Awaited<ReturnType<typeof auth>> | null = null;
+  try {
+    session = await auth();
+  } catch (err) {
+    if (isDevBypass) {
+      return {
+        userId: "dev_admin_user",
+        orgId: null,
+        orgRole: "admin",
+        isDevBypass: true,
+      };
+    }
+    throw err;
+  }
+
+  const { userId, orgId, orgRole, has } = session;
 
   if (isDevBypass && !userId) {
     return {
@@ -32,6 +48,7 @@ export async function requireAdminAuth(): Promise<AdminAuthSession> {
       isDevBypass: true,
     };
   }
+
 
   if (!userId) {
     redirect("/admin/login");

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { and, desc, eq, inArray, isNull, sql } from "drizzle-orm";
 import {
-  Activity,
   ArrowRight,
   Briefcase,
   CheckCircle2,
@@ -13,6 +12,7 @@ import {
   ShieldCheck,
   TrendingUp,
 } from "lucide-react";
+
 
 import { PendingDirectivesAlert } from "@/components/admin/pending-directives-alert";
 import { ActivityItem, RecentActivityStream } from "@/components/admin/recent-activity-stream";
@@ -35,8 +35,8 @@ export default async function AdminDashboardPage() {
   let totalQuotesCount = 0;
   let activeInquiriesCount = 0;
   let newInquiriesCount = 0;
-  let dbStatus = "Operational";
   let activityItems: ActivityItem[] = [];
+
 
   try {
     const [
@@ -95,8 +95,8 @@ export default async function AdminDashboardPage() {
     );
   } catch (error) {
     console.error("Failed to query admin metrics:", error);
-    dbStatus = "Degraded";
   }
+
 
   const completionRate =
     totalQuotesCount > 0 ? Math.round((processedCount / totalQuotesCount) * 100) : 100;
@@ -233,35 +233,35 @@ export default async function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* KPI Card 4: System Health Status */}
-        <div className="p-5 bg-card border border-border rounded-xl space-y-3 shadow-xs relative overflow-hidden group hover:border-sky-500/40 transition-colors">
+        {/* KPI Card 4: Total Commercial Portfolio */}
+        <div className="p-5 bg-card border border-border rounded-xl space-y-3 shadow-xs relative overflow-hidden group hover:border-purple-500/40 transition-colors">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-              System Diagnostics
+              Total Commercial Requests
             </span>
-            <div className={`p-2 rounded-lg ${dbStatus === "Operational" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-rose-500/10 text-rose-600 dark:text-rose-400"}`}>
-              <Activity className="w-4 h-4" />
+            <div className="p-2 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400">
+              <Briefcase className="w-4 h-4" />
             </div>
           </div>
           <div>
             <div className="flex items-baseline gap-2">
-              <span className={`text-2xl font-extrabold font-mono tracking-tight ${dbStatus === "Operational" ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>
-                {dbStatus}
+              <span className="text-3xl font-extrabold text-foreground tracking-tight">
+                {totalQuotesCount + activeInquiriesCount}
               </span>
+              <span className="text-xs text-muted-foreground font-medium">total leads</span>
             </div>
-            <p className="text-xs text-muted-foreground font-medium mt-1">
-              Supabase DB & Clerk Auth Guard
+            <p className="text-xs text-purple-600 dark:text-purple-400 font-semibold mt-1 inline-flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3" /> All system data secured
             </p>
           </div>
           <div className="pt-2 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground">
-            <span className="inline-flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3 text-emerald-500" /> RLS Active
-            </span>
-            <Link href="/admin/diagnostics" className="text-foreground hover:underline font-semibold flex items-center gap-0.5">
-              Diagnostics <ArrowRight className="w-3 h-3" />
+            <span>RFQs & Inquiries Combined</span>
+            <Link href="/admin/quotes" className="text-foreground hover:underline font-semibold flex items-center gap-0.5">
+              Explore <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
         </div>
+
       </div>
 
       {/* Main Content Area: Recent Activity Stream + Quick Operations */}

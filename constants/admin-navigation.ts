@@ -61,10 +61,10 @@ export const ADMIN_NAV_SECTIONS: AdminNavSection[] = [
   {
     title: "Management",
     items: [
-      { title: "System Diagnostics", href: "/admin/diagnostics", iconName: "Activity" },
       { title: "Settings & Access", href: "/admin/settings", iconName: "Settings" },
     ],
   },
+
 ];
 
 /**
