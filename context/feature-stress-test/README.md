@@ -181,7 +181,8 @@ To mark this stress test plan **Verified Clean**, all the following conditions m
 
 ### Standard Lifecycle Flow:
 
-1. **Load Context:** Read `AGENTS.md`, `context/architecture.md`, `context/code-standards.md`, and relevant implementation specs.
+1. **Load Context:** Read `AGENTS.md`, `context/project-overview.md`, `context/architecture.md`, `context/code-standards.md`, `context/ui-context.md`, `context/ai-workflow-rules.md`, `context/progress-tracker.md`, `context/seo.md`, and relevant implementation specifications.
+
 2. **Draft Stress Test Spec:** Create `context/feature-stress-test/XX-[feature-name].md` using the 7-section template above.
 3. **Register in Registry Index:** Add the new stress test plan to the registry table in `context/feature-stress-test/README.md` and update `context/progress-tracker.md`.
 4. **Obtain Approval:** Present the stress test plan to the user alongside the implementation plan.
