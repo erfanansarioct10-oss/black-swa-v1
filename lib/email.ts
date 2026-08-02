@@ -5,8 +5,9 @@ import { escapeHtml } from "@/lib/html";
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-const FROM_EMAIL =
-  process.env.RESEND_FROM_EMAIL || "Black Swan International <quotes@blackswaninternational.com>";
+const rawFromEmail = (process.env.RESEND_FROM_EMAIL || "").trim().replace(/^["']|["']$/g, "").trim();
+const FROM_EMAIL = rawFromEmail || "Black Swan International <quotes@nooridigital.site>";
+
 
 export interface SendQuoteConfirmationEmailParams {
   email: string;
