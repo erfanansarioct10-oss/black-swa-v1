@@ -71,6 +71,7 @@ Current skills include:
 - Supabase
 - Supabase PostgreSQL Best Practices
 - Vercel AI SDK
+- Graphify
 
 Whenever a feature involves one of these technologies:
 
@@ -128,11 +129,12 @@ Never skip steps.
 
 ---
 
-# Search Before Creating
+# Search & Query Graph Before Creating
 
 Before creating anything new:
 
-Search for:
+1. Query `graphify-out/graph.json` via `/graphify query` or `/graphify path` to understand existing component relationships.
+2. Search for:
 
 - Existing components
 - Existing hooks
@@ -300,6 +302,7 @@ Before completing UI work verify:
 Always:
 
 - Use Drizzle
+- Inspect `db/schema.ts` for current Drizzle ORM table definitions, read and analyze all SQL migration files in `supabase/migrations/`, and verify that any proposed schema modification, query, or Server Action aligns with existing Supabase PostgreSQL RLS policies and performance indexes before modifying or executing code
 - Use transactions where appropriate
 - Keep queries inside server code
 - Validate data before writing
@@ -354,6 +357,7 @@ A task is complete only if:
 - Secure
 - Tested
 - No duplicated code
+- Knowledge graph updated (`/graphify --update`) if files were created, moved, or deleted
 - Documentation updated if needed
 
 ---

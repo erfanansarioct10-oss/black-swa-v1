@@ -18,6 +18,9 @@ import {
   ExternalLink,
 } from "lucide-react";
 
+import { MessageSquare, Send, X, CheckCircle2, AlertCircle } from "lucide-react";
+import { submitNegotiationRequestAction } from "@/actions/proposal";
+
 import type { QuoteWithItems } from "@/types/quote";
 import { QuoteTrackingTimeline } from "./quote-tracking-timeline";
 
@@ -27,6 +30,43 @@ interface QuoteTrackingDetailsProps {
 
 export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
   const [copied, setCopied] = useState(false);
+  const [showNegotiationModal, setShowNegotiationModal] = useState(false);
+  const [customerNotes, setCustomerNotes] = useState("");
+  const [submittedNotes, setSubmittedNotes] = useState("");
+  const [isSubmittingNegotiation, setIsSubmittingNegotiation] = useState(false);
+  const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
+  const [negotiationFeedback, setNegotiationFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  const handleSubmitNegotiation = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!customerNotes.trim() || customerNotes.trim().length < 10) {
+      setNegotiationFeedback({ type: "error", message: "Please enter at least 10 characters describing your request." });
+      return;
+    }
+
+    try {
+      setIsSubmittingNegotiation(true);
+      setNegotiationFeedback(null);
+      const res = await submitNegotiationRequestAction({
+        referenceId: quote.referenceId,
+        customerNotes: customerNotes.trim(),
+      });
+
+      if (res.success) {
+        setSubmittedNotes(customerNotes.trim());
+        setIsSubmittedSuccessfully(true);
+        setCustomerNotes("");
+      } else {
+        setNegotiationFeedback({ type: "error", message: res.error || "Failed to submit negotiation request" });
+      }
+    } catch {
+      setNegotiationFeedback({ type: "error", message: "An unexpected error occurred while submitting your request." });
+    } finally {
+      setIsSubmittingNegotiation(false);
+    }
+  };
+
+
 
   const handleCopyRef = () => {
     if (!navigator.clipboard) return;
@@ -54,6 +94,8 @@ export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
   });
 
   const canPrintQuotation = quote.status === "quoted" || quote.status === "completed";
+
+  const hasFinancials = Boolean(quote.grandTotal && quote.grandTotal > 0);
 
   return (
     <div className="space-y-8 w-full print:space-y-4">
@@ -229,7 +271,9 @@ export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
                 <th className="py-3 px-4 font-semibold">Equipment / Hardware Title</th>
                 <th className="py-3 px-4 font-semibold">Category</th>
                 <th className="py-3 px-4 font-semibold text-center">Quantity</th>
-                <th className="py-3 px-4 font-semibold">Technical Requirements / Notes</th>
+                {hasFinancials && <th className="py-3 px-4 font-semibold text-right">Unit Price</th>}
+                {hasFinancials && <th className="py-3 px-4 font-semibold text-right">Line Total</th>}
+                <th className="py-3 px-4 font-semibold">Technical Notes</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -241,6 +285,16 @@ export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
                     {item.category}
                   </td>
                   <td className="py-3.5 px-4 text-center font-bold text-foreground">{item.quantity}</td>
+                  {hasFinancials && (
+                    <td className="py-3.5 px-4 text-right font-medium">
+                      Rs. {(item.unitPrice || 0).toLocaleString("en-NP")}
+                    </td>
+                  )}
+                  {hasFinancials && (
+                    <td className="py-3.5 px-4 text-right font-bold text-foreground">
+                      Rs. {(item.totalPrice || 0).toLocaleString("en-NP")}
+                    </td>
+                  )}
                   <td className="py-3.5 px-4 text-xs text-muted-foreground italic">
                     {item.notes || "Standard B2B hardware specification"}
                   </td>
@@ -249,6 +303,29 @@ export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
             </tbody>
           </table>
         </div>
+
+        {hasFinancials && (
+          <div className="flex justify-end pt-4 border-t border-border">
+            <div className="w-64 space-y-1.5 text-sm">
+              <div className="flex justify-between text-muted-foreground">
+                <span>Subtotal:</span>
+                <span className="font-semibold text-foreground">Rs. {(quote.subtotal || 0).toLocaleString("en-NP")}</span>
+              </div>
+              <div className="flex justify-between text-muted-foreground">
+                <span>13% VAT Tax:</span>
+                <span className="font-semibold text-foreground">Rs. {(quote.vatAmount || 0).toLocaleString("en-NP")}</span>
+              </div>
+              <div className="flex justify-between text-muted-foreground">
+                <span>Shipping & Delivery:</span>
+                <span className="font-semibold text-foreground">Rs. {(quote.shippingCost || 0).toLocaleString("en-NP")}</span>
+              </div>
+              <div className="flex justify-between border-t border-foreground pt-2 font-bold text-base text-foreground">
+                <span>Grand Total (NPR):</span>
+                <span className="text-emerald-600">Rs. {(quote.grandTotal || 0).toLocaleString("en-NP")}</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Official Proposal / Download Action Box */}
@@ -260,13 +337,17 @@ export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
-          <a
-            href="mailto:support@blackswan.com.np"
-            className="px-4 py-2.5 bg-primary text-primary-foreground font-semibold rounded-lg text-sm transition-colors hover:bg-primary/90 inline-flex items-center gap-2 shadow-sm"
+          <button
+            onClick={() => {
+              setShowNegotiationModal(true);
+              setNegotiationFeedback(null);
+            }}
+            className="px-4 py-2.5 bg-primary text-primary-foreground font-semibold rounded-lg text-sm transition-colors hover:bg-primary/90 inline-flex items-center gap-2 shadow-sm cursor-pointer"
           >
-            <Mail className="w-4 h-4" />
-            Email Support Desk
-          </a>
+            <MessageSquare className="w-4 h-4" />
+            Request Revision & Negotiation
+          </button>
+
           <Link
             href="/products"
             className="px-4 py-2.5 bg-card border border-border hover:bg-accent text-foreground font-semibold rounded-lg text-sm transition-colors inline-flex items-center gap-2"
@@ -276,6 +357,149 @@ export function QuoteTrackingDetails({ quote }: QuoteTrackingDetailsProps) {
           </Link>
         </div>
       </div>
+
+      {/* Commercial Negotiation & Revision Request Modal */}
+      {showNegotiationModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto">
+          <div className="bg-card border border-border rounded-xl max-w-lg w-full p-6 space-y-6 shadow-2xl animate-in fade-in zoom-in duration-200">
+            <div className="flex items-center justify-between border-b border-border pb-4">
+              <div className="flex items-center gap-2">
+                <MessageSquare className="w-5 h-5 text-primary" />
+                <h3 className="font-bold text-foreground text-lg">Request Revision & Negotiation</h3>
+              </div>
+              <button
+                onClick={() => setShowNegotiationModal(false)}
+                className="text-muted-foreground hover:text-foreground p-1 rounded-md transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {isSubmittedSuccessfully ? (
+              <div className="text-center py-4 space-y-5 animate-in fade-in zoom-in-95 duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 ring-8 ring-emerald-50 dark:ring-emerald-950/20 mx-auto">
+                  <CheckCircle2 className="w-10 h-10" />
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="text-xl font-bold text-foreground">Revision Request Submitted Successfully!</h4>
+                  <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                    Your commercial negotiation notes for reference{" "}
+                    <strong className="text-foreground">{quote.referenceId}</strong> have been sent directly to your assigned Managing Director.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-muted/40 rounded-xl border border-border text-left space-y-2 text-xs">
+                  <span className="font-semibold text-muted-foreground uppercase tracking-wider block">Submitted Request Summary</span>
+                  <p className="text-foreground italic leading-relaxed whitespace-pre-line bg-background/60 p-3 rounded-lg border border-border/50">
+                    &quot;{submittedNotes}&quot;
+                  </p>
+                  <div className="text-muted-foreground pt-1 flex items-center justify-between">
+                    <span>Assigned Desk: Managing Director Desk</span>
+                    <span className="text-emerald-600 font-semibold flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Status: Under Review
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    onClick={() => {
+                      setShowNegotiationModal(false);
+                      setIsSubmittedSuccessfully(false);
+                    }}
+                    className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg text-sm transition-colors shadow-sm cursor-pointer"
+                  >
+                    Done / Return to Quote Details
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Submit custom pricing feedback, discount requests, or hardware specification changes for reference{" "}
+                  <strong className="text-foreground">{quote.referenceId}</strong>. Your assigned Managing Director will review your notes and issue an updated revision snapshot.
+                </p>
+
+                {negotiationFeedback && (
+                  <div
+                    className={`p-3 rounded-lg text-xs font-semibold flex items-center gap-2 ${
+                      negotiationFeedback.type === "success"
+                        ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                        : "bg-rose-50 text-rose-800 border border-rose-200"
+                    }`}
+                  >
+                    {negotiationFeedback.type === "success" ? (
+                      <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                    ) : (
+                      <AlertCircle className="h-4 w-4 text-rose-600 shrink-0" />
+                    )}
+                    {negotiationFeedback.message}
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmitNegotiation} className="space-y-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Reference & Contact Info
+                    </label>
+                    <div className="p-3 bg-muted/40 rounded-lg border border-border/50 text-xs space-y-1 text-foreground">
+                      <div>
+                        <span className="font-semibold text-muted-foreground">Quote Reference:</span>{" "}
+                        {quote.referenceId}
+                      </div>
+                      <div>
+                        <span className="font-semibold text-muted-foreground">Contact:</span> {quote.fullName} (
+                        {quote.email})
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="customerNotes" className="text-xs font-semibold text-foreground">
+                      Your Revision Request / Negotiation Notes <span className="text-rose-500">*</span>
+                    </label>
+                    <textarea
+                      id="customerNotes"
+                      rows={4}
+                      required
+                      placeholder="e.g., Please apply a 10% volume discount for bulk PACS workstation order, or change quantity of encoders from 1 to 2..."
+                      value={customerNotes}
+                      onChange={(e) => setCustomerNotes(e.target.value)}
+                      className="w-full rounded-lg border border-input bg-background p-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-end gap-3 pt-3 border-t border-border">
+                    <button
+                      type="button"
+                      onClick={() => setShowNegotiationModal(false)}
+                      className="px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={isSubmittingNegotiation}
+                      className="px-4 py-2 bg-primary text-primary-foreground font-semibold rounded-lg text-sm transition-colors hover:bg-primary/90 disabled:opacity-50 inline-flex items-center gap-2 cursor-pointer shadow-sm"
+                    >
+                      {isSubmittingNegotiation ? (
+                        "Submitting..."
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" /> Submit Request
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
+

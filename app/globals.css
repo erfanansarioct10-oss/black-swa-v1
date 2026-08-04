@@ -166,4 +166,49 @@
   color: #60a5fa;
 }
 
+/* Strict Print Media Layout Isolation Rules */
+@media print {
+  header,
+  nav,
+  aside,
+  footer,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #printable-proposal,
+  #printable-proposal *,
+  #printable-quote,
+  #printable-quote * {
+    visibility: visible;
+  }
+
+  #printable-proposal,
+  #printable-quote {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+}
+
+
 

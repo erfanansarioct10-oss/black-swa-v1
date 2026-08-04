@@ -1,12 +1,14 @@
 import React from "react";
 import { AlertCircle } from "lucide-react";
 
-import { generatePageMetadata } from "@/lib/seo";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { recordProposalViewAction } from "@/actions/proposal";
 import { getQuoteByLookupTokenAction, getQuoteByTrackingAction } from "@/actions/quote";
-import { QuoteTrackingSearchForm } from "@/components/quote/quote-tracking-search-form";
 import { QuoteTrackingDetails } from "@/components/quote/quote-tracking-details";
+import { QuoteTrackingSearchForm } from "@/components/quote/quote-tracking-search-form";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { generatePageMetadata } from "@/lib/seo";
 import type { QuoteWithItems } from "@/types/quote";
+
 
 interface PageProps {
   params: Promise<{ referenceId: string }>;
@@ -53,6 +55,12 @@ export default async function QuoteTrackDetailPage({ params, searchParams }: Pag
 
   // If quote record was successfully loaded, render tracking details
   if (quoteData) {
+
+    // Record proposal view receipt asynchronously
+    recordProposalViewAction(quoteData.referenceId).catch((err) => {
+      console.warn("[Proposal View Tracking Warning]:", err);
+    });
+
     return (
       <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-8">
         <Breadcrumbs
@@ -66,6 +74,7 @@ export default async function QuoteTrackDetailPage({ params, searchParams }: Pag
       </div>
     );
   }
+
 
   // If verification is needed or lookup failed, render verification prompt with search form
   return (

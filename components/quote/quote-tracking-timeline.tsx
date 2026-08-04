@@ -93,9 +93,8 @@ export function QuoteTrackingTimeline({ status }: QuoteTrackingTimelineProps) {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4 relative z-10">
           {STEPS.map((step, idx) => {
             const stepNumber = idx + 1;
-            const isCompleted =
-              stepNumber < currentStepIndex || (status === "completed" && stepNumber === currentStepIndex);
-            const isCurrent = stepNumber === currentStepIndex && status !== "completed";
+            const isCompleted = stepNumber <= currentStepIndex;
+            const isCurrent = stepNumber === currentStepIndex;
             const Icon = step.icon;
 
             return (
@@ -107,14 +106,15 @@ export function QuoteTrackingTimeline({ status }: QuoteTrackingTimelineProps) {
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 shrink-0 ${
                     isCompleted
-                      ? "bg-emerald-600 text-white shadow-sm"
-                      : isCurrent
-                      ? "bg-primary text-primary-foreground ring-4 ring-primary/20 shadow-md"
+                      ? isCurrent
+                        ? "bg-emerald-600 text-white ring-4 ring-emerald-600/20 shadow-md"
+                        : "bg-emerald-600 text-white shadow-sm"
                       : "bg-muted text-muted-foreground border border-border"
                   }`}
                 >
                   {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
                 </div>
+
 
                 {/* Step Content */}
                 <div className="space-y-1">

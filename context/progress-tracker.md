@@ -4,11 +4,11 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`)
+- Phase 5D: Automated Proposal Generation & Customer Dispatch
 
-## Current Goal
+### Current Goal
 
-- Implement Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
+- Implement Phase 5D Automated Proposal Generation & Customer Dispatch (Branded Printable & PDF Proposal Generator, One-Click Resend Email Dispatch with Next.js `after()`, Proposal Versioning & Expiration Tracking via `proposal_versions` table, Customer View Receipt Tracking, and Security & RBAC Guards; see spec in [`context/implementation-specs/38-phase-5d-automated-proposal-generation-and-customer-dispatch.md`](./implementation-specs/38-phase-5d-automated-proposal-generation-and-customer-dispatch.md)).
 
 ## Completed
 
@@ -26,17 +26,33 @@ Update this file after every meaningful implementation change.
 - Completed Homepage Popular Services UI Alignment (Added "Read More" detail buttons matching `/services` grid, linking to `/services/[slug]`).
 - Completed React Hydration Mismatch Fixes & Service Button Styling (Added `suppressHydrationWarning` to `html`/`body`, fixed deterministic `localStorage`/`sessionStorage` state initialization in `QuoteCartProvider` and `QuoteRequest`, updated "Inquire About Service" buttons to solid black).
 - Completed CodeRabbit PR Review Findings Resolution (Addressed 34 security, correctness, and code quality items: sanitized server action error returns, gated Turnstile test keys to non-production, tightened Supabase RLS policies, enforced Clerk role-based middleware protection, added DB expression indexes for quote lookups, fixed timeline completed state, fixed RFQ notes toggle isolation, added Zod .max() limits, deduplicated Telegram dispatch helper, fixed localStorage stale closures, and updated documentation/metadata).
+- Structured Phase 4 Admin Portal into 4 sub-phases (4A: Admin Shell & Security, 4B: Executive Metrics & Activity Overview, 4C: Advanced Analytics & Visualizations, 4D: Command Center & System Diagnostics) in [`docs/feature-roadmap.md`](../docs/feature-roadmap.md).
+- Completed Phase 4A Responsive Admin Layout & Shell (`app/admin/layout.tsx`, `constants/admin-navigation.ts`, `AdminShellProvider` with `useSyncExternalStore` hydration safety, `AdminSidebar` with collapsible desktop width, `AdminMobileNav` drawer sheet, `AdminHeader` with breadcrumbs & Clerk UserButton; see spec in [`context/implementation-specs/26-phase-4a-responsive-admin-layout-and-shell.md`](./implementation-specs/26-phase-4a-responsive-admin-layout-and-shell.md)).
+- Completed Phase 4A Sub-Task 2 Server-Side Clerk Role Guard & Security Architecture (`lib/admin-auth.ts`, `app/admin/unauthorized/page.tsx`, `proxy.ts`, `app/admin/layout.tsx`, `components/admin/admin-header.tsx`; see spec in [`context/implementation-specs/27-phase-4a-clerk-role-authorization-guard.md`](./implementation-specs/27-phase-4a-clerk-role-authorization-guard.md)).
+- Completed Phase 4B Executive Metrics & Activity Overview Dashboard (`app/admin/page.tsx`, `components/admin/pending-directives-alert.tsx`, `components/admin/recent-activity-stream.tsx`; see spec in [`context/implementation-specs/28-phase-4b-executive-metrics-and-activity-overview.md`](./implementation-specs/28-phase-4b-executive-metrics-and-activity-overview.md)).
+- Completed Phase 4C Advanced Analytics, Funnel Visualizations & Data Insights (`app/admin/analytics/page.tsx`, `components/admin/analytics/analytics-filter-bar.tsx`, `components/admin/analytics/executive-throughput-cards.tsx`, `components/admin/analytics/conversion-funnel-sla.tsx`; see spec in [`context/implementation-specs/29-phase-4c-advanced-analytics-and-visualizations.md`](./implementation-specs/29-phase-4c-advanced-analytics-and-visualizations.md)).
+- Completed Phase 4D Command Center, Quick Search, Executive Notification Center & Admin Management Portals (`actions/admin.ts`, `components/admin/command-palette.tsx`, `components/admin/notification-drawer.tsx`, `app/admin/quotes/page.tsx`, `app/admin/inquiries/page.tsx`; see spec in [`context/implementation-specs/32-phase-4d-command-center-and-diagnostics.md`](./implementation-specs/32-phase-4d-command-center-and-diagnostics.md)).
+- Completed Phase 5A Customer & Account Management Core (`customers` Drizzle ORM table in `db/schema.ts`, SQL migration `20260802000000_create_customers_table.sql`, Zod schemas in `schemas/customer.ts`, Server Actions in `actions/customer.ts`, directory page `/admin/customers`, and account profile page `/admin/customers/[id]`; see spec in [`context/implementation-specs/33-phase-5a-customer-and-account-management-core.md`](./implementation-specs/33-phase-5a-customer-and-account-management-core.md)).
+- Completed Feature Stress Testing Framework ([`context/feature-stress-test/README.md`](./feature-stress-test/README.md)).
+- Completed Phase 4 Feature Stress Testing & Security Audit Suite.
+- Completed Phase 5A & Phase 5B Feature Stress Testing & Security Audit Suite (`scripts/stress/33-customer-management-stress.ts`, `scripts/stress/34-lead-management-stress.ts`, and master runner `scripts/stress/run-phase5-stress-suite.ts`).
+- Completed Phase 5B Lead Management & Inquiry Processing ([`context/implementation-specs/34-phase-5b-lead-management-and-inquiry-processing.md`](./implementation-specs/34-phase-5b-lead-management-and-inquiry-processing.md)).
+- Completed Fix CodeRabbit PR Review Findings (Commit 7e695b6) ([`context/implementation-specs/35-fix-coderabbit-pr-review-findings.md`](./implementation-specs/35-fix-coderabbit-pr-review-findings.md)).
+- Completed Phase 5C Quotation Workbench & Interactive Proposal Builder ([`context/implementation-specs/36-phase-5c-quotation-workbench-and-interactive-proposal-builder.md`](./implementation-specs/36-phase-5c-quotation-workbench-and-interactive-proposal-builder.md)).
+- Completed Phase 5D Automated Proposal Generation & Customer Dispatch (`proposal_versions` Drizzle ORM table in `db/schema.ts`, SQL migration `20260804000000_create_proposal_versions_table.sql`, Zod validation schemas in `schemas/proposal.ts`, Server Actions in `actions/proposal.ts`, Resend API email dispatch via Next.js `after()`, customer view receipt tracking, and branded PDF print layout; see spec in [`context/implementation-specs/38-phase-5d-automated-proposal-generation-and-customer-dispatch.md`](./implementation-specs/38-phase-5d-automated-proposal-generation-and-customer-dispatch.md)).
 
 ## In Progress
 
-- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
+- None
+
+
 
 
 
 ## Next Up
 
-- Phase 4: Secure Administrative Portal & CRM Dashboard (`/admin`).
-
+- Phase 5C: Interaction History & Communication Logs (Logging client interactions, emails, phone calls, meetings, and activity timeline).
+- Phase 5D: Automated Pipeline Workflows & CRM Dashboards (Automated status transitions, lead scoring, manager assignment rules, and executive CRM metrics).
 
 
 ## Open Questions
@@ -50,6 +66,7 @@ Update this file after every meaningful implementation change.
 - Client-side Quote Cart state management via React Context (`components/providers/quote-cart-provider.tsx`) with `localStorage` persistence.
 - Single business domain focus: Medical Technology & Broadcast Computer Hardware Systems.
 - Admin portal accessible strictly via `/admin` (no admin links rendered on public-facing site).
+- Eliminated external health pingers to optimize Vercel Serverless Function execution duration and eliminate hosting charges.
 
 ## Session Notes
 

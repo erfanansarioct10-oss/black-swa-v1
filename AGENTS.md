@@ -50,6 +50,7 @@ Current installed skills include:
 - Supabase
 - Supabase PostgreSQL Best Practices
 - Vercel AI SDK
+- Graphify
 
 Additional skills may be added over time.
 
@@ -70,10 +71,32 @@ Examples:
 | Database           | Supabase                           |
 | PostgreSQL Queries | Supabase PostgreSQL Best Practices |
 | AI Features        | Vercel AI SDK                      |
+| Codebase Map & Flow Tracing | Graphify                          |
 
 Do **NOT** rely solely on model memory when an official project skill exists.
 
 Always follow the implementation patterns defined by the installed skill.
+
+---
+
+# Codebase Exploration & Knowledge Graph Rule
+
+Whenever assigned a task that requires understanding system architecture, tracing dependencies across files, refactoring multi-module logic, or answering complex code flow questions, AI agents **MUST**:
+
+1. Check if `graphify-out/graph.json` exists.
+2. If `graphify-out/graph.json` exists, use `/graphify query "<question>"` or `/graphify path "<source>" "<target>"` to perform BFS/DFS traversal of the graph rather than searching line-by-line or loading dozens of raw files.
+3. When creating, moving, or deleting files during feature development, run `/graphify --update` to keep `graphify-out/graph.json` in sync.
+
+---
+
+# Database & Backend Migration Analysis Rule
+
+Whenever a **backend-related task**, database schema change, Server Action, API endpoint, or data persistence feature is assigned, AI agents **MUST**:
+
+1. Inspect `db/schema.ts` for current Drizzle ORM table definitions.
+2. Read and analyze all SQL migration files in `supabase/migrations/` to understand existing table structures, constraints, foreign keys, performance indexes, and Row-Level Security (RLS) policies.
+3. Verify that any proposed schema modification, query, or Server Action aligns with existing Supabase PostgreSQL RLS policies and performance indexes before modifying or executing code.
+
 
 ---
 

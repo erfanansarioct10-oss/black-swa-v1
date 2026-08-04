@@ -5,8 +5,15 @@ import { escapeHtml } from "@/lib/html";
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-const FROM_EMAIL =
-  process.env.RESEND_FROM_EMAIL || "Black Swan International <quotes@blackswaninternational.com>";
+let rawFromEmail = (process.env.RESEND_FROM_EMAIL || "").trim();
+if (
+  (rawFromEmail.startsWith('"') && rawFromEmail.endsWith('"')) ||
+  (rawFromEmail.startsWith("'") && rawFromEmail.endsWith("'"))
+) {
+  rawFromEmail = rawFromEmail.slice(1, -1).trim();
+}
+const FROM_EMAIL = rawFromEmail || "Black Swan International <quotes@nooridigital.site>";
+
 
 export interface SendQuoteConfirmationEmailParams {
   email: string;
@@ -301,6 +308,48 @@ export async function sendContactInquiryConfirmationEmail(
       to: [params.email],
       subject: `Inquiry Received - Black Swan International`,
       html: htmlContent,
+    });
+
+    if (error) {
+      console.error("[Resend Email Error]:", error);
+      return { success: false, error: error.message };
+    }
+
+    return { success: true, id: data?.id };
+  } catch (err) {
+    console.error("[Resend Exception]:", err);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : "Unknown email dispatch error",
+    };
+  }
+}
+
+export interface SendProposalEmailParams {
+  to: string;
+  subject: string;
+  html: string;
+}
+
+/**
+ * Dispatches formal proposal email via Resend API or logs fallback.
+ */
+export async function sendQuoteProposalEmail(
+  params: SendProposalEmailParams
+): Promise<{ success: boolean; id?: string; error?: string }> {
+  try {
+    if (!resend) {
+      console.warn(
+        `[Email Dev Fallback] RESEND_API_KEY is not configured. Proposal email to ${params.to} skipped in local environment.`
+      );
+      return { success: true, id: "dev-fallback-mock-id" };
+    }
+
+    const { data, error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: [params.to],
+      subject: params.subject,
+      html: params.html,
     });
 
     if (error) {
