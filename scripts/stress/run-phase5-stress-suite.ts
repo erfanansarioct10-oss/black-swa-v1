@@ -1,12 +1,13 @@
 import { runCustomerManagementStressTest } from "./33-customer-management-stress";
 import { runLeadManagementStressTest } from "./34-lead-management-stress";
 import { runCodeRabbitPR14StressTest } from "./35-coderabbit-pr14-stress";
+import { runQuoteWorkbenchStressTest } from "./36-quote-workbench-stress";
+import { runPipelineCrmStressTest } from "./37-pipeline-crm-stress";
 
 async function runPhase5StressSuite() {
   console.log("================================================================");
   console.log("🚀 STARTING PHASE 5 FEATURE STRESS TEST & SECURITY AUDIT SUITE");
   console.log("================================================================\n");
-
 
   const startTime = Date.now();
   let totalTests = 0;
@@ -31,6 +32,20 @@ async function runPhase5StressSuite() {
   totalTests += spec35Result.testsRun;
   if (!spec35Result.success) {
     allErrors.push(...spec35Result.errors.map((e) => `[Spec 35 PR #14 Review Audit] ${e}`));
+  }
+
+  // Spec 36: Phase 5C Quotation Workbench & Interactive Proposal Builder
+  const spec36Result = await runQuoteWorkbenchStressTest();
+  totalTests += spec36Result.testsRun;
+  if (!spec36Result.success) {
+    allErrors.push(...spec36Result.errors.map((e) => `[Spec 36 Quote Workbench] ${e}`));
+  }
+
+  // Spec 37: Phase 5D Automated Pipeline Workflows & CRM Dashboards
+  const spec37Result = await runPipelineCrmStressTest();
+  totalTests += spec37Result.testsRun;
+  if (!spec37Result.success) {
+    allErrors.push(...spec37Result.errors.map((e) => `[Spec 37 Pipeline CRM] ${e}`));
   }
 
   const durationMs = Date.now() - startTime;

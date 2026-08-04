@@ -231,4 +231,10 @@ To mark this stress test plan **Verified Clean**, all the following conditions m
 | [33-phase-5a-customer-and-account-management-core](33-phase-5a-customer-and-account-management-core.md) | Customer & Account Core RLS & Concurrency Stress Test | Verified Clean | Customer Directory, Profile DB Actions |
 | [34-phase-5b-lead-management-and-inquiry-processing](34-phase-5b-lead-management-and-inquiry-processing.md) | Lead Management Pipeline RLS & State Transition Stress Test | Verified Clean | Lead Pipeline, Inquiry Server Actions |
 | [35-fix-coderabbit-pr-review-findings](35-fix-coderabbit-pr-review-findings.md) | CodeRabbit PR #14 Review Findings Audit | Verified Clean | Lead Transactions, Search Bounds, Notification Counts, RLS Policies |
+| [36-phase-5c-quotation-workbench](36-phase-5c-quotation-workbench.md) | Quotation Workbench & Interactive Proposal Builder Fuzzing & Math Audit | Verified Clean | Financial Math, Status Transitions, Activity Logs, RLS Policies |
+| [37-phase-5d-pipeline-crm](37-phase-5d-pipeline-crm.md) | Phase 5D Automated Pipeline Workflows & CRM Dashboards Stress Test | Verified Clean | Stage Transitions, SLA Algorithms, CSV Export Sanitization |
+| [38-phase-5d-automated-proposal-generation-and-customer-dispatch](38-phase-5d-automated-proposal-generation-and-customer-dispatch.md) | Phase 5D Automated Proposal Generation & Customer Dispatch Stress Test | Verified Clean | Proposal Versioning, Expiration Tracking, Resend Dispatch & View Receipts |
+
+
+
 

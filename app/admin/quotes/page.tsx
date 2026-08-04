@@ -175,21 +175,36 @@ export default async function AdminQuotesPage({ searchParams }: QuotesPageProps)
 
 
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-[11px] text-muted-foreground inline-flex items-center gap-1">
-                    {q.assignedManagerId ? (
-                      <><UserCheck className="w-3.5 h-3.5 text-blue-500" /> Director Assigned</>
-                    ) : (
-                      <><Clock className="w-3.5 h-3.5 text-amber-500" /> Awaiting Director Assignment</>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] text-muted-foreground inline-flex items-center gap-1">
+                      {q.assignedManagerId ? (
+                        <><UserCheck className="w-3.5 h-3.5 text-blue-500" /> Director Assigned ({q.assignedManagerId})</>
+                      ) : (
+                        <><Clock className="w-3.5 h-3.5 text-amber-500" /> Awaiting Director Assignment</>
+                      )}
+                    </span>
+                    {q.grandTotal > 0 && (
+                      <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                        Rs. {q.grandTotal.toLocaleString("en-NP")}
+                      </span>
                     )}
-                  </span>
+                  </div>
 
-                  <Link
-                    href={`/quote/track/${q.referenceId}`}
-                    target="_blank"
-                    className="text-xs font-semibold text-emerald-600 hover:underline"
-                  >
-                    Public Tracking Portal →
-                  </Link>
+                  <div className="flex items-center gap-3">
+                    <Link
+                      href={`/admin/quotes/${q.id}`}
+                      className="text-xs font-bold text-sky-600 hover:underline bg-sky-50 px-2.5 py-1 rounded border border-sky-200"
+                    >
+                      Open Quotation Workbench →
+                    </Link>
+                    <Link
+                      href={`/quote/track/${q.referenceId}`}
+                      target="_blank"
+                      className="text-xs text-muted-foreground hover:underline"
+                    >
+                      Track Portal
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}

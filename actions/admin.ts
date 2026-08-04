@@ -5,7 +5,8 @@ import { revalidatePath } from "next/cache";
 import { and, desc, eq, ilike, isNull, or, sql } from "drizzle-orm";
 
 import { db } from "@/db";
-import { contactInquiries, quotes } from "@/db/schema";
+import { contactInquiries, quoteActivityLogs, quotes } from "@/db/schema";
+
 import { requireAdminAuth } from "@/lib/admin-auth";
 import type { ActionResponse } from "@/types/quote";
 
@@ -140,14 +141,14 @@ export async function adminSearchAction(
 }
 
 /**
- * Retrieves unread notification items requiring executive action (unassigned pending RFQs and new inquiries).
+ * Retrieves unread notification items requiring executive action (unassigned pending RFQs, new inquiries, and customer revision requests).
  * Protected by server-side Clerk role authorization.
  */
 export async function getAdminNotificationsAction(): Promise<ActionResponse<AdminNotificationsData>> {
   try {
     await requireAdminAuth();
 
-    const [unassignedQuotes, newInquiries, [unassignedTotal], [newInquiriesTotal]] = await Promise.all([
+    const [unassignedQuotes, newInquiries, revisionRequests, [unassignedTotal], [newInquiriesTotal], [revisionsTotal]] = await Promise.all([
       db
         .select()
         .from(quotes)
@@ -161,6 +162,21 @@ export async function getAdminNotificationsAction(): Promise<ActionResponse<Admi
         .orderBy(desc(contactInquiries.createdAt))
         .limit(10),
       db
+        .select({
+          id: quoteActivityLogs.id,
+          quoteId: quotes.id,
+          referenceId: quotes.referenceId,
+          fullName: quotes.fullName,
+          companyName: quotes.companyName,
+          message: quoteActivityLogs.message,
+          createdAt: quoteActivityLogs.createdAt,
+        })
+        .from(quoteActivityLogs)
+        .innerJoin(quotes, eq(quoteActivityLogs.quoteId, quotes.id))
+        .where(eq(quoteActivityLogs.actionType, "revision_requested"))
+        .orderBy(desc(quoteActivityLogs.createdAt))
+        .limit(10),
+      db
         .select({ count: sql<number>`count(*)` })
         .from(quotes)
         .where(and(eq(quotes.status, "pending"), isNull(quotes.assignedManagerId))),
@@ -168,6 +184,10 @@ export async function getAdminNotificationsAction(): Promise<ActionResponse<Admi
         .select({ count: sql<number>`count(*)` })
         .from(contactInquiries)
         .where(eq(contactInquiries.status, "new")),
+      db
+        .select({ count: sql<number>`count(*)` })
+        .from(quoteActivityLogs)
+        .where(eq(quoteActivityLogs.actionType, "revision_requested")),
     ]);
 
     const quoteItemsMapped: AdminNotificationItem[] = unassignedQuotes.map((q) => ({
@@ -192,17 +212,29 @@ export async function getAdminNotificationsAction(): Promise<ActionResponse<Admi
       href: `/admin/inquiries?id=${encodeURIComponent(i.id)}`,
     }));
 
-    const combinedItems = [...quoteItemsMapped, ...inquiryItemsMapped].sort(
+    const revisionItemsMapped: AdminNotificationItem[] = revisionRequests.map((r) => ({
+      id: r.id,
+      type: "rfq",
+      title: `Negotiation Requested: ${r.referenceId}`,
+      subtitle: `${r.fullName} (${r.companyName || "Direct Client"})`,
+      referenceId: r.referenceId,
+      status: "revision_requested",
+      createdAt: r.createdAt.toISOString(),
+      href: `/admin/quotes/${r.quoteId}`,
+    }));
+
+    const combinedItems = [...revisionItemsMapped, ...quoteItemsMapped, ...inquiryItemsMapped].sort(
       (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
 
     const totalUnassigned = Number(unassignedTotal?.count || 0);
     const totalNewInquiries = Number(newInquiriesTotal?.count || 0);
+    const totalRevisions = Number(revisionsTotal?.count || 0);
 
     return {
       success: true,
       data: {
-        totalUnread: totalUnassigned + totalNewInquiries,
+        totalUnread: totalUnassigned + totalNewInquiries + totalRevisions,
         unassignedQuotesCount: totalUnassigned,
         newInquiriesCount: totalNewInquiries,
         items: combinedItems,

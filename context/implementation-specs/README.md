@@ -204,5 +204,11 @@ When working on a feature or review fix:
 | [32-phase-4d-command-center-and-diagnostics](32-phase-4d-command-center-and-diagnostics.md)                                           | Phase 4D Command Center, Quick Search & Executive Notification Center | Complete | Command Palette, Quick Search & Notifications |
 | [33-phase-5a-customer-and-account-management-core](33-phase-5a-customer-and-account-management-core.md)                 | Phase 5A: Customer & Account Management Core                | Complete | Customer Directory & Profiles (`/admin/customers`) |
 | [34-phase-5b-lead-management-and-inquiry-processing](34-phase-5b-lead-management-and-inquiry-processing.md)         | Phase 5B: Lead Management & Inquiry Processing              | Complete | Lead Pipeline & Inquiry Management (`/admin/leads`) |
-| [35-fix-coderabbit-pr-review-findings](35-fix-coderabbit-pr-review-findings.md)                                 | Fix CodeRabbit PR Review Findings (Commit 7e695b6)         | In Progress | Security, Data Integrity, UI & Analytics |
+| [35-fix-coderabbit-pr-review-findings](35-fix-coderabbit-pr-review-findings.md)                                 | Fix CodeRabbit PR Review Findings (Commit 7e695b6)         | Complete | Security, Data Integrity, UI & Analytics |
+| [36-phase-5c-quotation-workbench-and-interactive-proposal-builder](36-phase-5c-quotation-workbench-and-interactive-proposal-builder.md) | Phase 5C: Quotation Workbench & Interactive Proposal Builder | Complete | Quotation Workbench & Proposal Builder (`/admin/quotes/[id]`) |
+| [37-phase-5d-automated-pipeline-workflows-and-crm-dashboards](37-phase-5d-automated-pipeline-workflows-and-crm-dashboards.md) | Phase 5D: Automated Pipeline Workflows & CRM Dashboards | Draft | Sales Pipeline Kanban & CRM Analytics (`/admin/crm/pipeline`, `/admin/crm/analytics`) |
+| [38-phase-5d-automated-proposal-generation-and-customer-dispatch](38-phase-5d-automated-proposal-generation-and-customer-dispatch.md) | Phase 5D: Automated Proposal Generation & Customer Dispatch | Complete | Proposal Generator & Customer Dispatch (`/admin/quotes/[id]`) |
+
+
+
 

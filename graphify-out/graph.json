@@ -1,0 +1,2725 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "RootLayout",
+      "file_type": "code",
+      "source_file": ".agents/skills/clerk-nextjs-patterns/templates/nextjs-basic-auth/app/layout.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "agents_skills_clerk_nextjs_patterns_templates_nextjs_basic_auth_app_layout_rootlayout",
+      "community": 54,
+      "norm_label": "rootlayout"
+    },
+    {
+      "label": "Home",
+      "file_type": "code",
+      "source_file": ".agents/skills/clerk-nextjs-patterns/templates/nextjs-basic-auth/app/page.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents_skills_clerk_nextjs_patterns_templates_nextjs_basic_auth_app_page_home",
+      "community": 55,
+      "norm_label": "home"
+    },
+    {
+      "label": "Layout",
+      "file_type": "code",
+      "source_file": ".agents/skills/clerk-react-router-patterns/templates/react-router-basic-auth/app/root.tsx",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "agents_skills_clerk_react_router_patterns_templates_react_router_basic_auth_app_root_layout",
+      "community": 58,
+      "norm_label": "layout"
+    },
+    {
+      "label": "App",
+      "file_type": "code",
+      "source_file": ".agents/skills/clerk-react-router-patterns/templates/react-router-basic-auth/app/root.tsx",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "agents_skills_clerk_react_router_patterns_templates_react_router_basic_auth_app_root_app",
+      "community": 56,
+      "norm_label": "app"
+    },
+    {
+      "label": "ErrorBoundary",
+      "file_type": "code",
+      "source_file": ".agents/skills/clerk-react-router-patterns/templates/react-router-basic-auth/app/root.tsx",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "agents_skills_clerk_react_router_patterns_templates_react_router_basic_auth_app_root_errorboundary",
+      "community": 57,
+      "norm_label": "errorboundary"
+    },
+    {
+      "label": "Home",
+      "file_type": "code",
+      "source_file": ".agents/skills/clerk-react-router-patterns/templates/react-router-basic-auth/app/routes/home.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents_skills_clerk_react_router_patterns_templates_react_router_basic_auth_app_routes_home_home",
+      "community": 59,
+      "norm_label": "home"
+    },
+    {
+      "label": "getRouter",
+      "file_type": "code",
+      "source_file": ".agents/skills/clerk-tanstack-patterns/templates/tanstack-basic-auth/src/router.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "agents_skills_clerk_tanstack_patterns_templates_tanstack_basic_auth_src_router_getrouter",
+      "community": 60,
+      "norm_label": "getrouter"
+    },
+    {
+      "label": "AdminSearchResultItem",
+      "file_type": "code",
+      "source_file": "actions/admin.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "actions_admin_adminsearchresultitem",
+      "community": 6,
+      "norm_label": "adminsearchresultitem"
+    },
+    {
+      "label": "AdminSearchResponseData",
+      "file_type": "code",
+      "source_file": "actions/admin.ts",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "actions_admin_adminsearchresponsedata",
+      "community": 5,
+      "norm_label": "adminsearchresponsedata"
+    },
+    {
+      "label": "AdminNotificationItem",
+      "file_type": "code",
+      "source_file": "actions/admin.ts",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "actions_admin_adminnotificationitem",
+      "community": 2,
+      "norm_label": "adminnotificationitem"
+    },
+    {
+      "label": "AdminNotificationsData",
+      "file_type": "code",
+      "source_file": "actions/admin.ts",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "actions_admin_adminnotificationsdata",
+      "community": 3,
+      "norm_label": "adminnotificationsdata"
+    },
+    {
+      "label": "adminSearchAction",
+      "file_type": "code",
+      "source_file": "actions/admin.ts",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "actions_admin_adminsearchaction",
+      "community": 4,
+      "norm_label": "adminsearchaction"
+    },
+    {
+      "label": "getAdminNotificationsAction",
+      "file_type": "code",
+      "source_file": "actions/admin.ts",
+      "source_location": "L147",
+      "_origin": "ast",
+      "id": "actions_admin_getadminnotificationsaction",
+      "community": 8,
+      "norm_label": "getadminnotificationsaction"
+    },
+    {
+      "label": "assignQuoteToSelfAction",
+      "file_type": "code",
+      "source_file": "actions/admin.ts",
+      "source_location": "L259",
+      "_origin": "ast",
+      "id": "actions_admin_assignquotetoselfaction",
+      "community": 7,
+      "norm_label": "assignquotetoselfaction"
+    },
+    {
+      "label": "updateInquiryStatusAction",
+      "file_type": "code",
+      "source_file": "actions/admin.ts",
+      "source_location": "L307",
+      "_origin": "ast",
+      "id": "actions_admin_updateinquirystatusaction",
+      "community": 9,
+      "norm_label": "updateinquirystatusaction"
+    },
+    {
+      "label": "submitContactInquiryAction",
+      "file_type": "code",
+      "source_file": "actions/contact.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "actions_contact_submitcontactinquiryaction",
+      "community": 10,
+      "norm_label": "submitcontactinquiryaction"
+    },
+    {
+      "label": "exportCrmDataAction",
+      "file_type": "code",
+      "source_file": "actions/crm-export.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "actions_crm_export_exportcrmdataaction",
+      "community": 11,
+      "norm_label": "exportcrmdataaction"
+    },
+    {
+      "label": "CustomerStatsData",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "actions_customer_customerstatsdata",
+      "community": 16,
+      "norm_label": "customerstatsdata"
+    },
+    {
+      "label": "CustomerListItem",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "actions_customer_customerlistitem",
+      "community": 14,
+      "norm_label": "customerlistitem"
+    },
+    {
+      "label": "CustomerListResponseData",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "actions_customer_customerlistresponsedata",
+      "community": 15,
+      "norm_label": "customerlistresponsedata"
+    },
+    {
+      "label": "CustomerDetailResponseData",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L56",
+      "_origin": "ast",
+      "id": "actions_customer_customerdetailresponsedata",
+      "community": 13,
+      "norm_label": "customerdetailresponsedata"
+    },
+    {
+      "label": "getCustomersAction",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "actions_customer_getcustomersaction",
+      "community": 19,
+      "norm_label": "getcustomersaction"
+    },
+    {
+      "label": "getCustomerStatsAction",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L181",
+      "_origin": "ast",
+      "id": "actions_customer_getcustomerstatsaction",
+      "community": 20,
+      "norm_label": "getcustomerstatsaction"
+    },
+    {
+      "label": "getCustomerByIdAction",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L225",
+      "_origin": "ast",
+      "id": "actions_customer_getcustomerbyidaction",
+      "community": 18,
+      "norm_label": "getcustomerbyidaction"
+    },
+    {
+      "label": "createCustomerAction",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L295",
+      "_origin": "ast",
+      "id": "actions_customer_createcustomeraction",
+      "community": 12,
+      "norm_label": "createcustomeraction"
+    },
+    {
+      "label": "updateCustomerAction",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L350",
+      "_origin": "ast",
+      "id": "actions_customer_updatecustomeraction",
+      "community": 21,
+      "norm_label": "updatecustomeraction"
+    },
+    {
+      "label": "deleteCustomerAction",
+      "file_type": "code",
+      "source_file": "actions/customer.ts",
+      "source_location": "L413",
+      "_origin": "ast",
+      "id": "actions_customer_deletecustomeraction",
+      "community": 17,
+      "norm_label": "deletecustomeraction"
+    },
+    {
+      "label": "LeadStatsData",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "actions_lead_leadstatsdata",
+      "community": 30,
+      "norm_label": "leadstatsdata"
+    },
+    {
+      "label": "LeadListItem",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "actions_lead_leadlistitem",
+      "community": 28,
+      "norm_label": "leadlistitem"
+    },
+    {
+      "label": "LeadListResponseData",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "actions_lead_leadlistresponsedata",
+      "community": 29,
+      "norm_label": "leadlistresponsedata"
+    },
+    {
+      "label": "LeadDetailResponseData",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "actions_lead_leaddetailresponsedata",
+      "community": 27,
+      "norm_label": "leaddetailresponsedata"
+    },
+    {
+      "label": "getLeadStatsAction",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L79",
+      "_origin": "ast",
+      "id": "actions_lead_getleadstatsaction",
+      "community": 26,
+      "norm_label": "getleadstatsaction"
+    },
+    {
+      "label": "getLeadsAction",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L114",
+      "_origin": "ast",
+      "id": "actions_lead_getleadsaction",
+      "community": 25,
+      "norm_label": "getleadsaction"
+    },
+    {
+      "label": "getLeadByIdAction",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L232",
+      "_origin": "ast",
+      "id": "actions_lead_getleadbyidaction",
+      "community": 24,
+      "norm_label": "getleadbyidaction"
+    },
+    {
+      "label": "createLeadAction",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L293",
+      "_origin": "ast",
+      "id": "actions_lead_createleadaction",
+      "community": 23,
+      "norm_label": "createleadaction"
+    },
+    {
+      "label": "updateLeadAction",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L345",
+      "_origin": "ast",
+      "id": "actions_lead_updateleadaction",
+      "community": 31,
+      "norm_label": "updateleadaction"
+    },
+    {
+      "label": "convertLeadToCustomerAction",
+      "file_type": "code",
+      "source_file": "actions/lead.ts",
+      "source_location": "L410",
+      "_origin": "ast",
+      "id": "actions_lead_convertleadtocustomeraction",
+      "community": 22,
+      "norm_label": "convertleadtocustomeraction"
+    },
+    {
+      "label": "PipelineLeadItem",
+      "file_type": "code",
+      "source_file": "actions/pipeline.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "actions_pipeline_pipelineleaditem",
+      "community": 36,
+      "norm_label": "pipelineleaditem"
+    },
+    {
+      "label": "PipelineColumn",
+      "file_type": "code",
+      "source_file": "actions/pipeline.ts",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "actions_pipeline_pipelinecolumn",
+      "community": 0,
+      "norm_label": "pipelinecolumn"
+    },
+    {
+      "label": "PipelineData",
+      "file_type": "code",
+      "source_file": "actions/pipeline.ts",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "actions_pipeline_pipelinedata",
+      "community": 35,
+      "norm_label": "pipelinedata"
+    },
+    {
+      "label": "PipelineAnalyticsMetrics",
+      "file_type": "code",
+      "source_file": "actions/pipeline.ts",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "actions_pipeline_pipelineanalyticsmetrics",
+      "community": 34,
+      "norm_label": "pipelineanalyticsmetrics"
+    },
+    {
+      "label": "updateLeadStageAction",
+      "file_type": "code",
+      "source_file": "actions/pipeline.ts",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "actions_pipeline_updateleadstageaction",
+      "community": 37,
+      "norm_label": "updateleadstageaction"
+    },
+    {
+      "label": "getPipelineDataAction",
+      "file_type": "code",
+      "source_file": "actions/pipeline.ts",
+      "source_location": "L194",
+      "_origin": "ast",
+      "id": "actions_pipeline_getpipelinedataaction",
+      "community": 33,
+      "norm_label": "getpipelinedataaction"
+    },
+    {
+      "label": "getPipelineAnalyticsAction",
+      "file_type": "code",
+      "source_file": "actions/pipeline.ts",
+      "source_location": "L291",
+      "_origin": "ast",
+      "id": "actions_pipeline_getpipelineanalyticsaction",
+      "community": 32,
+      "norm_label": "getpipelineanalyticsaction"
+    },
+    {
+      "label": "ProposalVersionItem",
+      "file_type": "code",
+      "source_file": "actions/proposal.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "actions_proposal_proposalversionitem",
+      "community": 41,
+      "norm_label": "proposalversionitem"
+    },
+    {
+      "label": "createProposalVersionAction",
+      "file_type": "code",
+      "source_file": "actions/proposal.ts",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "actions_proposal_createproposalversionaction",
+      "community": 38,
+      "norm_label": "createproposalversionaction"
+    },
+    {
+      "label": "getProposalVersionsAction",
+      "file_type": "code",
+      "source_file": "actions/proposal.ts",
+      "source_location": "L146",
+      "_origin": "ast",
+      "id": "actions_proposal_getproposalversionsaction",
+      "community": 40,
+      "norm_label": "getproposalversionsaction"
+    },
+    {
+      "label": "dispatchProposalEmailAction",
+      "file_type": "code",
+      "source_file": "actions/proposal.ts",
+      "source_location": "L172",
+      "_origin": "ast",
+      "id": "actions_proposal_dispatchproposalemailaction",
+      "community": 39,
+      "norm_label": "dispatchproposalemailaction"
+    },
+    {
+      "label": "recordProposalViewAction",
+      "file_type": "code",
+      "source_file": "actions/proposal.ts",
+      "source_location": "L316",
+      "_origin": "ast",
+      "id": "actions_proposal_recordproposalviewaction",
+      "community": 42,
+      "norm_label": "recordproposalviewaction"
+    },
+    {
+      "label": "submitNegotiationRequestAction",
+      "file_type": "code",
+      "source_file": "actions/proposal.ts",
+      "source_location": "L407",
+      "_origin": "ast",
+      "id": "actions_proposal_submitnegotiationrequestaction",
+      "community": 43,
+      "norm_label": "submitnegotiationrequestaction"
+    },
+    {
+      "label": "QuoteDetailData",
+      "file_type": "code",
+      "source_file": "actions/quote-admin.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "actions_quote_admin_quotedetaildata",
+      "community": 47,
+      "norm_label": "quotedetaildata"
+    },
+    {
+      "label": "getAdminQuoteDetailAction",
+      "file_type": "code",
+      "source_file": "actions/quote-admin.ts",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "actions_quote_admin_getadminquotedetailaction",
+      "community": 46,
+      "norm_label": "getadminquotedetailaction"
+    },
+    {
+      "label": "updateQuoteFinancialsAction",
+      "file_type": "code",
+      "source_file": "actions/quote-admin.ts",
+      "source_location": "L99",
+      "_origin": "ast",
+      "id": "actions_quote_admin_updatequotefinancialsaction",
+      "community": 49,
+      "norm_label": "updatequotefinancialsaction"
+    },
+    {
+      "label": "updateQuoteStatusAction",
+      "file_type": "code",
+      "source_file": "actions/quote-admin.ts",
+      "source_location": "L189",
+      "_origin": "ast",
+      "id": "actions_quote_admin_updatequotestatusaction",
+      "community": 50,
+      "norm_label": "updatequotestatusaction"
+    },
+    {
+      "label": "addQuoteActivityNoteAction",
+      "file_type": "code",
+      "source_file": "actions/quote-admin.ts",
+      "source_location": "L265",
+      "_origin": "ast",
+      "id": "actions_quote_admin_addquoteactivitynoteaction",
+      "community": 44,
+      "norm_label": "addquoteactivitynoteaction"
+    },
+    {
+      "label": "assignQuoteManagerAction",
+      "file_type": "code",
+      "source_file": "actions/quote-admin.ts",
+      "source_location": "L299",
+      "_origin": "ast",
+      "id": "actions_quote_admin_assignquotemanageraction",
+      "community": 45,
+      "norm_label": "assignquotemanageraction"
+    },
+    {
+      "label": "sendQuoteProposalEmailAction",
+      "file_type": "code",
+      "source_file": "actions/quote-admin.ts",
+      "source_location": "L344",
+      "_origin": "ast",
+      "id": "actions_quote_admin_sendquoteproposalemailaction",
+      "community": 48,
+      "norm_label": "sendquoteproposalemailaction"
+    },
+    {
+      "label": "createQuoteAction",
+      "file_type": "code",
+      "source_file": "actions/quote.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "actions_quote_createquoteaction",
+      "community": 51,
+      "norm_label": "createquoteaction"
+    },
+    {
+      "label": "getQuoteByTrackingAction",
+      "file_type": "code",
+      "source_file": "actions/quote.ts",
+      "source_location": "L170",
+      "_origin": "ast",
+      "id": "actions_quote_getquotebytrackingaction",
+      "community": 53,
+      "norm_label": "getquotebytrackingaction"
+    },
+    {
+      "label": "getQuoteByLookupTokenAction",
+      "file_type": "code",
+      "source_file": "actions/quote.ts",
+      "source_location": "L219",
+      "_origin": "ast",
+      "id": "actions_quote_getquotebylookuptokenaction",
+      "community": 52,
+      "norm_label": "getquotebylookuptokenaction"
+    },
+    {
+      "label": "AboutPage",
+      "file_type": "code",
+      "source_file": "app/(public)/about/page.tsx",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "app_public_about_page_aboutpage",
+      "community": 76,
+      "norm_label": "aboutpage"
+    },
+    {
+      "label": "ContactPage",
+      "file_type": "code",
+      "source_file": "app/(public)/contact/page.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "app_public_contact_page_contactpage",
+      "community": 77,
+      "norm_label": "contactpage"
+    },
+    {
+      "label": "PublicLayout",
+      "file_type": "code",
+      "source_file": "app/(public)/layout.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "app_public_layout_publiclayout",
+      "community": 78,
+      "norm_label": "publiclayout"
+    },
+    {
+      "label": "HomePage",
+      "file_type": "code",
+      "source_file": "app/(public)/page.tsx",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "app_public_page_homepage",
+      "community": 79,
+      "norm_label": "homepage"
+    },
+    {
+      "label": "PrivacyPage",
+      "file_type": "code",
+      "source_file": "app/(public)/privacy/page.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "app_public_privacy_page_privacypage",
+      "community": 80,
+      "norm_label": "privacypage"
+    },
+    {
+      "label": "ProductsPage",
+      "file_type": "code",
+      "source_file": "app/(public)/products/page.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "app_public_products_page_productspage",
+      "community": 81,
+      "norm_label": "productspage"
+    },
+    {
+      "label": "QuotePage",
+      "file_type": "code",
+      "source_file": "app/(public)/quote/page.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "app_public_quote_page_quotepage",
+      "community": 82,
+      "norm_label": "quotepage"
+    },
+    {
+      "label": "generateMetadata",
+      "file_type": "code",
+      "source_file": "app/(public)/quote/track/[referenceId]/page.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "app_public_quote_track_referenceid_page_generatemetadata",
+      "community": 84,
+      "norm_label": "generatemetadata"
+    },
+    {
+      "label": "QuoteTrackDetailPage",
+      "file_type": "code",
+      "source_file": "app/(public)/quote/track/[referenceId]/page.tsx",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "app_public_quote_track_referenceid_page_quotetrackdetailpage",
+      "community": 85,
+      "norm_label": "quotetrackdetailpage"
+    },
+    {
+      "label": "QuoteTrackPage",
+      "file_type": "code",
+      "source_file": "app/(public)/quote/track/page.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "app_public_quote_track_page_quotetrackpage",
+      "community": 83,
+      "norm_label": "quotetrackpage"
+    },
+    {
+      "label": "generateStaticParams",
+      "file_type": "code",
+      "source_file": "app/(public)/services/[slug]/page.tsx",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "app_public_services_slug_page_generatestaticparams",
+      "community": 88,
+      "norm_label": "generatestaticparams"
+    },
+    {
+      "label": "generateMetadata",
+      "file_type": "code",
+      "source_file": "app/(public)/services/[slug]/page.tsx",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "app_public_services_slug_page_generatemetadata",
+      "community": 87,
+      "norm_label": "generatemetadata"
+    },
+    {
+      "label": "ServiceDetailPage",
+      "file_type": "code",
+      "source_file": "app/(public)/services/[slug]/page.tsx",
+      "source_location": "L57",
+      "_origin": "ast",
+      "id": "app_public_services_slug_page_servicedetailpage",
+      "community": 89,
+      "norm_label": "servicedetailpage"
+    },
+    {
+      "label": "ServicesPage",
+      "file_type": "code",
+      "source_file": "app/(public)/services/page.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "app_public_services_page_servicespage",
+      "community": 86,
+      "norm_label": "servicespage"
+    },
+    {
+      "label": "TermsPage",
+      "file_type": "code",
+      "source_file": "app/(public)/terms/page.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "app_public_terms_page_termspage",
+      "community": 90,
+      "norm_label": "termspage"
+    },
+    {
+      "label": "AnalyticsPage",
+      "file_type": "code",
+      "source_file": "app/admin/analytics/page.tsx",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "app_admin_analytics_page_analyticspage",
+      "community": 61,
+      "norm_label": "analyticspage"
+    },
+    {
+      "label": "CrmAnalyticsPage",
+      "file_type": "code",
+      "source_file": "app/admin/crm/analytics/page.tsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "app_admin_crm_analytics_page_crmanalyticspage",
+      "community": 62,
+      "norm_label": "crmanalyticspage"
+    },
+    {
+      "label": "SalesPipelinePage",
+      "file_type": "code",
+      "source_file": "app/admin/crm/pipeline/page.tsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "app_admin_crm_pipeline_page_salespipelinepage",
+      "community": 63,
+      "norm_label": "salespipelinepage"
+    },
+    {
+      "label": "CustomerDetailPage",
+      "file_type": "code",
+      "source_file": "app/admin/customers/[id]/page.tsx",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "app_admin_customers_id_page_customerdetailpage",
+      "community": 64,
+      "norm_label": "customerdetailpage"
+    },
+    {
+      "label": "AdminCustomersPage",
+      "file_type": "code",
+      "source_file": "app/admin/customers/page.tsx",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "app_admin_customers_page_admincustomerspage",
+      "community": 65,
+      "norm_label": "admincustomerspage"
+    },
+    {
+      "label": "AdminInquiriesPage",
+      "file_type": "code",
+      "source_file": "app/admin/inquiries/page.tsx",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "app_admin_inquiries_page_admininquiriespage",
+      "community": 66,
+      "norm_label": "admininquiriespage"
+    },
+    {
+      "label": "AdminLayout",
+      "file_type": "code",
+      "source_file": "app/admin/layout.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "app_admin_layout_adminlayout",
+      "community": 67,
+      "norm_label": "adminlayout"
+    },
+    {
+      "label": "AdminLeadDetailPage",
+      "file_type": "code",
+      "source_file": "app/admin/leads/[id]/page.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "app_admin_leads_id_page_adminleaddetailpage",
+      "community": 68,
+      "norm_label": "adminleaddetailpage"
+    },
+    {
+      "label": "AdminLeadsPage",
+      "file_type": "code",
+      "source_file": "app/admin/leads/page.tsx",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "app_admin_leads_page_adminleadspage",
+      "community": 69,
+      "norm_label": "adminleadspage"
+    },
+    {
+      "label": "AdminLoginPage",
+      "file_type": "code",
+      "source_file": "app/admin/login/[[...login]]/page.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "app_admin_login_login_page_adminloginpage",
+      "community": 70,
+      "norm_label": "adminloginpage"
+    },
+    {
+      "label": "AdminDashboardPage",
+      "file_type": "code",
+      "source_file": "app/admin/page.tsx",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "app_admin_page_admindashboardpage",
+      "community": 71,
+      "norm_label": "admindashboardpage"
+    },
+    {
+      "label": "AdminQuoteWorkbenchPage",
+      "file_type": "code",
+      "source_file": "app/admin/quotes/[id]/page.tsx",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "app_admin_quotes_id_page_adminquoteworkbenchpage",
+      "community": 72,
+      "norm_label": "adminquoteworkbenchpage"
+    },
+    {
+      "label": "AdminQuotesPage",
+      "file_type": "code",
+      "source_file": "app/admin/quotes/page.tsx",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "app_admin_quotes_page_adminquotespage",
+      "community": 73,
+      "norm_label": "adminquotespage"
+    },
+    {
+      "label": "AdminUnauthorizedPage",
+      "file_type": "code",
+      "source_file": "app/admin/unauthorized/page.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "app_admin_unauthorized_page_adminunauthorizedpage",
+      "community": 74,
+      "norm_label": "adminunauthorizedpage"
+    },
+    {
+      "label": "RootLayout",
+      "file_type": "code",
+      "source_file": "app/layout.tsx",
+      "source_location": "L71",
+      "_origin": "ast",
+      "id": "app_layout_rootlayout",
+      "community": 75,
+      "norm_label": "rootlayout"
+    },
+    {
+      "label": "robots",
+      "file_type": "code",
+      "source_file": "app/robots.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "app_robots_robots",
+      "community": 91,
+      "norm_label": "robots"
+    },
+    {
+      "label": "sitemap",
+      "file_type": "code",
+      "source_file": "app/sitemap.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "app_sitemap_sitemap",
+      "community": 92,
+      "norm_label": "sitemap"
+    },
+    {
+      "label": "AdminHeader",
+      "file_type": "code",
+      "source_file": "components/admin/admin-header.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "components_admin_admin_header_adminheader",
+      "community": 93,
+      "norm_label": "adminheader"
+    },
+    {
+      "label": "AdminMobileNav",
+      "file_type": "code",
+      "source_file": "components/admin/admin-mobile-nav.tsx",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "components_admin_admin_mobile_nav_adminmobilenav",
+      "community": 94,
+      "norm_label": "adminmobilenav"
+    },
+    {
+      "label": "AdminSidebar",
+      "file_type": "code",
+      "source_file": "components/admin/admin-sidebar.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "components_admin_admin_sidebar_adminsidebar",
+      "community": 95,
+      "norm_label": "adminsidebar"
+    },
+    {
+      "label": "TrendPoint",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/analytics-charts.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "components_admin_analytics_analytics_charts_trendpoint",
+      "community": 99,
+      "norm_label": "trendpoint"
+    },
+    {
+      "label": "CategoryBreakdown",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/analytics-charts.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "components_admin_analytics_analytics_charts_categorybreakdown",
+      "community": 98,
+      "norm_label": "categorybreakdown"
+    },
+    {
+      "label": "BudgetDistribution",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/analytics-charts.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "components_admin_analytics_analytics_charts_budgetdistribution",
+      "community": 97,
+      "norm_label": "budgetdistribution"
+    },
+    {
+      "label": "AnalyticsCharts",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/analytics-charts.tsx",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "components_admin_analytics_analytics_charts_analyticscharts",
+      "community": 96,
+      "norm_label": "analyticscharts"
+    },
+    {
+      "label": "PresetRange",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/analytics-filter-bar.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "components_admin_analytics_analytics_filter_bar_presetrange",
+      "community": 101,
+      "norm_label": "presetrange"
+    },
+    {
+      "label": "AnalyticsFilterBar",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/analytics-filter-bar.tsx",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "components_admin_analytics_analytics_filter_bar_analyticsfilterbar",
+      "community": 100,
+      "norm_label": "analyticsfilterbar"
+    },
+    {
+      "label": "FunnelStage",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/conversion-funnel-sla.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "components_admin_analytics_conversion_funnel_sla_funnelstage",
+      "community": 103,
+      "norm_label": "funnelstage"
+    },
+    {
+      "label": "SlaBreakdown",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/conversion-funnel-sla.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "components_admin_analytics_conversion_funnel_sla_slabreakdown",
+      "community": 104,
+      "norm_label": "slabreakdown"
+    },
+    {
+      "label": "ConversionFunnelSla",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/conversion-funnel-sla.tsx",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "components_admin_analytics_conversion_funnel_sla_conversionfunnelsla",
+      "community": 102,
+      "norm_label": "conversionfunnelsla"
+    },
+    {
+      "label": "ThroughputMetrics",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/executive-throughput-cards.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "components_admin_analytics_executive_throughput_cards_throughputmetrics",
+      "community": 106,
+      "norm_label": "throughputmetrics"
+    },
+    {
+      "label": "ExecutiveThroughputCards",
+      "file_type": "code",
+      "source_file": "components/admin/analytics/executive-throughput-cards.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "components_admin_analytics_executive_throughput_cards_executivethroughputcards",
+      "community": 105,
+      "norm_label": "executivethroughputcards"
+    },
+    {
+      "label": "CommandPalette",
+      "file_type": "code",
+      "source_file": "components/admin/command-palette.tsx",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "components_admin_command_palette_commandpalette",
+      "community": 107,
+      "norm_label": "commandpalette"
+    },
+    {
+      "label": "CrmAnalyticsView",
+      "file_type": "code",
+      "source_file": "components/admin/crm/crm-analytics-view.tsx",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "components_admin_crm_crm_analytics_view_crmanalyticsview",
+      "community": 108,
+      "norm_label": "crmanalyticsview"
+    },
+    {
+      "label": "PipelineKanban",
+      "file_type": "code",
+      "source_file": "components/admin/crm/pipeline-kanban.tsx",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "components_admin_crm_pipeline_kanban_pipelinekanban",
+      "community": 109,
+      "norm_label": "pipelinekanban"
+    },
+    {
+      "label": "CustomerFormModal",
+      "file_type": "code",
+      "source_file": "components/admin/customers/customer-form-modal.tsx",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "components_admin_customers_customer_form_modal_customerformmodal",
+      "community": 110,
+      "norm_label": "customerformmodal"
+    },
+    {
+      "label": "CustomerNotesEditor",
+      "file_type": "code",
+      "source_file": "components/admin/customers/customer-notes-editor.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "components_admin_customers_customer_notes_editor_customernoteseditor",
+      "community": 111,
+      "norm_label": "customernoteseditor"
+    },
+    {
+      "label": "CustomerTable",
+      "file_type": "code",
+      "source_file": "components/admin/customers/customer-table.tsx",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "components_admin_customers_customer_table_customertable",
+      "community": 112,
+      "norm_label": "customertable"
+    },
+    {
+      "label": "ConvertLeadModal",
+      "file_type": "code",
+      "source_file": "components/admin/leads/convert-lead-modal.tsx",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "components_admin_leads_convert_lead_modal_convertleadmodal",
+      "community": 113,
+      "norm_label": "convertleadmodal"
+    },
+    {
+      "label": "LeadDetailClient",
+      "file_type": "code",
+      "source_file": "components/admin/leads/lead-detail-client.tsx",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "components_admin_leads_lead_detail_client_leaddetailclient",
+      "community": 114,
+      "norm_label": "leaddetailclient"
+    },
+    {
+      "label": "LeadFilterBar",
+      "file_type": "code",
+      "source_file": "components/admin/leads/lead-filter-bar.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "components_admin_leads_lead_filter_bar_leadfilterbar",
+      "community": 115,
+      "norm_label": "leadfilterbar"
+    },
+    {
+      "label": "LeadFormModal",
+      "file_type": "code",
+      "source_file": "components/admin/leads/lead-form-modal.tsx",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "components_admin_leads_lead_form_modal_leadformmodal",
+      "community": 116,
+      "norm_label": "leadformmodal"
+    },
+    {
+      "label": "LeadTable",
+      "file_type": "code",
+      "source_file": "components/admin/leads/lead-table.tsx",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "components_admin_leads_lead_table_leadtable",
+      "community": 117,
+      "norm_label": "leadtable"
+    },
+    {
+      "label": "LeadsTableContainer",
+      "file_type": "code",
+      "source_file": "components/admin/leads/leads-table-container.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "components_admin_leads_leads_table_container_leadstablecontainer",
+      "community": 118,
+      "norm_label": "leadstablecontainer"
+    },
+    {
+      "label": "NotificationDrawer",
+      "file_type": "code",
+      "source_file": "components/admin/notification-drawer.tsx",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "components_admin_notification_drawer_notificationdrawer",
+      "community": 119,
+      "norm_label": "notificationdrawer"
+    },
+    {
+      "label": "PendingDirectivesAlert",
+      "file_type": "code",
+      "source_file": "components/admin/pending-directives-alert.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "components_admin_pending_directives_alert_pendingdirectivesalert",
+      "community": 120,
+      "norm_label": "pendingdirectivesalert"
+    },
+    {
+      "label": "ProposalVersionHistory",
+      "file_type": "code",
+      "source_file": "components/admin/quotes/proposal-version-history.tsx",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "components_admin_quotes_proposal_version_history_proposalversionhistory",
+      "community": 121,
+      "norm_label": "proposalversionhistory"
+    },
+    {
+      "label": "QuoteActivitySidebar",
+      "file_type": "code",
+      "source_file": "components/admin/quotes/quote-activity-sidebar.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "components_admin_quotes_quote_activity_sidebar_quoteactivitysidebar",
+      "community": 122,
+      "norm_label": "quoteactivitysidebar"
+    },
+    {
+      "label": "QuoteProposalPreview",
+      "file_type": "code",
+      "source_file": "components/admin/quotes/quote-proposal-preview.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "components_admin_quotes_quote_proposal_preview_quoteproposalpreview",
+      "community": 123,
+      "norm_label": "quoteproposalpreview"
+    },
+    {
+      "label": "QuoteWorkbench",
+      "file_type": "code",
+      "source_file": "components/admin/quotes/quote-workbench.tsx",
+      "source_location": "L37",
+      "_origin": "ast",
+      "id": "components_admin_quotes_quote_workbench_quoteworkbench",
+      "community": 124,
+      "norm_label": "quoteworkbench"
+    },
+    {
+      "label": "ActivityItem",
+      "file_type": "code",
+      "source_file": "components/admin/recent-activity-stream.tsx",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "components_admin_recent_activity_stream_activityitem",
+      "community": 125,
+      "norm_label": "activityitem"
+    },
+    {
+      "label": "RecentActivityStream",
+      "file_type": "code",
+      "source_file": "components/admin/recent-activity-stream.tsx",
+      "source_location": "L89",
+      "_origin": "ast",
+      "id": "components_admin_recent_activity_stream_recentactivitystream",
+      "community": 126,
+      "norm_label": "recentactivitystream"
+    },
+    {
+      "label": "ContactForm",
+      "file_type": "code",
+      "source_file": "components/contact/contact-form.tsx",
+      "source_location": "L91",
+      "_origin": "ast",
+      "id": "components_contact_contact_form_contactform",
+      "community": 127,
+      "norm_label": "contactform"
+    },
+    {
+      "label": "InquiryForm",
+      "file_type": "code",
+      "source_file": "components/contact/inquiry-form.tsx",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "components_contact_inquiry_form_inquiryform",
+      "community": 128,
+      "norm_label": "inquiryform"
+    },
+    {
+      "label": "MainHeader",
+      "file_type": "code",
+      "source_file": "components/layout/main-header.tsx",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "components_layout_main_header_mainheader",
+      "community": 129,
+      "norm_label": "mainheader"
+    },
+    {
+      "label": "MobileNav",
+      "file_type": "code",
+      "source_file": "components/layout/mobile-nav.tsx",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "components_layout_mobile_nav_mobilenav",
+      "community": 130,
+      "norm_label": "mobilenav"
+    },
+    {
+      "label": "PublicFooter",
+      "file_type": "code",
+      "source_file": "components/layout/public-footer.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "components_layout_public_footer_publicfooter",
+      "community": 131,
+      "norm_label": "publicfooter"
+    },
+    {
+      "label": "ProductCatalog",
+      "file_type": "code",
+      "source_file": "components/products/product-catalog.tsx",
+      "source_location": "L188",
+      "_origin": "ast",
+      "id": "components_products_product_catalog_productcatalog",
+      "community": 132,
+      "norm_label": "productcatalog"
+    },
+    {
+      "label": "AdminShellProvider",
+      "file_type": "code",
+      "source_file": "components/providers/admin-shell-provider.tsx",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "components_providers_admin_shell_provider_adminshellprovider",
+      "community": 133,
+      "norm_label": "adminshellprovider"
+    },
+    {
+      "label": "useAdminShell",
+      "file_type": "code",
+      "source_file": "components/providers/admin-shell-provider.tsx",
+      "source_location": "L88",
+      "_origin": "ast",
+      "id": "components_providers_admin_shell_provider_useadminshell",
+      "community": 134,
+      "norm_label": "useadminshell"
+    },
+    {
+      "label": "QuoteCartItem",
+      "file_type": "code",
+      "source_file": "components/providers/quote-cart-provider.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "components_providers_quote_cart_provider_quotecartitem",
+      "community": 135,
+      "norm_label": "quotecartitem"
+    },
+    {
+      "label": "QuoteCartProvider",
+      "file_type": "code",
+      "source_file": "components/providers/quote-cart-provider.tsx",
+      "source_location": "L64",
+      "_origin": "ast",
+      "id": "components_providers_quote_cart_provider_quotecartprovider",
+      "community": 136,
+      "norm_label": "quotecartprovider"
+    },
+    {
+      "label": "useQuoteCart",
+      "file_type": "code",
+      "source_file": "components/providers/quote-cart-provider.tsx",
+      "source_location": "L165",
+      "_origin": "ast",
+      "id": "components_providers_quote_cart_provider_usequotecart",
+      "community": 137,
+      "norm_label": "usequotecart"
+    },
+    {
+      "label": "QuoteRequest",
+      "file_type": "code",
+      "source_file": "components/quote/quote-request.tsx",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "components_quote_quote_request_quoterequest",
+      "community": 138,
+      "norm_label": "quoterequest"
+    },
+    {
+      "label": "QuoteTrackingDetails",
+      "file_type": "code",
+      "source_file": "components/quote/quote-tracking-details.tsx",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "components_quote_quote_tracking_details_quotetrackingdetails",
+      "community": 139,
+      "norm_label": "quotetrackingdetails"
+    },
+    {
+      "label": "QuoteTrackingSearchForm",
+      "file_type": "code",
+      "source_file": "components/quote/quote-tracking-search-form.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "components_quote_quote_tracking_search_form_quotetrackingsearchform",
+      "community": 140,
+      "norm_label": "quotetrackingsearchform"
+    },
+    {
+      "label": "QuoteTrackingTimeline",
+      "file_type": "code",
+      "source_file": "components/quote/quote-tracking-timeline.tsx",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "components_quote_quote_tracking_timeline_quotetrackingtimeline",
+      "community": 141,
+      "norm_label": "quotetrackingtimeline"
+    },
+    {
+      "label": "RFQConfirmationProps",
+      "file_type": "code",
+      "source_file": "components/quote/rfq-confirmation.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "components_quote_rfq_confirmation_rfqconfirmationprops",
+      "community": 143,
+      "norm_label": "rfqconfirmationprops"
+    },
+    {
+      "label": "RFQConfirmation",
+      "file_type": "code",
+      "source_file": "components/quote/rfq-confirmation.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "components_quote_rfq_confirmation_rfqconfirmation",
+      "community": 142,
+      "norm_label": "rfqconfirmation"
+    },
+    {
+      "label": "RFQWizardProgressProps",
+      "file_type": "code",
+      "source_file": "components/quote/rfq-wizard-progress.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "components_quote_rfq_wizard_progress_rfqwizardprogressprops",
+      "community": 145,
+      "norm_label": "rfqwizardprogressprops"
+    },
+    {
+      "label": "RFQWizardProgress",
+      "file_type": "code",
+      "source_file": "components/quote/rfq-wizard-progress.tsx",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "components_quote_rfq_wizard_progress_rfqwizardprogress",
+      "community": 144,
+      "norm_label": "rfqwizardprogress"
+    },
+    {
+      "label": "RFQStepEquipment",
+      "file_type": "code",
+      "source_file": "components/quote/rfq-wizard-steps.tsx",
+      "source_location": "L37",
+      "_origin": "ast",
+      "id": "components_quote_rfq_wizard_steps_rfqstepequipment",
+      "community": 147,
+      "norm_label": "rfqstepequipment"
+    },
+    {
+      "label": "RFQStepDetails",
+      "file_type": "code",
+      "source_file": "components/quote/rfq-wizard-steps.tsx",
+      "source_location": "L218",
+      "_origin": "ast",
+      "id": "components_quote_rfq_wizard_steps_rfqstepdetails",
+      "community": 146,
+      "norm_label": "rfqstepdetails"
+    },
+    {
+      "label": "RFQStepReview",
+      "file_type": "code",
+      "source_file": "components/quote/rfq-wizard-steps.tsx",
+      "source_location": "L446",
+      "_origin": "ast",
+      "id": "components_quote_rfq_wizard_steps_rfqstepreview",
+      "community": 148,
+      "norm_label": "rfqstepreview"
+    },
+    {
+      "label": "AboutCompanyProfile",
+      "file_type": "code",
+      "source_file": "components/sections/about/about-company-profile.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "components_sections_about_about_company_profile_aboutcompanyprofile",
+      "community": 149,
+      "norm_label": "aboutcompanyprofile"
+    },
+    {
+      "label": "AboutCta",
+      "file_type": "code",
+      "source_file": "components/sections/about/about-cta.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "components_sections_about_about_cta_aboutcta",
+      "community": 150,
+      "norm_label": "aboutcta"
+    },
+    {
+      "label": "AboutHero",
+      "file_type": "code",
+      "source_file": "components/sections/about/about-hero.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "components_sections_about_about_hero_abouthero",
+      "community": 151,
+      "norm_label": "abouthero"
+    },
+    {
+      "label": "AboutHowWeAssist",
+      "file_type": "code",
+      "source_file": "components/sections/about/about-how-we-assist.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "components_sections_about_about_how_we_assist_abouthowweassist",
+      "community": 152,
+      "norm_label": "abouthowweassist"
+    },
+    {
+      "label": "AboutStats",
+      "file_type": "code",
+      "source_file": "components/sections/about/about-stats.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "components_sections_about_about_stats_aboutstats",
+      "community": 153,
+      "norm_label": "aboutstats"
+    },
+    {
+      "label": "AboutWhatWeDo",
+      "file_type": "code",
+      "source_file": "components/sections/about/about-what-we-do.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "components_sections_about_about_what_we_do_aboutwhatwedo",
+      "community": 154,
+      "norm_label": "aboutwhatwedo"
+    },
+    {
+      "label": "AboutWhoWeAre",
+      "file_type": "code",
+      "source_file": "components/sections/about/about-who-we-are.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "components_sections_about_about_who_we_are_aboutwhoweare",
+      "community": 155,
+      "norm_label": "aboutwhoweare"
+    },
+    {
+      "label": "BrandMarquee",
+      "file_type": "code",
+      "source_file": "components/sections/brand-marquee.tsx",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "components_sections_brand_marquee_brandmarquee",
+      "community": 156,
+      "norm_label": "brandmarquee"
+    },
+    {
+      "label": "CertificationsSection",
+      "file_type": "code",
+      "source_file": "components/sections/certifications-section.tsx",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "components_sections_certifications_section_certificationssection",
+      "community": 157,
+      "norm_label": "certificationssection"
+    },
+    {
+      "label": "CustomerReviewsSection",
+      "file_type": "code",
+      "source_file": "components/sections/customer-reviews-section.tsx",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "components_sections_customer_reviews_section_customerreviewssection",
+      "community": 158,
+      "norm_label": "customerreviewssection"
+    },
+    {
+      "label": "EnterpriseAdvantageSection",
+      "file_type": "code",
+      "source_file": "components/sections/enterprise-advantage-section.tsx",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "components_sections_enterprise_advantage_section_enterpriseadvantagesection",
+      "community": 159,
+      "norm_label": "enterpriseadvantagesection"
+    },
+    {
+      "label": "FeaturedProductsSection",
+      "file_type": "code",
+      "source_file": "components/sections/featured-products-section.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "components_sections_featured_products_section_featuredproductssection",
+      "community": 160,
+      "norm_label": "featuredproductssection"
+    },
+    {
+      "label": "GetInTouchSection",
+      "file_type": "code",
+      "source_file": "components/sections/get-in-touch-section.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "components_sections_get_in_touch_section_getintouchsection",
+      "community": 161,
+      "norm_label": "getintouchsection"
+    },
+    {
+      "label": "PopularServicesSection",
+      "file_type": "code",
+      "source_file": "components/sections/popular-services-section.tsx",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "components_sections_popular_services_section_popularservicessection",
+      "community": 162,
+      "norm_label": "popularservicessection"
+    },
+    {
+      "label": "ProcurementWorkflowSection",
+      "file_type": "code",
+      "source_file": "components/sections/procurement-workflow-section.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "components_sections_procurement_workflow_section_procurementworkflowsection",
+      "community": 163,
+      "norm_label": "procurementworkflowsection"
+    },
+    {
+      "label": "WhoWeAreSection",
+      "file_type": "code",
+      "source_file": "components/sections/who-we-are-section.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "components_sections_who_we_are_section_whowearesection",
+      "community": 164,
+      "norm_label": "whowearesection"
+    },
+    {
+      "label": "JsonLd",
+      "file_type": "code",
+      "source_file": "components/seo/json-ld.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "components_seo_json_ld_jsonld",
+      "community": 165,
+      "norm_label": "jsonld"
+    },
+    {
+      "label": "ServicesClientGrid",
+      "file_type": "code",
+      "source_file": "components/services/services-client-grid.tsx",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "components_services_services_client_grid_servicesclientgrid",
+      "community": 166,
+      "norm_label": "servicesclientgrid"
+    },
+    {
+      "label": "AnimatedCount",
+      "file_type": "code",
+      "source_file": "components/ui/animated-count.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "components_ui_animated_count_animatedcount",
+      "community": 167,
+      "norm_label": "animatedcount"
+    },
+    {
+      "label": "BreadcrumbItem",
+      "file_type": "code",
+      "source_file": "components/ui/breadcrumbs.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "components_ui_breadcrumbs_breadcrumbitem",
+      "community": 168,
+      "norm_label": "breadcrumbitem"
+    },
+    {
+      "label": "Breadcrumbs",
+      "file_type": "code",
+      "source_file": "components/ui/breadcrumbs.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "components_ui_breadcrumbs_breadcrumbs",
+      "community": 169,
+      "norm_label": "breadcrumbs"
+    },
+    {
+      "label": "FeatureCardProps",
+      "file_type": "code",
+      "source_file": "components/ui/feature-card.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "components_ui_feature_card_featurecardprops",
+      "community": 171,
+      "norm_label": "featurecardprops"
+    },
+    {
+      "label": "FeatureCard",
+      "file_type": "code",
+      "source_file": "components/ui/feature-card.tsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "components_ui_feature_card_featurecard",
+      "community": 170,
+      "norm_label": "featurecard"
+    },
+    {
+      "label": "AboutStat",
+      "file_type": "code",
+      "source_file": "constants/about.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "constants_about_aboutstat",
+      "community": 173,
+      "norm_label": "aboutstat"
+    },
+    {
+      "label": "AboutPillar",
+      "file_type": "code",
+      "source_file": "constants/about.ts",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "constants_about_aboutpillar",
+      "community": 172,
+      "norm_label": "aboutpillar"
+    },
+    {
+      "label": "WorkflowStep",
+      "file_type": "code",
+      "source_file": "constants/about.ts",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "constants_about_workflowstep",
+      "community": 175,
+      "norm_label": "workflowstep"
+    },
+    {
+      "label": "ValueItem",
+      "file_type": "code",
+      "source_file": "constants/about.ts",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "constants_about_valueitem",
+      "community": 174,
+      "norm_label": "valueitem"
+    },
+    {
+      "label": "AdminNavItem",
+      "file_type": "code",
+      "source_file": "constants/admin-navigation.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "constants_admin_navigation_adminnavitem",
+      "community": 176,
+      "norm_label": "adminnavitem"
+    },
+    {
+      "label": "AdminNavSection",
+      "file_type": "code",
+      "source_file": "constants/admin-navigation.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "constants_admin_navigation_adminnavsection",
+      "community": 177,
+      "norm_label": "adminnavsection"
+    },
+    {
+      "label": "getAdminRouteTitle",
+      "file_type": "code",
+      "source_file": "constants/admin-navigation.ts",
+      "source_location": "L79",
+      "_origin": "ast",
+      "id": "constants_admin_navigation_getadminroutetitle",
+      "community": 178,
+      "norm_label": "getadminroutetitle"
+    },
+    {
+      "label": "isNavItemActive",
+      "file_type": "code",
+      "source_file": "constants/admin-navigation.ts",
+      "source_location": "L94",
+      "_origin": "ast",
+      "id": "constants_admin_navigation_isnavitemactive",
+      "community": 179,
+      "norm_label": "isnavitemactive"
+    },
+    {
+      "label": "AdvantageItem",
+      "file_type": "code",
+      "source_file": "constants/advantages.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "constants_advantages_advantageitem",
+      "community": 180,
+      "norm_label": "advantageitem"
+    },
+    {
+      "label": "getAdvantageIcon",
+      "file_type": "code",
+      "source_file": "constants/advantages.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "constants_advantages_getadvantageicon",
+      "community": 181,
+      "norm_label": "getadvantageicon"
+    },
+    {
+      "label": "BrandLogo",
+      "file_type": "code",
+      "source_file": "constants/brands.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "constants_brands_brandlogo",
+      "community": 182,
+      "norm_label": "brandlogo"
+    },
+    {
+      "label": "CertificationCategory",
+      "file_type": "code",
+      "source_file": "constants/certifications.ts",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "constants_certifications_certificationcategory",
+      "community": 183,
+      "norm_label": "certificationcategory"
+    },
+    {
+      "label": "CertificationStatus",
+      "file_type": "code",
+      "source_file": "constants/certifications.ts",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "constants_certifications_certificationstatus",
+      "community": 185,
+      "norm_label": "certificationstatus"
+    },
+    {
+      "label": "CertificationItem",
+      "file_type": "code",
+      "source_file": "constants/certifications.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "constants_certifications_certificationitem",
+      "community": 184,
+      "norm_label": "certificationitem"
+    },
+    {
+      "label": "getCertificationIcon",
+      "file_type": "code",
+      "source_file": "constants/certifications.ts",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "constants_certifications_getcertificationicon",
+      "community": 186,
+      "norm_label": "getcertificationicon"
+    },
+    {
+      "label": "ProcurementStepItem",
+      "file_type": "code",
+      "source_file": "constants/procurement-workflow.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "constants_procurement_workflow_procurementstepitem",
+      "community": 188,
+      "norm_label": "procurementstepitem"
+    },
+    {
+      "label": "getProcurementStepIcon",
+      "file_type": "code",
+      "source_file": "constants/procurement-workflow.ts",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "constants_procurement_workflow_getprocurementstepicon",
+      "community": 187,
+      "norm_label": "getprocurementstepicon"
+    },
+    {
+      "label": "SampleProduct",
+      "file_type": "code",
+      "source_file": "constants/products.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "constants_products_sampleproduct",
+      "community": 189,
+      "norm_label": "sampleproduct"
+    },
+    {
+      "label": "CustomerReviewItem",
+      "file_type": "code",
+      "source_file": "constants/reviews.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "constants_reviews_customerreviewitem",
+      "community": 190,
+      "norm_label": "customerreviewitem"
+    },
+    {
+      "label": "ServiceCategory",
+      "file_type": "code",
+      "source_file": "constants/services.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "constants_services_servicecategory",
+      "community": 194,
+      "norm_label": "servicecategory"
+    },
+    {
+      "label": "ServiceFeature",
+      "file_type": "code",
+      "source_file": "constants/services.ts",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "constants_services_servicefeature",
+      "community": 196,
+      "norm_label": "servicefeature"
+    },
+    {
+      "label": "ServiceFAQ",
+      "file_type": "code",
+      "source_file": "constants/services.ts",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "constants_services_servicefaq",
+      "community": 195,
+      "norm_label": "servicefaq"
+    },
+    {
+      "label": "ServiceBlogSection",
+      "file_type": "code",
+      "source_file": "constants/services.ts",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "constants_services_serviceblogsection",
+      "community": 193,
+      "norm_label": "serviceblogsection"
+    },
+    {
+      "label": "ServiceBlogContent",
+      "file_type": "code",
+      "source_file": "constants/services.ts",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "constants_services_serviceblogcontent",
+      "community": 192,
+      "norm_label": "serviceblogcontent"
+    },
+    {
+      "label": "ServiceItem",
+      "file_type": "code",
+      "source_file": "constants/services.ts",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "constants_services_serviceitem",
+      "community": 197,
+      "norm_label": "serviceitem"
+    },
+    {
+      "label": "getServiceIcon",
+      "file_type": "code",
+      "source_file": "constants/services.ts",
+      "source_location": "L98",
+      "_origin": "ast",
+      "id": "constants_services_getserviceicon",
+      "community": 191,
+      "norm_label": "getserviceicon"
+    },
+    {
+      "label": "UseSimulatedFormSubmitOptions",
+      "file_type": "code",
+      "source_file": "hooks/use-simulated-form-submit.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "hooks_use_simulated_form_submit_usesimulatedformsubmitoptions",
+      "community": 199,
+      "norm_label": "usesimulatedformsubmitoptions"
+    },
+    {
+      "label": "useSimulatedFormSubmit",
+      "file_type": "code",
+      "source_file": "hooks/use-simulated-form-submit.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "hooks_use_simulated_form_submit_usesimulatedformsubmit",
+      "community": 198,
+      "norm_label": "usesimulatedformsubmit"
+    },
+    {
+      "label": "AdminAuthSession",
+      "file_type": "code",
+      "source_file": "lib/admin-auth.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "lib_admin_auth_adminauthsession",
+      "community": 200,
+      "norm_label": "adminauthsession"
+    },
+    {
+      "label": "isAdminSession",
+      "file_type": "code",
+      "source_file": "lib/admin-auth.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "lib_admin_auth_isadminsession",
+      "community": 201,
+      "norm_label": "isadminsession"
+    },
+    {
+      "label": "requireAdminAuth",
+      "file_type": "code",
+      "source_file": "lib/admin-auth.ts",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "lib_admin_auth_requireadminauth",
+      "community": 202,
+      "norm_label": "requireadminauth"
+    },
+    {
+      "label": "SendQuoteConfirmationEmailParams",
+      "file_type": "code",
+      "source_file": "lib/email.ts",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "lib_email_sendquoteconfirmationemailparams",
+      "community": 209,
+      "norm_label": "sendquoteconfirmationemailparams"
+    },
+    {
+      "label": "generateQuoteConfirmationHtml",
+      "file_type": "code",
+      "source_file": "lib/email.ts",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "lib_email_generatequoteconfirmationhtml",
+      "community": 204,
+      "norm_label": "generatequoteconfirmationhtml"
+    },
+    {
+      "label": "sendQuoteConfirmationEmail",
+      "file_type": "code",
+      "source_file": "lib/email.ts",
+      "source_location": "L169",
+      "_origin": "ast",
+      "id": "lib_email_sendquoteconfirmationemail",
+      "community": 208,
+      "norm_label": "sendquoteconfirmationemail"
+    },
+    {
+      "label": "SendContactInquiryEmailParams",
+      "file_type": "code",
+      "source_file": "lib/email.ts",
+      "source_location": "L204",
+      "_origin": "ast",
+      "id": "lib_email_sendcontactinquiryemailparams",
+      "community": 206,
+      "norm_label": "sendcontactinquiryemailparams"
+    },
+    {
+      "label": "generateContactInquiryHtml",
+      "file_type": "code",
+      "source_file": "lib/email.ts",
+      "source_location": "L216",
+      "_origin": "ast",
+      "id": "lib_email_generatecontactinquiryhtml",
+      "community": 203,
+      "norm_label": "generatecontactinquiryhtml"
+    },
+    {
+      "label": "sendContactInquiryConfirmationEmail",
+      "file_type": "code",
+      "source_file": "lib/email.ts",
+      "source_location": "L293",
+      "_origin": "ast",
+      "id": "lib_email_sendcontactinquiryconfirmationemail",
+      "community": 205,
+      "norm_label": "sendcontactinquiryconfirmationemail"
+    },
+    {
+      "label": "SendProposalEmailParams",
+      "file_type": "code",
+      "source_file": "lib/email.ts",
+      "source_location": "L328",
+      "_origin": "ast",
+      "id": "lib_email_sendproposalemailparams",
+      "community": 207,
+      "norm_label": "sendproposalemailparams"
+    },
+    {
+      "label": "sendQuoteProposalEmail",
+      "file_type": "code",
+      "source_file": "lib/email.ts",
+      "source_location": "L337",
+      "_origin": "ast",
+      "id": "lib_email_sendquoteproposalemail",
+      "community": 210,
+      "norm_label": "sendquoteproposalemail"
+    },
+    {
+      "label": "escapeHtml",
+      "file_type": "code",
+      "source_file": "lib/html.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "lib_html_escapehtml",
+      "community": 211,
+      "norm_label": "escapehtml"
+    },
+    {
+      "label": "generatePageMetadata",
+      "file_type": "code",
+      "source_file": "lib/seo.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "lib_seo_generatepagemetadata",
+      "community": 212,
+      "norm_label": "generatepagemetadata"
+    },
+    {
+      "label": "SendTelegramQuoteAlertParams",
+      "file_type": "code",
+      "source_file": "lib/telegram.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "lib_telegram_sendtelegramquotealertparams",
+      "community": 216,
+      "norm_label": "sendtelegramquotealertparams"
+    },
+    {
+      "label": "sendTelegramQuoteAlert",
+      "file_type": "code",
+      "source_file": "lib/telegram.ts",
+      "source_location": "L68",
+      "_origin": "ast",
+      "id": "lib_telegram_sendtelegramquotealert",
+      "community": 215,
+      "norm_label": "sendtelegramquotealert"
+    },
+    {
+      "label": "SendTelegramContactInquiryParams",
+      "file_type": "code",
+      "source_file": "lib/telegram.ts",
+      "source_location": "L101",
+      "_origin": "ast",
+      "id": "lib_telegram_sendtelegramcontactinquiryparams",
+      "community": 214,
+      "norm_label": "sendtelegramcontactinquiryparams"
+    },
+    {
+      "label": "sendTelegramContactInquiryAlert",
+      "file_type": "code",
+      "source_file": "lib/telegram.ts",
+      "source_location": "L113",
+      "_origin": "ast",
+      "id": "lib_telegram_sendtelegramcontactinquiryalert",
+      "community": 213,
+      "norm_label": "sendtelegramcontactinquiryalert"
+    },
+    {
+      "label": "verifyTurnstileToken",
+      "file_type": "code",
+      "source_file": "lib/turnstile.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "lib_turnstile_verifyturnstiletoken",
+      "community": 217,
+      "norm_label": "verifyturnstiletoken"
+    },
+    {
+      "label": "cn",
+      "file_type": "code",
+      "source_file": "lib/utils.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "lib_utils_cn",
+      "community": 218,
+      "norm_label": "cn"
+    },
+    {
+      "label": "ContactInquirySchemaType",
+      "file_type": "code",
+      "source_file": "schemas/contact.ts",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "schemas_contact_contactinquiryschematype",
+      "community": 219,
+      "norm_label": "contactinquiryschematype"
+    },
+    {
+      "label": "CreateCustomerInput",
+      "file_type": "code",
+      "source_file": "schemas/customer.ts",
+      "source_location": "L87",
+      "_origin": "ast",
+      "id": "schemas_customer_createcustomerinput",
+      "community": 220,
+      "norm_label": "createcustomerinput"
+    },
+    {
+      "label": "UpdateCustomerInput",
+      "file_type": "code",
+      "source_file": "schemas/customer.ts",
+      "source_location": "L88",
+      "_origin": "ast",
+      "id": "schemas_customer_updatecustomerinput",
+      "community": 225,
+      "norm_label": "updatecustomerinput"
+    },
+    {
+      "label": "CustomerFilterInput",
+      "file_type": "code",
+      "source_file": "schemas/customer.ts",
+      "source_location": "L89",
+      "_origin": "ast",
+      "id": "schemas_customer_customerfilterinput",
+      "community": 221,
+      "norm_label": "customerfilterinput"
+    },
+    {
+      "label": "OrganizationType",
+      "file_type": "code",
+      "source_file": "schemas/customer.ts",
+      "source_location": "L90",
+      "_origin": "ast",
+      "id": "schemas_customer_organizationtype",
+      "community": 224,
+      "norm_label": "organizationtype"
+    },
+    {
+      "label": "CustomerStatus",
+      "file_type": "code",
+      "source_file": "schemas/customer.ts",
+      "source_location": "L91",
+      "_origin": "ast",
+      "id": "schemas_customer_customerstatus",
+      "community": 222,
+      "norm_label": "customerstatus"
+    },
+    {
+      "label": "LeadSource",
+      "file_type": "code",
+      "source_file": "schemas/customer.ts",
+      "source_location": "L92",
+      "_origin": "ast",
+      "id": "schemas_customer_leadsource",
+      "community": 223,
+      "norm_label": "leadsource"
+    },
+    {
+      "label": "LeadSource",
+      "file_type": "code",
+      "source_file": "schemas/lead.ts",
+      "source_location": "L155",
+      "_origin": "ast",
+      "id": "schemas_lead_leadsource",
+      "community": 230,
+      "norm_label": "leadsource"
+    },
+    {
+      "label": "LeadStatus",
+      "file_type": "code",
+      "source_file": "schemas/lead.ts",
+      "source_location": "L156",
+      "_origin": "ast",
+      "id": "schemas_lead_leadstatus",
+      "community": 231,
+      "norm_label": "leadstatus"
+    },
+    {
+      "label": "LeadPriority",
+      "file_type": "code",
+      "source_file": "schemas/lead.ts",
+      "source_location": "L157",
+      "_origin": "ast",
+      "id": "schemas_lead_leadpriority",
+      "community": 229,
+      "norm_label": "leadpriority"
+    },
+    {
+      "label": "CreateLeadInput",
+      "file_type": "code",
+      "source_file": "schemas/lead.ts",
+      "source_location": "L158",
+      "_origin": "ast",
+      "id": "schemas_lead_createleadinput",
+      "community": 227,
+      "norm_label": "createleadinput"
+    },
+    {
+      "label": "UpdateLeadInput",
+      "file_type": "code",
+      "source_file": "schemas/lead.ts",
+      "source_location": "L159",
+      "_origin": "ast",
+      "id": "schemas_lead_updateleadinput",
+      "community": 232,
+      "norm_label": "updateleadinput"
+    },
+    {
+      "label": "LeadFilterInput",
+      "file_type": "code",
+      "source_file": "schemas/lead.ts",
+      "source_location": "L160",
+      "_origin": "ast",
+      "id": "schemas_lead_leadfilterinput",
+      "community": 228,
+      "norm_label": "leadfilterinput"
+    },
+    {
+      "label": "ConvertLeadInput",
+      "file_type": "code",
+      "source_file": "schemas/lead.ts",
+      "source_location": "L161",
+      "_origin": "ast",
+      "id": "schemas_lead_convertleadinput",
+      "community": 226,
+      "norm_label": "convertleadinput"
+    },
+    {
+      "label": "LeadStage",
+      "file_type": "code",
+      "source_file": "schemas/pipeline.ts",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "schemas_pipeline_leadstage",
+      "community": 0,
+      "norm_label": "leadstage"
+    },
+    {
+      "label": "UpdateLeadStageInput",
+      "file_type": "code",
+      "source_file": "schemas/pipeline.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "schemas_pipeline_updateleadstageinput",
+      "community": 236,
+      "norm_label": "updateleadstageinput"
+    },
+    {
+      "label": "CrmDateHorizon",
+      "file_type": "code",
+      "source_file": "schemas/pipeline.ts",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "schemas_pipeline_crmdatehorizon",
+      "community": 233,
+      "norm_label": "crmdatehorizon"
+    },
+    {
+      "label": "CrmExportInput",
+      "file_type": "code",
+      "source_file": "schemas/pipeline.ts",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "schemas_pipeline_crmexportinput",
+      "community": 234,
+      "norm_label": "crmexportinput"
+    },
+    {
+      "label": "sanitizeCsvField",
+      "file_type": "code",
+      "source_file": "schemas/pipeline.ts",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "schemas_pipeline_sanitizecsvfield",
+      "community": 235,
+      "norm_label": "sanitizecsvfield"
+    },
+    {
+      "label": "CreateProposalVersionSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/proposal.ts",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "schemas_proposal_createproposalversionschematype",
+      "community": 237,
+      "norm_label": "createproposalversionschematype"
+    },
+    {
+      "label": "DispatchProposalEmailSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/proposal.ts",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "schemas_proposal_dispatchproposalemailschematype",
+      "community": 238,
+      "norm_label": "dispatchproposalemailschematype"
+    },
+    {
+      "label": "TrackProposalViewSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/proposal.ts",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "schemas_proposal_trackproposalviewschematype",
+      "community": 240,
+      "norm_label": "trackproposalviewschematype"
+    },
+    {
+      "label": "SubmitNegotiationRequestSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/proposal.ts",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "schemas_proposal_submitnegotiationrequestschematype",
+      "community": 239,
+      "norm_label": "submitnegotiationrequestschematype"
+    },
+    {
+      "label": "UpdateQuoteItemFinancialSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/quote-admin.ts",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "schemas_quote_admin_updatequoteitemfinancialschematype",
+      "community": 245,
+      "norm_label": "updatequoteitemfinancialschematype"
+    },
+    {
+      "label": "UpdateQuoteFinancialsSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/quote-admin.ts",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "schemas_quote_admin_updatequotefinancialsschematype",
+      "community": 244,
+      "norm_label": "updatequotefinancialsschematype"
+    },
+    {
+      "label": "UpdateQuoteStatusSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/quote-admin.ts",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "schemas_quote_admin_updatequotestatusschematype",
+      "community": 246,
+      "norm_label": "updatequotestatusschematype"
+    },
+    {
+      "label": "AddQuoteActivityNoteSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/quote-admin.ts",
+      "source_location": "L48",
+      "_origin": "ast",
+      "id": "schemas_quote_admin_addquoteactivitynoteschematype",
+      "community": 241,
+      "norm_label": "addquoteactivitynoteschematype"
+    },
+    {
+      "label": "AssignQuoteManagerSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/quote-admin.ts",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "schemas_quote_admin_assignquotemanagerschematype",
+      "community": 242,
+      "norm_label": "assignquotemanagerschematype"
+    },
+    {
+      "label": "SendQuoteProposalEmailSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/quote-admin.ts",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "schemas_quote_admin_sendquoteproposalemailschematype",
+      "community": 243,
+      "norm_label": "sendquoteproposalemailschematype"
+    },
+    {
+      "label": "QuoteItemSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/quote.ts",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "schemas_quote_quoteitemschematype",
+      "community": 248,
+      "norm_label": "quoteitemschematype"
+    },
+    {
+      "label": "CreateQuoteSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/quote.ts",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "schemas_quote_createquoteschematype",
+      "community": 247,
+      "norm_label": "createquoteschematype"
+    },
+    {
+      "label": "QuoteTrackingLookupSchemaType",
+      "file_type": "code",
+      "source_file": "schemas/quote.ts",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "schemas_quote_quotetrackinglookupschematype",
+      "community": 249,
+      "norm_label": "quotetrackinglookupschematype"
+    },
+    {
+      "label": "runLayoutShellStressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/26-layout-shell-stress.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "scripts_stress_26_layout_shell_stress_runlayoutshellstresstest",
+      "community": 250,
+      "norm_label": "runlayoutshellstresstest"
+    },
+    {
+      "label": "runClerkAuthGuardStressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/27-clerk-auth-guard-stress.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "scripts_stress_27_clerk_auth_guard_stress_runclerkauthguardstresstest",
+      "community": 251,
+      "norm_label": "runclerkauthguardstresstest"
+    },
+    {
+      "label": "runExecutiveMetricsStressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/28-executive-metrics-stress.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "scripts_stress_28_executive_metrics_stress_runexecutivemetricsstresstest",
+      "community": 252,
+      "norm_label": "runexecutivemetricsstresstest"
+    },
+    {
+      "label": "runAnalyticsVisualizationsStressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/29-analytics-visualizations-stress.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_stress_29_analytics_visualizations_stress_runanalyticsvisualizationsstresstest",
+      "community": 253,
+      "norm_label": "runanalyticsvisualizationsstresstest"
+    },
+    {
+      "label": "runCodeRabbitPR11StressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/30-coderabbit-pr11-stress.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_stress_30_coderabbit_pr11_stress_runcoderabbitpr11stresstest",
+      "community": 254,
+      "norm_label": "runcoderabbitpr11stresstest"
+    },
+    {
+      "label": "runCodeRabbitPR12StressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/31-coderabbit-pr12-stress.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "scripts_stress_31_coderabbit_pr12_stress_runcoderabbitpr12stresstest",
+      "community": 255,
+      "norm_label": "runcoderabbitpr12stresstest"
+    },
+    {
+      "label": "runCommandCenterDiagnosticsStressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/32-command-center-diagnostics-stress.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "scripts_stress_32_command_center_diagnostics_stress_runcommandcenterdiagnosticsstresstest",
+      "community": 256,
+      "norm_label": "runcommandcenterdiagnosticsstresstest"
+    },
+    {
+      "label": "runCustomerManagementStressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/33-customer-management-stress.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "scripts_stress_33_customer_management_stress_runcustomermanagementstresstest",
+      "community": 257,
+      "norm_label": "runcustomermanagementstresstest"
+    },
+    {
+      "label": "runLeadManagementStressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/34-lead-management-stress.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "scripts_stress_34_lead_management_stress_runleadmanagementstresstest",
+      "community": 258,
+      "norm_label": "runleadmanagementstresstest"
+    },
+    {
+      "label": "runCodeRabbitPR14StressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/35-coderabbit-pr14-stress.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "scripts_stress_35_coderabbit_pr14_stress_runcoderabbitpr14stresstest",
+      "community": 259,
+      "norm_label": "runcoderabbitpr14stresstest"
+    },
+    {
+      "label": "runQuoteWorkbenchStressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/36-quote-workbench-stress.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "scripts_stress_36_quote_workbench_stress_runquoteworkbenchstresstest",
+      "community": 260,
+      "norm_label": "runquoteworkbenchstresstest"
+    },
+    {
+      "label": "runPipelineCrmStressTest",
+      "file_type": "code",
+      "source_file": "scripts/stress/37-pipeline-crm-stress.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "scripts_stress_37_pipeline_crm_stress_runpipelinecrmstresstest",
+      "community": 261,
+      "norm_label": "runpipelinecrmstresstest"
+    },
+    {
+      "label": "QuoteStatus",
+      "file_type": "code",
+      "source_file": "types/quote.ts",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "types_quote_quotestatus",
+      "community": 266,
+      "norm_label": "quotestatus"
+    },
+    {
+      "label": "QuoteItem",
+      "file_type": "code",
+      "source_file": "types/quote.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "types_quote_quoteitem",
+      "community": 265,
+      "norm_label": "quoteitem"
+    },
+    {
+      "label": "Quote",
+      "file_type": "code",
+      "source_file": "types/quote.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "types_quote_quote",
+      "community": 1,
+      "norm_label": "quote"
+    },
+    {
+      "label": "QuoteWithItems",
+      "file_type": "code",
+      "source_file": "types/quote.ts",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "types_quote_quotewithitems",
+      "community": 1,
+      "norm_label": "quotewithitems"
+    },
+    {
+      "label": "CreateQuoteItemInput",
+      "file_type": "code",
+      "source_file": "types/quote.ts",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "types_quote_createquoteiteminput",
+      "community": 264,
+      "norm_label": "createquoteiteminput"
+    },
+    {
+      "label": "CreateQuoteInput",
+      "file_type": "code",
+      "source_file": "types/quote.ts",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "types_quote_createquoteinput",
+      "community": 263,
+      "norm_label": "createquoteinput"
+    },
+    {
+      "label": "ActionResponse",
+      "file_type": "code",
+      "source_file": "types/quote.ts",
+      "source_location": "L57",
+      "_origin": "ast",
+      "id": "types_quote_actionresponse",
+      "community": 262,
+      "norm_label": "actionresponse"
+    }
+  ],
+  "links": [
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "actions/pipeline.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "actions_pipeline_pipelinecolumn",
+      "target": "schemas_pipeline_leadstage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "types/quote.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "types_quote_quotewithitems",
+      "target": "types_quote_quote",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "24d09c1335c4e241732385ffbee2fcb1c97277d5"
+}

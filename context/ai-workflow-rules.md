@@ -71,6 +71,7 @@ Current skills include:
 - Supabase
 - Supabase PostgreSQL Best Practices
 - Vercel AI SDK
+- Graphify
 
 Whenever a feature involves one of these technologies:
 
@@ -128,11 +129,12 @@ Never skip steps.
 
 ---
 
-# Search Before Creating
+# Search & Query Graph Before Creating
 
 Before creating anything new:
 
-Search for:
+1. Query `graphify-out/graph.json` via `/graphify query` or `/graphify path` to understand existing component relationships.
+2. Search for:
 
 - Existing components
 - Existing hooks
@@ -355,6 +357,7 @@ A task is complete only if:
 - Secure
 - Tested
 - No duplicated code
+- Knowledge graph updated (`/graphify --update`) if files were created, moved, or deleted
 - Documentation updated if needed
 
 ---

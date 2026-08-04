@@ -52,6 +52,8 @@ export const ADMIN_NAV_SECTIONS: AdminNavSection[] = [
       { title: "Contact Inquiries", href: "/admin/inquiries", iconName: "Mail" },
       { title: "Customer Database", href: "/admin/customers", iconName: "Users" },
       { title: "Lead Pipeline", href: "/admin/leads", iconName: "Target" },
+      { title: "Sales Pipeline", href: "/admin/crm/pipeline", iconName: "Target" },
+      { title: "CRM Analytics", href: "/admin/crm/analytics", iconName: "BarChart3" },
     ],
   },
 

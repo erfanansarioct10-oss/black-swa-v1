@@ -121,10 +121,10 @@ CRM & Quotation Pipeline System
 
 ## Phase 5C: Quotation Workbench & Interactive Proposal Builder
 
-- [ ] Comprehensive Admin RFQ Workbench (`app/admin/quotes/[id]/page.tsx` with line-item hardware specification controls)
-- [ ] Interactive Hardware Pricing & Discount Estimator (Custom line-item pricing adjustments, volume discounts, shipping, warranty, and tax calculations)
-- [ ] Quote Status Lifecycle Management (Pending -> Assigned -> In Review -> Quoted -> Won / Lost / Cancelled with audit trail logging)
-- [ ] Internal Quotation Notes & Team Collaboration Sidebar (`actions/quote-admin.ts`)
+- [x] Comprehensive Admin RFQ Workbench (`app/admin/quotes/[id]/page.tsx` with line-item hardware specification controls)
+- [x] Interactive Hardware Pricing & Discount Estimator (Custom line-item pricing adjustments, volume discounts, shipping, warranty, and tax calculations)
+- [x] Quote Status Lifecycle Management (Pending -> Assigned -> In Review -> Quoted -> Won / Lost / Cancelled with audit trail logging)
+- [x] Internal Quotation Notes & Team Collaboration Sidebar (`actions/quote-admin.ts`)
 
 ## Phase 5D: Automated Proposal Generation & Customer Dispatch
 

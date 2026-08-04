@@ -15,6 +15,9 @@ export interface QuoteItem {
   productTitle: string;
   category: string;
   quantity: number;
+  unitPrice?: number;
+  discountPercentage?: number;
+  totalPrice?: number;
   notes?: string | null;
   createdAt: Date;
 }
@@ -34,6 +37,12 @@ export interface Quote {
   status: QuoteStatus;
   assignedManagerId?: string | null;
   adminNotes?: string | null;
+  subtotal?: number;
+  vatAmount?: number;
+  shippingCost?: number;
+  discountTotal?: number;
+  grandTotal?: number;
+  currency?: string;
   createdAt: Date;
   updatedAt: Date;
 }

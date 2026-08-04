@@ -70,6 +70,12 @@ export const quotes = pgTable("quotes", {
     .default("pending"),
   assignedManagerId: text("assigned_manager_id"),
   adminNotes: text("admin_notes"),
+  subtotal: integer("subtotal").default(0).notNull(),
+  vatAmount: integer("vat_amount").default(0).notNull(),
+  shippingCost: integer("shipping_cost").default(0).notNull(),
+  discountTotal: integer("discount_total").default(0).notNull(),
+  grandTotal: integer("grand_total").default(0).notNull(),
+  currency: text("currency").default("NPR").notNull(),
   assignedAt: timestamp("assigned_at", { withTimezone: true }),
   quotedAt: timestamp("quoted_at", { withTimezone: true }),
   completedAt: timestamp("completed_at", { withTimezone: true }),
@@ -93,11 +99,60 @@ export const quoteItems = pgTable("quote_items", {
   productTitle: text("product_title").notNull(),
   category: text("category").notNull(),
   quantity: integer("quantity").notNull().default(1),
+  unitPrice: integer("unit_price").default(0).notNull(),
+  discountPercentage: integer("discount_percentage").default(0).notNull(),
+  totalPrice: integer("total_price").default(0).notNull(),
   notes: text("notes"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => [
   index("idx_quote_items_quote_id").on(table.quoteId),
 ]);
+
+// Quote Activity Logs & Audit Trail table
+export const quoteActivityLogs = pgTable("quote_activity_logs", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  quoteId: uuid("quote_id")
+    .notNull()
+    .references(() => quotes.id, { onDelete: "cascade" }),
+  authorClerkUserId: text("author_clerk_user_id").notNull(),
+  authorName: text("author_name").notNull(),
+  actionType: text("action_type").notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index("idx_quote_activity_quote_id").on(table.quoteId),
+  index("idx_quote_activity_action_type").on(table.actionType),
+]);
+
+// Proposal Versions & Revision Audit Trail table
+export const proposalVersions = pgTable("proposal_versions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  quoteId: uuid("quote_id")
+    .notNull()
+    .references(() => quotes.id, { onDelete: "cascade" }),
+  versionNumber: integer("version_number").notNull().default(1),
+  subtotal: integer("subtotal").notNull().default(0),
+  vatAmount: integer("vat_amount").notNull().default(0),
+  shippingCost: integer("shipping_cost").notNull().default(0),
+  discountTotal: integer("discount_total").notNull().default(0),
+  grandTotal: integer("grand_total").notNull().default(0),
+  currency: text("currency").notNull().default("NPR"),
+  validityDays: integer("validity_days").notNull().default(30),
+  expiresAt: timestamp("expires_at", { withTimezone: true }),
+  customMessage: text("custom_message"),
+  termsAndConditions: text("terms_and_conditions"),
+  dispatchedAt: timestamp("dispatched_at", { withTimezone: true }),
+  dispatchedByClerkUserId: text("dispatched_by_clerk_user_id"),
+  viewedAt: timestamp("viewed_at", { withTimezone: true }),
+  viewCount: integer("view_count").notNull().default(0),
+  lastViewedAt: timestamp("last_viewed_at", { withTimezone: true }),
+  snapshotData: text("snapshot_data"),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+}, (table) => [
+  index("idx_proposal_versions_quote_id").on(table.quoteId),
+  index("idx_proposal_versions_version").on(table.quoteId, table.versionNumber),
+]);
+
 
 // Contact & Service Inquiries table
 export const contactInquiries = pgTable("contact_inquiries", {
@@ -134,7 +189,7 @@ export const leads = pgTable("leads", {
     .notNull()
     .default("website_rfq"),
   status: text("status", {
-    enum: ["new", "contacted", "qualified", "unqualified", "converted"],
+    enum: ["new", "contacted", "qualified", "unqualified", "converted", "assessment", "proposal_sent", "negotiation", "closed_won", "closed_lost"],
   })
     .notNull()
     .default("new"),
